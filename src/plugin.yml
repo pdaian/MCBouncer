@@ -1,0 +1,15 @@
+name: MCBouncer
+version: 1.0
+author: MCBStaff
+website: http://www.mcbouncer.com/
+main: com.mcbouncer.plugin.Plugin
+description: MCBouncer is a global/local ban suite and protection program that is modular, unbiased, and fair to its users.
+commands:
+  ban:
+    description: 'Ban command'
+    usage: 'Usage: /<command>'
+    aliases: []
+  ban-global:
+    description: 'Global ban command'
+    usage: 'Usage: /<command>'
+    aliases: []
