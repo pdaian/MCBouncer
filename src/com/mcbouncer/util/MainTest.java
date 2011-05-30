@@ -16,7 +16,8 @@ public class MainTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(MCBouncer.getIPBans("123.123.1234.123", "apikey", "0", "20").get(0).get("server"));
-        System.out.println(MCBouncer.getIPBanCount("5.5.5.5", "apikey"));
+        System.out.println(MCBouncerAPI.getIPBans("123.123.123.123", "apikey", "0", "20").get(0).get("server"));
+        System.out.println(MCBouncerAPI.getIPBanCount("5.5.5.5", "apikey"));
+        System.out.println(MCBouncerAPI.getBanReason("allnaturalx", "apikey"));
     }
 }
