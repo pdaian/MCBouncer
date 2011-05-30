@@ -13,29 +13,41 @@ import org.json.simple.parser.ParseException;
 public class MCBouncer {
 
     public static long getBanCount(String user, String key){
-       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getBanCount/"+key+"/"+user), new String[] {"totalcount"});
-       return (Long) result.get("totalcount");
+       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getBanCount/"+key+"/"+user), new String[] {"totalcount", "success"});
+       if ((Boolean) result.get("success"))
+           return (Long) result.get("totalcount");
+       return 0;
     }
     public static long getNoteCount(String user, String key){
-       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getNoteCount/"+key+"/"+user), new String[] {"totalcount"});
-       return (Long) result.get("totalcount");
+       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getNoteCount/"+key+"/"+user), new String[] {"totalcount", "success"});
+       if ((Boolean) result.get("success"))
+           return (Long) result.get("totalcount");
+       return 0;
     }
     public static long getIPBanCount(String IP, String key){
-       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getIPBanCount/"+key+"/"+IP), new String[] {"totalcount"});
-       return (Long) result.get("totalcount");
+       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getIPBanCount/"+key+"/"+IP), new String[] {"totalcount", "success"});
+       if ((Boolean) result.get("success"))
+           return (Long) result.get("totalcount");
+       return 0;
     }
     public static ArrayList<HashMap<String, Object>> getIPBans(String IP, String key, String page, String numEntries) {
-       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getIPBans/"+key+"/"+IP+"/"+page+"/"+numEntries), new String[] {"data"});
-       return (ArrayList<HashMap<String, Object>>) result.get("data");
+       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getIPBans/"+key+"/"+IP+"/"+page+"/"+numEntries), new String[] {"data", "success"});
+       if ((Boolean) result.get("success"))
+           return (ArrayList<HashMap<String, Object>>) result.get("data");
+       return null;
     }
     public static ArrayList<HashMap<String, Object>> getBans(String user, String key, String page, String numEntries) {
-       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getBans/"+key+"/"+user+"/"+page+"/"+numEntries), new String[] {"data"});
-       return (ArrayList<HashMap<String, Object>>) result.get("data");
+       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getBans/"+key+"/"+user+"/"+page+"/"+numEntries), new String[] {"data", "success"});
+       if ((Boolean) result.get("success"))
+           return (ArrayList<HashMap<String, Object>>) result.get("data");
+       return null;
     }
     public static ArrayList<HashMap<String, Object>> getNotes(String user, String key, String page, String numEntries) {
-       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getNotes/"+key+"/"+user+"/"+page+"/"+numEntries), new String[] {"data"});
-       return (ArrayList<HashMap<String, Object>>) result.get("data");
-    }    
+       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getNotes/"+key+"/"+user+"/"+page+"/"+numEntries), new String[] {"data", "success"});
+       if ((Boolean) result.get("success"))
+           return (ArrayList<HashMap<String, Object>>) result.get("data");
+       return null;
+    }
     private static String getUrl(String site) {
         String requestUrl = site;
         try {
