@@ -15,11 +15,13 @@ public class MCBouncer {
        HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getBanCount/"+key+"/"+user), new String[] {"totalcount"});
        return (Long) result.get("totalcount");
     }
-    
+    public static long getIPBanCount(String IP, String key){
+       HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getIPBanCount/"+key+"/"+IP), new String[] {"totalcount"});
+       return (Long) result.get("totalcount");
+    }
     public static HashMap<String, Object> getIPBans(String IP, String key, String page, String numEntries) {
        HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getIPBans/"+key+"/"+IP+"/"+page+"/"+numEntries), new String[] {"data"});
        return (HashMap<String, Object>) result.get("data");
-       
     }
 
     private static String getUrl(String site) {

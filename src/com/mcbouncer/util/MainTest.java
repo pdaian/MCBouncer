@@ -17,5 +17,6 @@ public class MainTest {
      */
     public static void main(String[] args) {
         System.out.println(((HashMap<String, Object>)MCBouncer.getIPBans("5.5.5.5", "apikey", "0", "50").get("1")).get("ip"));
+        System.out.println(MCBouncer.getIPBanCount("5.5.5.5", "apikey"));
     }
 }
