@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,17 +24,17 @@ public class MCBouncer {
        HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getIPBanCount/"+key+"/"+IP), new String[] {"totalcount"});
        return (Long) result.get("totalcount");
     }
-    public static HashMap<String, Object> getIPBans(String IP, String key, String page, String numEntries) {
+    public static ArrayList<HashMap<String, Object>> getIPBans(String IP, String key, String page, String numEntries) {
        HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getIPBans/"+key+"/"+IP+"/"+page+"/"+numEntries), new String[] {"data"});
-       return (HashMap<String, Object>) result.get("data");
+       return (ArrayList<HashMap<String, Object>>) result.get("data");
     }
-    public static HashMap<String, Object> getBans(String user, String key, String page, String numEntries) {
+    public static ArrayList<HashMap<String, Object>> getBans(String user, String key, String page, String numEntries) {
        HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getBans/"+key+"/"+user+"/"+page+"/"+numEntries), new String[] {"data"});
-       return (HashMap<String, Object>) result.get("data");
+       return (ArrayList<HashMap<String, Object>>) result.get("data");
     }
-    public static HashMap<String, Object> getNotes(String user, String key, String page, String numEntries) {
+    public static ArrayList<HashMap<String, Object>> getNotes(String user, String key, String page, String numEntries) {
        HashMap<String, Object> result = MCBouncer.parseJson(MCBouncer.getUrl("http://mcbouncer.com/api/getNotes/"+key+"/"+user+"/"+page+"/"+numEntries), new String[] {"data"});
-       return (HashMap<String, Object>) result.get("data");
+       return (ArrayList<HashMap<String, Object>>) result.get("data");
     }    
     private static String getUrl(String site) {
         String requestUrl = site;

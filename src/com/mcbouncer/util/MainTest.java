@@ -16,7 +16,7 @@ public class MainTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(((HashMap<String, Object>)MCBouncer.getIPBans("5.5.5.5", "apikey", "0", "50").get("1")).get("ip"));
+        System.out.println(MCBouncer.getIPBans("123.123.1234.123", "apikey", "0", "20").get(0).get("server"));
         System.out.println(MCBouncer.getIPBanCount("5.5.5.5", "apikey"));
     }
 }
