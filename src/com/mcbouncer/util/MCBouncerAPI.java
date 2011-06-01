@@ -94,7 +94,7 @@ public class MCBouncerAPI {
     }    
     public static boolean addIPBan(String IP, String key, String issuer, String reason) {
         reason = java.net.URLEncoder.encode(reason);
-        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addBan/" + key + "/" + issuer+ "/" + IP + "/" + reason));
+        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addIPBan/" + key + "/" + issuer+ "/" + IP + "/" + reason));
         if ((Boolean) result.get("success")) {
             return true;
         }
@@ -112,7 +112,7 @@ public class MCBouncerAPI {
     }   
      public static boolean addNote(String user, String key, String issuer, String note) {
         note = java.net.URLEncoder.encode(note);
-        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addBan/" + key + "/" + issuer+ "/" + user + "/" + note));
+        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addNote/" + key + "/" + issuer+ "/" + user + "/" + note));
         if ((Boolean) result.get("success")) {
             return true;
         }
