@@ -1,14 +1,16 @@
 package com.mcbouncer.plugin;
 
-import java.util.HashMap;
+import com.mcbouncer.util.MCBouncerConfig;
+import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.plugin.PluginManager;
@@ -27,7 +29,6 @@ public class MCBouncer extends JavaPlugin {
     public void onEnable() {
         final PluginManager pm = getServer().getPluginManager();
         final MCBPlayerListener pl = new MCBPlayerListener();
-        pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Priority.High, this);
         pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Priority.High, this);
         setupPermissions();
     }
@@ -46,6 +47,19 @@ public class MCBouncer extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+        String senderName = sender instanceof Player ? ((Player)sender).getName() : "console";
+        if (command.getName().equalsIgnoreCase("ban")) {
+            if (args.length < 1) {
+                sender.sendMessage(ChatColor.GREEN+"You must specify a user. Type /ban for more info.");
+                return false;
+            }
+            String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : ""); // Stuff goes here
+            if (args.length == 1) {
+            }
+            MCBouncerUtil.addBan(args[0], senderName, reason);
+
+        } else if (command.getName().equalsIgnoreCase("unban")) {
+        }
         return true;
     }
 }

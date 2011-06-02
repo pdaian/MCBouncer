@@ -13,6 +13,8 @@ public class MCBouncerConfig {
     private static String apiKey = "";
     private static int numBansDisallow = 10;
     private static boolean showBanMessages = true;
+    private static String defaultBanMessage = "Banned for rule violation.";
+
 
     public MCBouncerConfig(File folder) {
         Properties configFile = new Properties();
@@ -21,14 +23,15 @@ public class MCBouncerConfig {
             if (f.exists()) {
                 configFile.load(this.getClass().getClassLoader().getResourceAsStream(folder.getPath() + "/config.properties"));
                 configFile.load(this.getClass().getClassLoader().getResourceAsStream("/my_config.properties"));
-                this.apiKey = configFile.getProperty("apiKey");
-                this.numBansDisallow = Integer.valueOf(configFile.getProperty("numBansDisallow"));
-                this.showBanMessages = configFile.getProperty("showBanMessages").toLowerCase().contains("true");
+                MCBouncerConfig.apiKey = configFile.getProperty("apiKey");
+                MCBouncerConfig.numBansDisallow = Integer.valueOf(configFile.getProperty("numBansDisallow"));
+                MCBouncerConfig.showBanMessages = configFile.getProperty("showBanMessages").toLowerCase().contains("true");
+                MCBouncerConfig.defaultBanMessage = configFile.getProperty("defaultBanMessage");
             } else {
                 f.createNewFile();
                 FileWriter fstream = new FileWriter(folder.getPath() + "/config.properties");
                 BufferedWriter out = new BufferedWriter(fstream);
-                out.write("# Replace this with your API key from mcbouncer.com/apikey\napiKey:REPLACE\nnumBansDisallow:10\nshowBanMessages:true\n");
+                out.write("# Replace this with your API key from mcbouncer.com/apikey\napiKey:REPLACE\nnumBansDisallow:10\nshowBanMessages:true\ndefaultBanMessage:Banned for rule violation.");
                 out.close();
             }
         } catch (IOException ex) {
@@ -48,6 +51,7 @@ public class MCBouncerConfig {
         return showBanMessages;
     }
 
-    
+    public static String getDefaultReason() {
+        return defaultBanMessage;
+    }
 }
-
