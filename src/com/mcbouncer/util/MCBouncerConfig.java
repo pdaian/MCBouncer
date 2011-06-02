@@ -16,7 +16,7 @@ public class MCBouncerConfig {
     private static String defaultBanMessage = "Banned for rule violation.";
 
 
-    public MCBouncerConfig(File folder) {
+    public MCBouncerConfig(File folder) {   // This never gets called (static class).  FIX.
         Properties configFile = new Properties();
         try {
             File f = new File(folder.getPath() + "/config.properties");

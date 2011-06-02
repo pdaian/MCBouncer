@@ -69,6 +69,13 @@ public class MCBouncerAPI {
         }
         return (String) result.get("error");
     }
+        public static boolean isBanned(String user, String key) {
+        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getBanReason/" + key + "/" + user));
+        if ((Boolean) result.get("success")) {
+            return (Boolean) result.get("is_banned");
+        }
+        return false;
+    }
     public static boolean removeNote(int noteid, String key) {
         JSONObject result = (MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/removeNote/" + key + "/" + noteid)));
         if ((Boolean) result.get("success"))

@@ -28,7 +28,7 @@ public class MCBouncer extends JavaPlugin {
     @Override
     public void onEnable() {
         final PluginManager pm = getServer().getPluginManager();
-        final MCBPlayerListener pl = new MCBPlayerListener();
+        final MCBPlayerListener pl = new MCBPlayerListener(this);
         pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Priority.High, this);
         setupPermissions();
     }
@@ -47,10 +47,17 @@ public class MCBouncer extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-        String senderName = sender instanceof Player ? ((Player)sender).getName() : "console";
+        String senderName = "console";
+        if (sender instanceof Player) {
+            if (!this.permissionHandler.has((Player) sender, "mcbouncer.mod")) {
+                return false;
+            }
+            senderName = ((Player) sender).getName();
+
+        }
         if (command.getName().equalsIgnoreCase("ban")) {
             if (args.length < 1) {
-                sender.sendMessage(ChatColor.GREEN+"You must specify a user. Type /ban for more info.");
+                sender.sendMessage(ChatColor.GREEN + "You must specify a user. Type /ban for more info.");
                 return false;
             }
             String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : ""); // Stuff goes here
@@ -59,7 +66,14 @@ public class MCBouncer extends JavaPlugin {
             MCBouncerUtil.addBan(args[0], senderName, reason);
 
         } else if (command.getName().equalsIgnoreCase("unban")) {
+            if (args.length != 1) {
+                sender.sendMessage(ChatColor.GREEN+"You must specify a user, and only one arg. Type /unban for more info.");
+                return false;
+            }
+            MCBouncerUtil.removeBan(args[0]);
         }
+        else
+            return false;
         return true;
     }
 }
