@@ -5,9 +5,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
+import org.bukkit.plugin.Plugin;
 
 public class MCBPlayerListener extends PlayerListener {
 
+    private Plugin plugin;
+    public MCBPlayerListener(Plugin plugin) {
+        this.plugin = plugin;
+    }
     @Override
     public void onPlayerJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
@@ -25,10 +30,10 @@ public class MCBPlayerListener extends PlayerListener {
                 String response = numBans > 0 ? numBans + " bans. " : " ";
                 response += numNotes > 0 ? numNotes + " notes." : "";
                 if (!response.isEmpty()) {
-                    MCBouncerUtil.modMessage(ChatColor.GREEN + response);
+                    MCBouncerUtil.modMessage(ChatColor.GREEN + response, plugin);
                 }
             }
         };
         r.run();
-    }c
+    }
 }
