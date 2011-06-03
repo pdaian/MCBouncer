@@ -66,8 +66,13 @@ public class MCBouncer extends JavaPlugin {
                 sender.sendMessage(ChatColor.GREEN + "You must specify a user.");
                 return false;
             }
-            String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : this.join(args, " ",args[0]));
+            String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : this.join(args, " "));
             sender.sendMessage(ChatColor.GREEN+(MCBouncerUtil.addBan(args[0], senderName, reason) ? "User banned successfully." : MCBouncerAPI.getError()));
+            Player p = this.getServer().getPlayer(args[0]);
+            if (p != null) {
+                p.kickPlayer(reason);
+            }
+       
         } else if (command.getName().equalsIgnoreCase("unban")) {
             if (args.length != 1) {
                 sender.sendMessage(ChatColor.GREEN+"You must specify a user, and only one arg.");
@@ -81,7 +86,7 @@ public class MCBouncer extends JavaPlugin {
                 return false;
             }
             ArrayList<HashMap<String, Object>> result = MCBouncerUtil.getBans(args[0]);
-            sender.sendMessage(args[0]+" has "+result.size()+" ban"+(result.size() != 1 ? "s" : "")+".");
+            sender.sendMessage(ChatColor.AQUA+args[0]+" has "+result.size()+" ban"+(result.size() != 1 ? "s" : "")+".");
             for (int i = 0; i < result.size(); i++) {
                 sender.sendMessage(ChatColor.GREEN+""+(i+1)+": "+result.get(i).get("server")+" ("+result.get(i).get("issuer")+") ["+result.get(i).get("reason")+"]");
             }
@@ -93,13 +98,12 @@ public class MCBouncer extends JavaPlugin {
     }
     // Stolen from Google
 
-    public static String join(String[] s, String delimiter, String ex) {
+    public static String join(String[] s, String delimiter) {
         StringBuilder buffer = new StringBuilder();
-        for (String strin : s) {
-            if (!s.equals(ex))
-                buffer.append(strin).append(delimiter);
+        for (int i = 1; i < s.length; i++) {
+            buffer.append(s[i]).append(delimiter);
         }
-        return buffer.toString().substring(0, buffer.length()-1);
+        return buffer.toString().substring(0, buffer.length() - 1);
     }
 
 }
