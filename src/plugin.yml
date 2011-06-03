@@ -13,3 +13,11 @@ commands:
     description: 'Global ban command'
     usage: 'Usage: /<command>'
     aliases: []
+  unban:
+    description: 'Unban command.'
+    usage: 'Usage: /<command> playername'
+    aliases: []
+  lookup:
+    description: 'Lookup command.'
+    usage: 'Usage: /<command> playername'
+    aliases: []

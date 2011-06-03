@@ -4,54 +4,61 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bukkit.util.config.Configuration;
 
 public class MCBouncerConfig {
+    public static boolean debugMode = false;
+    public static int numBansDisallow = 10;
+    public static String apiKey = "";
+    public static boolean showBanMessages = true;
+    public static String defaultReason = "Banned for rule violation.";
+    public static Configuration config = null;
 
-    private static String apiKey = "";
-    private static int numBansDisallow = 10;
-    private static boolean showBanMessages = true;
-    private static String defaultBanMessage = "Banned for rule violation.";
-
-
-    public MCBouncerConfig(File folder) {   // This never gets called (static class).  FIX.
-        Properties configFile = new Properties();
-        try {
-            File f = new File(folder.getPath() + "/config.properties");
-            if (f.exists()) {
-                configFile.load(this.getClass().getClassLoader().getResourceAsStream(folder.getPath() + "/config.properties"));
-                configFile.load(this.getClass().getClassLoader().getResourceAsStream("/my_config.properties"));
-                MCBouncerConfig.apiKey = configFile.getProperty("apiKey");
-                MCBouncerConfig.numBansDisallow = Integer.valueOf(configFile.getProperty("numBansDisallow"));
-                MCBouncerConfig.showBanMessages = configFile.getProperty("showBanMessages").toLowerCase().contains("true");
-                MCBouncerConfig.defaultBanMessage = configFile.getProperty("defaultBanMessage");
-            } else {
+    public static void load(File folder) {
+        folder.mkdirs();
+        File file = new File(folder, "config.yml");
+        config = new Configuration(file);
+        config.load();
+        if (!file.exists()) {
+            try {
+                File f = new File(folder.getPath() + "/config.properties");
                 f.createNewFile();
-                FileWriter fstream = new FileWriter(folder.getPath() + "/config.properties");
+                FileWriter fstream = new FileWriter(folder.getPath() + "/config.yml");
                 BufferedWriter out = new BufferedWriter(fstream);
-                out.write("# Replace this with your API key from mcbouncer.com/apikey\napiKey:REPLACE\nnumBansDisallow:10\nshowBanMessages:true\ndefaultBanMessage:Banned for rule violation.");
+                out.write("# Replace this with your API key from mcbouncer.com/apikey\napiKey: REPLACE\nnumBansDisallow: 10\nshowBanMessages: true\ndefaultBanMessage: 'Banned for rule violation.'");
                 out.close();
+                config.load();
+            } catch (IOException ex) {
+                Logger.getLogger(MCBouncerConfig.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(MCBouncerConfig.class.getName()).log(Level.SEVERE, null, ex);
         }
+        setSettings();
     }
-
+    private static void setSettings() {
+        debugMode = config.getBoolean("debug", debugMode);
+        apiKey = config.getString("apiKey", apiKey);
+        numBansDisallow = config.getInt("numBansDisallow", numBansDisallow);
+        showBanMessages = config.getBoolean("showBansMessages", showBanMessages);
+        defaultReason = config.getString("defaultBanMessage", "Banned for rule violation.");
+    }
     public static String getApiKey() {
         return apiKey;
     }
-
+    public static Configuration getConfig() {
+        return config;
+    }
+    public static boolean isDebugMode() {
+        return debugMode;
+    }
+    public static String getDefaultReason() {
+        return defaultReason;
+    }
     public static int getNumBansDisallow() {
         return numBansDisallow;
     }
-
     public static boolean isShowBanMessages() {
         return showBanMessages;
-    }
-
-    public static String getDefaultReason() {
-        return defaultBanMessage;
     }
 }

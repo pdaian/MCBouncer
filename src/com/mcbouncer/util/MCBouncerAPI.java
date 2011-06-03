@@ -3,9 +3,12 @@ package com.mcbouncer.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -100,7 +103,7 @@ public class MCBouncerAPI {
         return false;
     }    
     public static boolean addIPBan(String IP, String key, String issuer, String reason) {
-        reason = java.net.URLEncoder.encode(reason);
+        reason = encode(reason);
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addIPBan/" + key + "/" + issuer+ "/" + IP + "/" + reason));
         if ((Boolean) result.get("success")) {
             return true;
@@ -109,7 +112,7 @@ public class MCBouncerAPI {
         return false;
     }        
      public static boolean addBan(String user, String key, String issuer, String reason) {
-        reason = java.net.URLEncoder.encode(reason);
+        reason = encode(reason);
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addBan/" + key + "/" + issuer+ "/" + user + "/" + reason));
         if ((Boolean) result.get("success")) {
             return true;
@@ -118,7 +121,7 @@ public class MCBouncerAPI {
         return false;
     }   
      public static boolean addNote(String user, String key, String issuer, String note) {
-        note = java.net.URLEncoder.encode(note);
+        note = encode(note);
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addNote/" + key + "/" + issuer+ "/" + user + "/" + note));
         if ((Boolean) result.get("success")) {
             return true;
@@ -161,4 +164,18 @@ public class MCBouncerAPI {
         }
         return json;
     }
-}
+    private static String encode(String pText) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < pText.length(); i++) {
+            char token = pText.charAt(i);
+            if (Character.isLetterOrDigit(token)) {
+                builder.append(token);
+                continue;
+            }
+            String s = "%"+Integer.toHexString((int) token);
+            builder.append(s);
+        }
+        return builder.toString();
+    }
+    }
+
