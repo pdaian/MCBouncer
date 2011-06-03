@@ -1,16 +1,18 @@
 package com.mcbouncer.util;
 
 import com.mcbouncer.plugin.MCBouncer;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 public class MCBouncerUtil {
 
-    public static void addBan(String playerName, String admin, String reason) {
-        MCBouncerAPI.addBan(playerName, MCBouncerConfig.getApiKey(), admin, reason);
+    public static boolean addBan(String playerName, String admin, String reason) {
+        return MCBouncerAPI.addBan(playerName, MCBouncerConfig.getApiKey(), admin, reason);
     }
-    public static void removeBan(String playerName) {
-        MCBouncerAPI.removeBan(playerName, MCBouncerConfig.getApiKey());
+    public static boolean removeBan(String playerName) {
+        return MCBouncerAPI.removeBan(playerName, MCBouncerConfig.getApiKey());
     }
 
     public static int getBanCount(String playerName, String IP) {
@@ -21,7 +23,7 @@ public class MCBouncerUtil {
         return (int) MCBouncerAPI.getNoteCount(playerName, MCBouncerConfig.getApiKey());
     }
 
-    public static boolean isAllowedToJoin(String playerName, String IP) {
+    public static boolean isNotAllowedToJoin(String playerName, String IP) {
         MCBouncerAPI.updateUser(playerName, MCBouncerConfig.getApiKey(), IP);
         return MCBouncerAPI.isBanned(playerName, MCBouncerConfig.getApiKey()) || MCBouncerAPI.isBanned(playerName, MCBouncerConfig.getApiKey()); // Second one should be isIpBanned()
     }
@@ -41,5 +43,8 @@ public class MCBouncerUtil {
                 p[z].sendMessage(message);
             }
         }
+    }
+    public static ArrayList<HashMap<String, Object>> getBans(String user) {
+        return MCBouncerAPI.getBans(user, MCBouncerConfig.getApiKey(), "0", "50");
     }
 }
