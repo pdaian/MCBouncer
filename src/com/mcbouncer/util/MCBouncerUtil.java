@@ -11,6 +11,9 @@ public class MCBouncerUtil {
     public static boolean addBan(String playerName, String admin, String reason) {
         return MCBouncerAPI.addBan(playerName, MCBouncerConfig.getApiKey(), admin, reason);
     }
+    public static boolean addIPBan(String IP, String admin, String reason) {
+        return MCBouncerAPI.addIPBan(IP, MCBouncerConfig.getApiKey(), admin, reason);
+    }
     public static boolean removeBan(String playerName) {
         return MCBouncerAPI.removeBan(playerName, MCBouncerConfig.getApiKey());
     }
