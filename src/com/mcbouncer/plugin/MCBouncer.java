@@ -82,6 +82,14 @@ public class MCBouncer extends JavaPlugin {
             }
             sender.sendMessage(ChatColor.GREEN+(MCBouncerUtil.removeBan(args[0]) ? "User unbanned successfully." : MCBouncerAPI.getError()));
         }
+        else if (command.getName().equalsIgnoreCase("kick")) {
+            if (getServer().matchPlayer(args[0]).size() > 0) {
+                String reason = (args.length > 1 ? this.join(args, " ") : MCBouncerConfig.getDefaultKickMessage());
+                getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
+                MCBouncerUtil.appropriateNotify(ChatColor.RED+getServer().matchPlayer(args[0]).get(0).getName()+" was kicked for "+reason);
+            }
+            sender.sendMessage(ChatColor.GREEN+"No suck player.");
+        }
         else if (command.getName().equalsIgnoreCase("lookup")) {
             if (args.length != 1) {
                 sender.sendMessage(ChatColor.GREEN+"You must specify a user, and only one arg.");
@@ -97,17 +105,15 @@ public class MCBouncer extends JavaPlugin {
             Pattern p = Pattern.compile("^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
             boolean matches = p.matcher(args[0]).matches();
         if (!matches) {
-            args[0] = (String) (getServer().matchPlayer(args[0]).size() > 0 ? getServer().matchPlayer(args[0]).get(0) : "");
+            args[0] = (String) (getServer().matchPlayer(args[0]).size() > 0 ? getServer().matchPlayer(args[0]).get(0).getAddress().getAddress().getHostAddress() : "");
+            getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
         }
         if (args[0].isEmpty()) {
             sender.sendMessage(ChatColor.GREEN+"Not a valid player or IP.");
             return false;
         }
-        sender.sendMessage(ChatColor.GREEN+(MCBouncerUtil.addIPBan(args[0]) ? "IP banned successfully." : MCBouncerAPI.getError()));
-        if (!matches) {
-            getServer().getPlayer(args[0]).kickPlayer(reason);
-        }
- }
+        sender.sendMessage(ChatColor.GREEN+(MCBouncerUtil.addIPBan(args[0], senderName, reason) ? "IP banned successfully." : MCBouncerAPI.getError()));
+    }
         
         else
             return false;

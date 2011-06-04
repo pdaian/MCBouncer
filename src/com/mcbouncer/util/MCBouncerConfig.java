@@ -9,12 +9,13 @@ import java.util.logging.Logger;
 import org.bukkit.util.config.Configuration;
 
 public class MCBouncerConfig {
-    public static boolean debugMode = false;
-    public static int numBansDisallow = 10;
-    public static String apiKey = "";
-    public static boolean showBanMessages = true;
-    public static String defaultReason = "Banned for rule violation.";
-    public static Configuration config = null;
+    private static boolean debugMode = false;
+    private static int numBansDisallow = 10;
+    private static String apiKey = "";
+    private static boolean showBanMessages = true;
+    private static String defaultReason = "Banned for rule violation.";
+    private static String defaultKickMessage = "Kicked by an admin.";
+    private static Configuration config = null;
 
     public static void load(File folder) {
         folder.mkdirs();
@@ -27,7 +28,7 @@ public class MCBouncerConfig {
                 f.createNewFile();
                 FileWriter fstream = new FileWriter(folder.getPath() + "/config.yml");
                 BufferedWriter out = new BufferedWriter(fstream);
-                out.write("# Replace this with your API key from mcbouncer.com/apikey\napiKey: REPLACE\nnumBansDisallow: 10\nshowBanMessages: true\ndefaultBanMessage: 'Banned for rule violation.'");
+                out.write("# Replace this with your API key from mcbouncer.com/apikey\napiKey: REPLACE\nnumBansDisallow: 10\nshowBanMessages: true\ndefaultBanMessage: 'Banned for rule violation.'\ndefaultKickMessage: 'Kicked by an admin.;\n");
                 out.close();
                 config.load();
             } catch (IOException ex) {
@@ -42,6 +43,7 @@ public class MCBouncerConfig {
         numBansDisallow = config.getInt("numBansDisallow", numBansDisallow);
         showBanMessages = config.getBoolean("showBansMessages", showBanMessages);
         defaultReason = config.getString("defaultBanMessage", "Banned for rule violation.");
+        defaultKickMessage = config.getString("defaultKickMessage", "Kicked by an admin.");
     }
     public static String getApiKey() {
         return apiKey;
@@ -60,5 +62,8 @@ public class MCBouncerConfig {
     }
     public static boolean isShowBanMessages() {
         return showBanMessages;
+    }
+    public static String getDefaultKickMessage() {
+        return defaultKickMessage;
     }
 }
