@@ -50,4 +50,8 @@ public class MCBouncerUtil {
     public static ArrayList<HashMap<String, Object>> getBans(String user) {
         return MCBouncerAPI.getBans(user, MCBouncerConfig.getApiKey(), "0", "50");
     }
+
+    public static void appropriateNotify(String string) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
