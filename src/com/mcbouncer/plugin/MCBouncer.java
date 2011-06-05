@@ -120,7 +120,7 @@ public class MCBouncer extends JavaPlugin {
             for (String s : new String[] {"ban_reasons_global", "ban_reasons_local"}) {
                 for (String reason : (String[]) result.get(s)) {
                     int i = 0;
-                    sender.sendMessage(ChatColor.GREEN+(s == "ban_reasons_global" ? "[G] " : "[L] ")+""+i+": "+reason);
+                    sender.sendMessage(ChatColor.GREEN+(s.equals("ban_reasons_global") ? "[G] " : "[L] ")+""+i+": "+reason);
                     i++;
                 }
             }
