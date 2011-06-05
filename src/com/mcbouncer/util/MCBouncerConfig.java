@@ -16,6 +16,7 @@ public class MCBouncerConfig {
     private static String defaultReason = "Banned for rule violation.";
     private static String defaultKickMessage = "Kicked by an admin.";
     private static Configuration config = null;
+    private static String mcBansKey = "sample";
 
     public static void load(File folder) {
         folder.mkdirs();
@@ -28,7 +29,7 @@ public class MCBouncerConfig {
                 f.createNewFile();
                 FileWriter fstream = new FileWriter(folder.getPath() + "/config.yml");
                 BufferedWriter out = new BufferedWriter(fstream);
-                out.write("# Replace this with your API key from mcbouncer.com/apikey\napiKey: REPLACE\nnumBansDisallow: 10\nshowBanMessages: true\ndefaultBanMessage: 'Banned for rule violation.'\ndefaultKickMessage: 'Kicked by an admin.;\n");
+                out.write("# Replace this with your API key from mcbouncer.com/apikey\napiKey: REPLACE\nnumBansDisallow: 10\nshowBanMessages: true\ndefaultBanMessage: 'Banned for rule violation.'\ndefaultKickMessage: 'Kicked by an admin.;\n\n#MCBans API key from mcbans.com, to use the /mcb-lookup command.\nmcBansKey: sample");
                 out.close();
                 config.load();
             } catch (IOException ex) {
@@ -44,6 +45,7 @@ public class MCBouncerConfig {
         showBanMessages = config.getBoolean("showBansMessages", showBanMessages);
         defaultReason = config.getString("defaultBanMessage", "Banned for rule violation.");
         defaultKickMessage = config.getString("defaultKickMessage", "Kicked by an admin.");
+        mcBansKey = config.getString("mcBansKey", "sample");
     }
     public static String getApiKey() {
         return apiKey;
@@ -65,5 +67,8 @@ public class MCBouncerConfig {
     }
     public static String getDefaultKickMessage() {
         return defaultKickMessage;
+    }
+    public static String getMcBansKey() {
+        return mcBansKey;
     }
 }

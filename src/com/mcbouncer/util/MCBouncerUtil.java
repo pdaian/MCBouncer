@@ -1,10 +1,17 @@
 package com.mcbouncer.util;
 
 import com.mcbouncer.plugin.MCBouncer;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.json.simple.JSONObject;
 
 public class MCBouncerUtil {
 
@@ -52,6 +59,30 @@ public class MCBouncerUtil {
     }
 
     public static void appropriateNotify(String string) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return;
+    }
+    
+    public static JSONObject getMCBLookup(String playerName) { // [irc.esper.net] #mcbans <Firestar> and tbh i have said i do not care if people make their own plugins that integrate with mcbans
+        StringBuilder response = new StringBuilder();
+        if (MCBouncerConfig.getMcBansKey().equals("sample")) {
+            return null;
+        }
+        try {
+            String request = "player" + URLEncoder.encode(playerName, "UTF-8") + "&exec=lookup_user";
+            URLConnection conn = new URL("http://72.10.39.172/"+MCBouncerConfig.getMcBansKey()).openConnection(); // http://www.exampledepot.com/egs/java.net/Post.html
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(request);
+            wr.flush();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+            }
+            wr.close();
+            rd.close();
+            return MCBouncerAPI.parseJson(response.toString());
+        } catch (Exception e) {}
+        return null;
     }
 }

@@ -7,11 +7,7 @@ description: MCBouncer is a global/local ban suite and protection program that i
 commands:
   ban:
     description: 'Ban command'
-    usage: 'Usage: /<command>'
-    aliases: []
-  ban-global:
-    description: 'Global ban command'
-    usage: 'Usage: /<command>'
+    usage: 'Usage: /<command> [reason]'
     aliases: []
   unban:
     description: 'Unban command.'
@@ -19,5 +15,17 @@ commands:
     aliases: []
   lookup:
     description: 'Lookup command.'
+    usage: 'Usage: /<command> playername'
+    aliases: []
+  kick:
+    description: 'Kick command.'
+    usage: 'Usage: /<command> playername [reason]'
+    aliases: []
+  banip:
+    description: 'IP Ban command.'
+    usage: 'Usage: /<command> playername/IP'
+    aliases: []
+  mcb-lookup:
+    description: 'MCBans Lookup command.'
     usage: 'Usage: /<command> playername'
     aliases: []

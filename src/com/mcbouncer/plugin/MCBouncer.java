@@ -5,23 +5,19 @@ import com.mcbouncer.util.MCBouncerConfig;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.regex.Pattern;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.json.simple.JSONObject;
 
 public class MCBouncer extends JavaPlugin {
 
@@ -67,7 +63,7 @@ public class MCBouncer extends JavaPlugin {
                 sender.sendMessage(ChatColor.GREEN + "You must specify a user.");
                 return false;
             }
-            args[0] = (String) (getServer().matchPlayer(args[0]).size() > 0 ? getServer().matchPlayer(args[0]).get(0) : args[0]);
+            args[0] = (getServer().matchPlayer(args[0]).size() > 0 ? getServer().matchPlayer(args[0]).get(0).getName() : args[0]);
             String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : this.join(args, " "));
             sender.sendMessage(ChatColor.GREEN+(MCBouncerUtil.addBan(args[0], senderName, reason) ? "User banned successfully." : MCBouncerAPI.getError()));
             Player p = this.getServer().getPlayer(args[0]);
@@ -85,10 +81,10 @@ public class MCBouncer extends JavaPlugin {
         else if (command.getName().equalsIgnoreCase("kick")) {
             if (getServer().matchPlayer(args[0]).size() > 0) {
                 String reason = (args.length > 1 ? this.join(args, " ") : MCBouncerConfig.getDefaultKickMessage());
-                getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
                 MCBouncerUtil.appropriateNotify(ChatColor.RED+getServer().matchPlayer(args[0]).get(0).getName()+" was kicked for "+reason);
+                getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
             }
-            sender.sendMessage(ChatColor.GREEN+"No suck player.");
+            sender.sendMessage(ChatColor.GREEN+"No such player.");
         }
         else if (command.getName().equalsIgnoreCase("lookup")) {
             if (args.length != 1) {
@@ -105,7 +101,7 @@ public class MCBouncer extends JavaPlugin {
             Pattern p = Pattern.compile("^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
             boolean matches = p.matcher(args[0]).matches();
         if (!matches) {
-            args[0] = (String) (getServer().matchPlayer(args[0]).size() > 0 ? getServer().matchPlayer(args[0]).get(0).getAddress().getAddress().getHostAddress() : "");
+            args[0] = (getServer().matchPlayer(args[0]).size() > 0 ? getServer().matchPlayer(args[0]).get(0).getAddress().getAddress().getHostAddress() : "");
             getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
         }
         if (args[0].isEmpty()) {
@@ -114,7 +110,21 @@ public class MCBouncer extends JavaPlugin {
         }
         sender.sendMessage(ChatColor.GREEN+(MCBouncerUtil.addIPBan(args[0], senderName, reason) ? "IP banned successfully." : MCBouncerAPI.getError()));
     }
-        
+        else if (command.getName().equalsIgnoreCase("mcb-lookup")) {
+            if (args.length != 1) {
+                sender.sendMessage(ChatColor.GREEN+"You must specify a user, and only one arg.");
+                return false;
+            }
+            JSONObject result = MCBouncerUtil.getMCBLookup(args[0]);
+            sender.sendMessage(ChatColor.AQUA+args[0]+" has "+result.get("ban_num") +" ban"+(result.get("ban_num") != 1 ? "s" : "")+".");
+            for (String s : new String[] {"ban_reasons_global", "ban_reasons_local"}) {
+                for (String reason : (String[]) result.get(s)) {
+                    int i = 0;
+                    sender.sendMessage(ChatColor.GREEN+(s == "ban_reasons_global" ? "[G] " : "[L] ")+""+i+": "+reason);
+                    i++;
+                }
+            }
+        }       
         else
             return false;
         return true;

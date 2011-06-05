@@ -25,6 +25,7 @@ public class MCBouncerAPI {
         MCBouncerAPI.setError((String) result.get("error"));
         return 0;
     }
+
     public static long getNoteCount(String user, String key) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getNoteCount/" + key + "/" + user));
         if ((Boolean) result.get("success")) {
@@ -33,6 +34,7 @@ public class MCBouncerAPI {
         MCBouncerAPI.setError((String) result.get("error"));
         return 0;
     }
+
     public static long getIPBanCount(String IP, String key) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getIPBanCount/" + key + "/" + IP));
         if ((Boolean) result.get("success")) {
@@ -41,6 +43,7 @@ public class MCBouncerAPI {
         MCBouncerAPI.setError((String) result.get("error"));
         return 0;
     }
+
     public static ArrayList<HashMap<String, Object>> getIPBans(String IP, String key, String page, String numEntries) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getIPBans/" + key + "/" + IP + "/" + page + "/" + numEntries));
         if ((Boolean) result.get("success")) {
@@ -48,6 +51,7 @@ public class MCBouncerAPI {
         }
         return (ArrayList<HashMap<String, Object>>) MCBouncerAPI.setError((String) result.get("error"));
     }
+
     public static ArrayList<HashMap<String, Object>> getBans(String user, String key, String page, String numEntries) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getBans/" + key + "/" + user + "/" + page + "/" + numEntries));
         if ((Boolean) result.get("success")) {
@@ -55,6 +59,7 @@ public class MCBouncerAPI {
         }
         return (ArrayList<HashMap<String, Object>>) MCBouncerAPI.setError((String) result.get("error"));
     }
+
     public static ArrayList<HashMap<String, Object>> getNotes(String user, String key, String page, String numEntries) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getNotes/" + key + "/" + user + "/" + page + "/" + numEntries));
         if ((Boolean) result.get("success")) {
@@ -62,9 +67,11 @@ public class MCBouncerAPI {
         }
         return (ArrayList<HashMap<String, Object>>) MCBouncerAPI.setError((String) result.get("error"));
     }
+
     public static boolean updateUser(String user, String key, String IP) {
         return (Boolean) ((MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/updateUser/" + key + "/" + user + "/" + IP))).get("success"));
     }
+
     public static String getBanReason(String user, String key) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getBanReason/" + key + "/" + user));
         if ((Boolean) result.get("success")) {
@@ -72,20 +79,24 @@ public class MCBouncerAPI {
         }
         return (String) result.get("error");
     }
-        public static boolean isBanned(String user, String key) {
+
+    public static boolean isBanned(String user, String key) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getBanReason/" + key + "/" + user));
         if ((Boolean) result.get("success")) {
             return (Boolean) result.get("is_banned");
         }
         return false;
     }
+
     public static boolean removeNote(int noteid, String key) {
         JSONObject result = (MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/removeNote/" + key + "/" + noteid)));
-        if ((Boolean) result.get("success"))
+        if ((Boolean) result.get("success")) {
             return true;
+        }
         MCBouncerAPI.setError((String) result.get("error"));
         return false;
     }
+
     public static boolean removeBan(String user, String key) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/removeBan/" + key + "/" + user));
         if ((Boolean) result.get("success")) {
@@ -94,6 +105,7 @@ public class MCBouncerAPI {
         MCBouncerAPI.setError((String) result.get("error"));
         return false;
     }
+
     public static boolean removeIPBan(String IP, String key) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/removeIPBan/" + key + "/" + IP));
         if ((Boolean) result.get("success")) {
@@ -101,39 +113,43 @@ public class MCBouncerAPI {
         }
         MCBouncerAPI.setError((String) result.get("error"));
         return false;
-    }    
+    }
+
     public static boolean addIPBan(String IP, String key, String issuer, String reason) {
         reason = encode(reason);
-        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addIPBan/" + key + "/" + issuer+ "/" + IP + "/" + reason));
+        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addIPBan/" + key + "/" + issuer + "/" + IP + "/" + reason));
         if ((Boolean) result.get("success")) {
             return true;
         }
         MCBouncerAPI.setError((String) result.get("error"));
         return false;
-    }        
-     public static boolean addBan(String user, String key, String issuer, String reason) {
+    }
+
+    public static boolean addBan(String user, String key, String issuer, String reason) {
         reason = encode(reason);
-        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addBan/" + key + "/" + issuer+ "/" + user + "/" + reason));
+        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addBan/" + key + "/" + issuer + "/" + user + "/" + reason));
         if ((Boolean) result.get("success")) {
             return true;
         }
         MCBouncerAPI.setError((String) result.get("error"));
         return false;
-    }   
-     public static boolean addNote(String user, String key, String issuer, String note) {
+    }
+
+    public static boolean addNote(String user, String key, String issuer, String note) {
         note = encode(note);
-        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addNote/" + key + "/" + issuer+ "/" + user + "/" + note));
+        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/addNote/" + key + "/" + issuer + "/" + user + "/" + note));
         if ((Boolean) result.get("success")) {
             return true;
         }
         MCBouncerAPI.setError((String) result.get("error"));
         return false;
-    }      
-    
-    private static Object setError (String e) {
+    }
+
+    private static Object setError(String e) {
         MCBouncerAPI.lastFailure = (String) e;
         return null;
     }
+
     public static String getError() {
         return MCBouncerAPI.lastFailure;
     }
@@ -155,7 +171,7 @@ public class MCBouncerAPI {
         }
     }
 
-    private static JSONObject parseJson(String jsonin) {
+    public static JSONObject parseJson(String jsonin) {
         JSONObject json = null;
         try {
             json = (JSONObject) new JSONParser().parse(jsonin);
@@ -164,6 +180,7 @@ public class MCBouncerAPI {
         }
         return json;
     }
+
     private static String encode(String pText) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < pText.length(); i++) {
@@ -172,10 +189,9 @@ public class MCBouncerAPI {
                 builder.append(token);
                 continue;
             }
-            String s = "%"+Integer.toHexString((int) token);
+            String s = "%" + Integer.toHexString((int) token);
             builder.append(s);
         }
         return builder.toString();
     }
-    }
-
+}
