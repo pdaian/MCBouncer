@@ -116,7 +116,7 @@ public class MCBouncer extends JavaPlugin {
                 return false;
             }
             JSONObject result = MCBouncerUtil.getMCBLookup(args[0]);
-            sender.sendMessage(ChatColor.AQUA+args[0]+" has "+result.get("ban_num") +" ban"+(result.get("ban_num") != 1 ? "s" : "")+".");
+            sender.sendMessage(ChatColor.AQUA+args[0]+" has "+result.get("ban_num") +" ban"+(result.get("ban_num") != "1" ? "s" : "")+".");
             for (String s : new String[] {"ban_reasons_global", "ban_reasons_local"}) {
                 for (String reason : (String[]) result.get(s)) {
                     int i = 0;
