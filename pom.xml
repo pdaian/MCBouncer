@@ -28,7 +28,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Implementation-Title>AssignPermissions</Implementation-Title>
+                            <Implementation-Title>MCBouncer</Implementation-Title>
                             <Implementation-Version>${describe}</Implementation-Version>
                         </manifestEntries>
                     </archive>
