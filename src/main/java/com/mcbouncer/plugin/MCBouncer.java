@@ -64,7 +64,7 @@ public class MCBouncer extends JavaPlugin {
                 return false;
             }
             args[0] = (getServer().matchPlayer(args[0]).size() > 0 ? getServer().matchPlayer(args[0]).get(0).getName() : args[0]);
-            String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : this.join(args, " "));
+            String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : MCBouncerUtil.implode(args, " "));
             sender.sendMessage(ChatColor.GREEN+(MCBouncerUtil.addBan(args[0], senderName, reason) ? "User banned successfully." : MCBouncerAPI.getError()));
             Player p = this.getServer().getPlayer(args[0]);
             if (p != null) {
@@ -80,7 +80,7 @@ public class MCBouncer extends JavaPlugin {
         }
         else if (command.getName().equalsIgnoreCase("kick")) {
             if (getServer().matchPlayer(args[0]).size() > 0) {
-                String reason = (args.length > 1 ? this.join(args, " ") : MCBouncerConfig.getDefaultKickMessage());
+                String reason = (args.length > 1 ? MCBouncerUtil.implode(args, " ") : MCBouncerConfig.getDefaultKickMessage());
                 MCBouncerUtil.appropriateNotify(ChatColor.RED+getServer().matchPlayer(args[0]).get(0).getName()+" was kicked for "+reason);
                 getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
             }
@@ -97,7 +97,7 @@ public class MCBouncer extends JavaPlugin {
                 sender.sendMessage(ChatColor.GREEN + "" + (i + 1) + ": " + result.get(i).get("server") + " (" + result.get(i).get("issuer") + ") [" + result.get(i).get("reason") + "]");
             }
         } else if (command.getName().equalsIgnoreCase("banip")) { // IN PROGRESS AND MESSY - NOT DONE
-            String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : this.join(args, " "));
+            String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : MCBouncerUtil.implode(args, " "));
             Pattern p = Pattern.compile("^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
             boolean matches = p.matcher(args[0]).matches();
         if (!matches) {
@@ -128,15 +128,6 @@ public class MCBouncer extends JavaPlugin {
         else
             return false;
         return true;
-    }
-    // Stolen from Google
-
-    public static String join(String[] s, String delimiter) {
-        StringBuilder buffer = new StringBuilder();
-        for (int i = 1; i < s.length; i++) {
-            buffer.append(s[i]).append(delimiter);
-        }
-        return buffer.toString().substring(0, buffer.length() - 1);
     }
 
 }

@@ -85,4 +85,12 @@ public class MCBouncerUtil {
         } catch (Exception e) {}
         return null;
     }
+    
+    public static String implode(String[] s, String delimiter) {
+        StringBuilder buffer = new StringBuilder();
+        for (int i = 1; i < s.length; i++) {
+            buffer.append(s[i]).append(delimiter);
+        }
+        return buffer.toString().substring(0, buffer.length() - 1);
+    }
 }
