@@ -5,7 +5,7 @@
     <artifactId>MCBouncer</artifactId>
     <version>0.1</version>
     <name>MCBouncer</name>
-    <description>MCBouncer plugin</description>
+    <description>MCBouncer plugin - http://mcbouncer.com</description>
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
