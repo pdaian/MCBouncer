@@ -32,7 +32,9 @@ public class MCBCommands implements CommandExecutor {
         handler.registerCommand("kick", new KickCommand(parent));
         handler.registerCommand("lookup", new LookupCommand(parent));
         handler.registerCommand("mcb-lookup", new McbLookupCommand(parent));
-
+        handler.registerCommand("mute", new MuteCommand(parent));
+        handler.registerCommand("unmute", new UnmuteCommand(parent));
+        
         return handler;
     }
 

@@ -29,3 +29,11 @@ commands:
     description: 'MCBans Lookup command.'
     usage: 'Usage: /<command> playername'
     aliases: []
+  mute:
+    description: 'Prevent a player from talking'
+    usage: 'Usage: /<command> playername'
+    aliases: []
+  unmute:
+    description: 'Allow a player to speak'
+    usage: 'Usage: /<command> playername'
+    aliases: []

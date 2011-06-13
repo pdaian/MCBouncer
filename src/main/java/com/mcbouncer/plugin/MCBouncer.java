@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
+import java.util.ArrayList;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.event.Event;
@@ -17,6 +18,7 @@ public class MCBouncer extends JavaPlugin {
     public static PermissionHandler permissionHandler;
     public static final MCBLogger log = new MCBLogger();
     private MCBCommands commandHandler;
+    public ArrayList<Player> muted = new ArrayList<Player>();
 
     @Override
     public void onDisable() {
@@ -29,6 +31,9 @@ public class MCBouncer extends JavaPlugin {
         final MCBPlayerListener pl = new MCBPlayerListener(this);
         
         pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Priority.High, this);
+        pm.registerEvent(Event.Type.PLAYER_CHAT, pl, Priority.High, this);
+        pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pl, Priority.High, this);
+        
         setupPermissions();
         MCBouncerConfig.load(this.getDataFolder());
         this.commandHandler = MCBCommands.load(this);

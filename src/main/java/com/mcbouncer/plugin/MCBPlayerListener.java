@@ -3,15 +3,17 @@ package com.mcbouncer.plugin;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.plugin.Plugin;
 
 public class MCBPlayerListener extends PlayerListener {
     
-    private Plugin plugin;
+    private MCBouncer plugin;
 
-    public MCBPlayerListener(Plugin plugin) {
+    public MCBPlayerListener(MCBouncer plugin) {
         this.plugin = plugin;
     }
 
@@ -45,4 +47,22 @@ public class MCBPlayerListener extends PlayerListener {
             }
         }
     }
+
+    @Override
+    public void onPlayerChat(PlayerChatEvent event) {
+        if( plugin.muted.contains(event.getPlayer())) {
+            event.setCancelled(true);
+            plugin.log.info("Muted player chat: " + event.getPlayer().getName() + " : " + event.getMessage());
+        }
+    }
+
+    @Override
+    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+        if( plugin.muted.contains(event.getPlayer()) && event.getMessage().substring(0, 3).equals("/me")) {
+            event.setCancelled(true);
+            plugin.log.info("Muted player chat: " + event.getPlayer().getName() + " : " + event.getMessage());
+        }
+    }
+    
+    
 }
