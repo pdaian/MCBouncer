@@ -27,7 +27,7 @@ public class KickCommand implements CommandExecutor {
 
         if (parent.getServer().matchPlayer(args[0]).size() > 0) {
             String reason = (args.length > 1 ? MCBouncerUtil.implode(args, " ") : MCBouncerConfig.getDefaultKickMessage());
-            MCBouncerUtil.appropriateNotify(ChatColor.RED + parent.getServer().matchPlayer(args[0]).get(0).getName() + " was kicked for " + reason);
+            parent.messageMods(ChatColor.RED + parent.getServer().matchPlayer(args[0]).get(0).getName() + " was kicked for " + reason);
             parent.getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
             return true;
         }

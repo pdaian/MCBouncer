@@ -67,5 +67,13 @@ public class MCBouncer extends JavaPlugin {
             return this.permissionHandler.has(player, permission);
         }
     }
+    
+    public void messageMods( String message ) {
+        for( Player player : this.getServer().getOnlinePlayers() ) {
+            if( this.permission(player, "mcbouncer.mod") ) {
+                player.sendMessage(message);
+            }
+        }
+    }
 
 }
