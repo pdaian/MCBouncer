@@ -24,14 +24,16 @@ public class McbLookupCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
         JSONObject result = MCBouncerUtil.getMCBLookup(args[0]);
-        if( result == null ) return true;
-        
-        sender.sendMessage(ChatColor.AQUA + args[0] + " has " + result.get("ban_num") + " ban" + MCBouncerUtil.plural(Integer.parseInt( String.valueOf( result.get("ban_num") ) ), "", "s") + ".");
+        if (result == null) {
+            return true;
+        }
+
+        sender.sendMessage(ChatColor.AQUA + args[0] + " has " + result.get("ban_num") + " ban" + MCBouncerUtil.plural(Integer.parseInt(String.valueOf(result.get("ban_num"))), "", "s") + ".");
 
         for (String s : new String[]{"ban_reasons_global", "ban_reasons_local"}) {
-            for (String reason : MCBouncerUtil.JSONtoString( (JSONArray) result.get(s) ) ) {
+            for (String reason : MCBouncerUtil.JSONtoString((JSONArray) result.get(s))) {
                 int i = 0;
-                sender.sendMessage( (s.equals("ban_reasons_global") ? ChatColor.RED + "[G] " : ChatColor.AQUA + "[L] ") + ChatColor.GREEN + i + ": " + reason);
+                sender.sendMessage((s.equals("ban_reasons_global") ? ChatColor.RED + "[G] " : ChatColor.AQUA + "[L] ") + ChatColor.GREEN + i + ": " + reason);
                 i++;
             }
         }

@@ -27,10 +27,10 @@ public class BanCommand implements CommandExecutor {
 
         String playerName = (parent.getServer().matchPlayer(args[0]).size() > 0 ? parent.getServer().matchPlayer(args[0]).get(0).getName() : args[0]);
 
-        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason() );
+        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason());
 
         boolean result = MCBouncerUtil.addBan(playerName, MCBCommands.getSenderName(sender), reason);
-        
+
         if (result) {
             sender.sendMessage(ChatColor.GREEN + "User banned successfully.");
         } else {

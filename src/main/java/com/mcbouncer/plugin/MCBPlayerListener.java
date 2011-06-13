@@ -49,14 +49,12 @@ public class MCBPlayerListener extends PlayerListener {
 
                 if (numNotes == 0) {
                     response += numBans + " ban" + MCBouncerUtil.plural(numBans, ".", "s.");
-                } 
-                else if (numBans == 0) {
+                } else if (numBans == 0) {
                     response += numNotes + " note" + MCBouncerUtil.plural(numNotes, ".", "s.");
-                } 
-                else {
+                } else {
                     response += numBans + " ban" + MCBouncerUtil.plural(numBans, "", "s") + " and " + numNotes + " note" + MCBouncerUtil.plural(numNotes, ".", "s.");
                 }
-                
+
                 parent.messageMods(ChatColor.GREEN + response);
             }
         }

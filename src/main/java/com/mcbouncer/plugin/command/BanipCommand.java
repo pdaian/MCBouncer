@@ -13,7 +13,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class BanipCommand implements CommandExecutor {
-    
+
     private MCBouncer parent;
 
     public BanipCommand(MCBouncer parent) {
@@ -24,20 +24,19 @@ public class BanipCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
-        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason() );
-        
+        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason());
+
         String player = args[0];
-        
+
         if (!MCBouncerUtil.isIPAddress(player)) {
-            if( parent.getServer().matchPlayer(args[0]).size() > 0 ) {
+            if (parent.getServer().matchPlayer(args[0]).size() > 0) {
                 player = parent.getServer().matchPlayer(args[0]).get(0).getAddress().getAddress().getHostAddress();
                 parent.getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
-            }
-            else {
+            } else {
                 player = "";
             }
         }
-        
+
         if (player.isEmpty()) {
             sender.sendMessage(ChatColor.GREEN + "Not a valid player or IP.");
             return true;
@@ -53,5 +52,4 @@ public class BanipCommand implements CommandExecutor {
         return true;
 
     }
-
 }

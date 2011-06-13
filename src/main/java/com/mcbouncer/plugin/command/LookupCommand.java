@@ -22,7 +22,7 @@ public class LookupCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-        
+
         ArrayList<HashMap<String, Object>> result = MCBouncerUtil.getBans(args[0]);
         sender.sendMessage(ChatColor.AQUA + args[0] + " has " + result.size() + " ban" + MCBouncerUtil.plural(result.size(), "", "s") + ".");
         for (int i = 0; i < result.size(); i++) {

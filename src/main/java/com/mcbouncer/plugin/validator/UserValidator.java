@@ -10,11 +10,13 @@ public class UserValidator extends BaseValidator implements IValidator {
 
     @Override
     public boolean isValid(String[] args) {
-	
-	if( !this.isAtLeastArgs(args, 1) ) return false; //Must be at least 1 argument
-	if( this.isAtLeastArgs(args, 2) ) return false; //Must be only 1 argument
-	
-	return true;
-    }
 
+        if (!this.isAtLeastArgs(args, 1)) {
+            return false; //Must be at least 1 argument
+        }
+        if (this.isAtLeastArgs(args, 2)) {
+            return false; //Must be only 1 argument
+        }
+        return true;
+    }
 }

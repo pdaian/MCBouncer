@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender;
 public class UnbanCommand implements CommandExecutor {
 
     private MCBouncer parent;
-    
+
     public UnbanCommand(MCBouncer parent) {
         MCBValidators.getInstance().registerValidator("unban", new UserValidator(this, parent));
         this.parent = parent;
@@ -22,13 +22,12 @@ public class UnbanCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
-        if( MCBouncerUtil.removeBan(args[0]) ) {
+        if (MCBouncerUtil.removeBan(args[0])) {
             sender.sendMessage(ChatColor.GREEN + "User unbanned successfully.");
+        } else {
+            sender.sendMessage(ChatColor.RED + MCBouncerAPI.getError());
         }
-        else {
-            sender.sendMessage(ChatColor.RED +  MCBouncerAPI.getError());
-        }
-        
+
         return true;
 
     }

@@ -22,11 +22,11 @@ public class KickCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-        
+
         Player player = parent.getServer().getPlayer(args[0]);
-        
-        if( player != null ) {
-            String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultKickMessage() );
+
+        if (player != null) {
+            String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultKickMessage());
             parent.messageMods(ChatColor.RED + player.getName() + " was kicked for " + reason);
             player.kickPlayer("Kicked: " + reason);
             return true;
