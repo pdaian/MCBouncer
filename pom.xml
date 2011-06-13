@@ -45,6 +45,22 @@
             </plugin>
         </plugins>
         <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/main/resources/</directory>
+                <includes>
+                    <include>plugin.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <targetPath>defaults/</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/main/resources/</directory>
+                <includes>
+                    <include>config.yml</include>
+                </includes>
+            </resource>
         </resources>
     </build>
     <repositories>
