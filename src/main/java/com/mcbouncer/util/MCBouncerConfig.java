@@ -1,14 +1,18 @@
 package com.mcbouncer.util;
 
+import com.mcbouncer.plugin.MCBouncer;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.util.config.Configuration;
 
 public class MCBouncerConfig {
+
     private static boolean debugMode = false;
     private static int numBansDisallow = 10;
     private static String apiKey = "";
@@ -23,21 +27,45 @@ public class MCBouncerConfig {
         File file = new File(folder, "config.yml");
         config = new Configuration(file);
         config.load();
+
         if (!file.exists()) {
-            try {
-                File f = new File(folder.getPath() + "/config.properties");
-                f.createNewFile();
-                FileWriter fstream = new FileWriter(folder.getPath() + "/config.yml");
-                BufferedWriter out = new BufferedWriter(fstream);
-                out.write("# Replace this with your API key from mcbouncer.com/apikey\napiKey: REPLACE\nnumBansDisallow: 10\nshowBanMessages: true\ndefaultBanMessage: 'Banned for rule violation.'\ndefaultKickMessage: 'Kicked by an admin.;\n\n#MCBans API key from mcbans.com, to use the /mcb-lookup command.\nmcBansKey: sample");
-                out.close();
-                config.load();
-            } catch (IOException ex) {
-                Logger.getLogger(MCBouncerConfig.class.getName()).log(Level.SEVERE, null, ex);
+            InputStream input = MCBouncer.class.getResourceAsStream("/defaults/config.yml");
+            if (input != null) {
+                FileOutputStream output = null;
+
+                try {
+                    output = new FileOutputStream(file);
+                    byte[] buf = new byte[8192];
+                    int length = 0;
+                    while ((length = input.read(buf)) > 0) {
+                        output.write(buf, 0, length);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (input != null) {
+                            input.close();
+                        }
+                    } catch (IOException e) {
+                    }
+
+                    try {
+                        if (output != null) {
+                            output.close();
+                        }
+                    } catch (IOException e) {
+                    }
+                }
             }
+
+            config.load();
         }
+
         setSettings();
     }
+
     private static void setSettings() {
         debugMode = config.getBoolean("debug", debugMode);
         apiKey = config.getString("apiKey", apiKey);
@@ -47,27 +75,35 @@ public class MCBouncerConfig {
         defaultKickMessage = config.getString("defaultKickMessage", "Kicked by an admin.");
         mcBansKey = config.getString("mcBansKey", "sample");
     }
+
     public static String getApiKey() {
         return apiKey;
     }
+
     public static Configuration getConfig() {
         return config;
     }
+
     public static boolean isDebugMode() {
         return debugMode;
     }
+
     public static String getDefaultReason() {
         return defaultReason;
     }
+
     public static int getNumBansDisallow() {
         return numBansDisallow;
     }
+
     public static boolean isShowBanMessages() {
         return showBanMessages;
     }
+
     public static String getDefaultKickMessage() {
         return defaultKickMessage;
     }
+
     public static String getMcBansKey() {
         return mcBansKey;
     }
