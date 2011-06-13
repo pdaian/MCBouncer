@@ -22,10 +22,11 @@ import org.json.simple.JSONObject;
 public class MCBouncer extends JavaPlugin {
 
     public static PermissionHandler permissionHandler;
+    public static final MCBLogger log = new MCBLogger();
 
     @Override
     public void onDisable() {
-        System.out.println("Closing MCBouncer!");
+        log.info("Closing MCBouncer!");
     }
 
     @Override
@@ -44,7 +45,7 @@ public class MCBouncer extends JavaPlugin {
             if (permissionsPlugin != null) {
                 this.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
             } else {
-                this.getServer().getLogger().info("Permission system not detected, defaulting to OP");
+                log.info("Permission system not detected, defaulting to OP");
             }
         }
     }
@@ -52,7 +53,7 @@ public class MCBouncer extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
         String senderName = "console";
-        if (sender instanceof Player) { 
+        if (sender instanceof Player) {
             if (!this.permissionHandler.has((Player) sender, "mcbouncer.mod")) {
                 return false;
             }
@@ -65,34 +66,32 @@ public class MCBouncer extends JavaPlugin {
             }
             args[0] = (getServer().matchPlayer(args[0]).size() > 0 ? getServer().matchPlayer(args[0]).get(0).getName() : args[0]);
             String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : MCBouncerUtil.implode(args, " "));
-            sender.sendMessage(ChatColor.GREEN+(MCBouncerUtil.addBan(args[0], senderName, reason) ? "User banned successfully." : MCBouncerAPI.getError()));
+            sender.sendMessage(ChatColor.GREEN + (MCBouncerUtil.addBan(args[0], senderName, reason) ? "User banned successfully." : MCBouncerAPI.getError()));
             Player p = this.getServer().getPlayer(args[0]);
             if (p != null) {
                 p.kickPlayer(reason);
             }
-       
+
         } else if (command.getName().equalsIgnoreCase("unban")) {
             if (args.length != 1) {
-                sender.sendMessage(ChatColor.GREEN+"You must specify a user, and only one arg.");
+                sender.sendMessage(ChatColor.GREEN + "You must specify a user, and only one arg.");
                 return false;
             }
-            sender.sendMessage(ChatColor.GREEN+(MCBouncerUtil.removeBan(args[0]) ? "User unbanned successfully." : MCBouncerAPI.getError()));
-        }
-        else if (command.getName().equalsIgnoreCase("kick")) {
+            sender.sendMessage(ChatColor.GREEN + (MCBouncerUtil.removeBan(args[0]) ? "User unbanned successfully." : MCBouncerAPI.getError()));
+        } else if (command.getName().equalsIgnoreCase("kick")) {
             if (getServer().matchPlayer(args[0]).size() > 0) {
                 String reason = (args.length > 1 ? MCBouncerUtil.implode(args, " ") : MCBouncerConfig.getDefaultKickMessage());
-                MCBouncerUtil.appropriateNotify(ChatColor.RED+getServer().matchPlayer(args[0]).get(0).getName()+" was kicked for "+reason);
+                MCBouncerUtil.appropriateNotify(ChatColor.RED + getServer().matchPlayer(args[0]).get(0).getName() + " was kicked for " + reason);
                 getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
             }
-            sender.sendMessage(ChatColor.GREEN+"No such player.");
-        }
-        else if (command.getName().equalsIgnoreCase("lookup")) {
+            sender.sendMessage(ChatColor.GREEN + "No such player.");
+        } else if (command.getName().equalsIgnoreCase("lookup")) {
             if (args.length != 1) {
-                sender.sendMessage(ChatColor.GREEN+"You must specify a user, and only one arg.");
+                sender.sendMessage(ChatColor.GREEN + "You must specify a user, and only one arg.");
                 return false;
             }
             ArrayList<HashMap<String, Object>> result = MCBouncerUtil.getBans(args[0]);
-            sender.sendMessage(ChatColor.AQUA+args[0]+" has "+result.size()+" ban"+(result.size() != 1 ? "s" : "")+".");
+            sender.sendMessage(ChatColor.AQUA + args[0] + " has " + result.size() + " ban" + (result.size() != 1 ? "s" : "") + ".");
             for (int i = 0; i < result.size(); i++) {
                 sender.sendMessage(ChatColor.GREEN + "" + (i + 1) + ": " + result.get(i).get("server") + " (" + result.get(i).get("issuer") + ") [" + result.get(i).get("reason") + "]");
             }
@@ -100,34 +99,32 @@ public class MCBouncer extends JavaPlugin {
             String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : MCBouncerUtil.implode(args, " "));
             Pattern p = Pattern.compile("^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
             boolean matches = p.matcher(args[0]).matches();
-        if (!matches) {
-            args[0] = (getServer().matchPlayer(args[0]).size() > 0 ? getServer().matchPlayer(args[0]).get(0).getAddress().getAddress().getHostAddress() : "");
-            getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
-        }
-        if (args[0].isEmpty()) {
-            sender.sendMessage(ChatColor.GREEN+"Not a valid player or IP.");
-            return false;
-        }
-        sender.sendMessage(ChatColor.GREEN+(MCBouncerUtil.addIPBan(args[0], senderName, reason) ? "IP banned successfully." : MCBouncerAPI.getError()));
-    }
-        else if (command.getName().equalsIgnoreCase("mcb-lookup")) {
+            if (!matches) {
+                args[0] = (getServer().matchPlayer(args[0]).size() > 0 ? getServer().matchPlayer(args[0]).get(0).getAddress().getAddress().getHostAddress() : "");
+                getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
+            }
+            if (args[0].isEmpty()) {
+                sender.sendMessage(ChatColor.GREEN + "Not a valid player or IP.");
+                return false;
+            }
+            sender.sendMessage(ChatColor.GREEN + (MCBouncerUtil.addIPBan(args[0], senderName, reason) ? "IP banned successfully." : MCBouncerAPI.getError()));
+        } else if (command.getName().equalsIgnoreCase("mcb-lookup")) {
             if (args.length != 1) {
-                sender.sendMessage(ChatColor.GREEN+"You must specify a user, and only one arg.");
+                sender.sendMessage(ChatColor.GREEN + "You must specify a user, and only one arg.");
                 return false;
             }
             JSONObject result = MCBouncerUtil.getMCBLookup(args[0]);
-            sender.sendMessage(ChatColor.AQUA+args[0]+" has "+result.get("ban_num") +" ban"+(result.get("ban_num") != "1" ? "s" : "")+".");
-            for (String s : new String[] {"ban_reasons_global", "ban_reasons_local"}) {
+            sender.sendMessage(ChatColor.AQUA + args[0] + " has " + result.get("ban_num") + " ban" + (result.get("ban_num") != "1" ? "s" : "") + ".");
+            for (String s : new String[]{"ban_reasons_global", "ban_reasons_local"}) {
                 for (String reason : (String[]) result.get(s)) {
                     int i = 0;
-                    sender.sendMessage(ChatColor.GREEN+(s.equals("ban_reasons_global") ? "[G] " : "[L] ")+""+i+": "+reason);
+                    sender.sendMessage(ChatColor.GREEN + (s.equals("ban_reasons_global") ? "[G] " : "[L] ") + "" + i + ": " + reason);
                     i++;
                 }
             }
-        }       
-        else
+        } else {
             return false;
+        }
         return true;
     }
-
 }
