@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Adds a debug method, and prefixes all log messages with [ModTRS]
+ * Adds a debug method, and prefixes all log messages with [MCBouncer]
  */
 public class MCBLogger {
 

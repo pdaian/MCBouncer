@@ -32,9 +32,9 @@ public class MCBPlayerListener extends PlayerListener {
             String playerName = player.getName();
             String IP = player.getAddress().getAddress().getHostAddress();
             if (MCBouncerUtil.isNotAllowedToJoin(playerName, IP)) {
-                player.kickPlayer(MCBouncerUtil.getBanReason(playerName));
+                player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
                 return;
-                }
+            }
             int numBans = MCBouncerUtil.getBanCount(playerName, IP);
             int numNotes = MCBouncerUtil.getNoteCount(playerName);
             String response = numBans > 0 || numNotes > 0 ? playerName+" has " : "";
