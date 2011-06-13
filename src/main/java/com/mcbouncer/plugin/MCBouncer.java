@@ -36,6 +36,8 @@ public class MCBouncer extends JavaPlugin {
         pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Priority.High, this);
         setupPermissions();
         MCBouncerConfig.load(this.getDataFolder());
+        
+        log.info("MCBouncer successfully initiated");
     }
 
     private void setupPermissions() {
