@@ -43,7 +43,7 @@ public class MCBPlayerListener extends PlayerListener {
             response += numBans > 0 ? numBans + " ban(s). " : "";
             response += numNotes > 0 ? numNotes + " note(s)." : "";
             if (!response.isEmpty()) {
-                MCBouncerUtil.modMessage(ChatColor.GREEN + response, plugin);
+                plugin.messageMods(ChatColor.GREEN + response);
             }
         }
     }

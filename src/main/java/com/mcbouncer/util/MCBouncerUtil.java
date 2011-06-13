@@ -1,6 +1,5 @@
 package com.mcbouncer.util;
 
-import com.mcbouncer.plugin.MCBouncer;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -9,6 +8,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.json.simple.JSONObject;
@@ -46,20 +46,8 @@ public class MCBouncerUtil {
         return true;
     }
 
-    public static void modMessage(String message, Plugin plugin) {
-        final Player[] p = plugin.getServer().getOnlinePlayers();
-        for (int z = 0; z < p.length; z++) {
-            if (MCBouncer.permissionHandler.has(p[z], "mcbouncer.mod")) {
-                p[z].sendMessage(message);
-            }
-        }
-    }
     public static ArrayList<HashMap<String, Object>> getBans(String user) {
         return MCBouncerAPI.getBans(user, MCBouncerConfig.getApiKey(), "0", "50");
-    }
-
-    public static void appropriateNotify(String string) {
-        return;
     }
     
     public static JSONObject getMCBLookup(String playerName) { // [irc.esper.net] #mcbans <Firestar> and tbh i have said i do not care if people make their own plugins that integrate with mcbans

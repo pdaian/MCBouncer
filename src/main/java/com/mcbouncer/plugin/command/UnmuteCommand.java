@@ -34,7 +34,7 @@ public class UnmuteCommand implements CommandExecutor {
             }
             else {
                 parent.muted.remove(player);
-                MCBouncerUtil.appropriateNotify(ChatColor.RED + player.getName() + " was unmuted");
+                parent.messageMods(ChatColor.RED + player.getName() + " was unmuted");
             }
             
         }

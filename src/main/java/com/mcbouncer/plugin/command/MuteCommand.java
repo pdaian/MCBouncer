@@ -34,7 +34,7 @@ public class MuteCommand implements CommandExecutor {
             }
             else {
                 parent.muted.add(player);
-                MCBouncerUtil.appropriateNotify(ChatColor.RED + player.getName() + " was muted");
+                parent.messageMods(ChatColor.RED + player.getName() + " was muted");
             }
             
         }
