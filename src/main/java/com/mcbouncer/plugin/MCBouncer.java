@@ -8,45 +8,65 @@ import com.nijikokun.bukkit.Permissions.Permissions;
 import java.util.ArrayList;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.event.Event;
-import org.bukkit.event.Event.Priority;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MCBouncer extends JavaPlugin {
 
-    public static PermissionHandler permissionHandler;
+    /**
+     * Permissions class
+     */
+    public PermissionHandler permissionHandler;
+    
+    /**
+     * Logging class, provides debugging
+     */
     public static final MCBLogger log = new MCBLogger();
+    
+    /**
+     * Command handler class
+     */
     private MCBCommands commandHandler;
+    
+    /**
+     * ArrayList of all muted players
+     */
     public ArrayList<Player> muted = new ArrayList<Player>();
+    
+    /**
+     * Listener handling
+     */
+    private MCBListeners listeners;
 
+    /**
+     * Simply outputs a message when disabled
+     */
     @Override
     public void onDisable() {
-        log.info("Closing MCBouncer!");
+        log.info("Plugin disabled. (version " + this.getDescription().getVersion() + ")");
     }
 
+    /**
+     * Performs awesome loading action
+     */
     @Override
     public void onEnable() {
-        final PluginManager pm = getServer().getPluginManager();
-        final MCBPlayerListener pl = new MCBPlayerListener(this);
         
-        pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Priority.High, this);
-        pm.registerEvent(Event.Type.PLAYER_CHAT, pl, Priority.High, this);
-        pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pl, Priority.High, this);
-        
-        setupPermissions();
         MCBouncerConfig.load(this.getDataFolder());
+        setupPermissions();
+        
+        this.listeners = MCBListeners.load(this);
         this.commandHandler = MCBCommands.load(this);
         
         log.info("MCBouncer successfully initiated");
+        log.debug("Debug mode enabled!");
     }
 
     private void setupPermissions() {
         Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
 
-        if (MCBouncer.permissionHandler == null) {
+        if (this.permissionHandler == null) {
             if (permissionsPlugin != null) {
-                MCBouncer.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
+                this.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
             } else {
                 log.info("Permission system not detected, defaulting to OP");
             }
@@ -59,7 +79,7 @@ public class MCBouncer extends JavaPlugin {
     }
     
     
-    public boolean permission( Player player, String permission ) {
+    public boolean hasPermission( Player player, String permission ) {
         if (this.permissionHandler == null ) {
             return player.isOp();
         }
@@ -70,7 +90,7 @@ public class MCBouncer extends JavaPlugin {
     
     public void messageMods( String message ) {
         for( Player player : this.getServer().getOnlinePlayers() ) {
-            if( this.permission(player, "mcbouncer.mod") ) {
+            if( this.hasPermission(player, "mcbouncer.mod") ) {
                 player.sendMessage(message);
             }
         }

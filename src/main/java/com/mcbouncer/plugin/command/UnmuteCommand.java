@@ -1,8 +1,8 @@
 package com.mcbouncer.plugin.command;
 
+import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
-import com.mcbouncer.util.MCBouncerConfig;
-import com.mcbouncer.util.MCBouncerUtil;
+import com.mcbouncer.plugin.validator.UserValidator;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,21 +14,17 @@ public class UnmuteCommand implements CommandExecutor {
     private MCBouncer parent;
 
     public UnmuteCommand(MCBouncer parent) {
-        //MCBValidatorHandler.getInstance().registerValidator( "ban", new BanValidator(this, parent) );    
+        MCBValidators.getInstance().registerValidator("unmute", new UserValidator(this, parent));
         this.parent = parent;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
-        if (args.length < 1) {
-            sender.sendMessage(ChatColor.GREEN + "You must specify a user");
-            return false;
-        }
+        Player player = parent.getServer().getPlayer(args[0]);
 
-        if (parent.getServer().matchPlayer(args[0]).size() > 0) {
+        if (player != null) {
             
-            Player player = parent.getServer().matchPlayer(args[0]).get(0);
             if( !parent.muted.contains(player) ) {
                 sender.sendMessage(ChatColor.GREEN + "Player is not muted.");
             }

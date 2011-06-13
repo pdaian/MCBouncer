@@ -8,9 +8,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.bukkit.Server;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class MCBouncerUtil {
@@ -23,6 +21,9 @@ public class MCBouncerUtil {
     }
     public static boolean removeBan(String playerName) {
         return MCBouncerAPI.removeBan(playerName, MCBouncerConfig.getApiKey());
+    }
+    public static boolean removeIPBan(String playerName) {
+        return MCBouncerAPI.removeIPBan(playerName, MCBouncerConfig.getApiKey());
     }
 
     public static int getBanCount(String playerName, String IP) {
@@ -74,11 +75,64 @@ public class MCBouncerUtil {
         return null;
     }
     
-    public static String implode(String[] s, String delimiter) {
-        StringBuilder buffer = new StringBuilder();
-        for (int i = 1; i < s.length; i++) {
-            buffer.append(s[i]).append(delimiter);
+    public static String implodeWithoutFirstElement( String[] array, String glue ) {
+
+	String out = "";
+
+	if( array.length == 0 ) {
+	    return out;
+	}
+        
+        boolean first = true;
+        
+	for( String part : array ) {
+            if( first ) {
+                first = false;
+            }
+	    else {
+                out = out + part + glue;
+            }
+	}
+        
+        if( "".equals(out) ) {
+            return "";
         }
-        return buffer.toString().substring(0, buffer.length() - 1);
+        
+	out = out.substring(0, out.length() - glue.length() );
+
+	return out;
+    }
+    
+    public static boolean isIPAddress(String string) {
+        try {
+            return ( NetUtil.long2ip(NetUtil.ip2long(string) ).equals(string) );
+        }
+        catch( Exception e) {
+            return false;
+        }
+    }
+    
+    public static String getDefaultReason( String[] args, String main, String defaultString ) {
+        if( args.length > 1 ) {
+            return main;
+        }
+        else {
+            return defaultString;
+        }
+    }
+    
+    public static String plural( int i, String one, String notone ) {
+        if( i == 1 ) {
+            return one;
+        }
+        return notone;
+    }
+    
+    public static String[] JSONtoString( JSONArray arr ) {
+        String[] out = new String[arr.size()];
+        for( int i = 0; i < arr.size(); i++ ) {
+            out[i] = arr.get(i).toString();
+        }
+        return out;
     }
 }

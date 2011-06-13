@@ -1,6 +1,8 @@
 package com.mcbouncer.plugin.command;
 
+import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.validator.UserValidator;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.ChatColor;
@@ -13,19 +15,19 @@ public class UnbanCommand implements CommandExecutor {
     private MCBouncer parent;
     
     public UnbanCommand(MCBouncer parent) {
-        //MCBValidatorHandler.getInstance().registerValidator( "ban", new BanValidator(this, parent) );    
+        MCBValidators.getInstance().registerValidator("unban", new UserValidator(this, parent));
         this.parent = parent;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
-        if (args.length != 1) {
-            sender.sendMessage(ChatColor.GREEN + "You must specify a user.");
-            return false;
+        if( MCBouncerUtil.removeBan(args[0]) ) {
+            sender.sendMessage(ChatColor.GREEN + "User unbanned successfully.");
         }
-        
-        sender.sendMessage(ChatColor.GREEN + (MCBouncerUtil.removeBan(args[0]) ? "User unbanned successfully." : MCBouncerAPI.getError()));
+        else {
+            sender.sendMessage(ChatColor.RED +  MCBouncerAPI.getError());
+        }
         
         return true;
 

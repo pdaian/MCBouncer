@@ -1,14 +1,10 @@
 package com.mcbouncer.util;
 
 import com.mcbouncer.plugin.MCBouncer;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.bukkit.util.config.Configuration;
 
 public class MCBouncerConfig {
