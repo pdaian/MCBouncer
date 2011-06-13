@@ -24,17 +24,16 @@ public class UnmuteCommand implements CommandExecutor {
         Player player = parent.getServer().getPlayer(args[0]);
 
         if (player != null) {
-            
-            if( !parent.muted.contains(player) ) {
+
+            if (!parent.muted.contains(player)) {
                 sender.sendMessage(ChatColor.GREEN + "Player is not muted.");
-            }
-            else {
+            } else {
                 parent.muted.remove(player);
                 parent.messageMods(ChatColor.RED + player.getName() + " was unmuted");
             }
-            
+
         }
-        
+
         return true;
 
     }

@@ -25,21 +25,20 @@ public class MuteCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.GREEN + "You must specify a user");
             return false;
         }
-        
+
         Player player = parent.getServer().getPlayer(args[0]);
 
         if (player != null) {
-            
-            if( parent.muted.contains(player) ) {
+
+            if (parent.muted.contains(player)) {
                 sender.sendMessage(ChatColor.GREEN + "Player is already muted.");
-            }
-            else {
+            } else {
                 parent.muted.add(player);
                 parent.messageMods(ChatColor.RED + player.getName() + " was muted");
             }
-            
+
         }
-        
+
         return true;
 
     }

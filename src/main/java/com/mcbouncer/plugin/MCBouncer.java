@@ -16,22 +16,18 @@ public class MCBouncer extends JavaPlugin {
      * Permissions class
      */
     public PermissionHandler permissionHandler;
-    
     /**
      * Logging class, provides debugging
      */
     public static final MCBLogger log = new MCBLogger();
-    
     /**
      * Command handler class
      */
     private MCBCommands commandHandler;
-    
     /**
      * ArrayList of all muted players
      */
     public ArrayList<Player> muted = new ArrayList<Player>();
-    
     /**
      * Listener handling
      */
@@ -50,13 +46,13 @@ public class MCBouncer extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        
+
         MCBouncerConfig.load(this.getDataFolder());
         setupPermissions();
-        
+
         this.listeners = MCBListeners.load(this);
         this.commandHandler = MCBCommands.load(this);
-        
+
         log.info("MCBouncer successfully initiated");
         log.debug("Debug mode enabled!");
     }
@@ -77,23 +73,20 @@ public class MCBouncer extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
         return this.commandHandler.onCommand(sender, command, commandLabel, args);
     }
-    
-    
-    public boolean hasPermission( Player player, String permission ) {
-        if (this.permissionHandler == null ) {
+
+    public boolean hasPermission(Player player, String permission) {
+        if (this.permissionHandler == null) {
             return player.isOp();
-        }
-        else {
+        } else {
             return this.permissionHandler.has(player, permission);
         }
     }
-    
-    public void messageMods( String message ) {
-        for( Player player : this.getServer().getOnlinePlayers() ) {
-            if( this.hasPermission(player, "mcbouncer.mod") ) {
+
+    public void messageMods(String message) {
+        for (Player player : this.getServer().getOnlinePlayers()) {
+            if (this.hasPermission(player, "mcbouncer.mod")) {
                 player.sendMessage(message);
             }
         }
     }
-
 }

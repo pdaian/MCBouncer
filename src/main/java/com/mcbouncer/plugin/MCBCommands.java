@@ -74,7 +74,7 @@ public class MCBCommands implements CommandExecutor {
                     return false;
                 }
             }
-            
+
             return commands.get(commandName).onCommand(sender, command, commandLabel, args);
 
         } catch (Exception e) {
@@ -91,5 +91,4 @@ public class MCBCommands implements CommandExecutor {
         }
         return senderName;
     }
-
 }
