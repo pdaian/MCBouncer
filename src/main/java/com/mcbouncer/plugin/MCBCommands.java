@@ -28,13 +28,15 @@ public class MCBCommands implements CommandExecutor {
         MCBCommands handler = new MCBCommands(parent);
 
         handler.registerCommand("ban", new BanCommand(parent));
+        handler.registerCommand("banip", new BanipCommand(parent));
         handler.registerCommand("unban", new UnbanCommand(parent));
+        handler.registerCommand("unbanip", new UnbanipCommand(parent));
         handler.registerCommand("kick", new KickCommand(parent));
         handler.registerCommand("lookup", new LookupCommand(parent));
         handler.registerCommand("mcb-lookup", new McbLookupCommand(parent));
         handler.registerCommand("mute", new MuteCommand(parent));
         handler.registerCommand("unmute", new UnmuteCommand(parent));
-        
+
         return handler;
     }
 
@@ -46,11 +48,11 @@ public class MCBCommands implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
         if (sender instanceof Player) {
-            if (!parent.permission((Player) sender, "mcbouncer.mod")) {
+            if (!parent.hasPermission((Player) sender, "mcbouncer.mod")) {
                 return false;
             }
         }
-        
+
         String commandName = command.getName().toLowerCase();
 
         //What's this hackery? /command arg  arg2 threw an error. Strip unnecessary spaces
@@ -67,11 +69,12 @@ public class MCBCommands implements CommandExecutor {
                 return false;
             }
 
-            /*if (MCBValidatorHandler.getInstance().hasValidator(commandName)) {
-            if (!MCBValidatorHandler.getInstance().getValidator(commandName).isValid(args)) {
-            return false;
+            if (MCBValidators.getInstance().hasValidator(commandName)) {
+                if (!MCBValidators.getInstance().getValidator(commandName).isValid(args)) {
+                    return false;
+                }
             }
-            }*/
+            
             return commands.get(commandName).onCommand(sender, command, commandLabel, args);
 
         } catch (Exception e) {
@@ -80,7 +83,7 @@ public class MCBCommands implements CommandExecutor {
         }
 
     }
-    
+
     public static String getSenderName(CommandSender sender) {
         String senderName = "console";
         if (sender instanceof Player) {
@@ -88,4 +91,5 @@ public class MCBCommands implements CommandExecutor {
         }
         return senderName;
     }
+
 }

@@ -25,6 +25,10 @@ commands:
     description: 'IP Ban command.'
     usage: 'Usage: /<command> playername/IP'
     aliases: []
+  unbanip:
+    description: 'IP unban command.'
+    usage: 'Usage: /<command> playername/IP'
+    aliases: []
   mcb-lookup:
     description: 'MCBans Lookup command.'
     usage: 'Usage: /<command> playername'

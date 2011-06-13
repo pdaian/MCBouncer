@@ -1,43 +1,57 @@
 package com.mcbouncer.plugin.command;
 
 import com.mcbouncer.plugin.MCBCommands;
+import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.validator.UserAndReasonValidator;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerConfig;
 import com.mcbouncer.util.MCBouncerUtil;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.regex.Pattern;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class BanipCommand implements CommandExecutor {
-
+    
     private MCBouncer parent;
 
     public BanipCommand(MCBouncer parent) {
-        //MCBValidatorHandler.getInstance().registerValidator( "ban", new BanValidator(this, parent) );    
+        MCBValidators.getInstance().registerValidator("banip", new UserAndReasonValidator(this, parent));
         this.parent = parent;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
-        String reason = (args.length == 1 ? MCBouncerConfig.getDefaultReason() : MCBouncerUtil.implode(args, " "));
-        Pattern p = Pattern.compile("^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
-        boolean matches = p.matcher(args[0]).matches();
-        if (!matches) {
-            args[0] = (parent.getServer().matchPlayer(args[0]).size() > 0 ? parent.getServer().matchPlayer(args[0]).get(0).getAddress().getAddress().getHostAddress() : "");
-            parent.getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
+        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason() );
+        
+        String player = args[0];
+        
+        if (!MCBouncerUtil.isIPAddress(player)) {
+            if( parent.getServer().matchPlayer(args[0]).size() > 0 ) {
+                player = parent.getServer().matchPlayer(args[0]).get(0).getAddress().getAddress().getHostAddress();
+                parent.getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
+            }
+            else {
+                player = "";
+            }
         }
-        if (args[0].isEmpty()) {
+        
+        if (player.isEmpty()) {
             sender.sendMessage(ChatColor.GREEN + "Not a valid player or IP.");
-            return false;
+            return true;
         }
-        sender.sendMessage(ChatColor.GREEN + (MCBouncerUtil.addIPBan(args[0], MCBCommands.getSenderName(sender), reason) ? "IP banned successfully." : MCBouncerAPI.getError()));
+
+        boolean result = MCBouncerUtil.addIPBan(player, MCBCommands.getSenderName(sender), reason);
+        if (result) {
+            sender.sendMessage(ChatColor.GREEN + "IP banned successfully.");
+        } else {
+            sender.sendMessage(ChatColor.RED + MCBouncerAPI.getError());
+        }
+
         return true;
 
     }
+
 }
