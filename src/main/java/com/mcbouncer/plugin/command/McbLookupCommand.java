@@ -2,7 +2,6 @@ package com.mcbouncer.plugin.command;
 
 import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
-import com.mcbouncer.plugin.validator.UserValidator;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -16,13 +15,14 @@ public class McbLookupCommand implements CommandExecutor {
     private MCBouncer parent;
 
     public McbLookupCommand(MCBouncer parent) {
-        MCBValidators.getInstance().registerValidator("mcb-lookup", new UserValidator(this, parent));
         this.parent = parent;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
+        if( !MCBValidators.UserValidator(args) ) return false;
+        
         JSONObject result = MCBouncerUtil.getMCBLookup(args[0]);
         if (result == null) {
             return true;

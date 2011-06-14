@@ -3,7 +3,6 @@ package com.mcbouncer.plugin.command;
 import com.mcbouncer.plugin.MCBCommands;
 import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
-import com.mcbouncer.plugin.validator.UserAndReasonValidator;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerConfig;
 import com.mcbouncer.util.MCBouncerUtil;
@@ -17,13 +16,14 @@ public class BanipCommand implements CommandExecutor {
     private MCBouncer parent;
 
     public BanipCommand(MCBouncer parent) {
-        MCBValidators.getInstance().registerValidator("banip", new UserAndReasonValidator(this, parent));
         this.parent = parent;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
+        if( !MCBValidators.UserAndReasonValidator(args) ) return false;
+        
         String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason());
 
         String player = args[0];

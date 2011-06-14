@@ -69,12 +69,6 @@ public class MCBCommands implements CommandExecutor {
                 return false;
             }
 
-            if (MCBValidators.getInstance().hasValidator(commandName)) {
-                if (!MCBValidators.getInstance().getValidator(commandName).isValid(args)) {
-                    return false;
-                }
-            }
-
             return commands.get(commandName).onCommand(sender, command, commandLabel, args);
 
         } catch (Exception e) {
