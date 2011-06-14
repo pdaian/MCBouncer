@@ -6,7 +6,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -44,7 +43,7 @@ public class MCBouncer extends JavaPlugin {
         this.commands.put("kick", new KickCommand(this));
         this.commands.put("lookup", new LookupCommand(this));
         this.commands.put("mcb-lookup", new McbLookupCommand(this));
-        log.info("MCBouncer successfully initiated");
+        log.info("Plugin enabled. (version " + this.getDescription().getVersion() + ")");
         log.debug("Debug mode enabled!");
     }
 
