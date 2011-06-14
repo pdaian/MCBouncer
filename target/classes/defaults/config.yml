@@ -1,9 +1,0 @@
-# Replace this with your API key from mcbouncer.com/apikey
-apiKey: REPLACE
-numBansDisallow: 10
-showBanMessages: true
-defaultBanMessage: 'Banned for rule violation.'
-defaultKickMessage: 'Kicked by an admin.'
-
-#MCBans API key from mcbans.com, to use the /mcb-lookup command.
-mcBansKey: sample
