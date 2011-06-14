@@ -2,7 +2,6 @@ package com.mcbouncer.plugin.command;
 
 import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
-import com.mcbouncer.plugin.validator.UserValidator;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.ChatColor;
@@ -15,13 +14,14 @@ public class UnbanipCommand implements CommandExecutor {
     private MCBouncer parent;
 
     public UnbanipCommand(MCBouncer parent) {
-        MCBValidators.getInstance().registerValidator("unbanip", new UserValidator(this, parent));
         this.parent = parent;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
+        if( !MCBValidators.UserValidator(args) ) return false;
+        
         String player = args[0];
 
         if (!MCBouncerUtil.isIPAddress(player)) {

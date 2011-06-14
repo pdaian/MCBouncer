@@ -3,7 +3,6 @@ package com.mcbouncer.plugin.command;
 import com.mcbouncer.plugin.MCBCommands;
 import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
-import com.mcbouncer.plugin.validator.UserAndReasonValidator;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerConfig;
 import com.mcbouncer.util.MCBouncerUtil;
@@ -18,13 +17,14 @@ public class BanCommand implements CommandExecutor {
     private MCBouncer parent;
 
     public BanCommand(MCBouncer parent) {
-        MCBValidators.getInstance().registerValidator("ban", new UserAndReasonValidator(this, parent));
         this.parent = parent;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
+        if( !MCBValidators.UserAndReasonValidator(args) ) return false;
+        
         String playerName = (parent.getServer().matchPlayer(args[0]).size() > 0 ? parent.getServer().matchPlayer(args[0]).get(0).getName() : args[0]);
 
         String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason());

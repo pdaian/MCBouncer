@@ -1,47 +1,67 @@
 package com.mcbouncer.plugin;
 
-import com.mcbouncer.plugin.validator.IValidator;
-import java.util.HashMap;
 
 public class MCBValidators {
 
-    /**
-     * Singleton instance
-     */
-    private static MCBValidators instance;
-    /**
-     * List of all validators
-     */
-    private HashMap<String, IValidator> validators = new HashMap<String, IValidator>();
+    public static boolean UserAndReasonValidator(String[] args) {
 
+        return MCBValidators.isAtLeastArgs(args, 1);
+    }
+    
+    public static boolean UserValidator(String[] args) {
+
+        return (MCBValidators.isAtLeastArgs(args, 1) && !MCBValidators.isAtLeastArgs(args, 2));
+    }
+    
     /**
-     * Singleton instance retrieval
+     * Returns true if the string is an integer
      */
-    public static MCBValidators getInstance() {
-        if (instance == null) {
-            instance = new MCBValidators();
+    protected static boolean isInteger(String arg) {
+        try {
+            Integer.parseInt(arg);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        return instance;
     }
 
     /**
-     * Adds a validator
+     * Returns true if the string is a number
      */
-    public void registerValidator(String command, IValidator validator) {
-        validators.put(command, validator);
+    protected static boolean isNumeric(String arg) {
+        try {
+            Double.parseDouble(arg);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
-     * Returns true if a validator exists
+     * Returns true if a string is at least a length
      */
-    public boolean hasValidator(String command) {
-        return validators.containsKey(command);
+    protected static boolean isAtLeastLength(String str, int length) {
+        return str.length() >= length;
     }
 
     /**
-     * Returns the validator
+     * Returns true if there are at least a number of arguments
      */
-    public IValidator getValidator(String command) {
-        return validators.get(command);
+    protected static boolean isAtLeastArgs(String[] args, int length) {
+        return args.length >= length;
+    }
+
+    /**
+     * Returns true if a value exists inside a String[]
+     */
+    protected static boolean inArray(String substring, String[] strings) {
+
+        for (String string : strings) {
+            if (string.equals(substring)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
