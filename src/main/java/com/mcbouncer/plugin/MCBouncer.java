@@ -19,44 +19,24 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class MCBouncer extends JavaPlugin {
 
-    /**
-     * Permissions class
-     */
     public PermissionHandler permissionHandler;
-    /**
-     * Logging class, provides debugging
-     */
     public static final MCBLogger log = new MCBLogger();
-    /**
-     * ArrayList of all muted players
-     */
-    public ArrayList<String> muted = new ArrayList<String>();
-    
     public HashMap<String, BaseCommand> commands = new HashMap<String, BaseCommand>();
 
-    /**
-     * Simply outputs a message when disabled
-     */
     @Override
     public void onDisable() {
         log.info("Plugin disabled. (version " + this.getDescription().getVersion() + ")");
     }
 
-    /**
-     * Performs awesome loading action
-     */
     @Override
     public void onEnable() {
-
         MCBouncerConfig.load(this.getDataFolder());
         setupPermissions();
-
         MCBPlayerListener pl = new MCBPlayerListener(this);
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.High, this);
         pm.registerEvent(Event.Type.PLAYER_CHAT, pl, Event.Priority.High, this);
         pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pl, Event.Priority.High, this);
-
         this.commands.put("ban", new BanCommand(this));
         this.commands.put("banip", new BanipCommand(this));
         this.commands.put("unban", new UnbanCommand(this));
@@ -64,9 +44,6 @@ public class MCBouncer extends JavaPlugin {
         this.commands.put("kick", new KickCommand(this));
         this.commands.put("lookup", new LookupCommand(this));
         this.commands.put("mcb-lookup", new McbLookupCommand(this));
-        this.commands.put("mute", new MuteCommand(this));
-        this.commands.put("unmute", new UnmuteCommand(this));
-
         log.info("MCBouncer successfully initiated");
         log.debug("Debug mode enabled!");
     }
@@ -125,28 +102,21 @@ public class MCBouncer extends JavaPlugin {
         @Override
         public void run() {
             if (!this.onCommand()) {
-
                 if (command.getUsage().length() > 0) {
                     for (String line : command.getUsage().replace("<command>", commandLabel).split("\n")) {
                         sender.sendMessage(line);
                     }
                 }
-
             }
-
-
         }
 
         public boolean onCommand() {
-
             if (sender instanceof Player) {
                 if (!parent.hasPermission((Player) sender, "mcbouncer.mod")) {
                     return false;
                 }
             }
-
             String commandName = command.getName().toLowerCase();
-
             //What's this hackery? /command arg  arg2 threw an error. Strip unnecessary spaces
             List<String> temp_list = new LinkedList<String>();
             temp_list.addAll(Arrays.asList(args));
@@ -154,25 +124,19 @@ public class MCBouncer extends JavaPlugin {
                 temp_list.remove("");
             }
             args = temp_list.toArray(new String[0]);
-
             try {
                 if (!parent.commands.containsKey(commandName)) {
-
                     return false;
                 }
-
                 BaseCommand commandClass = parent.commands.get(commandName);
                 commandClass.setArgs(args);
                 commandClass.setParent(parent);
                 commandClass.setSender(sender);
                 return commandClass.runCommand();
-
             } catch (Exception e) {
                 e.printStackTrace();
                 return true;
             }
-
         }
     }
-
 }

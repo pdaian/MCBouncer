@@ -36,7 +36,6 @@ public abstract class BaseCommand {
     
     protected String getIPFromArgs(String arg, String kickReason) {
         String player = args[0];
-
         if (!MCBouncerUtil.isIPAddress(player)) {
             Player playerInst = parent.getServer().getPlayer(player);
             if (playerInst != null) {
@@ -46,18 +45,15 @@ public abstract class BaseCommand {
                 player = "";
             }
         }
-        
         return player;
     }
     
     protected String getSenderName() {
-        
         String senderName = "console";
         if (sender instanceof Player) {
             senderName = ((Player) sender).getName();
         }
         return senderName;
-        
     }
     
     protected void sendMessageToSender(String message) {

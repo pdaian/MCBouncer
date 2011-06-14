@@ -14,16 +14,12 @@ public class McbLookupCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-
         if( !MCBValidators.UserValidator(args) ) return false;
-        
         JSONObject result = MCBouncerUtil.getMCBLookup(args[0]);
         if (result == null) {
             return true;
         }
-
         this.sendMessageToSender(ChatColor.AQUA + args[0] + " has " + result.get("ban_num") + " ban" + MCBouncerUtil.plural(Integer.parseInt(String.valueOf(result.get("ban_num"))), "", "s") + ".");
-
         for (String s : new String[]{"ban_reasons_global", "ban_reasons_local"}) {
             for (String reason : MCBouncerUtil.JSONtoString((JSONArray) result.get(s))) {
                 int i = 0;
