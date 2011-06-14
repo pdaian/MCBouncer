@@ -28,6 +28,7 @@ public class KickCommand implements CommandExecutor {
         if (player != null) {
             String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultKickMessage());
             parent.messageMods(ChatColor.RED + player.getName() + " was kicked for " + reason);
+            player.getWorld().strikeLightningEffect(player.getLocation());
             player.kickPlayer("Kicked: " + reason);
             return true;
         }

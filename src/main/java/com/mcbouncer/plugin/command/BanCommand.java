@@ -39,6 +39,7 @@ public class BanCommand implements CommandExecutor {
 
         Player p = parent.getServer().getPlayer(playerName);
         if (p != null) {
+            p.getWorld().strikeLightningEffect(p.getLocation());
             p.kickPlayer(reason);
         }
 
