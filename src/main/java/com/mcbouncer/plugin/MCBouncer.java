@@ -7,6 +7,11 @@ import org.bukkit.command.CommandSender;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
@@ -24,13 +29,11 @@ public class MCBouncer extends JavaPlugin {
      */
     public static final MCBLogger log = new MCBLogger();
     /**
-     * Command handler class
-     */
-    private MCBCommands commandHandler;
-    /**
      * ArrayList of all muted players
      */
     public ArrayList<Player> muted = new ArrayList<Player>();
+    
+    public HashMap<String, CommandExecutor> commands = new HashMap<String, CommandExecutor>();
 
     /**
      * Simply outputs a message when disabled
@@ -55,16 +58,15 @@ public class MCBouncer extends JavaPlugin {
         pm.registerEvent(Event.Type.PLAYER_CHAT, pl, Event.Priority.High, this);
         pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pl, Event.Priority.High, this);
 
-        this.commandHandler = new MCBCommands(this);
-        this.commandHandler.registerCommand("ban", new BanCommand(this));
-        this.commandHandler.registerCommand("banip", new BanipCommand(this));
-        this.commandHandler.registerCommand("unban", new UnbanCommand(this));
-        this.commandHandler.registerCommand("unbanip", new UnbanipCommand(this));
-        this.commandHandler.registerCommand("kick", new KickCommand(this));
-        this.commandHandler.registerCommand("lookup", new LookupCommand(this));
-        this.commandHandler.registerCommand("mcb-lookup", new McbLookupCommand(this));
-        this.commandHandler.registerCommand("mute", new MuteCommand(this));
-        this.commandHandler.registerCommand("unmute", new UnmuteCommand(this));
+        this.commands.put("ban", new BanCommand(this));
+        this.commands.put("banip", new BanipCommand(this));
+        this.commands.put("unban", new UnbanCommand(this));
+        this.commands.put("unbanip", new UnbanipCommand(this));
+        this.commands.put("kick", new KickCommand(this));
+        this.commands.put("lookup", new LookupCommand(this));
+        this.commands.put("mcb-lookup", new McbLookupCommand(this));
+        this.commands.put("mute", new MuteCommand(this));
+        this.commands.put("unmute", new UnmuteCommand(this));
 
         log.info("MCBouncer successfully initiated");
         log.debug("Debug mode enabled!");
@@ -123,7 +125,7 @@ public class MCBouncer extends JavaPlugin {
 
         @Override
         public void run() {
-            if (!parent.commandHandler.onCommand(sender, command, commandLabel, args)) {
+            if (!this.onCommand()) {
 
                 if (command.getUsage().length() > 0) {
                     for (String line : command.getUsage().replace("<command>", commandLabel).split("\n")) {
@@ -135,5 +137,46 @@ public class MCBouncer extends JavaPlugin {
 
 
         }
+
+        public boolean onCommand() {
+
+            if (sender instanceof Player) {
+                if (!parent.hasPermission((Player) sender, "mcbouncer.mod")) {
+                    return false;
+                }
+            }
+
+            String commandName = command.getName().toLowerCase();
+
+            //What's this hackery? /command arg  arg2 threw an error. Strip unnecessary spaces
+            List<String> temp_list = new LinkedList<String>();
+            temp_list.addAll(Arrays.asList(args));
+            while (temp_list.contains("")) {
+                temp_list.remove("");
+            }
+            args = temp_list.toArray(new String[0]);
+
+            try {
+                if (!commands.containsKey(commandName)) {
+
+                    return false;
+                }
+
+                return commands.get(commandName).onCommand(sender, command, commandLabel, args);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return true;
+            }
+
+        }
+    }
+
+    public static String getSenderName(CommandSender sender) {
+        String senderName = "console";
+        if (sender instanceof Player) {
+            senderName = ((Player) sender).getName();
+        }
+        return senderName;
     }
 }
