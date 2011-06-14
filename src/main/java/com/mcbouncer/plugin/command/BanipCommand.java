@@ -28,6 +28,7 @@ public class BanipCommand extends BaseCommand {
 
         boolean result = MCBouncerUtil.addIPBan(player, this.getSenderName(), reason);
         if (result) {
+            MCBouncer.log.info(this.getSenderName() + " banning " + player + " - " + reason);
             this.sendMessageToSender(ChatColor.GREEN + "IP banned successfully.");
         } else {
             this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());

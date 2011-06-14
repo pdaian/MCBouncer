@@ -23,6 +23,7 @@ public class UnmuteCommand extends BaseCommand {
             } else {
                 parent.muted.remove(name);
                 this.sendMessageToMods(ChatColor.GREEN + name + " was unmuted");
+                MCBouncer.log.info(this.getSenderName() + " unmuted " + name);
             }
 
         }
