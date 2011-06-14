@@ -1,5 +1,6 @@
 package com.mcbouncer.plugin;
 
+import com.mcbouncer.plugin.command.*;
 import com.mcbouncer.util.MCBouncerConfig;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MCBouncer extends JavaPlugin {
@@ -48,11 +50,21 @@ public class MCBouncer extends JavaPlugin {
         setupPermissions();
 
         MCBPlayerListener pl = new MCBPlayerListener(this);
-        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.High, this);
-        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_CHAT, pl, Event.Priority.High, this);
-        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pl, Event.Priority.High, this);
+        PluginManager pm = this.getServer().getPluginManager();
+        pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.High, this);
+        pm.registerEvent(Event.Type.PLAYER_CHAT, pl, Event.Priority.High, this);
+        pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pl, Event.Priority.High, this);
 
-        this.commandHandler = MCBCommands.load(this);
+        this.commandHandler = new MCBCommands(this);
+        this.commandHandler.registerCommand("ban", new BanCommand(this));
+        this.commandHandler.registerCommand("banip", new BanipCommand(this));
+        this.commandHandler.registerCommand("unban", new UnbanCommand(this));
+        this.commandHandler.registerCommand("unbanip", new UnbanipCommand(this));
+        this.commandHandler.registerCommand("kick", new KickCommand(this));
+        this.commandHandler.registerCommand("lookup", new LookupCommand(this));
+        this.commandHandler.registerCommand("mcb-lookup", new McbLookupCommand(this));
+        this.commandHandler.registerCommand("mute", new MuteCommand(this));
+        this.commandHandler.registerCommand("unmute", new UnmuteCommand(this));
 
         log.info("MCBouncer successfully initiated");
         log.debug("Debug mode enabled!");
