@@ -17,6 +17,7 @@ public class UnbanCommand extends BaseCommand {
             return false;
         }
         if (MCBouncerUtil.removeBan(args[0])) {
+            MCBouncer.log.info(this.getSenderName() + " unbanned " + args[0]);
             this.sendMessageToSender(ChatColor.GREEN + "User unbanned successfully.");
         } else {
             this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
