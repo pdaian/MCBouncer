@@ -1,6 +1,5 @@
 package com.mcbouncer.plugin.command;
 
-import com.mcbouncer.plugin.MCBCommands;
 import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
 import com.mcbouncer.util.MCBouncerAPI;
@@ -29,7 +28,7 @@ public class BanCommand implements CommandExecutor {
 
         String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason());
 
-        boolean result = MCBouncerUtil.addBan(playerName, MCBCommands.getSenderName(sender), reason);
+        boolean result = MCBouncerUtil.addBan(playerName, MCBouncer.getSenderName(sender), reason);
 
         if (result) {
             sender.sendMessage(ChatColor.GREEN + "User banned successfully.");

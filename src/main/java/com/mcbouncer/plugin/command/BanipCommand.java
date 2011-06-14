@@ -1,6 +1,5 @@
 package com.mcbouncer.plugin.command;
 
-import com.mcbouncer.plugin.MCBCommands;
 import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
 import com.mcbouncer.util.MCBouncerAPI;
@@ -42,7 +41,7 @@ public class BanipCommand implements CommandExecutor {
             return true;
         }
 
-        boolean result = MCBouncerUtil.addIPBan(player, MCBCommands.getSenderName(sender), reason);
+        boolean result = MCBouncerUtil.addIPBan(player, MCBouncer.getSenderName(sender), reason);
         if (result) {
             sender.sendMessage(ChatColor.GREEN + "IP banned successfully.");
         } else {
