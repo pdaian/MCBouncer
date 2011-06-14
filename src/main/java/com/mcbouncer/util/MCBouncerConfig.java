@@ -1,11 +1,11 @@
 package com.mcbouncer.util;
 
 import com.mcbouncer.bukkit.MCBouncer;
+import com.mcbouncer.util.yaml.Configuration;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import org.bukkit.util.config.Configuration;
 
 public class MCBouncerConfig {
 
