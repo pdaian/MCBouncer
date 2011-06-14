@@ -1,4 +1,4 @@
-package com.mcbouncer.plugin;
+package com.mcbouncer.util;
 
 import java.util.HashMap;
 import java.util.Map;

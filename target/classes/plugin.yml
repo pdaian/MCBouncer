@@ -1,0 +1,43 @@
+name: MCBouncer
+version: 1.0
+author: MCBStaff
+website: http://www.mcbouncer.com/
+main: com.mcbouncer.plugin.MCBouncer
+description: MCBouncer is a global/local ban suite and protection program that is modular, unbiased, and fair to its users.
+commands:
+  ban:
+    description: 'Ban command'
+    usage: 'Usage: /<command> [reason]'
+    aliases: []
+  unban:
+    description: 'Unban command.'
+    usage: 'Usage: /<command> playername'
+    aliases: []
+  lookup:
+    description: 'Lookup command.'
+    usage: 'Usage: /<command> playername'
+    aliases: []
+  kick:
+    description: 'Kick command.'
+    usage: 'Usage: /<command> playername [reason]'
+    aliases: []
+  banip:
+    description: 'IP Ban command.'
+    usage: 'Usage: /<command> playername/IP'
+    aliases: []
+  unbanip:
+    description: 'IP unban command.'
+    usage: 'Usage: /<command> playername/IP'
+    aliases: []
+  mcb-lookup:
+    description: 'MCBans Lookup command.'
+    usage: 'Usage: /<command> playername'
+    aliases: []
+  mute:
+    description: 'Prevent a player from talking'
+    usage: 'Usage: /<command> playername'
+    aliases: []
+  unmute:
+    description: 'Allow a player to speak'
+    usage: 'Usage: /<command> playername'
+    aliases: []

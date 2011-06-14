@@ -1,4 +1,4 @@
-package com.mcbouncer.plugin;
+package com.mcbouncer.bukkit;
 
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.ChatColor;
@@ -30,21 +30,16 @@ public class MCBPlayerListener extends PlayerListener {
 
         @Override
         public void run() {
-
             String playerName = player.getName();
             String IP = player.getAddress().getAddress().getHostAddress();
-
             if (MCBouncerUtil.isNotAllowedToJoin(playerName, IP)) {
                 player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
                 return;
             }
-
             int numBans = MCBouncerUtil.getBanCount(playerName, IP);
             int numNotes = MCBouncerUtil.getNoteCount(playerName);
-
             if (numBans > 0 || numNotes > 0) {
                 String response = playerName + " has ";
-
                 if (numNotes == 0) {
                     response += numBans + " ban" + MCBouncerUtil.plural(numBans, ".", "s.");
                 } else if (numBans == 0) {
@@ -52,10 +47,8 @@ public class MCBPlayerListener extends PlayerListener {
                 } else {
                     response += numBans + " ban" + MCBouncerUtil.plural(numBans, "", "s") + " and " + numNotes + " note" + MCBouncerUtil.plural(numNotes, ".", "s.");
                 }
-
                 parent.messageMods(ChatColor.GREEN + response);
             }
         }
     }
-
 }
