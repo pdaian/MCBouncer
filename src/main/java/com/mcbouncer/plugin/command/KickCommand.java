@@ -11,24 +11,19 @@ public class KickCommand extends BaseCommand {
     public KickCommand(MCBouncer parent) {
         this.parent = parent;
     }
-
+    
     public boolean runCommand() {
-
-        if( !MCBValidators.UserAndReasonValidator(args) ) return false;
-        
+        if (!MCBValidators.UserAndReasonValidator(args)) {
+            return false;
+        }
         if (this.isPlayerOnline(args[0])) {
-            
             String name = this.getPlayerName(args[0]);
-            
             String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultKickMessage());
             this.sendMessageToMods(ChatColor.RED + name + " was kicked for " + reason);
             this.kickPlayer(name, "Kicked: " + reason);
             return true;
         }
-        
         this.sendMessageToSender(ChatColor.RED + "No such player.");
-
         return true;
-
     }
 }

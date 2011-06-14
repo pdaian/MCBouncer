@@ -61,14 +61,6 @@ public class MCBPlayerListener extends PlayerListener {
     }
 
     @Override
-    public void onPlayerChat(PlayerChatEvent event) {
-        if (parent.muted.contains(event.getPlayer().getName())) {
-            event.setCancelled(true);
-            MCBouncer.log.info("Muted player chat: " + event.getPlayer().getName() + " : " + event.getMessage());
-        }
-    }
-
-    @Override
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
         if (parent.muted.contains(event.getPlayer().getName()) && event.getMessage().substring(0, 3).equals("/me")) {
             event.setCancelled(true);

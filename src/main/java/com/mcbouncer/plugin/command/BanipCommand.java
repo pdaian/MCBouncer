@@ -14,7 +14,9 @@ public class BanipCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if( !MCBValidators.UserAndReasonValidator(args) ) return false;
+        if (!MCBValidators.UserAndReasonValidator(args)) {
+            return false;
+        }
         String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason());
         String player = this.getIPFromArgs(args[0], reason);
         if (player.isEmpty()) {
@@ -28,6 +30,5 @@ public class BanipCommand extends BaseCommand {
             this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
         }
         return true;
-
     }
 }

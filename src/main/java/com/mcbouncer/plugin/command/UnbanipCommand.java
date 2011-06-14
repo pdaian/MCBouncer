@@ -13,24 +13,20 @@ public class UnbanipCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-
-        if( !MCBValidators.UserValidator(args) ) return false;
-        
+        if (!MCBValidators.UserValidator(args)) {
+            return false;
+        }
         String player = args[0];
-
         if (!MCBouncerUtil.isIPAddress(player)) {
             this.sendMessageToSender(ChatColor.RED + "Not a valid player or IP.");
             return true;
         }
-
         boolean result = MCBouncerUtil.removeIPBan(player);
         if (result) {
             this.sendMessageToSender(ChatColor.GREEN + "IP unbanned successfully.");
         } else {
             this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
         }
-
         return true;
-
     }
 }
