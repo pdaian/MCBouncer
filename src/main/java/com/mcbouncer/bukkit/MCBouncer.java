@@ -1,12 +1,12 @@
-package com.mcbouncer.plugin;
+package com.mcbouncer.bukkit;
 
+import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.plugin.command.*;
 import com.mcbouncer.util.MCBouncerConfig;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;

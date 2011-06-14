@@ -1,12 +1,9 @@
-package com.mcbouncer.plugin;
+package com.mcbouncer.util;
 
 import com.mcbouncer.util.MCBouncerConfig;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Adds a debug method, and prefixes all log messages with [MCBouncer]
- */
 public class MCBLogger {
 
     public static final Logger logger = Logger.getLogger("Minecraft");
