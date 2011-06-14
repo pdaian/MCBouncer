@@ -1,11 +1,12 @@
 package com.mcbouncer.plugin.command;
 
-import com.mcbouncer.plugin.MCBValidators;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.bukkit.BaseCommand;
+import com.mcbouncer.util.MCBValidators;
+import com.mcbouncer.bukkit.MCBouncer;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerConfig;
 import com.mcbouncer.util.MCBouncerUtil;
-import com.mcbouncer.plugin.ChatColor;
+import com.mcbouncer.util.ChatColor;
 
 public class BanCommand extends BaseCommand {
 
