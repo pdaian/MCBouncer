@@ -19,10 +19,11 @@ public class MuteCommand extends BaseCommand {
             String name = this.getPlayerName(args[0]);
 
             if (parent.muted.contains(name)) {
-                this.sendMessageToSender(ChatColor.GREEN + "Player is already muted.");
+                this.sendMessageToSender(ChatColor.RED + "Player is already muted.");
             } else {
                 parent.muted.add(name);
-                this.sendMessageToMods(ChatColor.RED + name + " was muted");
+                this.sendMessageToMods(ChatColor.GREEN + name + " was muted");
+                MCBouncer.log.info(this.getSenderName() + " muted " + name);
             }
 
         }
