@@ -71,7 +71,9 @@ public class MCBouncer extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-        return this.commandHandler.onCommand(sender, command, commandLabel, args);
+        CommandThread r = new CommandThread(this, sender, command, commandLabel, args);
+        r.start();
+        return true;
     }
 
     public boolean hasPermission(Player player, String permission) {
@@ -87,6 +89,38 @@ public class MCBouncer extends JavaPlugin {
             if (this.hasPermission(player, "mcbouncer.mod")) {
                 player.sendMessage(message);
             }
+        }
+    }
+
+    public class CommandThread extends Thread {
+
+        MCBouncer parent;
+        CommandSender sender;
+        Command command;
+        String commandLabel;
+        String[] args;
+
+        public CommandThread(MCBouncer parent, CommandSender sender, Command command, String commandLabel, String[] args) {
+            this.parent = parent;
+            this.sender = sender;
+            this.command = command;
+            this.commandLabel = commandLabel;
+            this.args = args;
+        }
+
+        @Override
+        public void run() {
+            if (!parent.commandHandler.onCommand(sender, command, commandLabel, args)) {
+
+                if (command.getUsage().length() > 0) {
+                    for (String line : command.getUsage().replace("<command>", commandLabel).split("\n")) {
+                        sender.sendMessage(line);
+                    }
+                }
+
+            }
+
+
         }
     }
 }
