@@ -80,15 +80,11 @@ public class MCBouncerUtil {
     }
 
     public static String implodeWithoutFirstElement(String[] array, String glue) {
-
         String out = "";
-
         if (array.length == 0) {
             return out;
         }
-
         boolean first = true;
-
         for (String part : array) {
             if (first) {
                 first = false;
@@ -96,13 +92,10 @@ public class MCBouncerUtil {
                 out = out + part + glue;
             }
         }
-
         if ("".equals(out)) {
             return "";
         }
-
         out = out.substring(0, out.length() - glue.length());
-
         return out;
     }
 
