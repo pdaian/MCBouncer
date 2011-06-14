@@ -1,6 +1,5 @@
 package com.mcbouncer.util;
 
-import com.mcbouncer.util.MCBouncerConfig;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,7 +12,7 @@ public class MCBLogger {
     }
 
     public void debug(String s) {
-        if (MCBouncerConfig.isDebugMode()) {
+        if (MCBConfiguration.isDebugMode()) {
             logger.log(Level.INFO, "[MCBouncer DEBUG] " + s);
         }
     }

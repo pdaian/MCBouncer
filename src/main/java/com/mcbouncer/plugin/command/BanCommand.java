@@ -4,7 +4,7 @@ import com.mcbouncer.bukkit.BaseCommand;
 import com.mcbouncer.util.MCBValidators;
 import com.mcbouncer.bukkit.MCBouncer;
 import com.mcbouncer.util.MCBouncerAPI;
-import com.mcbouncer.util.MCBouncerConfig;
+import com.mcbouncer.util.MCBConfiguration;
 import com.mcbouncer.util.MCBouncerUtil;
 import com.mcbouncer.util.ChatColor;
 
@@ -19,7 +19,7 @@ public class BanCommand extends BaseCommand {
             return false;
         }
         String playerName = this.getPlayerNameFromArgs(args[0]);
-        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason());
+        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
         boolean result = MCBouncerUtil.addBan(playerName, this.getSenderName(), reason);
         if (result) {
             MCBouncer.log.info(this.getSenderName() + " banning " + playerName + " - " + reason);
