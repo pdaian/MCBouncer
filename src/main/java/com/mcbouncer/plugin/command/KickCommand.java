@@ -1,37 +1,32 @@
 package com.mcbouncer.plugin.command;
 
+import com.mcbouncer.plugin.ChatColor;
 import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
 import com.mcbouncer.util.MCBouncerConfig;
 import com.mcbouncer.util.MCBouncerUtil;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-public class KickCommand implements CommandExecutor {
-
-    private MCBouncer parent;
+public class KickCommand extends BaseCommand {
 
     public KickCommand(MCBouncer parent) {
         this.parent = parent;
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+    public boolean runCommand() {
 
         if( !MCBValidators.UserAndReasonValidator(args) ) return false;
         
-        Player player = parent.getServer().getPlayer(args[0]);
-
-        if (player != null) {
+        if (this.isPlayerOnline(args[0])) {
+            
+            String name = this.getPlayerName(args[0]);
+            
             String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultKickMessage());
-            parent.messageMods(ChatColor.RED + player.getName() + " was kicked for " + reason);
-            player.kickPlayer("Kicked: " + reason);
+            this.sendMessageToMods(ChatColor.RED + name + " was kicked for " + reason);
+            this.kickPlayer(name, "Kicked: " + reason);
             return true;
         }
-        sender.sendMessage(ChatColor.RED + "No such player.");
+        
+        this.sendMessageToSender(ChatColor.RED + "No such player.");
 
         return true;
 

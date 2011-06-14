@@ -1,35 +1,28 @@
 package com.mcbouncer.plugin.command;
 
+import com.mcbouncer.plugin.ChatColor;
 import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-public class UnmuteCommand implements CommandExecutor {
-
-    private MCBouncer parent;
+public class UnmuteCommand extends BaseCommand {
 
     public UnmuteCommand(MCBouncer parent) {
         this.parent = parent;
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+    public boolean runCommand() {
 
         if( !MCBValidators.UserValidator(args) ) return false;
         
-        Player player = parent.getServer().getPlayer(args[0]);
-
-        if (player != null) {
-
-            if (!parent.muted.contains(player)) {
-                sender.sendMessage(ChatColor.GREEN + "Player is not muted.");
+        if(this.isPlayerOnline(args[0])) {
+            
+            String name = this.getPlayerName(args[0]);
+            
+            if (!parent.muted.contains(name)) {
+                this.sendMessageToSender(ChatColor.RED + "Player is not muted.");
             } else {
-                parent.muted.remove(player);
-                parent.messageMods(ChatColor.RED + player.getName() + " was unmuted");
+                parent.muted.remove(name);
+                this.sendMessageToMods(ChatColor.GREEN + name + " was unmuted");
             }
 
         }

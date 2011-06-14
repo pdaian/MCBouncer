@@ -5,47 +5,32 @@ import com.mcbouncer.plugin.MCBouncer;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerConfig;
 import com.mcbouncer.util.MCBouncerUtil;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import com.mcbouncer.plugin.ChatColor;
 
-public class BanipCommand implements CommandExecutor {
-
-    private MCBouncer parent;
+public class BanipCommand extends BaseCommand {
 
     public BanipCommand(MCBouncer parent) {
         this.parent = parent;
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+    public boolean runCommand() {
 
         if( !MCBValidators.UserAndReasonValidator(args) ) return false;
         
         String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason());
-
-        String player = args[0];
-
-        if (!MCBouncerUtil.isIPAddress(player)) {
-            if (parent.getServer().matchPlayer(args[0]).size() > 0) {
-                player = parent.getServer().matchPlayer(args[0]).get(0).getAddress().getAddress().getHostAddress();
-                parent.getServer().matchPlayer(args[0]).get(0).kickPlayer(reason);
-            } else {
-                player = "";
-            }
-        }
+        
+        String player = this.getIPFromArgs(args[0], reason);
 
         if (player.isEmpty()) {
-            sender.sendMessage(ChatColor.GREEN + "Not a valid player or IP.");
+            this.sendMessageToSender(ChatColor.GREEN + "Not a valid player or IP.");
             return true;
         }
 
-        boolean result = MCBouncerUtil.addIPBan(player, MCBouncer.getSenderName(sender), reason);
+        boolean result = MCBouncerUtil.addIPBan(player, this.getSenderName(), reason);
         if (result) {
-            sender.sendMessage(ChatColor.GREEN + "IP banned successfully.");
+            this.sendMessageToSender(ChatColor.GREEN + "IP banned successfully.");
         } else {
-            sender.sendMessage(ChatColor.RED + MCBouncerAPI.getError());
+            this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
         }
 
         return true;

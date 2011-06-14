@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
@@ -31,9 +30,9 @@ public class MCBouncer extends JavaPlugin {
     /**
      * ArrayList of all muted players
      */
-    public ArrayList<Player> muted = new ArrayList<Player>();
+    public ArrayList<String> muted = new ArrayList<String>();
     
-    public HashMap<String, CommandExecutor> commands = new HashMap<String, CommandExecutor>();
+    public HashMap<String, BaseCommand> commands = new HashMap<String, BaseCommand>();
 
     /**
      * Simply outputs a message when disabled
@@ -157,12 +156,16 @@ public class MCBouncer extends JavaPlugin {
             args = temp_list.toArray(new String[0]);
 
             try {
-                if (!commands.containsKey(commandName)) {
+                if (!parent.commands.containsKey(commandName)) {
 
                     return false;
                 }
 
-                return commands.get(commandName).onCommand(sender, command, commandLabel, args);
+                BaseCommand commandClass = parent.commands.get(commandName);
+                commandClass.setArgs(args);
+                commandClass.setParent(parent);
+                commandClass.setSender(sender);
+                return commandClass.runCommand();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -172,11 +175,4 @@ public class MCBouncer extends JavaPlugin {
         }
     }
 
-    public static String getSenderName(CommandSender sender) {
-        String senderName = "console";
-        if (sender instanceof Player) {
-            senderName = ((Player) sender).getName();
-        }
-        return senderName;
-    }
 }

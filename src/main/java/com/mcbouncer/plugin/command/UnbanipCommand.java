@@ -1,39 +1,33 @@
 package com.mcbouncer.plugin.command;
 
+import com.mcbouncer.plugin.ChatColor;
 import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerUtil;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 
-public class UnbanipCommand implements CommandExecutor {
-
-    private MCBouncer parent;
+public class UnbanipCommand extends BaseCommand {
 
     public UnbanipCommand(MCBouncer parent) {
         this.parent = parent;
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+    public boolean runCommand() {
 
         if( !MCBValidators.UserValidator(args) ) return false;
         
         String player = args[0];
 
         if (!MCBouncerUtil.isIPAddress(player)) {
-            sender.sendMessage(ChatColor.GREEN + "Not a valid player or IP.");
+            this.sendMessageToSender(ChatColor.RED + "Not a valid player or IP.");
             return true;
         }
 
         boolean result = MCBouncerUtil.removeIPBan(player);
         if (result) {
-            sender.sendMessage(ChatColor.GREEN + "IP unbanned successfully.");
+            this.sendMessageToSender(ChatColor.GREEN + "IP unbanned successfully.");
         } else {
-            sender.sendMessage(ChatColor.RED + MCBouncerAPI.getError());
+            this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
         }
 
         return true;
