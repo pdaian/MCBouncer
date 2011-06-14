@@ -4,7 +4,7 @@ import com.mcbouncer.bukkit.BaseCommand;
 import com.mcbouncer.util.MCBValidators;
 import com.mcbouncer.bukkit.MCBouncer;
 import com.mcbouncer.util.MCBouncerAPI;
-import com.mcbouncer.util.MCBouncerConfig;
+import com.mcbouncer.util.MCBConfiguration;
 import com.mcbouncer.util.MCBouncerUtil;
 import com.mcbouncer.util.ChatColor;
 
@@ -18,8 +18,13 @@ public class BanipCommand extends BaseCommand {
         if (!MCBValidators.UserAndReasonValidator(args)) {
             return false;
         }
-        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBouncerConfig.getDefaultReason());
+        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
         String player = this.getIPFromArgs(args[0], reason);
+        if( !MCBouncerUtil.isIPAddress(args[0]) ) {
+            if( this.isPlayerOnline(args[0]) ) {
+                this.kickPlayer(this.getPlayerName(args[0]), reason);
+            }
+        }
         if (player.isEmpty()) {
             this.sendMessageToSender(ChatColor.GREEN + "Not a valid player or IP.");
             return true;

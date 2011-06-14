@@ -1,16 +1,75 @@
 package com.mcbouncer.bukkit;
 
+import com.mcbouncer.plugin.command.MCBCommand;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-
-public abstract class BaseCommand {
+public abstract class BaseCommand implements MCBCommand {
 
     protected MCBouncer parent;
     protected String[] args;
     protected CommandSender sender;
-
+    
+    public String getPlayerNameFromArgs(String arg) {
+        Player player = parent.getServer().getPlayer(arg);
+        if(player != null ) {
+            return player.getName();
+        }
+        else {
+            return arg;
+        }
+    }
+    
+    public String getPlayerName(String name) {
+        if(parent.getServer().getPlayer(name) != null) {
+            return parent.getServer().getPlayer(name).getName();
+        }
+        return "";
+    }
+    
+    public boolean isPlayerOnline(String name) {
+        return (parent.getServer().getPlayer(name) != null);
+    }
+    
+    public String getSenderName() {
+        String senderName = "console";
+        if (sender instanceof Player) {
+            senderName = ((Player) sender).getName();
+        }
+        return senderName;
+    }
+    
+    public String getIPFromArgs(String arg, String kickReason) {
+        String player = args[0];
+        if (!MCBouncerUtil.isIPAddress(player)) {
+            Player playerInst = parent.getServer().getPlayer(player);
+            if (playerInst != null) {
+                player = playerInst.getAddress().getAddress().getHostAddress();
+            } else {
+                player = "";
+            }
+        }
+        return player;
+    }
+    
+    public void sendMessageToSender(String message) {
+        sender.sendMessage(message);
+    }
+    
+    public void sendMessageToMods(String message) {
+        parent.messageMods(message);
+    }
+    
+    public void kickPlayer(String player, String reason) {
+        Player p = parent.getServer().getPlayer(player);
+        if (p != null) {
+            p.kickPlayer(reason);
+        }
+    }
+    
+    public abstract boolean runCommand();
+    
     public void setArgs(String[] args) {
         this.args = args;
     }
@@ -22,65 +81,5 @@ public abstract class BaseCommand {
     public void setSender(CommandSender sender) {
         this.sender = sender;
     }
-    
-    protected String getPlayerNameFromArgs(String arg) {
-        Player player = parent.getServer().getPlayer(arg);
-        if(player != null ) {
-            return player.getName();
-        }
-        else {
-            return arg;
-        }
-    }
-    
-    protected String getIPFromArgs(String arg, String kickReason) {
-        String player = args[0];
-        if (!MCBouncerUtil.isIPAddress(player)) {
-            Player playerInst = parent.getServer().getPlayer(player);
-            if (playerInst != null) {
-                player = playerInst.getAddress().getAddress().getHostAddress();
-                playerInst.kickPlayer(kickReason);
-            } else {
-                player = "";
-            }
-        }
-        return player;
-    }
-    
-    protected String getSenderName() {
-        String senderName = "console";
-        if (sender instanceof Player) {
-            senderName = ((Player) sender).getName();
-        }
-        return senderName;
-    }
-    
-    protected void sendMessageToSender(String message) {
-        sender.sendMessage(message);
-    }
-    
-    public void sendMessageToMods(String message) {
-        parent.messageMods(message);
-    }
-    
-    protected void kickPlayer(String player, String reason) {
-        Player p = parent.getServer().getPlayer(player);
-        if (p != null) {
-            p.kickPlayer(reason);
-        }
-    }
-    
-    protected boolean isPlayerOnline(String name) {
-        return (parent.getServer().getPlayer(name) != null);
-    }
-    
-    protected String getPlayerName(String name) {
-        if(parent.getServer().getPlayer(name) != null) {
-            return parent.getServer().getPlayer(name).getName();
-        }
-        return "";
-    }
-    
-    public abstract boolean runCommand();
     
 }

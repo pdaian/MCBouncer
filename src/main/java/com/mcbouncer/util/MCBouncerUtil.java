@@ -14,36 +14,36 @@ import org.json.simple.JSONObject;
 public class MCBouncerUtil {
 
     public static boolean addBan(String playerName, String admin, String reason) {
-        return MCBouncerAPI.addBan(playerName, MCBouncerConfig.getApiKey(), admin, reason);
+        return MCBouncerAPI.addBan(playerName, MCBConfiguration.getApiKey(), admin, reason);
     }
 
     public static boolean addIPBan(String IP, String admin, String reason) {
-        return MCBouncerAPI.addIPBan(IP, MCBouncerConfig.getApiKey(), admin, reason);
+        return MCBouncerAPI.addIPBan(IP, MCBConfiguration.getApiKey(), admin, reason);
     }
 
     public static boolean removeBan(String playerName) {
-        return MCBouncerAPI.removeBan(playerName, MCBouncerConfig.getApiKey());
+        return MCBouncerAPI.removeBan(playerName, MCBConfiguration.getApiKey());
     }
 
     public static boolean removeIPBan(String playerName) {
-        return MCBouncerAPI.removeIPBan(playerName, MCBouncerConfig.getApiKey());
+        return MCBouncerAPI.removeIPBan(playerName, MCBConfiguration.getApiKey());
     }
 
     public static int getBanCount(String playerName, String IP) {
-        return (int) (MCBouncerAPI.getBanCount(playerName, MCBouncerConfig.getApiKey()) + MCBouncerAPI.getIPBanCount(IP, MCBouncerConfig.getApiKey()));
+        return (int) (MCBouncerAPI.getBanCount(playerName, MCBConfiguration.getApiKey()) + MCBouncerAPI.getIPBanCount(IP, MCBConfiguration.getApiKey()));
     }
 
     public static int getNoteCount(String playerName) {
-        return (int) MCBouncerAPI.getNoteCount(playerName, MCBouncerConfig.getApiKey());
+        return (int) MCBouncerAPI.getNoteCount(playerName, MCBConfiguration.getApiKey());
     }
 
     public static boolean isNotAllowedToJoin(String playerName, String IP) {
-        MCBouncerAPI.updateUser(playerName, MCBouncerConfig.getApiKey(), IP);
-        return MCBouncerAPI.isBanned(playerName, MCBouncerConfig.getApiKey()) || MCBouncerAPI.isBanned(playerName, MCBouncerConfig.getApiKey()); // Second one should be isIpBanned()
+        MCBouncerAPI.updateUser(playerName, MCBConfiguration.getApiKey(), IP);
+        return MCBouncerAPI.isBanned(playerName, MCBConfiguration.getApiKey()) || MCBouncerAPI.isBanned(playerName, MCBConfiguration.getApiKey()); // Second one should be isIpBanned()
     }
 
     public static String getBanReason(String playerName) {
-        return MCBouncerAPI.getBanReason(playerName, MCBouncerConfig.getApiKey());
+        return MCBouncerAPI.getBanReason(playerName, MCBConfiguration.getApiKey());
     }
 
     public static boolean isLocallyBanned(String playerName) {
@@ -51,17 +51,17 @@ public class MCBouncerUtil {
     }
 
     public static ArrayList<HashMap<String, Object>> getBans(String user) {
-        return MCBouncerAPI.getBans(user, MCBouncerConfig.getApiKey(), "0", "50");
+        return MCBouncerAPI.getBans(user, MCBConfiguration.getApiKey(), "0", "50");
     }
 
     public static JSONObject getMCBLookup(String playerName) { // [irc.esper.net] #mcbans <Firestar> and tbh i have said i do not care if people make their own plugins that integrate with mcbans
         StringBuilder response = new StringBuilder();
-        if (MCBouncerConfig.getMcBansKey().equals("sample")) {
+        if (MCBConfiguration.getMcBansKey().equals("sample")) {
             return null;
         }
         try {
             String request = "player" + URLEncoder.encode(playerName, "UTF-8") + "&exec=lookup_user";
-            URLConnection conn = new URL("http://72.10.39.172/" + MCBouncerConfig.getMcBansKey()).openConnection(); // http://www.exampledepot.com/egs/java.net/Post.html
+            URLConnection conn = new URL("http://72.10.39.172/" + MCBConfiguration.getMcBansKey()).openConnection(); // http://www.exampledepot.com/egs/java.net/Post.html
             conn.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(request);

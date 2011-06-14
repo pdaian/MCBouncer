@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class MCBouncerConfig {
+public class MCBConfiguration {
 
     private static boolean debugMode = false;
     private static int numBansDisallow = 10;

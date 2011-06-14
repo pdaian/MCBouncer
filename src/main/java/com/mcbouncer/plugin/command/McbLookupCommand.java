@@ -4,6 +4,7 @@ import com.mcbouncer.bukkit.BaseCommand;
 import com.mcbouncer.util.ChatColor;
 import com.mcbouncer.util.MCBValidators;
 import com.mcbouncer.bukkit.MCBouncer;
+import com.mcbouncer.util.MCBConfiguration;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,7 +16,12 @@ public class McbLookupCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if( !MCBValidators.UserValidator(args) ) return false;
+        if( !MCBValidators.UserValidator(args) ) {
+            return false;
+        }
+        if( MCBConfiguration.getMcBansKey().equals("sample") ) {
+            this.sendMessageToSender("MCBans key not found. MCBans lookups are disabled.");
+        }
         JSONObject result = MCBouncerUtil.getMCBLookup(args[0]);
         if (result == null) {
             return true;

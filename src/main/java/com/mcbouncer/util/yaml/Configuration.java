@@ -100,16 +100,16 @@ public class Configuration extends ConfigurationNode {
      * @param headerLines header lines to prepend
      */
     public void setHeader(String... headerLines) {
-        StringBuilder header = new StringBuilder();
+        StringBuilder headerTemp = new StringBuilder();
 
         for (String line : headerLines) {
-            if (header.length() > 0) {
-                header.append("\r\n");
+            if (headerTemp.length() > 0) {
+                headerTemp.append("\r\n");
             }
-            header.append(line);
+            headerTemp.append(line);
         }
 
-        setHeader(header.toString());
+        setHeader(headerTemp.toString());
     }
 
     /**
