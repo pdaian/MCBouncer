@@ -23,6 +23,7 @@ public class UnbanipCommand extends BaseCommand {
         }
         boolean result = MCBouncerUtil.removeIPBan(player);
         if (result) {
+            MCBouncer.log.info(this.getSenderName() + " unbanned " + player);
             this.sendMessageToSender(ChatColor.GREEN + "IP unbanned successfully.");
         } else {
             this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
