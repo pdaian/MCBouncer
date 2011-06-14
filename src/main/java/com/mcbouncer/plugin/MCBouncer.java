@@ -7,6 +7,7 @@ import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 import java.util.ArrayList;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,10 +29,6 @@ public class MCBouncer extends JavaPlugin {
      * ArrayList of all muted players
      */
     public ArrayList<Player> muted = new ArrayList<Player>();
-    /**
-     * Listener handling
-     */
-    private MCBListeners listeners;
 
     /**
      * Simply outputs a message when disabled
@@ -50,7 +47,11 @@ public class MCBouncer extends JavaPlugin {
         MCBouncerConfig.load(this.getDataFolder());
         setupPermissions();
 
-        this.listeners = MCBListeners.load(this);
+        MCBPlayerListener pl = new MCBPlayerListener(this);
+        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.High, this);
+        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_CHAT, pl, Event.Priority.High, this);
+        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pl, Event.Priority.High, this);
+
         this.commandHandler = MCBCommands.load(this);
 
         log.info("MCBouncer successfully initiated");
