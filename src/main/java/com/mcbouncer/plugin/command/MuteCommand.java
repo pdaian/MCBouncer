@@ -1,40 +1,28 @@
 package com.mcbouncer.plugin.command;
 
+import com.mcbouncer.plugin.ChatColor;
 import com.mcbouncer.plugin.MCBValidators;
 import com.mcbouncer.plugin.MCBouncer;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-public class MuteCommand implements CommandExecutor {
-
-    private MCBouncer parent;
+public class MuteCommand extends BaseCommand {
 
     public MuteCommand(MCBouncer parent) {
         this.parent = parent;
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+    public boolean runCommand() {
 
         if( !MCBValidators.UserValidator(args) ) return false;
-        
-        if (args.length < 1) {
-            sender.sendMessage(ChatColor.GREEN + "You must specify a user");
-            return false;
-        }
 
-        Player player = parent.getServer().getPlayer(args[0]);
+        if(this.isPlayerOnline(args[0])) {
+            
+            String name = this.getPlayerName(args[0]);
 
-        if (player != null) {
-
-            if (parent.muted.contains(player)) {
-                sender.sendMessage(ChatColor.GREEN + "Player is already muted.");
+            if (parent.muted.contains(name)) {
+                this.sendMessageToSender(ChatColor.GREEN + "Player is already muted.");
             } else {
-                parent.muted.add(player);
-                parent.messageMods(ChatColor.RED + player.getName() + " was muted");
+                parent.muted.add(name);
+                this.sendMessageToMods(ChatColor.RED + name + " was muted");
             }
 
         }
