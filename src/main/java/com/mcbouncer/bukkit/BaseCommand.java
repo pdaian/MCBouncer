@@ -1,6 +1,5 @@
-package com.mcbouncer.plugin.command;
+package com.mcbouncer.bukkit;
 
-import com.mcbouncer.plugin.MCBouncer;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

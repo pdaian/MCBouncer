@@ -1,5 +1,6 @@
-package com.mcbouncer.plugin;
+package com.mcbouncer.bukkit;
 
+import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.plugin.command.*;
 import com.mcbouncer.util.MCBouncerConfig;
 import org.bukkit.command.Command;
