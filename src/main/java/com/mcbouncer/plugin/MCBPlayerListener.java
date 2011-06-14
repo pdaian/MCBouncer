@@ -3,8 +3,6 @@ package com.mcbouncer.plugin;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
 
@@ -60,11 +58,4 @@ public class MCBPlayerListener extends PlayerListener {
         }
     }
 
-    @Override
-    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
-        if (parent.muted.contains(event.getPlayer().getName()) && event.getMessage().substring(0, 3).equals("/me")) {
-            event.setCancelled(true);
-            MCBouncer.log.info("Muted player chat: " + event.getPlayer().getName() + " : " + event.getMessage());
-        }
-    }
 }
