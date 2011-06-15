@@ -1,4 +1,4 @@
-package com.mcbouncer.plugin.command;
+package com.mcbouncer.command;
 
 public interface MCBCommand {
     
