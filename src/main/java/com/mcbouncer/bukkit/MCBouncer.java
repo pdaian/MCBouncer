@@ -2,7 +2,7 @@ package com.mcbouncer.bukkit;
 
 import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.command.*;
-import com.mcbouncer.util.MCBConfiguration;
+import com.mcbouncer.util.config.MCBConfiguration;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import com.nijiko.permissions.PermissionHandler;

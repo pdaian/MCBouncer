@@ -1,5 +1,6 @@
 package com.mcbouncer.util;
 
+import com.mcbouncer.util.config.MCBConfiguration;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;

@@ -1,5 +1,6 @@
 package com.mcbouncer.util;
 
+import com.mcbouncer.util.config.MCBConfiguration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
