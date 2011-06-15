@@ -1,7 +1,7 @@
 package com.mcbouncer.bukkit;
 
 import com.mcbouncer.util.MCBLogger;
-import com.mcbouncer.plugin.command.*;
+import com.mcbouncer.command.*;
 import com.mcbouncer.util.MCBConfiguration;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

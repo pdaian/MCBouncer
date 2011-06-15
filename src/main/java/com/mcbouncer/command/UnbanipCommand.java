@@ -1,4 +1,4 @@
-package com.mcbouncer.plugin.command;
+package com.mcbouncer.command;
 
 import com.mcbouncer.bukkit.BaseCommand;
 import com.mcbouncer.util.ChatColor;
