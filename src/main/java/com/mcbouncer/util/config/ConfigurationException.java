@@ -1,4 +1,4 @@
-package com.mcbouncer.util.yaml;
+package com.mcbouncer.util.config;
 
 /**
  * Configuration exception.

@@ -1,4 +1,4 @@
-package com.mcbouncer.util.yaml;
+package com.mcbouncer.util.config;
 
 import java.io.File;
 import java.io.FileInputStream;
