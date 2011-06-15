@@ -6,13 +6,14 @@ package com.mcbouncer.util.yaml;
  * @author sk89q
  */
 public class ConfigurationException extends Exception {
-    private static final long serialVersionUID = -2442886939908724203L;
 
-    public ConfigurationException() {
-        super();
-    }
+	private static final long serialVersionUID = -2442886939908724203L;
 
-    public ConfigurationException(String msg) {
-        super(msg);
-    }
+	public ConfigurationException() {
+		super();
+	}
+
+	public ConfigurationException(String msg) {
+		super(msg);
+	}
 }

@@ -10,24 +10,24 @@ import com.mcbouncer.util.ChatColor;
 
 public class BanCommand extends BaseCommand {
 
-    public BanCommand(MCBouncer parent) {
-        this.parent = parent;
-    }
+	public BanCommand(MCBouncer parent) {
+		this.parent = parent;
+	}
 
-    public boolean runCommand() {
-        if (!MCBValidators.UserAndReasonValidator(args)) {
-            return false;
-        }
-        String playerName = this.getPlayerNameFromArgs(args[0]);
-        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
-        boolean result = MCBouncerUtil.addBan(playerName, this.getSenderName(), reason);
-        if (result) {
-            MCBouncer.log.info(this.getSenderName() + " banning " + playerName + " - " + reason);
-            this.sendMessageToSender(ChatColor.GREEN + "User banned successfully.");
-        } else {
-            this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
-        }
-        this.kickPlayer(playerName, reason);
-        return true;
-    }
+	public boolean runCommand() {
+		if (!MCBValidators.UserAndReasonValidator(args)) {
+			return false;
+		}
+		String playerName = this.getPlayerNameFromArgs(args[0]);
+		String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
+		boolean result = MCBouncerUtil.addBan(playerName, this.getSenderName(), reason);
+		if (result) {
+			MCBouncer.log.info(this.getSenderName() + " banning " + playerName + " - " + reason);
+			this.sendMessageToSender(ChatColor.GREEN + "User banned successfully.");
+		} else {
+			this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
+		}
+		this.kickPlayer(playerName, "Banned: " + reason);
+		return true;
+	}
 }
