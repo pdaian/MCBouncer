@@ -15,6 +15,7 @@ public class MCBConfiguration {
     private static boolean showBanMessages = true;
     private static String defaultReason = "Banned for rule violation.";
     private static String defaultKickMessage = "Kicked by an admin.";
+    private static boolean fastBans = false;
     private static Configuration config = null;
 
     public static void load(File folder) {
@@ -68,15 +69,22 @@ public class MCBConfiguration {
         showBanMessages = config.getBoolean("showBansMessages", showBanMessages);
         defaultReason = config.getString("defaultBanMessage", "Banned for rule violation.");
         defaultKickMessage = config.getString("defaultKickMessage", "Kicked by an admin.");
+        fastBans = config.getBoolean("fastBans", fastBans);
     }
 
     public static String getApiKey() {
         return apiKey;
     }
+    
+    public static boolean getFastBans() {
+        return fastBans;
+    }
 
     public static Configuration getConfig() {
         return config;
     }
+    
+    
 
     public static boolean isDebugMode() {
         return debugMode;
