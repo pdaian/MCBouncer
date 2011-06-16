@@ -16,7 +16,6 @@ public class MCBConfiguration {
     private static String defaultReason = "Banned for rule violation.";
     private static String defaultKickMessage = "Kicked by an admin.";
     private static Configuration config = null;
-    private static String mcBansKey = "sample";
 
     public static void load(File folder) {
         folder.mkdirs();
@@ -69,7 +68,6 @@ public class MCBConfiguration {
         showBanMessages = config.getBoolean("showBansMessages", showBanMessages);
         defaultReason = config.getString("defaultBanMessage", "Banned for rule violation.");
         defaultKickMessage = config.getString("defaultKickMessage", "Kicked by an admin.");
-        mcBansKey = config.getString("mcBansKey", "sample");
     }
 
     public static String getApiKey() {
@@ -100,7 +98,4 @@ public class MCBConfiguration {
         return defaultKickMessage;
     }
 
-    public static String getMcBansKey() {
-        return mcBansKey;
-    }
 }
