@@ -1,11 +1,12 @@
 package com.mcbouncer.bukkit;
 
-import com.mcbouncer.command.MCBCommand;
+import com.mcbouncer.command.ICommand;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-public abstract class BaseCommand implements MCBCommand {
+public abstract class BaseCommand implements ICommand {
 
 	protected MCBouncer parent;
 	protected String[] args;
@@ -74,6 +75,12 @@ public abstract class BaseCommand implements MCBCommand {
 			}
 		}
 	}
+
+        public boolean senderHasPermission(String permission) {
+                return ( this.sender instanceof ConsoleCommandSender ) || parent.hasPermission( (Player) this.sender, permission);
+        }
+        
+        
 
 	public abstract boolean runCommand();
 
