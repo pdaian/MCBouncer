@@ -1,11 +1,16 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>MCBouncer</groupId>
+    <groupId>com.mcbouncer</groupId>
     <artifactId>MCBouncer</artifactId>
-    <version>0.1</version>
+    <version>1.0beta</version>
     <name>MCBouncer</name>
     <description>MCBouncer plugin - http://mcbouncer.com</description>
+    <scm>
+        <connection>scm:git:git://github.com/pdaian/MCBouncer.git</connection>
+        <url>https://github.com/pdaian/MCBouncer</url>
+        <developerConnection>scm:git:git://github.com/pdaian/MCBouncer.git</developerConnection>
+    </scm>
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
@@ -34,6 +39,8 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>MCBouncer</finalName>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <defaultGoal>clean install</defaultGoal>
         <plugins>
             <plugin>
@@ -45,6 +52,7 @@
                         <manifestEntries>
                             <Implementation-Title>MCBouncer</Implementation-Title>
                             <Implementation-Version>${describe}</Implementation-Version>
+                            <Built-By>MCBouncer Team</Built-By>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -63,10 +71,12 @@
                 <version>2.0.4</version>
                 <artifactId>proguard-maven-plugin</artifactId>
                 <executions>
-                   <execution>
-                       <phase>package</phase>
-                       <goals><goal>proguard</goal></goals>
-                   </execution>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
                 </executions>
                 <configuration>
                     <obfuscate>true</obfuscate>
@@ -83,6 +93,23 @@
                         <option>-optimizationpasses 3</option>
                     </options>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/package.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>build</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <resources>
