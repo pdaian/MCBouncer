@@ -1,14 +1,40 @@
 package com.mcbouncer.command;
 
-public interface MCBCommand {
-    String getPlayerNameFromArgs(String arg);
-    String getPlayerName(String name);
-    boolean isPlayerOnline(String name);
-    String getSenderName();
-    String getIPFromArgs(String arg, String kickReason);
-    void sendMessageToSender(String message);
-    void sendMessageToMods(String message);
-    void kickPlayer(String player, String reason);
-    void kickPlayerWithIP(String ip, String reason);
-    boolean runCommand();
+import com.mcbouncer.bukkit.BaseCommand;
+import com.mcbouncer.bukkit.MCBouncer;
+import com.mcbouncer.util.MCBValidators;
+
+public class MCBCommand extends BaseCommand {
+
+    public MCBCommand(MCBouncer parent) {
+        this.parent = parent;
+    }
+
+    public boolean runCommand() {
+        if (!MCBValidators.UserValidator(args)) {
+            return false;
+        }
+        
+        BaseCommand commandClass;
+        
+        if( args[0].equals("version") ) {
+            commandClass = new VersionCommand(parent);
+        }
+        else if( args[0].equals("reload") ) {
+            commandClass = new ReloadCommand(parent);
+        }
+        else if( args[0].equals("help") ) {
+            commandClass = new HelpCommand(parent);
+        }
+        else {
+            return false;
+        }
+        
+        commandClass.setArgs(args);
+        commandClass.setParent(parent);
+        commandClass.setSender(sender);
+        return commandClass.runCommand();
+
+    }
+    
 }
