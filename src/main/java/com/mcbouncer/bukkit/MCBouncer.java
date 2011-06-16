@@ -43,8 +43,7 @@ public class MCBouncer extends JavaPlugin {
         this.commands.put("unbanip", new UnbanipCommand(this));
         this.commands.put("kick", new KickCommand(this));
         this.commands.put("lookup", new LookupCommand(this));
-        this.commands.put("mcb-lookup", new McbLookupCommand(this));
-        log.info("MCBouncer successfully initiated");
+        log.info("Plugin enabled. (version " + this.getDescription().getVersion() + ")");
         log.debug("Debug mode enabled!");
     }
 
