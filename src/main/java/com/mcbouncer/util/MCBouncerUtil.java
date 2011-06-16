@@ -1,16 +1,9 @@
 package com.mcbouncer.util;
 
 import com.mcbouncer.util.config.MCBConfiguration;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 public class MCBouncerUtil {
 
@@ -66,7 +59,7 @@ public class MCBouncerUtil {
         return MCBouncerAPI.getBans(user, MCBConfiguration.getApiKey(), "0", "50");
     }
 
-    public static JSONObject getMCBLookup(String playerName) { // [irc.esper.net] #mcbans <Firestar> and tbh i have said i do not care if people make their own plugins that integrate with mcbans
+    /*public static JSONObject getMCBLookup(String playerName) { // [irc.esper.net] #mcbans <Firestar> and tbh i have said i do not care if people make their own plugins that integrate with mcbans
         StringBuilder response = new StringBuilder();
         if (MCBConfiguration.getMcBansKey().equals("sample")) {
             return null;
@@ -89,7 +82,7 @@ public class MCBouncerUtil {
         } catch (Exception e) {
         }
         return null;
-    }
+    }*/
 
     public static String implodeWithoutFirstElement(String[] array, String glue) {
         String out = "";
