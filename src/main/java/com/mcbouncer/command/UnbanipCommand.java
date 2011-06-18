@@ -14,7 +14,7 @@ public class UnbanipCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!MCBValidators.UserValidator(args)) {
+        if (args.length != 1) {
             return false;
         }
         String player = args[0];

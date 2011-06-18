@@ -14,7 +14,7 @@ public class UnbanCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!MCBValidators.UserValidator(args)) {
+        if (args.length != 1) {
             return false;
         }
         if (MCBouncerUtil.removeBan(args[0])) {

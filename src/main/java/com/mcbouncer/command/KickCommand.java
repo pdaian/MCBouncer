@@ -14,7 +14,7 @@ public class KickCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!MCBValidators.UserAndReasonValidator(args)) {
+        if (args.length < 1) {
             return false;
         }
         if (this.isPlayerOnline(args[0])) {

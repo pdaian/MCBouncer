@@ -8,9 +8,9 @@ import com.mcbouncer.util.config.MCBConfiguration;
 import com.mcbouncer.util.MCBouncerUtil;
 import com.mcbouncer.util.ChatColor;
 
-public class BanCommand extends BaseCommand {
+public class AddnoteCommand extends BaseCommand {
 
-    public BanCommand(MCBouncer parent) {
+    public AddnoteCommand(MCBouncer parent) {
         this.parent = parent;
     }
 

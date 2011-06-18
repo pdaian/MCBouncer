@@ -15,7 +15,7 @@ public class BanipCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!MCBValidators.UserAndReasonValidator(args)) {
+        if (args.length < 1) {
             return false;
         }
         String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
