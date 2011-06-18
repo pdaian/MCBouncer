@@ -27,8 +27,8 @@ public class MCBouncerUtil {
         return MCBouncerAPI.removeIPBan(playerName, MCBConfiguration.getApiKey());
     }
     
-    public static boolean removeNote(int noteID) {
-        return MCBouncerAPI.removeNote(noteID, MCBConfiguration.getApiKey());
+    public static boolean removeNote(int noteID, String admin) {
+        return MCBouncerAPI.removeNote(noteID, MCBConfiguration.getApiKey(), admin);
     }
 
     public static int getBanCount(String playerName, String IP) {

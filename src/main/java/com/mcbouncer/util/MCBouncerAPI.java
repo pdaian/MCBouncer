@@ -101,8 +101,8 @@ public class MCBouncerAPI {
         return false;
     }
 
-    public static boolean removeNote(int noteid, String key) {
-        JSONObject result = (MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/removeNote/" + key + "/" + noteid)));
+    public static boolean removeNote(int noteid, String key, String issuer) {
+        JSONObject result = (MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/removeNote/" + key + "/" + issuer + "/" + noteid)));
         if ((Boolean) result.get("success")) {
             return true;
         }
