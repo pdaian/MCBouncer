@@ -24,25 +24,4 @@ public class ValidatorTest extends TestCase {
         assertTrue(MCBValidators.UserAndReasonValidator( new String[] {"foo", "bar", "baz"} ) );
     }
     
-    public void testIsInteger() {  
-        assertTrue(MCBValidators.isInteger("5"));
-        assertTrue(MCBValidators.isInteger("0"));
-        assertFalse(MCBValidators.isInteger("5.5"));
-        assertFalse(MCBValidators.isInteger(""));
-        assertFalse(MCBValidators.isInteger("text"));
-    }
-    
-    public void testIsNumeric() {       
-        assertTrue(MCBValidators.isNumeric("5"));
-        assertTrue(MCBValidators.isNumeric("0"));
-        assertTrue(MCBValidators.isNumeric("5.5"));
-        assertFalse(MCBValidators.isNumeric(""));
-        assertFalse(MCBValidators.isNumeric("text"));
-    }
-    
-    public void testInArray() {  
-        assertTrue( MCBValidators.inArray("check", new String[] { "check", "this" } ) );
-        assertFalse( MCBValidators.inArray("check", new String[] { "chieck", "this" } ) );
-        assertTrue( MCBValidators.inArray("", new String[] { "", "this" } ) );
-    }
 }

@@ -29,11 +29,12 @@ commands:
     description: 'Kick a user from the server'
     usage: '/<command> playername [reason]'
     aliases: []
-  mcbouncer:
-    description: 'MCBouncer commands'
-    usage: '/<command> [help|version|reload]'
-    aliases: []
   addnote:
     description: 'Adds a note'
     usage: '/<command> playername note'
     aliases: []
+  mcbouncer:
+    description: 'MCBouncer commands'
+    usage: '/<command> [help|version|reload]'
+    aliases: []
+  
