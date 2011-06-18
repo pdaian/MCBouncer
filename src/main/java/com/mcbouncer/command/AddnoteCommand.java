@@ -15,19 +15,18 @@ public class AddnoteCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (args.length < 1) {
+        if (args.length < 2) {
             return false;
         }
         String playerName = this.getPlayerNameFromArgs(args[0]);
-        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
-        boolean result = MCBouncerUtil.addBan(playerName, this.getSenderName(), reason);
+        String note = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), "");
+        boolean result = MCBouncerUtil.addNote(playerName, this.getSenderName(), note);
         if (result) {
-            MCBouncer.log.info(this.getSenderName() + " banning " + playerName + " - " + reason);
-            this.sendMessageToSender(ChatColor.GREEN + "User banned successfully.");
+            MCBouncer.log.info(this.getSenderName() + " added note to " + playerName + " - " + note);
+            this.sendMessageToSender(ChatColor.GREEN + "Note added successfully.");
         } else {
             this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
         }
-        this.kickPlayer(playerName, "Banned: " + reason);
         return true;
     }
 }
