@@ -9,6 +9,10 @@ public class MCBValidators {
     public static boolean UserValidator(String[] args) {
         return args.length == 1;
     }
+    
+    public static boolean thereAreTooManyValidators(String[] args) {
+        return args.length > 1;
+    }
 
     /**
      * Returns true if the string is an integer

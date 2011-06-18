@@ -14,6 +14,10 @@ public class MCBouncerUtil {
     public static boolean addIPBan(String IP, String admin, String reason) {
         return MCBouncerAPI.addIPBan(IP, MCBConfiguration.getApiKey(), admin, reason);
     }
+    
+    public static boolean addNote(String playerName, String admin, String note) {
+        return MCBouncerAPI.addNote(playerName, MCBConfiguration.getApiKey(), admin, note);
+    }
 
     public static boolean removeBan(String playerName) {
         return MCBouncerAPI.removeBan(playerName, MCBConfiguration.getApiKey());
@@ -21,6 +25,10 @@ public class MCBouncerUtil {
 
     public static boolean removeIPBan(String playerName) {
         return MCBouncerAPI.removeIPBan(playerName, MCBConfiguration.getApiKey());
+    }
+    
+    public static boolean removeNote(int noteID) {
+        return MCBouncerAPI.removeNote(noteID, MCBConfiguration.getApiKey());
     }
 
     public static int getBanCount(String playerName, String IP) {
@@ -59,31 +67,6 @@ public class MCBouncerUtil {
         return MCBouncerAPI.getBans(user, MCBConfiguration.getApiKey(), "0", "50");
     }
 
-    /*public static JSONObject getMCBLookup(String playerName) { // [irc.esper.net] #mcbans <Firestar> and tbh i have said i do not care if people make their own plugins that integrate with mcbans
-        StringBuilder response = new StringBuilder();
-        if (MCBConfiguration.getMcBansKey().equals("sample")) {
-            return null;
-        }
-        try {
-            String request = "player" + URLEncoder.encode(playerName, "UTF-8") + "&exec=lookup_user";
-            URLConnection conn = new URL("http://72.10.39.172/" + MCBConfiguration.getMcBansKey()).openConnection(); // http://www.exampledepot.com/egs/java.net/Post.html
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write(request);
-            wr.flush();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String line;
-            while ((line = rd.readLine()) != null) {
-                response.append(line);
-            }
-            wr.close();
-            rd.close();
-            return MCBouncerAPI.parseJson(response.toString());
-        } catch (Exception e) {
-        }
-        return null;
-    }*/
-
     public static String implodeWithoutFirstElement(String[] array, String glue) {
         String out = "";
         if (array.length == 0) {
@@ -94,14 +77,13 @@ public class MCBouncerUtil {
             if (first) {
                 first = false;
             } else {
-                out = out + part + glue;
+                out += part + glue;
             }
         }
         if ("".equals(out)) {
             return "";
         }
-        out = out.substring(0, out.length() - glue.length());
-        return out;
+        return out.substring(0, out.length() - glue.length());
     }
 
     public static boolean isIPAddress(String string) {
@@ -113,18 +95,11 @@ public class MCBouncerUtil {
     }
 
     public static String getDefaultReason(String[] args, String main, String defaultString) {
-        if (args.length > 1) {
-            return main;
-        } else {
-            return defaultString;
-        }
+        return args.length > 1 ? main : defaultString;
     }
 
     public static String plural(int i, String one, String notone) {
-        if (i == 1) {
-            return one;
-        }
-        return notone;
+        return i== 1 ? one : notone;
     }
 
     public static String[] JSONtoString(JSONArray arr) {
