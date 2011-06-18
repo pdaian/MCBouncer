@@ -2,7 +2,6 @@ package com.mcbouncer.command;
 
 import com.mcbouncer.bukkit.BaseCommand;
 import com.mcbouncer.util.ChatColor;
-import com.mcbouncer.util.MCBValidators;
 import com.mcbouncer.bukkit.MCBouncer;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerUtil;
