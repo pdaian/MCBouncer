@@ -18,7 +18,7 @@ commands:
     usage: '/<command> playername/IP'
     aliases: []
   unbanip:
-    description: 'Unabn an IP'
+    description: 'Unban an IP'
     usage: '/<command> playername/IP'
     aliases: []
   lookup:
@@ -32,4 +32,8 @@ commands:
   mcbouncer:
     description: 'MCBouncer commands'
     usage: '/<command> [help|version|reload]'
+    aliases: []
+  addnote:
+    description: 'Adds a note'
+    usage: '/<command> playername note'
     aliases: []

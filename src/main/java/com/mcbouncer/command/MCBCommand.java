@@ -14,9 +14,7 @@ public class MCBCommand extends BaseCommand {
         if (!MCBValidators.UserValidator(args)) {
             return false;
         }
-        
         BaseCommand commandClass;
-        
         if( args[0].equals("version") ) {
             commandClass = new VersionCommand(parent);
         }
@@ -29,7 +27,6 @@ public class MCBCommand extends BaseCommand {
         else {
             return false;
         }
-        
         commandClass.setArgs(args);
         commandClass.setParent(parent);
         commandClass.setSender(sender);

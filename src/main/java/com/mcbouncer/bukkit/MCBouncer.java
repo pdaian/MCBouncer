@@ -39,6 +39,7 @@ public class MCBouncer extends JavaPlugin {
         this.commands.put("kick", new KickCommand(this));
         this.commands.put("lookup", new LookupCommand(this));
         this.commands.put("mcbouncer", new MCBCommand(this));
+        this.commands.put("addnote", new AddnoteCommand(this));
         log.info("Plugin enabled. (version " + this.getDescription().getVersion() + ")");
         log.debug("Debug mode enabled!");
     }
