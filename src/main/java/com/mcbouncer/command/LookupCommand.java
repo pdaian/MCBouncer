@@ -17,11 +17,15 @@ public class LookupCommand extends BaseCommand {
         if (args.length != 1) {
             return false;
         }
-        ArrayList<HashMap<String, Object>> result = MCBouncerUtil.getBans(args[0]);
-        this.sendMessageToSender(ChatColor.AQUA + args[0] + " has " + result.size() + " ban" + MCBouncerUtil.plural(result.size(), "", "s") + ".");
-        for (int i = 0; i < result.size(); i++) {
-            this.sendMessageToSender(ChatColor.GREEN + "" + (i + 1) + ": " + result.get(i).get("server") + " (" + result.get(i).get("issuer") + ") [" + result.get(i).get("reason") + "]");
+        ArrayList<HashMap<String, Object>> bans = MCBouncerUtil.getBans(args[0]);
+        ArrayList<HashMap<String, Object>> notes = MCBouncerUtil.getNotes(args[0]);
+        this.sendMessageToSender(ChatColor.AQUA + args[0] + " has " + bans.size() + " ban" + MCBouncerUtil.plural(bans.size(), "", "s") + ", " + notes.size() + "note" + MCBouncerUtil.plural(notes.size(), "", "s"));
+        for (int i = 0; i < bans.size(); i++) {
+            this.sendMessageToSender(ChatColor.GREEN + "|BAN| " + (i + 1) + ": " + bans.get(i).get("server") + " (" + bans.get(i).get("issuer") + ") [" + bans.get(i).get("reason") + "]");
         }
+        for (int i = 0; i < notes.size(); i++) {
+            this.sendMessageToSender(ChatColor.GREEN + "|NOTE| " + (i + 1) + ": " + notes.get(i).get("server") + " (" + notes.get(i).get("issuer") + ") [" + notes.get(i).get("reason") + "]");
+        }        
         return true;
     }
 }
