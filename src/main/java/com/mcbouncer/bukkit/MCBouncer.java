@@ -76,5 +76,5 @@ public class MCBouncer extends JavaPlugin {
                 player.sendMessage(message);
             }
         }
-    }
+    }    
 }
