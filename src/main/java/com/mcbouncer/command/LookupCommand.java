@@ -15,7 +15,7 @@ public class LookupCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!MCBValidators.UserValidator(args)) {
+        if (args.length != 1) {
             return false;
         }
         ArrayList<HashMap<String, Object>> result = MCBouncerUtil.getBans(args[0]);
