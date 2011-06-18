@@ -66,6 +66,10 @@ public class MCBouncerUtil {
     public static ArrayList<HashMap<String, Object>> getBans(String user) {
         return MCBouncerAPI.getBans(user, MCBConfiguration.getApiKey(), "0", "50");
     }
+    
+    public static ArrayList<HashMap<String, Object>> getNotes(String user) {
+        return MCBouncerAPI.getNotes(user, MCBConfiguration.getApiKey(), "0", "50");
+    }
 
     public static String implodeWithoutFirstElement(String[] array, String glue) {
         String out = "";
