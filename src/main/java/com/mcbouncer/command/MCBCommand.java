@@ -2,7 +2,6 @@ package com.mcbouncer.command;
 
 import com.mcbouncer.bukkit.BaseCommand;
 import com.mcbouncer.bukkit.MCBouncer;
-import com.mcbouncer.util.MCBValidators;
 
 public class MCBCommand extends BaseCommand {
 
