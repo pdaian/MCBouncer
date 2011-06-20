@@ -5,15 +5,24 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class MCBPlayerListener extends PlayerListener {
 
     private MCBouncer parent;
+    private String lastKick;
 
     public MCBPlayerListener(MCBouncer parent) {
         this.parent = parent;
     }
 
+    @Override
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        if (event.getPlayer().getName().equals(this.lastKick)) {
+            event.setQuitMessage(null);
+        }
+    }
+    
     @Override
     public void onPlayerJoin(PlayerJoinEvent event) {
         Thread r = new PlayerJoinThread(event.getPlayer(), this, event.getJoinMessage());
@@ -21,16 +30,18 @@ public class MCBPlayerListener extends PlayerListener {
         event.setJoinMessage(null);
     }
     
-    private void isBannedLogic(Player player) {
+    private void isBannedLogic(Player player, String message) {
         String playerName = player.getName();
         String IP = player.getAddress().getAddress().getHostAddress();
         MCBouncerUtil.updateUser(playerName, IP);
         if (MCBouncerUtil.isBanned(playerName)) {
             player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
+            this.lastKick = player.getName();
             return;
         }
         if (MCBouncerUtil.isIPBanned(IP)) {
             player.kickPlayer("Banned: " + MCBouncerUtil.getIPBanReason(IP));
+            this.lastKick = player.getName();
             return;
         }
         int numBans = MCBouncerUtil.getBanCount(playerName, IP);
@@ -46,6 +57,7 @@ public class MCBPlayerListener extends PlayerListener {
             }
             parent.messageMods(ChatColor.GREEN + response);
         }
+        player.getServer().broadcastMessage(message);
     }
 
     public class PlayerJoinThread extends Thread {
@@ -62,8 +74,7 @@ public class MCBPlayerListener extends PlayerListener {
 
         @Override
         public void run() {
-            parent.isBannedLogic(player);
-            player.getServer().broadcastMessage(message);
+            parent.isBannedLogic(player, message);
         }
     }
 }
