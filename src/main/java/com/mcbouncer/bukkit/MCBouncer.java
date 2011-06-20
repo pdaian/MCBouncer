@@ -32,7 +32,7 @@ public class MCBouncer extends JavaPlugin {
         MCBPlayerListener pl = new MCBPlayerListener(this);
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.Highest, this);
-        pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Highest, this);
+        pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Highest, this);
         this.commands.put("ban", new BanCommand(this));
         this.commands.put("banip", new BanipCommand(this));
         this.commands.put("unban", new UnbanCommand(this));

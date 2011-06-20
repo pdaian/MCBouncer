@@ -4,8 +4,8 @@ import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerListener;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 public class MCBPlayerListener extends PlayerListener {
 
@@ -17,9 +17,12 @@ public class MCBPlayerListener extends PlayerListener {
     }
 
     @Override
-    public void onPlayerQuit(PlayerQuitEvent event) {
+    public void onPlayerKick(PlayerKickEvent event) {
         if (event.getPlayer().getName().equals(this.lastKick)) {
-            event.setQuitMessage(null);
+            event.setLeaveMessage(null);
+        }
+        else {
+            event.getPlayer().getServer().broadcastMessage("W: "+lastKick);
         }
     }
     
