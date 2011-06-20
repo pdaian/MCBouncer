@@ -8,36 +8,36 @@ commands:
   ban:
     description: 'Ban a username'
     usage: '/<command> [reason]'
-    aliases: []
+    aliases: ['mcb-ban']
   unban:
     description: 'Unban a username'
     usage: '/<command> playername'
-    aliases: []
+    aliases: ['mcb-unban']
   banip:
     description: 'Ban an IP'
     usage: '/<command> playername/IP'
-    aliases: []
+    aliases: ['mcb-banip']
   unbanip:
     description: 'Unban an IP'
     usage: '/<command> playername/IP'
-    aliases: []
+    aliases: ['mcb-unbanip']
   lookup:
     description: 'See all bans by a username'
     usage: '/<command> playername'
-    aliases: []
+    aliases: ['mcb-lookup']
   kick:
     description: 'Kick a user from the server'
     usage: '/<command> playername [reason]'
-    aliases: []
+    aliases: ['mcb-kick']
   mcbouncer:
     description: 'MCBouncer commands'
     usage: '/<command> [help|version|reload]'
-    aliases: []
+    aliases: ['mcb']
   addnote:
     description: 'Adds a note'
     usage: '/<command> playername note'
-    aliases: []
+    aliases: ['mcb-addnote']
   removenote:
     description: 'Removes a note'
     usage: '/<command> noteid'
-    aliases: []
+    aliases: ['mcb-remotenote', 'delnote', 'mcb-delnote']
