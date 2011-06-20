@@ -1,7 +1,6 @@
 package com.mcbouncer.bukkit;
 
 import com.mcbouncer.util.MCBouncerUtil;
-import com.mcbouncer.util.config.MCBConfiguration;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -53,10 +52,12 @@ public class MCBPlayerListener extends PlayerListener {
 
         Player player;
         MCBPlayerListener parent;
+        String message;
 
         public PlayerJoinThread(Player player, MCBPlayerListener parent, String message) {
             this.player = player;
             this.parent = parent;
+            this.message = message;
         }
 
         @Override
