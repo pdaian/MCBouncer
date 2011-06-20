@@ -17,12 +17,9 @@ public class MCBPlayerListener extends PlayerListener {
 
     @Override
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if (MCBConfiguration.getFastBans()) {
-            Thread r = new PlayerJoinThread(event.getPlayer(), this);
-            r.start();
-            return;
-        }
-        isBannedLogic(event.getPlayer());
+        Thread r = new PlayerJoinThread(event.getPlayer(), this, event.getJoinMessage());
+        r.start();
+        event.setJoinMessage(null);
     }
     
     private void isBannedLogic(Player player) {
@@ -57,7 +54,7 @@ public class MCBPlayerListener extends PlayerListener {
         Player player;
         MCBPlayerListener parent;
 
-        public PlayerJoinThread(Player player, MCBPlayerListener parent) {
+        public PlayerJoinThread(Player player, MCBPlayerListener parent, String message) {
             this.player = player;
             this.parent = parent;
         }
@@ -65,6 +62,7 @@ public class MCBPlayerListener extends PlayerListener {
         @Override
         public void run() {
             parent.isBannedLogic(player);
+            player.getServer().broadcastMessage(message);
         }
     }
 }
