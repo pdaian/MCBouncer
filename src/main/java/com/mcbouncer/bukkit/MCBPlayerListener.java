@@ -62,6 +62,7 @@ public class MCBPlayerListener extends PlayerListener {
         @Override
         public void run() {
             parent.isBannedLogic(player);
+            player.getServer().broadcastMessage(message);
         }
     }
 }
