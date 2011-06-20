@@ -22,7 +22,7 @@ public class MCBPlayerListener extends PlayerListener {
         event.setJoinMessage(null);
     }
     
-    private void isBannedLogic(Player player) {
+    private void isBannedLogic(Player player, String message) {
         String playerName = player.getName();
         String IP = player.getAddress().getAddress().getHostAddress();
         MCBouncerUtil.updateUser(playerName, IP);
@@ -46,6 +46,8 @@ public class MCBPlayerListener extends PlayerListener {
                 response += numBans + " ban" + MCBouncerUtil.plural(numBans, "", "s") + " and " + numNotes + " note" + MCBouncerUtil.plural(numNotes, ".", "s.");
             }
             parent.messageMods(ChatColor.GREEN + response);
+        } else {
+            player.getServer().broadcastMessage(message);
         }
     }
 
@@ -63,8 +65,7 @@ public class MCBPlayerListener extends PlayerListener {
 
         @Override
         public void run() {
-            parent.isBannedLogic(player);
-            player.getServer().broadcastMessage(message);
+            parent.isBannedLogic(player, message);
         }
     }
 }
