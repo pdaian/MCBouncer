@@ -1,4 +1,3 @@
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mcbouncer</groupId>
@@ -38,11 +37,11 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.7</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.pyx4me</groupId>
             <artifactId>proguard-maven-plugin</artifactId>
             <version>2.0.4</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
     <build>
         <finalName>MCBouncer</finalName>
@@ -72,7 +71,7 @@
                     <target>1.5</target>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>com.pyx4me</groupId>
                 <version>2.0.4</version>
                 <artifactId>proguard-maven-plugin</artifactId>
@@ -99,7 +98,7 @@
                         <option>-optimizationpasses 3</option>
                     </options>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
