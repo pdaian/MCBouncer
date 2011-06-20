@@ -24,8 +24,8 @@ public class LookupCommand extends BaseCommand {
             this.sendMessageToSender(ChatColor.GREEN + "|BAN| " + (i + 1) + ": " + bans.get(i).get("server") + " (" + bans.get(i).get("issuer") + ") [" + bans.get(i).get("reason") + "]");
         }
         for (int i = 0; i < notes.size(); i++) {
-            this.sendMessageToSender(ChatColor.GREEN + "|NOTE| " + (i + 1) + ": " + notes.get(i).get("server") + " (" + notes.get(i).get("issuer") + ") [" + notes.get(i).get("reason") + "]");
-        }        
+            this.sendMessageToSender(ChatColor.GREEN + "|NOTE| " + notes.get(i).get("note_id") + ": " + notes.get(i).get("server") + " (" + notes.get(i).get("issuer") + ") [" + notes.get(i).get("note") + "]");
+        }
         return true;
     }
 }
