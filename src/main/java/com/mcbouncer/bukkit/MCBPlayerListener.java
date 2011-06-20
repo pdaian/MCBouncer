@@ -53,10 +53,12 @@ public class MCBPlayerListener extends PlayerListener {
 
         Player player;
         MCBPlayerListener parent;
+        String message;
 
         public PlayerJoinThread(Player player, MCBPlayerListener parent, String message) {
             this.player = player;
             this.parent = parent;
+            this.message = message;
         }
 
         @Override
