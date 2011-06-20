@@ -36,12 +36,12 @@ public class MCBPlayerListener extends PlayerListener {
         MCBouncerUtil.updateUser(playerName, IP);
         if (MCBouncerUtil.isBanned(playerName)) {
             player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
-            this.lastKick = player.getName();
+            this.lastKick = playerName;
             return;
         }
         if (MCBouncerUtil.isIPBanned(IP)) {
             player.kickPlayer("Banned: " + MCBouncerUtil.getIPBanReason(IP));
-            this.lastKick = player.getName();
+            this.lastKick = playerName;
             return;
         }
         int numBans = MCBouncerUtil.getBanCount(playerName, IP);
