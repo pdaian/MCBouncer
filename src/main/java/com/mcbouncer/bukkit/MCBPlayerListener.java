@@ -1,20 +1,28 @@
 package com.mcbouncer.bukkit;
 
 import com.mcbouncer.util.MCBouncerUtil;
-import com.mcbouncer.util.config.MCBConfiguration;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class MCBPlayerListener extends PlayerListener {
 
     private MCBouncer parent;
+    private String lastKick;
 
     public MCBPlayerListener(MCBouncer parent) {
         this.parent = parent;
     }
 
+    @Override
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        if (event.getPlayer().getName().equals(this.lastKick)) {
+            event.setQuitMessage(null);
+        }
+    }
+    
     @Override
     public void onPlayerJoin(PlayerJoinEvent event) {
         Thread r = new PlayerJoinThread(event.getPlayer(), this, event.getJoinMessage());
@@ -28,10 +36,12 @@ public class MCBPlayerListener extends PlayerListener {
         MCBouncerUtil.updateUser(playerName, IP);
         if (MCBouncerUtil.isBanned(playerName)) {
             player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
+            this.lastKick = player.getName();
             return;
         }
         if (MCBouncerUtil.isIPBanned(IP)) {
             player.kickPlayer("Banned: " + MCBouncerUtil.getIPBanReason(IP));
+            this.lastKick = player.getName();
             return;
         }
         int numBans = MCBouncerUtil.getBanCount(playerName, IP);
@@ -46,9 +56,8 @@ public class MCBPlayerListener extends PlayerListener {
                 response += numBans + " ban" + MCBouncerUtil.plural(numBans, "", "s") + " and " + numNotes + " note" + MCBouncerUtil.plural(numNotes, ".", "s.");
             }
             parent.messageMods(ChatColor.GREEN + response);
-        } else {
-            player.getServer().broadcastMessage(message);
         }
+        player.getServer().broadcastMessage(message);
     }
 
     public class PlayerJoinThread extends Thread {
