@@ -29,10 +29,10 @@
             <outputDirectory>/</outputDirectory>
             <destName>MCBouncer.jar</destName>
         </file>
-        <file>
+        <!--<file>
             <source>${project.build.directory}/${artifactId}-small.jar</source>
             <outputDirectory>/</outputDirectory>
             <destName>MCBouncer-small.jar</destName>
-        </file>
+        </file>-->
     </files>
 </assembly>
