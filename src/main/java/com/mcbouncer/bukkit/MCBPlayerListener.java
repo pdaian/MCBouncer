@@ -35,13 +35,13 @@ public class MCBPlayerListener extends PlayerListener {
         String IP = player.getAddress().getAddress().getHostAddress();
         MCBouncerUtil.updateUser(playerName, IP);
         if (MCBouncerUtil.isBanned(playerName)) {
-            player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
             this.lastKick = playerName;
+            player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
             return;
         }
         if (MCBouncerUtil.isIPBanned(IP)) {
-            player.kickPlayer("Banned: " + MCBouncerUtil.getIPBanReason(IP));
             this.lastKick = playerName;
+            player.kickPlayer("Banned: " + MCBouncerUtil.getIPBanReason(IP));
             return;
         }
         int numBans = MCBouncerUtil.getBanCount(playerName, IP);
