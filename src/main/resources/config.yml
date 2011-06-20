@@ -4,5 +4,3 @@ numBansDisallow: 10
 showBanMessages: true
 defaultBanMessage: 'Banned for rule violation.'
 defaultKickMessage: 'Kicked by an admin.'
-# To find out more about fastBans, see mcbouncer.com/performance
-fastBans: false
