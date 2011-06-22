@@ -1,5 +1,6 @@
-package com.mcbouncer.bukkit;
+package com.mcbouncer.plugin;
 
+import com.mcbouncer.util.MCBouncerUtil;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,11 +53,16 @@ public class MCBCommandThread extends Thread {
             if (!parent.commands.containsKey(commandName)) {
                 return false;
             }
+            
             BaseCommand commandClass = parent.commands.get(commandName);
             commandClass.setArgs(args);
             commandClass.setParent(parent);
             commandClass.setSender(sender);
+            
+            MCBouncer.log.debug("Received command from " + commandClass.getSenderName() + " - /" + commandName + " " + MCBouncerUtil.implode(args, " ") );
+            
             return commandClass.runCommand();
+            
         } catch (Exception e) {
             e.printStackTrace();
             return true;

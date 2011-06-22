@@ -1,4 +1,4 @@
-package com.mcbouncer.bukkit;
+package com.mcbouncer.plugin;
 
 import com.mcbouncer.command.ICommand;
 import com.mcbouncer.util.MCBouncerUtil;

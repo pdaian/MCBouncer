@@ -59,10 +59,6 @@ public class MCBouncerUtil {
         return MCBouncerAPI.getIPBanReason(IP, MCBConfiguration.getApiKey());
     }
 
-    public static boolean isLocallyBanned(String playerName) {
-        return true;
-    }
-
     public static ArrayList<HashMap<String, Object>> getBans(String user) {
         return MCBouncerAPI.getBans(user, MCBConfiguration.getApiKey(), "0", "50");
     }
@@ -89,6 +85,20 @@ public class MCBouncerUtil {
         }
         return out.substring(0, out.length() - glue.length());
     }
+    
+    public static String implode(String[] array, String glue) {
+        String out = "";
+        if (array.length == 0) {
+            return out;
+        }
+        for (String part : array) {
+            out += part + glue;
+        }
+        if ("".equals(out)) {
+            return "";
+        }
+        return out.substring(0, out.length() - glue.length());
+    }
 
     public static boolean isIPAddress(String string) {
         try {
@@ -98,15 +108,15 @@ public class MCBouncerUtil {
         }
     }
 
-    public static String getDefaultReason(String[] args, String main, String defaultString) {
+    public static String getReasonOrDefault(String[] args, String main, String defaultString) {
         return args.length > 1 ? main : defaultString;
     }
 
     public static String plural(int i, String one, String notone) {
-        return i== 1 ? one : notone;
+        return i == 1 ? one : notone;
     }
 
-    public static String[] JSONtoString(JSONArray arr) {
+    public static String[] JSONArrayToStringArray(JSONArray arr) {
         String[] out = new String[arr.size()];
         for (int i = 0; i < arr.size(); i++) {
             out[i] = arr.get(i).toString();
