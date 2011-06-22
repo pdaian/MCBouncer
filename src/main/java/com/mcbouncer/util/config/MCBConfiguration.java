@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class MCBConfiguration {
 
@@ -14,6 +15,7 @@ public class MCBConfiguration {
     private static boolean showBanMessages = true;
     private static String defaultReason = "Banned for rule violation.";
     private static String defaultKickMessage = "Kicked by an admin.";
+    private static ArrayList<String> plugins = new ArrayList<String>();
     private static Configuration config = null;
 
     public static void load(File folder) {
@@ -67,6 +69,7 @@ public class MCBConfiguration {
         showBanMessages = config.getBoolean("showBansMessages", showBanMessages);
         defaultReason = config.getString("defaultBanMessage", "Banned for rule violation.");
         defaultKickMessage = config.getString("defaultKickMessage", "Kicked by an admin.");
+        plugins = (ArrayList<String>) config.getStringList("plugins", plugins);
     }
 
     public static String getApiKey() {
@@ -76,13 +79,15 @@ public class MCBConfiguration {
     public static Configuration getConfig() {
         return config;
     }
-    
-    
 
     public static boolean isDebugMode() {
         return debugMode;
     }
 
+    public static ArrayList<String> getPlugins() {
+        return plugins;
+    }
+    
     public static String getDefaultReason() {
         return defaultReason;
     }
@@ -98,5 +103,4 @@ public class MCBConfiguration {
     public static String getDefaultKickMessage() {
         return defaultKickMessage;
     }
-
 }
