@@ -1,7 +1,7 @@
 package com.mcbouncer.command;
 
-import com.mcbouncer.bukkit.BaseCommand;
-import com.mcbouncer.bukkit.MCBouncer;
+import com.mcbouncer.plugin.BaseCommand;
+import com.mcbouncer.plugin.MCBouncer;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.config.MCBConfiguration;
 import com.mcbouncer.util.MCBouncerUtil;
@@ -17,7 +17,7 @@ public class BanipCommand extends BaseCommand {
         if (args.length < 1) {
             return false;
         }
-        String reason = MCBouncerUtil.getDefaultReason(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
+        String reason = MCBouncerUtil.getReasonOrDefault(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
         String player = this.getIPFromArgs(args[0], reason);
         if (!MCBouncerUtil.isIPAddress(args[0])) {
             if (this.isPlayerOnline(args[0])) {

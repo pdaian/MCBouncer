@@ -1,6 +1,6 @@
 package com.mcbouncer.util.config;
 
-import com.mcbouncer.bukkit.MCBouncer;
+import com.mcbouncer.plugin.MCBouncer;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.mcbouncer.bukkit;
+package com.mcbouncer.plugin;
 
 import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.command.*;
@@ -29,19 +29,8 @@ public class MCBouncer extends JavaPlugin {
     public void onEnable() {
         MCBConfiguration.load(this.getDataFolder());
         setupPermissions();
-        MCBPlayerListener pl = new MCBPlayerListener(this);
-        PluginManager pm = this.getServer().getPluginManager();
-        pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.Highest, this);
-        pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Highest, this);
-        this.commands.put("ban", new BanCommand(this));
-        this.commands.put("banip", new BanipCommand(this));
-        this.commands.put("unban", new UnbanCommand(this));
-        this.commands.put("unbanip", new UnbanipCommand(this));
-        this.commands.put("kick", new KickCommand(this));
-        this.commands.put("lookup", new LookupCommand(this));
-        this.commands.put("mcbouncer", new MCBCommand(this));
-        this.commands.put("addnote", new AddnoteCommand(this));
-        this.commands.put("removenote", new RemovenoteCommand(this));
+        setupListeners();
+        setupCommands();
         log.info("Plugin enabled. (version " + this.getDescription().getVersion() + ")");
         log.debug("Debug mode enabled!");
     }
@@ -51,11 +40,31 @@ public class MCBouncer extends JavaPlugin {
 
         if (this.permissionHandler == null) {
             if (permissionsPlugin != null) {
+                log.debug("Permissions found, using that for Permissions.");
                 this.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
             } else {
-                log.info("Permission system not detected, defaulting to ops.txt.");
+                log.info("Permissions plugin not detected, defaulting to ops.txt.");
             }
         }
+    }
+    
+    private void setupListeners() {
+        MCBPlayerListener pl = new MCBPlayerListener(this);
+        PluginManager pm = this.getServer().getPluginManager();
+        pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.Highest, this);
+        pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Highest, this);
+    }
+    
+    private void setupCommands() {
+        this.commands.put("ban", new BanCommand(this));
+        this.commands.put("banip", new BanipCommand(this));
+        this.commands.put("unban", new UnbanCommand(this));
+        this.commands.put("unbanip", new UnbanipCommand(this));
+        this.commands.put("kick", new KickCommand(this));
+        this.commands.put("lookup", new LookupCommand(this));
+        this.commands.put("mcbouncer", new MCBCommand(this));
+        this.commands.put("addnote", new AddnoteCommand(this));
+        this.commands.put("removenote", new RemovenoteCommand(this));
     }
 
     @Override

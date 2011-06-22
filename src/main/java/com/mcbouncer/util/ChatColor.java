@@ -3,6 +3,9 @@ package com.mcbouncer.util;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * From Bukkit, used so non-bukkit versions can use ChatColor
+ */
 public enum ChatColor {
 
     BLACK(0x0),
