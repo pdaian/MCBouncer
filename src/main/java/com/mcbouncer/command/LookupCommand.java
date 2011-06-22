@@ -19,7 +19,7 @@ public class LookupCommand extends BaseCommand {
         }
         ArrayList<HashMap<String, Object>> bans = MCBouncerUtil.getBans(args[0]);
         ArrayList<HashMap<String, Object>> notes = MCBouncerUtil.getNotes(args[0]);
-        this.sendMessageToSender(ChatColor.AQUA + args[0] + " has " + bans.size() + " ban" + MCBouncerUtil.plural(bans.size(), "", "s") + ", " + notes.size() + "note" + MCBouncerUtil.plural(notes.size(), "", "s"));
+        this.sendMessageToSender(ChatColor.AQUA + args[0] + " has " + bans.size() + " ban" + MCBouncerUtil.plural(bans.size(), "", "s") + " " + notes.size() + " note" + MCBouncerUtil.plural(notes.size(), "", "s"));
         for (int i = 0; i < bans.size(); i++) {
             this.sendMessageToSender(ChatColor.GREEN + "|BAN| " + (i + 1) + ": " + bans.get(i).get("server") + " (" + bans.get(i).get("issuer") + ") [" + bans.get(i).get("reason") + "]");
         }
