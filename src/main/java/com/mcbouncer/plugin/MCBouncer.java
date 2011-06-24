@@ -21,6 +21,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MCBouncer extends JavaPlugin {
+    
+    public final static String version = "1.0beta";
 
     public PermissionHandler permissionHandler;
     public static final MCBLogger log = new MCBLogger();
@@ -28,15 +30,12 @@ public class MCBouncer extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        log.info("Plugin disabled. (version " + this.getDescription().getVersion() + ")");
+        log.info("Plugin disabled. (version " + MCBouncer.version + ")");
     }
 
     @Override
     public void onEnable() {
-        if (!this.getServer().getOnlineMode()) {
-            log.warning("MCBouncer cannot be enabled in online mode.  Disabling MCBouncer.");
-            return;
-        }
+        
         MCBConfiguration.load(this.getDataFolder());
         setupPermissions();
         setupListeners();
@@ -54,7 +53,7 @@ public class MCBouncer extends JavaPlugin {
             }
         }
 
-        log.info("Plugin enabled. (version " + this.getDescription().getVersion() + ")");
+        log.info("Plugin enabled. (version " + MCBouncer.version + ")");
         log.debug("Debug mode enabled!");
     }
 
