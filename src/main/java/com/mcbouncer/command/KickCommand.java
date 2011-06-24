@@ -16,8 +16,10 @@ public class KickCommand extends BaseCommand {
         if (args.length < 1) {
             return false;
         }
-        if (this.isPlayerOnline(args[0])) {
-            String name = this.getPlayerName(args[0]);
+        String name = this.getPlayerName(args[0]);
+        
+        if (this.isPlayerOnline(name)) {
+            
             String reason = MCBouncerUtil.getReasonOrDefault(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultKickMessage());
 
             this.sendMessageToMods(ChatColor.RED + name + " was kicked for " + reason);
