@@ -175,14 +175,14 @@
             <url>http://repo.bukkit.org/artifactory/repo</url>
         </repository>
         <repository>
-            <id>nexisonline-repo</id>
+            <id>mcbouncer-repo</id>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <url>http://ci.nexisonline.net:8080/nexus/content/groups/public/</url>
+            <url>http://maven.mcbouncer.com/archiva/repository/internal/</url>
         </repository>
     </repositories>
 </project>
