@@ -31,7 +31,7 @@ public class MCBouncer extends JavaPlugin {
     @Override
     public void onEnable() {
         
-        MCBConfiguration.load(this.getDataFolder());
+        setupConfiguration();
         setupPermissions();
         setupListeners();
         setupCommands();
@@ -52,7 +52,7 @@ public class MCBouncer extends JavaPlugin {
         log.debug("Debug mode enabled!");
     }
 
-    private void setupPermissions() {
+    protected void setupPermissions() {
         Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
 
         if (this.permissionHandler == null) {
@@ -65,14 +65,14 @@ public class MCBouncer extends JavaPlugin {
         }
     }
     
-    private void setupListeners() {
+    protected void setupListeners() {
         MCBPlayerListener pl = new MCBPlayerListener(this);
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.Highest, this);
         pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Highest, this);
     }
     
-    private void setupCommands() {
+    protected void setupCommands() {
         this.commands.put("ban", new BanCommand(this));
         this.commands.put("banip", new BanipCommand(this));
         this.commands.put("unban", new UnbanCommand(this));
@@ -82,6 +82,10 @@ public class MCBouncer extends JavaPlugin {
         this.commands.put("mcbouncer", new MCBCommand(this));
         this.commands.put("addnote", new AddnoteCommand(this));
         this.commands.put("removenote", new RemovenoteCommand(this));
+    }
+    
+    protected void setupConfiguration() {
+        new MCBConfiguration().load(this.getDataFolder());
     }
 
     @Override
@@ -105,5 +109,6 @@ public class MCBouncer extends JavaPlugin {
                 player.sendMessage(message);
             }
         }
-    }    
+    }
+
 }

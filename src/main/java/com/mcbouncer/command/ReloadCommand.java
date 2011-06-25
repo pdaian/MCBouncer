@@ -14,12 +14,18 @@ public class ReloadCommand extends BaseCommand {
     public boolean runCommand() {
         
         if( this.senderHasPermission("mcbouncer.admin") ) {
-            MCBConfiguration.load(parent.getDataFolder());
+            new Fail().doConf();
             this.sendMessageToSender(ChatColor.GRAY + "MCBouncer configuration loaded");
         }
         
         return true;
 
+    }
+    
+    protected class Fail extends MCBouncer {
+        public void doConf() {
+            this.setupConfiguration();
+        }
     }
     
 }
