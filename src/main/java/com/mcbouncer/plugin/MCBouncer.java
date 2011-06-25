@@ -2,17 +2,12 @@ package com.mcbouncer.plugin;
 
 import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.command.*;
-import com.mcbouncer.plugin.BouncerPlugin;
+//import com.mcbouncer.plugin.BouncerPlugin;
 import com.mcbouncer.util.config.MCBConfiguration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
-import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -41,7 +36,7 @@ public class MCBouncer extends JavaPlugin {
         setupListeners();
         setupCommands();
 
-        for (String s : MCBConfiguration.getPlugins()) {
+        /*for (String s : MCBConfiguration.getPlugins()) {
             File file = new File(this.getDataFolder() + s);
             try {
                 URL jarfile = new URL("jar", "", "file:" + file.getAbsolutePath() + "!/");
@@ -51,7 +46,7 @@ public class MCBouncer extends JavaPlugin {
             } catch (Exception ex) {
                 Logger.getLogger(MCBouncer.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }*/
 
         log.info("Plugin enabled. (version " + MCBouncer.version + ")");
         log.debug("Debug mode enabled!");
