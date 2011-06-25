@@ -3,6 +3,7 @@ package com.mcbouncer.plugin;
 import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.command.*;
 //import com.mcbouncer.plugin.BouncerPlugin;
+import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.config.MCBConfiguration;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -50,6 +51,10 @@ public class MCBouncer extends JavaPlugin {
 
         log.info("Plugin enabled. (version " + MCBouncer.version + ")");
         log.debug("Debug mode enabled!");
+        
+        if( MCBConfiguration.isDebugMode() ) {
+            MCBouncerAPI.website = "http://mcb.thezomg.com";
+        }
     }
 
     protected void setupPermissions() {
