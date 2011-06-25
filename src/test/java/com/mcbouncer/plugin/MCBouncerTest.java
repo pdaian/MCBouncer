@@ -1,17 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mcbouncer.plugin;
 
 import java.util.HashMap;
 import junit.framework.TestCase;
 import static org.mockito.Mockito.*;
 
-/**
- *
- * @author connor
- */
 public class MCBouncerTest extends TestCase {
     
     public MCBouncerTest(String testName) {
