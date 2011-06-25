@@ -14,6 +14,13 @@ public class MCBouncerAPI {
 
     private static String lastFailure = "";
 
+    /**
+     * Returns the number of bans a user has on every server
+     * @param user Username to check
+     * @param key API key of the server
+     * @return long Number of bans
+     * @static
+     */
     public static long getBanCount(String user, String key) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getBanCount/" + key + "/" + user));
         if ((Boolean) result.get("success")) {
@@ -23,6 +30,13 @@ public class MCBouncerAPI {
         return 0;
     }
 
+    /**
+     * Returns the number of notes a user has on every server
+     * @param user Username to check
+     * @param key API key of the server
+     * @return long Number of notes
+     * @static
+     */
     public static long getNoteCount(String user, String key) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getNoteCount/" + key + "/" + user));
         if ((Boolean) result.get("success")) {
@@ -32,6 +46,13 @@ public class MCBouncerAPI {
         return 0;
     }
 
+    /**
+     * Returns the number of bans an IP has on every server
+     * @param IP IP to check
+     * @param key API key of the server
+     * @return long Number of bans
+     * @static
+     */
     public static long getIPBanCount(String IP, String key) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getIPBanCount/" + key + "/" + IP));
         if ((Boolean) result.get("success")) {
@@ -41,6 +62,15 @@ public class MCBouncerAPI {
         return 0;
     }
 
+    /**
+     * Returns a list of all the bans that an IP has
+     * @param IP IP to check
+     * @param key Server API key
+     * @param page Page to get (0 is the first page, 1 is the second, and so on)
+     * @param numEntries Number of entries to get per page
+     * @return ArrayList<HashMap<String, Object>> ArrayList of HashMaps. The hashmap key is the server address, and the value is the ban data
+     * @static
+     */
     public static ArrayList<HashMap<String, Object>> getIPBans(String IP, String key, String page, String numEntries) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getIPBans/" + key + "/" + IP + "/" + page + "/" + numEntries));
         if ((Boolean) result.get("success")) {
@@ -49,6 +79,15 @@ public class MCBouncerAPI {
         return (ArrayList<HashMap<String, Object>>) MCBouncerAPI.setError((String) result.get("error"));
     }
 
+    /**
+     * Returns a list of all the bans that a user has
+     * @param user Username to check
+     * @param key Server API key
+     * @param page Page to get (0 is the first page, 1 is the second, and so on)
+     * @param numEntries Number of entries to get per page
+     * @return ArrayList<HashMap<String, Object>> ArrayList of HashMaps. The hashmap key is the server address, and the value is the ban data
+     * @static
+     */
     public static ArrayList<HashMap<String, Object>> getBans(String user, String key, String page, String numEntries) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getBans/" + key + "/" + user + "/" + page + "/" + numEntries));
         if ((Boolean) result.get("success")) {
@@ -57,6 +96,15 @@ public class MCBouncerAPI {
         return (ArrayList<HashMap<String, Object>>) MCBouncerAPI.setError((String) result.get("error"));
     }
 
+    /**
+     * Returns a list of all the notes that a user has
+     * @param user Username to check
+     * @param key Server API key
+     * @param page Page to get (0 is the first page, 1 is the second, and so on)
+     * @param numEntries Number of entries to get per page
+     * @return ArrayList<HashMap<String, Object>> ArrayList of HashMaps. The hashmap key is the server address, and the value is the note data
+     * @static
+     */
     public static ArrayList<HashMap<String, Object>> getNotes(String user, String key, String page, String numEntries) {
         JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/getNotes/" + key + "/" + user + "/" + page + "/" + numEntries));
         if ((Boolean) result.get("success")) {
@@ -65,6 +113,13 @@ public class MCBouncerAPI {
         return (ArrayList<HashMap<String, Object>>) MCBouncerAPI.setError((String) result.get("error"));
     }
 
+    /**
+     * Update the last login time of a username
+     * @param user Username to update
+     * @param key Server API key
+     * @param IP IP that the user has logged in under
+     * @return boolean Whether or not the API call succeeded
+     */
     public static boolean updateUser(String user, String key, String IP) {
         return (Boolean) ((MCBouncerAPI.parseJson(MCBouncerAPI.getUrl("http://mcbouncer.com/api/updateUser/" + key + "/" + user + "/" + IP))).get("success"));
     }

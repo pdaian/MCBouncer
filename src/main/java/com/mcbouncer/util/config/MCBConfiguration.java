@@ -18,7 +18,7 @@ public class MCBConfiguration {
     private static ArrayList<String> plugins = new ArrayList<String>();
     private static Configuration config = null;
 
-    public static void load(File folder) {
+    public void load(File folder) {
         folder.mkdirs();
         File file = new File(folder, "config.yml");
         config = new Configuration(file);
@@ -60,9 +60,10 @@ public class MCBConfiguration {
         }
 
         setSettings();
+        
     }
 
-    private static void setSettings() {
+    protected static void setSettings() {
         debugMode = config.getBoolean("debug", debugMode);
         apiKey = config.getString("apiKey", apiKey);
         numBansDisallow = config.getInt("numBansDisallow", numBansDisallow);

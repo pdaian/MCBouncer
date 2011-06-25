@@ -24,8 +24,8 @@ public enum ChatColor {
     LIGHT_PURPLE(0xD),
     YELLOW(0xE),
     WHITE(0xF);
-    private final int code;
-    private final static Map<Integer, ChatColor> colors = new HashMap<Integer, ChatColor>();
+    protected final int code;
+    protected final static Map<Integer, ChatColor> colors = new HashMap<Integer, ChatColor>();
 
     private ChatColor(final int code) {
         this.code = code;

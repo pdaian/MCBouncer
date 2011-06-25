@@ -1,4 +1,4 @@
-package com.mcbouncer;
+package com.mcbouncer.util;
 
 import com.mcbouncer.util.NetUtil;
 import junit.framework.Test;
