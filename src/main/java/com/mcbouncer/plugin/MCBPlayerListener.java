@@ -54,11 +54,11 @@ public class MCBPlayerListener extends PlayerListener {
         if (numBans > 0 || numNotes > 0) {
             String response = playerName + " has ";
             if (numNotes == 0) {
-                response += numBans + " ban" + MCBouncerUtil.plural(numBans, ".", "s.");
+                response += numBans + " ban" + ( numBans == 1 ? "." : "s." );
             } else if (numBans == 0) {
-                response += numNotes + " note" + MCBouncerUtil.plural(numNotes, ".", "s.");
+                response += numNotes + " note" + ( numNotes == 1 ? "." : "s." );
             } else {
-                response += numBans + " ban" + MCBouncerUtil.plural(numBans, "", "s") + " and " + numNotes + " note" + MCBouncerUtil.plural(numNotes, ".", "s.");
+                response += numBans + " ban" + ( numBans == 1 ? "" : "s" ) + " and " + numNotes + " note" + ( numNotes == 1 ? "." : "s." );
             }
             parent.messageMods(ChatColor.GREEN + response);
         }

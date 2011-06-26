@@ -63,6 +63,10 @@ public class MCBouncerUtil {
         return MCBouncerAPI.getBans(user, MCBConfiguration.getApiKey(), "0", "50");
     }
     
+    public static ArrayList<HashMap<String, Object>> getIPBans(String ip) {
+        return MCBouncerAPI.getIPBans(ip, MCBConfiguration.getApiKey(), "0", "50");
+    }
+    
     public static ArrayList<HashMap<String, Object>> getNotes(String user) {
         return MCBouncerAPI.getNotes(user, MCBConfiguration.getApiKey(), "0", "50");
     }
@@ -110,10 +114,6 @@ public class MCBouncerUtil {
 
     public static String getReasonOrDefault(String[] args, String main, String defaultString) {
         return args.length > 1 ? main : defaultString;
-    }
-
-    public static String plural(int i, String one, String notone) {
-        return i == 1 ? one : notone;
     }
 
     public static String[] JSONArrayToStringArray(JSONArray arr) {

@@ -26,7 +26,7 @@ public class BanipCommand extends BaseCommand {
         } else {
             this.kickPlayerWithIP(args[0], "Banned: " + reason);
         }
-        if (player.isEmpty() || player.equals("127.0.0.1")) {
+        if (player.isEmpty()) {
             this.sendMessageToSender(ChatColor.GREEN + "Not a valid player or IP.");
             return true;
         }

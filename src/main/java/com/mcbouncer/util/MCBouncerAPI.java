@@ -1,5 +1,7 @@
 package com.mcbouncer.util;
 
+import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.util.config.MCBConfiguration;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -158,7 +160,7 @@ public class MCBouncerAPI {
     }
 
     public static boolean removeNote(int noteid, String key, String issuer) {
-        JSONObject result = (MCBouncerAPI.parseJson(MCBouncerAPI.getUrl(website + "/api/removeNote/" + key + "/" + issuer + "/" + noteid)));
+        JSONObject result = (MCBouncerAPI.parseJson(MCBouncerAPI.getUrl(website + "/api/removeNote/" + key + "/" + issuer  + "/" + noteid)));
         if ((Boolean) result.get("success")) {
             return true;
         }
@@ -224,9 +226,9 @@ public class MCBouncerAPI {
     }
 
     private static String getUrl(String site) {
-        String requestUrl = site;
+        MCBouncer.log.info("Getting URL - " + site);
         try {
-            URL url = new URL(requestUrl.toString());
+            URL url = new URL(site.toString());
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String inputLine, result = "";
             while ((inputLine = in.readLine()) != null) {

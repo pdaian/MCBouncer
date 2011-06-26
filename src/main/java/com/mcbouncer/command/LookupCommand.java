@@ -17,14 +17,24 @@ public class LookupCommand extends BaseCommand {
         if (args.length != 1) {
             return false;
         }
-        ArrayList<HashMap<String, Object>> bans = MCBouncerUtil.getBans(args[0]);
-        ArrayList<HashMap<String, Object>> notes = MCBouncerUtil.getNotes(args[0]);
-        this.sendMessageToSender(ChatColor.AQUA + args[0] + " has " + bans.size() + " ban" + MCBouncerUtil.plural(bans.size(), "", "s") + " " + notes.size() + " note" + MCBouncerUtil.plural(notes.size(), "", "s"));
-        for (int i = 0; i < bans.size(); i++) {
-            this.sendMessageToSender(ChatColor.GREEN + "|BAN| " + (i + 1) + ": " + bans.get(i).get("server") + " (" + bans.get(i).get("issuer") + ") [" + bans.get(i).get("reason") + "]");
+        
+        if( !MCBouncerUtil.isIPAddress(args[0]) ) {
+            ArrayList<HashMap<String, Object>> bans = MCBouncerUtil.getBans(args[0]);
+            ArrayList<HashMap<String, Object>> notes = MCBouncerUtil.getNotes(args[0]);
+            this.sendMessageToSender(ChatColor.AQUA + args[0] + " has " + bans.size() + " ban" + ( bans.size() == 1 ? "" : "s" ) + " and " + notes.size() + " note" + ( notes.size() == 1 ? "" : "s" ));
+            for (int i = 0; i < bans.size(); i++) {
+                this.sendMessageToSender(ChatColor.GREEN + "Ban #" + (i + 1) + ": " + bans.get(i).get("server") + " (" + bans.get(i).get("issuer") + ") [" + bans.get(i).get("reason") + "]");
+            }
+            for (int i = 0; i < notes.size(); i++) {
+                this.sendMessageToSender(ChatColor.GREEN + "Note #" + notes.get(i).get("noteid") + ": " + notes.get(i).get("server") + " (" + notes.get(i).get("issuer") + ") [" + notes.get(i).get("note") + "]");
+            }
         }
-        for (int i = 0; i < notes.size(); i++) {
-            this.sendMessageToSender(ChatColor.GREEN + "|NOTE| " + notes.get(i).get("note_id") + ": " + notes.get(i).get("server") + " (" + notes.get(i).get("issuer") + ") [" + notes.get(i).get("note") + "]");
+        else {
+            ArrayList<HashMap<String, Object>> bans = MCBouncerUtil.getIPBans(args[0]);
+            this.sendMessageToSender(ChatColor.AQUA + args[0] + " has " + bans.size() + " ban" + ( bans.size() == 1 ? "" : "s" ));
+            for (int i = 0; i < bans.size(); i++) {
+                this.sendMessageToSender(ChatColor.GREEN + "Ban #" + (i + 1) + ": " + bans.get(i).get("server") + " (" + bans.get(i).get("issuer") + ") [" + bans.get(i).get("reason") + "]");
+            }
         }
         return true;
     }
