@@ -13,12 +13,6 @@
     </scm>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>0.0.1-SNAPSHOT</version>
@@ -38,11 +32,7 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.7</version>
         </dependency>
-        <!--<dependency>
-            <groupId>com.pyx4me</groupId>
-            <artifactId>proguard-maven-plugin</artifactId>
-            <version>2.0.4</version>
-        </dependency>-->
+        <!--
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
@@ -61,6 +51,12 @@
             <version>1.4.9</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>-->
     </dependencies>
     <build>
         <finalName>MCBouncer</finalName>
@@ -86,38 +82,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>com.pyx4me</groupId>
-                <version>2.0.4</version>
-                <artifactId>proguard-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>proguard</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <obfuscate>true</obfuscate>
-                    <injar>${project.build.finalName}.jar</injar>
-                    <outjar>${project.build.finalName}-small.jar</outjar>
-                    <outputDirectory>${project.build.directory}</outputDirectory>
-                    <proguardInclude>${basedir}/proguard.conf</proguardInclude>
-                    <libs>
-                        <lib>${java.home}/lib/rt.jar</lib>
-                    </libs>
-                    <options>
-                        <option>-dontskipnonpubliclibraryclasses</option>
-                        <option>-keep public class * extends org.bukkit.plugin.java.JavaPlugin { *; }</option>
-                        <option>-optimizationpasses 3</option>
-                    </options>
-                </configuration>
-            </plugin>-->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>

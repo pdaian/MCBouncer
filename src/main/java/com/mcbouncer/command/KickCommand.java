@@ -28,7 +28,9 @@ public class KickCommand extends BaseCommand {
             this.kickPlayer(name, "Kicked: " + reason);
             return true;
         }
-        this.sendMessageToSender(ChatColor.RED + "No such player.");
+        else {
+            this.sendMessageToSender(ChatColor.RED + "No such player.");
+        }
         return true;
     }
 }

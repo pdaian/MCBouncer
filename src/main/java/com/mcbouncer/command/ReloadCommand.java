@@ -3,7 +3,6 @@ package com.mcbouncer.command;
 import com.mcbouncer.plugin.BaseCommand;
 import com.mcbouncer.plugin.MCBouncer;
 import com.mcbouncer.util.ChatColor;
-import com.mcbouncer.util.config.MCBConfiguration;
 
 public class ReloadCommand extends BaseCommand {
 
@@ -14,7 +13,7 @@ public class ReloadCommand extends BaseCommand {
     public boolean runCommand() {
         
         if( this.senderHasPermission("mcbouncer.admin") ) {
-            new Fail().doConf();
+            new MockPlugin().doConf();
             this.sendMessageToSender(ChatColor.GRAY + "MCBouncer configuration loaded");
         }
         
@@ -22,7 +21,7 @@ public class ReloadCommand extends BaseCommand {
 
     }
     
-    protected class Fail extends MCBouncer {
+    protected class MockPlugin extends MCBouncer {
         public void doConf() {
             this.setupConfiguration();
         }
