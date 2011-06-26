@@ -226,7 +226,7 @@ public class MCBouncerAPI {
     }
 
     private static String getUrl(String site) {
-        MCBouncer.log.info("Getting URL - " + site);
+        MCBouncer.log.debug("Getting URL - " + site);
         try {
             URL url = new URL(site.toString());
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
