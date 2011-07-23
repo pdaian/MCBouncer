@@ -21,9 +21,6 @@ public class MCBPlayerListener extends PlayerListener {
         if (event.getPlayer().getName().equals(this.lastKick)) {
             event.setLeaveMessage(null);
         }
-        else {
-            event.getPlayer().getServer().broadcastMessage("W: "+lastKick);
-        }
     }
     
     @Override

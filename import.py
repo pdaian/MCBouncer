@@ -3,13 +3,13 @@ from BeautifulSoup import BeautifulSoup
 import urllib2 as urllib
 import time
 
-SERVER = c.nerd.nu
+SERVER = mc2.joe.to
 
 f = open("mcbback.txt", "w").write("")
 z = open("mcbback.txt", "a")
-for page in range(1,310):
+for page in range(1,3):
   if True:
-       site = urllib.urlopen("http://mcbans.com/server/"+SERVER"/"+str(page)).read()
+       site = urllib.urlopen("http://mcbans.com/server/"+SERVER+"/"+str(page)).read()
        soup = BeautifulSoup(site)
        table = soup.find('table')
        rows = table.findAll('tr')
