@@ -44,7 +44,7 @@ public class MCBouncer extends JavaPlugin {
         } catch (UnknownHostException ex) {
             MCBouncerAPI.website = "http://mcbouncer.com";
         }
-        log.info("Website for MCBouncer: " + MCBouncerAPI.website );
+        log.debug("Website for MCBouncer: " + MCBouncerAPI.website );
 
         log.info("Plugin enabled. (version " + MCBouncer.version + ")");
         log.debug("Debug mode enabled!");
