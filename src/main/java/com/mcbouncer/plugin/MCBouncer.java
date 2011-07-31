@@ -5,10 +5,12 @@ import com.mcbouncer.command.*;
 //import com.mcbouncer.plugin.BouncerPlugin;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.config.MCBConfiguration;
+import java.net.UnknownHostException;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
+import java.net.InetAddress;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -36,18 +38,13 @@ public class MCBouncer extends JavaPlugin {
         setupPermissions();
         setupListeners();
         setupCommands();
-
-        /*for (String s : MCBConfiguration.getPlugins()) {
-            File file = new File(this.getDataFolder() + s);
-            try {
-                URL jarfile = new URL("jar", "", "file:" + file.getAbsolutePath() + "!/");
-                URLClassLoader cl = URLClassLoader.newInstance(new URL[]{jarfile});
-                Class<BouncerPlugin> loadedClass = cl.loadClass("BouncerPlugin");
-                loadedClass.
-            } catch (Exception ex) {
-                Logger.getLogger(MCBouncer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }*/
+        
+        try {            
+            MCBouncerAPI.website = "http://" + InetAddress.getByName("www.mcbouncer.com").getHostAddress();
+        } catch (UnknownHostException ex) {
+            MCBouncerAPI.website = "http://mcbouncer.com";
+        }
+        log.info("Website for MCBouncer: " + MCBouncerAPI.website );
 
         log.info("Plugin enabled. (version " + MCBouncer.version + ")");
         log.debug("Debug mode enabled!");
