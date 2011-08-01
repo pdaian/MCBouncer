@@ -25,7 +25,7 @@ public abstract class BaseCommand implements ICommand {
 		if (parent.getServer().getPlayer(name) != null) {
 			return parent.getServer().getPlayer(name).getName();
 		}
-		return "";
+		return name;
 	}
 
 	public boolean isPlayerOnline(String name) {

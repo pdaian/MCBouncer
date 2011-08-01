@@ -33,16 +33,9 @@ public class MCBPlayerListener extends PlayerListener {
     private void isBannedLogic(Player player, String message) {
         String playerName = player.getName();
         String IP = player.getAddress().getAddress().getHostAddress();
-        MCBouncerUtil.updateUser(playerName, IP);
         if (MCBouncerUtil.isBanned(playerName)) {
             this.lastKick = playerName;
             player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
-            MCBouncer.log.info(playerName + " attempted to join with IP " + IP);
-            return;
-        }
-        if (MCBouncerUtil.isIPBanned(IP)) {
-            this.lastKick = playerName;
-            player.kickPlayer("Banned: " + MCBouncerUtil.getIPBanReason(IP));
             MCBouncer.log.info(playerName + " attempted to join with IP " + IP);
             return;
         }
