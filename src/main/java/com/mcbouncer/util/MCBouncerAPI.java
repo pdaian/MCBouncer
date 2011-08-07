@@ -1,7 +1,6 @@
 package com.mcbouncer.util;
 
 import com.mcbouncer.plugin.MCBouncer;
-import com.mcbouncer.util.config.MCBConfiguration;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -214,6 +213,22 @@ public class MCBouncerAPI {
         }
         MCBouncerAPI.setError((String) result.get("error"));
         return false;
+    }
+    
+    public static ArrayList<HashMap<String, Object>> getServerBans(String key) {
+        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl(website + "/api/getServerBans/" + key ));
+        if ((Boolean) result.get("success")) {
+            return (ArrayList<HashMap<String, Object>>) result.get("data");
+        }
+        return (ArrayList<HashMap<String, Object>>) MCBouncerAPI.setError((String) result.get("error"));
+    }
+    
+    public static ArrayList<HashMap<String, Object>> getServerIPBans(String key) {
+        JSONObject result = MCBouncerAPI.parseJson(MCBouncerAPI.getUrl(website + "/api/getServerIPBans/" + key ));
+        if ((Boolean) result.get("success")) {
+            return (ArrayList<HashMap<String, Object>>) result.get("data");
+        }
+        return (ArrayList<HashMap<String, Object>>) MCBouncerAPI.setError((String) result.get("error"));
     }
 
     private static Object setError(String e) {

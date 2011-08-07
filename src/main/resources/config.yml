@@ -6,9 +6,7 @@ showBanMessages: true
 defaultBanMessage: 'Banned for rule violation.'
 defaultKickMessage: 'Kicked by an admin.'
 
-# Download plugins from mcbouncer.com/plugins.  Enter the names of all plugins, case sensitive, in standard YML format.
-# EX - 
-# plugins:
-#   - 'EnhancedKick'
-#   - 'MCBansIntegration'
+#If MCBouncer is down for some reason, set this to false and reload the plugin.
+online: true
+
 plugins:
