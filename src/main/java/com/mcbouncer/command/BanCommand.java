@@ -18,15 +18,17 @@ public class BanCommand extends BaseCommand {
             return false;
         }
         String playerName = this.getPlayerNameFromArgs(args[0]);
-        String reason = MCBouncerUtil.getReasonOrDefault(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
-        boolean result = MCBouncerUtil.addBan(playerName, this.getSenderName(), reason);
-        if (result) {
-            MCBouncer.log.info(this.getSenderName() + " banning " + playerName + " - " + reason);
-            this.sendMessageToSender(ChatColor.GREEN + "User banned successfully.");
-        } else {
-            this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
+        if (playerName != null) {
+            String reason = MCBouncerUtil.getReasonOrDefault(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
+            boolean result = MCBouncerUtil.addBan(playerName, this.getSenderName(), reason);
+            if (result) {
+                MCBouncer.log.info(this.getSenderName() + " banning " + playerName + " - " + reason);
+                this.sendMessageToSender(ChatColor.GREEN + "User " + playerName + " banned successfully.");
+            } else {
+                this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
+            }
+            this.kickPlayer(playerName, "Banned: " + reason);
         }
-        this.kickPlayer(playerName, "Banned: " + reason);
         return true;
     }
 }
