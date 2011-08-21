@@ -17,16 +17,19 @@ public class AddnoteCommand extends BaseCommand {
             return false;
         }
         String playerName = this.getPlayerNameFromArgs(args[0]);
-        if (playerName != null) {
-            String note = MCBouncerUtil.getReasonOrDefault(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), "");
-            boolean result = MCBouncerUtil.addNote(playerName, this.getSenderName(), note);
-            if (result) {
-                MCBouncer.log.info(this.getSenderName() + " added note to " + playerName + " - " + note);
-                this.sendMessageToSender(ChatColor.GREEN + "Note added to " + playerName + " successfully.");
-            } else {
-                this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
-            }
+        if (playerName == null) {
+            playerName = args[0];
         }
+
+        String note = MCBouncerUtil.getReasonOrDefault(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), "");
+        boolean result = MCBouncerUtil.addNote(playerName, this.getSenderName(), note);
+        if (result) {
+            MCBouncer.log.info(this.getSenderName() + " added note to " + playerName + " - " + note);
+            this.sendMessageToSender(ChatColor.GREEN + "Note added to " + playerName + " successfully.");
+        } else {
+            this.sendMessageToSender(ChatColor.RED + MCBouncerAPI.getError());
+        }
+
         return true;
     }
 }
