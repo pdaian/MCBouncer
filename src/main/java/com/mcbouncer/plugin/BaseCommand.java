@@ -5,6 +5,7 @@ import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.ChatColor;
 
 public abstract class BaseCommand implements ICommand {
 
