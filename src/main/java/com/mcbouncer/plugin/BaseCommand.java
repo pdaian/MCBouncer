@@ -35,7 +35,7 @@ public abstract class BaseCommand implements ICommand {
 	public String getSenderName() {
 		String senderName = "console";
 		if (sender instanceof Player) {
-			senderName = ChatColor.stripColor((Player) sender).getName());
+			senderName = ChatColor.stripColor(((Player) sender).getName());
 		}
 		return senderName;
 	}
