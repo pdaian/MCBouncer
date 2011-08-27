@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class MCBConfiguration {
 
     private static boolean debugMode = false;
-    private static boolean onlineMode = true;
     private static int numBansDisallow = 10;
     private static String apiKey = "";
     private static boolean showBanMessages = true;
@@ -66,7 +65,6 @@ public class MCBConfiguration {
 
     protected static void setSettings() {
         debugMode = config.getBoolean("debug", debugMode);
-        onlineMode = config.getBoolean("online", onlineMode);
         apiKey = config.getString("apiKey", apiKey);
         numBansDisallow = config.getInt("numBansDisallow", numBansDisallow);
         showBanMessages = config.getBoolean("showBansMessages", showBanMessages);
@@ -85,10 +83,6 @@ public class MCBConfiguration {
 
     public static boolean isDebugMode() {
         return debugMode;
-    }
-
-    public static boolean isOnlineMode() {
-        return onlineMode;
     }
 
     public static ArrayList<String> getPlugins() {

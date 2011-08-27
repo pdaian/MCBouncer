@@ -3,7 +3,6 @@ package com.mcbouncer.plugin;
 import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.command.*;
 //import com.mcbouncer.plugin.BouncerPlugin;
-import com.mcbouncer.util.MCBUpdateThread;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.config.MCBConfiguration;
 import java.net.UnknownHostException;
@@ -26,7 +25,6 @@ public class MCBouncer extends JavaPlugin {
     public PermissionHandler permissionHandler;
     public static final MCBLogger log = new MCBLogger();
     public HashMap<String, BaseCommand> commands = new HashMap<String, BaseCommand>();
-    private MCBUpdateThread updateThread;
 
     @Override
     public void onDisable() {
@@ -46,19 +44,14 @@ public class MCBouncer extends JavaPlugin {
         } catch (UnknownHostException ex) {
             MCBouncerAPI.website = "http://mcbouncer.com";
         }
-        
-        if( MCBConfiguration.isDebugMode() ) {
-            MCBouncerAPI.website = "http://mcb.thezomg.com";
-        }
         log.debug("Website for MCBouncer: " + MCBouncerAPI.website );
-        
-        log.info("Starting backup thread.");
-        this.updateThread = new MCBUpdateThread(this);
-        this.updateThread.start();
 
         log.info("Plugin enabled. (version " + MCBouncer.version + ")");
         log.debug("Debug mode enabled!");
         
+        if( MCBConfiguration.isDebugMode() ) {
+            MCBouncerAPI.website = "http://mcb.thezomg.com";
+        }
     }
 
     protected void setupPermissions() {

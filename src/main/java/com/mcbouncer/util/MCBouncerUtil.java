@@ -14,7 +14,7 @@ public class MCBouncerUtil {
     public static boolean addIPBan(String IP, String admin, String reason) {
         return MCBouncerAPI.addIPBan(IP, MCBConfiguration.getApiKey(), admin, reason);
     }
-
+    
     public static boolean addNote(String playerName, String admin, String note) {
         return MCBouncerAPI.addNote(playerName, MCBConfiguration.getApiKey(), admin, note);
     }
@@ -26,7 +26,7 @@ public class MCBouncerUtil {
     public static boolean removeIPBan(String playerName) {
         return MCBouncerAPI.removeIPBan(playerName, MCBConfiguration.getApiKey());
     }
-
+    
     public static boolean removeNote(int noteID, String admin) {
         return MCBouncerAPI.removeNote(noteID, MCBConfiguration.getApiKey(), admin);
     }
@@ -62,19 +62,11 @@ public class MCBouncerUtil {
     public static ArrayList<HashMap<String, Object>> getBans(String user) {
         return MCBouncerAPI.getBans(user, MCBConfiguration.getApiKey(), "0", "50");
     }
-
-    public static ArrayList<HashMap<String, Object>> getServerBans() {
-        return MCBouncerAPI.getServerBans(MCBConfiguration.getApiKey());
-    }
-
+    
     public static ArrayList<HashMap<String, Object>> getIPBans(String ip) {
         return MCBouncerAPI.getIPBans(ip, MCBConfiguration.getApiKey(), "0", "50");
     }
-
-    public static ArrayList<HashMap<String, Object>> getServerIPBans() {
-        return MCBouncerAPI.getServerIPBans(MCBConfiguration.getApiKey());
-    }
-
+    
     public static ArrayList<HashMap<String, Object>> getNotes(String user) {
         return MCBouncerAPI.getNotes(user, MCBConfiguration.getApiKey(), "0", "50");
     }
@@ -97,7 +89,7 @@ public class MCBouncerUtil {
         }
         return out.substring(0, out.length() - glue.length());
     }
-
+    
     public static String implode(String[] array, String glue) {
         String out = "";
         if (array.length == 0) {

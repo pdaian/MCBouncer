@@ -18,7 +18,7 @@ public class KickCommand extends BaseCommand {
         }
         String name = this.getPlayerName(args[0]);
         
-        if (this.isPlayerOnline(name)) {
+        if (name != null && this.isPlayerOnline(name)) {
             
             String reason = MCBouncerUtil.getReasonOrDefault(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultKickMessage());
 

@@ -5,6 +5,7 @@ import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.ChatColor;
 
 public abstract class BaseCommand implements ICommand {
 
@@ -17,7 +18,7 @@ public abstract class BaseCommand implements ICommand {
         if (player != null) {
             return player.getName();
         } else {
-            return arg;
+            return null;
         }
     }
 
@@ -25,7 +26,7 @@ public abstract class BaseCommand implements ICommand {
         if (parent.getServer().getPlayer(name) != null) {
             return parent.getServer().getPlayer(name).getName();
         }
-        return name;
+        return null;
     }
 
     public boolean isPlayerOnline(String name) {
@@ -35,7 +36,7 @@ public abstract class BaseCommand implements ICommand {
     public String getSenderName() {
         String senderName = "console";
         if (sender instanceof Player) {
-            senderName = ((Player) sender).getName();
+            senderName = ChatColor.stripColor(((Player) sender).getName());
         }
         return senderName;
     }
@@ -80,10 +81,9 @@ public abstract class BaseCommand implements ICommand {
         return (this.sender instanceof ConsoleCommandSender) || parent.hasPermission((Player) this.sender, permission);
     }
 
-    @Override
     public String getPlayerIP(String playerName) {
         Player player = parent.getServer().getPlayer(playerName);
-        if( player != null ) {
+        if (player != null) {
             return player.getAddress().getAddress().getHostAddress();
         }
         return "";
