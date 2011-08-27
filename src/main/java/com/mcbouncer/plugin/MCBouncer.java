@@ -93,7 +93,7 @@ public class MCBouncer extends JavaPlugin {
         this.commands.put("removenote", new RemovenoteCommand(this));
     }
     
-    protected void setupConfiguration() {
+    public void setupConfiguration() {
         new MCBConfiguration().load(this.getDataFolder());
     }
 

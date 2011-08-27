@@ -10,6 +10,7 @@ public interface ICommand {
     void sendMessageToMods(String message);
     void kickPlayer(String player, String reason);
     void kickPlayerWithIP(String ip, String reason);
+    String getPlayerIP(String player);
     boolean senderHasPermission(String permission);
     boolean runCommand();
 }
