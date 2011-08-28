@@ -20,7 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class MCBouncer extends JavaPlugin {
     
-    public final static String version = "1.0beta";
+    public final static String version = "1.0";
 
     public PermissionHandler permissionHandler;
     public static final MCBLogger log = new MCBLogger();

@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mcbouncer</groupId>
     <artifactId>MCBouncer</artifactId>
-    <version>1.0beta</version>
+    <version>1.0</version>
     <name>MCBouncer</name>
     <description>MCBouncer plugin - http://mcbouncer.com</description>
     <scm>
