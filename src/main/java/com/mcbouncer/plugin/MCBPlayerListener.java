@@ -50,7 +50,7 @@ public class MCBPlayerListener extends PlayerListener {
     
     @Override
     public void onPlayerKick(PlayerKickEvent event) {
-        if (event.getPlayer().getName().equals(this.lastKick) || currUsers.contains(event.getPlayer.getName())) {
+        if (event.getPlayer().getName().equals(this.lastKick) || currUsers.contains(event.getPlayer().getName())) {
             event.setLeaveMessage(null);
         }
     }
