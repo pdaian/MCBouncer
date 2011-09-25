@@ -26,8 +26,10 @@ public class MCBPlayerListener extends PlayerListener {
     @Override
     public void onPlayerPreLogin(PlayerPreLoginEvent event) {
         if ( currUsers.contains(event.getName()) ) {
-            event.disallow(Result.KICK_OTHER, "Currently Doing a Lookup on you already.");
+            event.disallow(Result.KICK_OTHER, "Currently doing a Lookup on you already.");
         }
+        
+        currUsers.add(event.getName());
     }
     
     @Override
@@ -67,22 +69,16 @@ public class MCBPlayerListener extends PlayerListener {
         String IP = player.getAddress().getAddress().getHostAddress();
         MCBouncerUtil.updateUser(playerName, IP);
         
-        if (currUsers.contains(playerName)) return;
-        
-        currUsers.add(playerName);
-        
         if (MCBouncerUtil.isBanned(playerName)) {
             this.lastKick = playerName;
             player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
             MCBouncer.log.info(playerName + " attempted to join with IP " + IP);
-            currUsers.remove(player.getName());
             return;
         }
         if (MCBouncerUtil.isIPBanned(IP)) {
             this.lastKick = playerName;
             player.kickPlayer("Banned: " + MCBouncerUtil.getIPBanReason(IP));
             MCBouncer.log.info(playerName + " attempted to join with IP " + IP);
-            currUsers.remove(player.getName());
             return;
         }
         int numBans = MCBouncerUtil.getBanCount(playerName, IP);
