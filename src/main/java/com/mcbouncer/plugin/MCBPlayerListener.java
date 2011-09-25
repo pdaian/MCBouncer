@@ -1,21 +1,53 @@
 package com.mcbouncer.plugin;
 
 import com.mcbouncer.util.MCBouncerUtil;
+import java.util.List;
+import java.util.ArrayList;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerListener;
+import org.bukkit.event.player.PlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerPreLoginEvent.Result;
 
 public class MCBPlayerListener extends PlayerListener {
 
     private MCBouncer parent;
     private String lastKick;
+    private List<String> currUsers = new ArrayList<String>();
 
     public MCBPlayerListener(MCBouncer parent) {
         this.parent = parent;
     }
 
+    @Override
+    public void onPlayerPreLogin(PlayerPreLoginEvent event) {
+        if ( currUsers.contains(event.getName()) ) {
+            event.disallow(Result.KICK_OTHER, "Currently Doing a Lookup on you already.");
+        }
+    }
+    
+    @Override
+    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+        if (event.getPlayer() instanceof Player) {
+            if ( currUsers.contains(event.getPlayer().getName()) ) {
+                event.setCancelled(true);
+            }
+        }
+    }
+    
+    @Override
+    public void onPlayerChat(PlayerChatEvent event) {
+        if (event.getPlayer() instanceof Player) {
+            if ( currUsers.contains(event.getPlayer().getName()) ) {
+                event.setCancelled(true);
+            }
+        }
+    }
+    
     @Override
     public void onPlayerKick(PlayerKickEvent event) {
         if (event.getPlayer().getName().equals(this.lastKick)) {
@@ -34,6 +66,11 @@ public class MCBPlayerListener extends PlayerListener {
         String playerName = player.getName();
         String IP = player.getAddress().getAddress().getHostAddress();
         MCBouncerUtil.updateUser(playerName, IP);
+        
+        if (currUsers.contains(playerName)) return;
+        
+        currUsers.add(playerName);
+        
         if (MCBouncerUtil.isBanned(playerName)) {
             this.lastKick = playerName;
             player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
