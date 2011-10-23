@@ -16,6 +16,10 @@ public class AddnoteCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
+        if (!this.senderHasPermission("mcbouncer.addnote")) {
+            return true;
+        }
+        
         if (args.length < 2) {
             return false;
         }

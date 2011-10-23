@@ -16,10 +16,13 @@ public class RemovenoteCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
+        if (!this.senderHasPermission("mcbouncer.removenote")) {
+            return true;
+        }
+        
         if (args.length != 1) {
             return false;
         }
-        
         try {
             
             String sender = this.getSenderName();
