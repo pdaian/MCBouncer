@@ -1,1 +1,52 @@
-Coming soon! (Or Under Construction if you prefer.)
+MCBouncer is a banning system for Minecraft which is open, modular,
+fair, and unbiased. It is a collaboration of multiple users, all of
+whom are tech admins on some of the most popular servers currently
+operating.
+
+Homepage: http://mcbouncer.com/
+
+Commands:
+    - addnote - Add a note to a player
+        - Aliases: mcb-addnote
+        - Usage:   /<command> playername note
+    - ban - Bans a player
+        - Aliases: mcb-ban
+        - Usage:   /<command> playername [reason]
+    - banip - Bans an IP
+        - Aliases: mcb-banip
+        - Usage:   /<command> playername/IP [reason]
+    - mcbouncer - Runs an MCBouncer command
+        - Aliases: mcb
+        - Usage:   /<command> [help|version|reload]
+    - kick - Kicks a player
+        - Aliases: mcb-kick
+        - Usage:   /<command> playername [reason]
+    - lookup - Displays a player's ban record
+        - Aliases: mcb-lookup
+        - Usage:   /<command> playername
+    - removenote - Removes a note on a player
+        - Aliases: mcb-removenote, delnote, mcb-delnote
+        - Usage:   /<command> noteid
+    - unban - Unbans a player
+        - Aliases: mcb-unban
+        - Usage:   /<command> playername
+    - unbanip - Unbans an IP
+        - Aliases: mcb-unbanip
+        - Usage:   /<command> playername/IP
+
+Permissions:
+    - mcbouncer.mod - Will apply all of the following permissions
+        - mcbouncer.addnote    - Permission to add a note
+        - mcbouncer.ban        - Permission to ban a player
+        - mcbouncer.banip      - Permission to ban an IP
+        - mcbouncer.help       - Permission to read the help menu
+        - mcbouncer.kick       - Permission to kick a player
+        - mcbouncer.lookup     - Permission to lookup a player
+        - mcbouncer.msg.mod    - Permission to recieve mod messages
+        - mcbouncer.removenote - Permission to remove a note
+        - mcbouncer.unban      - Permission to unban a player
+        - mcbouncer.unbanip    - Permission to unban an IP
+        - mcbouncer.version    - Permission to print version information
+
+    - mcbouncer.admin - Will apply all of the following permissions
+        - mcbouncer.reload     - Permission to reload MCBouncer

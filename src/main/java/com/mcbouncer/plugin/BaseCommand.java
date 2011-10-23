@@ -1,5 +1,7 @@
 package com.mcbouncer.plugin;
 
+import java.util.Arrays;
+
 import com.mcbouncer.command.ICommand;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.command.CommandSender;
@@ -78,7 +80,38 @@ public abstract class BaseCommand implements ICommand {
     }
 
     public boolean senderHasPermission(String permission) {
-        return (this.sender instanceof ConsoleCommandSender) || parent.hasPermission((Player) this.sender, permission);
+        if (this.sender instanceof ConsoleCommandSender) {
+            return true;
+        }
+        
+        Player player = (Player) this.sender;
+        if (parent.hasPermission(player, permission)) {
+            return true;
+        }
+        
+        /* Let's keep things compatable with 'mcbouncer.(mod|admin)' */
+        
+        String[] mperms = {
+            "mcbouncer.addnote", "mcbouncer.ban",        "mcbouncer.banip",
+            "mcbouncer.help",    "mcbouncer.kick",       "mcbouncer.lookup",
+            "mcbouncer.msg.mod", "mcbouncer.removenote", "mcbouncer.unban",
+            "mcbouncer.unbanip", "mcbouncer.version"};
+        
+        int i = Arrays.binarySearch(mperms, permission);
+        if (parent.hasPermission(player, "mcbouncer.mod") && (i >= 0)) {
+            return true;
+        }
+        
+        /* Let's just make it an array now for furture expansion */
+        String[] aperms = {"mcbouncer.reload"};
+        
+        i = Arrays.binarySearch(aperms, permission);
+        if (parent.hasPermission(player, "mcbouncer.admin") && (i >= 0)) {
+            return true;
+        }
+        
+        sendMessageToSender(ChatColor.RED + "You do not have permission for that!");
+        return false;
     }
 
     public String getPlayerIP(String playerName) {

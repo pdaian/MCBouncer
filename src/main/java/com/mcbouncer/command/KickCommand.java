@@ -13,6 +13,10 @@ public class KickCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
+        if (!this.senderHasPermission("mcbouncer.kick")) {
+            return true;
+        }
+        
         if (args.length < 1) {
             return false;
         }

@@ -17,10 +17,13 @@ public class UnbanCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
+        if (!this.senderHasPermission("mcbouncer.unban")) {
+            return true;
+        }
+        
         if (args.length != 1) {
             return false;
         }
-        
         String sender = this.getSenderName();
         String user = args[0];
         

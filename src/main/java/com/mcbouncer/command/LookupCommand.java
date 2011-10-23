@@ -14,6 +14,10 @@ public class LookupCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
+        if (!this.senderHasPermission("mcbouncer.lookup")) {
+            return true;
+        }
+        
         if (args.length != 1) {
             return false;
         }

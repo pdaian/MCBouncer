@@ -12,7 +12,7 @@ public class ReloadCommand extends BaseCommand {
 
     public boolean runCommand() {
         
-        if( this.senderHasPermission("mcbouncer.admin") ) {
+        if( this.senderHasPermission("mcbouncer.reload") ) {
             parent.setupConfiguration();
             this.sendMessageToSender(ChatColor.GRAY + "MCBouncer configuration loaded");
         }
