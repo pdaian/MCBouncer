@@ -13,7 +13,7 @@ public class HelpCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!this.senderHasPermission("mcbouncer.help")) {
+        if (!this.senderHasPermission("mcbouncer.mod.help")) {
             return true;
         }
         

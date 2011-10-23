@@ -12,7 +12,7 @@ public class VersionCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!this.senderHasPermission("mcbouncer.version")) {
+        if (!this.senderHasPermission("mcbouncer.mod.version")) {
             return true;
         }
         

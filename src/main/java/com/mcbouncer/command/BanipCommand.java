@@ -18,7 +18,7 @@ public class BanipCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!this.senderHasPermission("mcbouncer.banip")) {
+        if (!this.senderHasPermission("mcbouncer.mod.banip")) {
             return true;
         }
         

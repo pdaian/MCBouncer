@@ -110,7 +110,7 @@ public class MCBouncer extends JavaPlugin {
 
     public void messageMods(String message) {
         for (Player player : this.getServer().getOnlinePlayers()) {
-            if (this.hasPermission(player, "mcbouncer.msg.mod")) {
+            if (this.hasPermission(player, "mcbouncer.mod.msg")) {
                 player.sendMessage(message);
             }
         }

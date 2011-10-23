@@ -18,7 +18,7 @@ public class BanCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!this.senderHasPermission("mcbouncer.ban")) {
+        if (!this.senderHasPermission("mcbouncer.mod.ban")) {
             return true;
         }
         

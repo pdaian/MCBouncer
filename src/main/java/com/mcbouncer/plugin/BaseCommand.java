@@ -89,24 +89,13 @@ public abstract class BaseCommand implements ICommand {
             return true;
         }
         
-        /* Let's keep things compatable with 'mcbouncer.(mod|admin)' */
-        
-        String[] mperms = {
-            "mcbouncer.addnote", "mcbouncer.ban",        "mcbouncer.banip",
-            "mcbouncer.help",    "mcbouncer.kick",       "mcbouncer.lookup",
-            "mcbouncer.msg.mod", "mcbouncer.removenote", "mcbouncer.unban",
-            "mcbouncer.unbanip", "mcbouncer.version"};
-        
-        int i = Arrays.binarySearch(mperms, permission);
-        if (parent.hasPermission(player, "mcbouncer.mod") && (i >= 0)) {
+        /* Keep compatibility with mcbouncer.mod */
+        if (parent.hasPermission(player, "mcbouncer.mod") && permission.matches("mcbouncer.mod.*")) {
             return true;
         }
         
-        /* Let's just make it an array now for furture expansion */
-        String[] aperms = {"mcbouncer.reload"};
-        
-        i = Arrays.binarySearch(aperms, permission);
-        if (parent.hasPermission(player, "mcbouncer.admin") && (i >= 0)) {
+        /* Keep compatibility with mcbouncer.admin */
+        if (parent.hasPermission(player, "mcbouncer.admin") && permission.matches("mcbouncer.admin.*")) {
             return true;
         }
         

@@ -17,7 +17,7 @@ public class UnbanCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!this.senderHasPermission("mcbouncer.unban")) {
+        if (!this.senderHasPermission("mcbouncer.mod.unban")) {
             return true;
         }
         

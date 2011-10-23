@@ -16,7 +16,7 @@ public class RemovenoteCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
-        if (!this.senderHasPermission("mcbouncer.removenote")) {
+        if (!this.senderHasPermission("mcbouncer.mod.removenote")) {
             return true;
         }
         
