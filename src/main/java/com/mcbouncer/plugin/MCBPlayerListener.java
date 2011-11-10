@@ -69,6 +69,12 @@ public class MCBPlayerListener extends PlayerListener {
         String IP = player.getAddress().getAddress().getHostAddress();
         MCBouncerUtil.updateUser(playerName, IP);
         
+        /* This will work for now.  Some ban caching should probably
+         * be implemented to stop from querying MCBouncer.com when
+         * not "really" needed
+         */
+        currUsers.remove(player.getName());
+        
         if (MCBouncerUtil.isBanned(playerName)) {
             this.lastKick = playerName;
             player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
@@ -94,7 +100,7 @@ public class MCBPlayerListener extends PlayerListener {
             }
             parent.messageMods(ChatColor.GREEN + response);
         }
-        currUsers.remove(player.getName());
+        
         player.getServer().broadcastMessage(message);
     }
 
