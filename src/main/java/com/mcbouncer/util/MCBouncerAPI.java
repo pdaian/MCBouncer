@@ -237,7 +237,13 @@ public class MCBouncerAPI {
             in.close();
             return result;
         } catch (IOException e) {
-            e.printStackTrace();
+            StringBuilder stacktrace = new StringBuilder( "" );
+            String NEW_LINE = System.getProperty("line.separator");
+            for (StackTraceElement element : e.getStackTrace() ){
+                stacktrace.append( element.toString().replaceAll("http\\:\\/\\/mcbouncer\\.com\\/api\\/[A-Z0-9a-z]+\\/[A-Za-z0-9]+\\/(.*)", "$1\\<apikey\\>$2") );
+                stacktrace.append( NEW_LINE );
+            }
+            System.out.println(stacktrace);
             return "";
         }
     }
