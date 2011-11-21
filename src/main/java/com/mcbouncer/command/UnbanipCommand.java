@@ -17,6 +17,9 @@ public class UnbanipCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
+        if (!this.senderHasPermission("mcbouncer.mod.unbanip")) {
+            return true;
+        }
         if (args.length != 1) {
             return false;
         }

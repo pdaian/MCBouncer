@@ -36,11 +36,6 @@ public class MCBCommandThread extends Thread {
     }
 
     public boolean onCommand() {
-        if (sender instanceof Player) {
-            if (!parent.hasPermission((Player) sender, "mcbouncer.mod")) {
-                return false;
-            }
-        }
         String commandName = command.getName().toLowerCase();
         //What's this hackery? /command arg  arg2 threw an error. Strip unnecessary spaces
         List<String> temp_list = new LinkedList<String>();

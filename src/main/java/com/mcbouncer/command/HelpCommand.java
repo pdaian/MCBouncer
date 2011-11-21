@@ -13,6 +13,10 @@ public class HelpCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
+        if (!this.senderHasPermission("mcbouncer.mod.help")) {
+            return true;
+        }
+        
         PluginDescriptionFile pdf = parent.getDescription();
         this.sendMessageToSender(ChatColor.GRAY + "MCBouncer commands");
         for( Object commandO : ( (LinkedHashMap<Object, Object>) pdf.getCommands() ).keySet() ) {

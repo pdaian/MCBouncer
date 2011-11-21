@@ -1,5 +1,7 @@
 package com.mcbouncer.plugin;
 
+import java.util.Arrays;
+
 import com.mcbouncer.command.ICommand;
 import com.mcbouncer.util.MCBouncerUtil;
 import org.bukkit.command.CommandSender;
@@ -78,7 +80,27 @@ public abstract class BaseCommand implements ICommand {
     }
 
     public boolean senderHasPermission(String permission) {
-        return (this.sender instanceof ConsoleCommandSender) || parent.hasPermission((Player) this.sender, permission);
+        if (this.sender instanceof ConsoleCommandSender) {
+            return true;
+        }
+        
+        Player player = (Player) this.sender;
+        if (parent.hasPermission(player, permission)) {
+            return true;
+        }
+        
+        /* Keep compatibility with mcbouncer.mod */
+        if (parent.hasPermission(player, "mcbouncer.mod") && permission.matches("mcbouncer.mod.*")) {
+            return true;
+        }
+        
+        /* Keep compatibility with mcbouncer.admin */
+        if (parent.hasPermission(player, "mcbouncer.admin") && permission.matches("mcbouncer.admin.*")) {
+            return true;
+        }
+        
+        sendMessageToSender(ChatColor.RED + "You do not have permission for that!");
+        return false;
     }
 
     public String getPlayerIP(String playerName) {

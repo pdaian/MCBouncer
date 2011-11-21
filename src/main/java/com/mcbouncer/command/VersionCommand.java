@@ -12,6 +12,10 @@ public class VersionCommand extends BaseCommand {
     }
 
     public boolean runCommand() {
+        if (!this.senderHasPermission("mcbouncer.mod.version")) {
+            return true;
+        }
+        
         PluginDescriptionFile pdf = parent.getDescription();
         this.sendMessageToSender(ChatColor.GRAY + String.format("You are running %s version %s", pdf.getName(), pdf.getVersion()));
         return true;
