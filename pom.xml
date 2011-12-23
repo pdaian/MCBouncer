@@ -1,3 +1,4 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mcbouncer</groupId>
@@ -51,7 +52,8 @@
                     <archive>
                         <manifestEntries>
                             <Implementation-Title>MCBouncer</Implementation-Title>
-                            <Implementation-Version>${describe}</Implementation-Version>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                            <Implementation-Vendor>MCBouncer Team</Implementation-Vendor>
                             <Built-By>MCBouncer Team</Built-By>
                         </manifestEntries>
                     </archive>
@@ -62,8 +64,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.5</source>
+                    <target>1.5</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -103,10 +105,9 @@
                         </goals>
                         <configuration>
                             <artifactSet>
-                                <includes>
-                                    <include>org.apache.httpcomponents:httpclient</include>
-                                    <include>com.google.guava:guava</include>
-                                </includes>
+                                <excludes>
+                                    <exclude>org.bukkit:bukkit</exclude>
+                                </excludes>
                             </artifactSet>
                         </configuration>
                     </execution>
