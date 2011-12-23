@@ -2,7 +2,6 @@ package com.mcbouncer.plugin;
 
 import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.command.*;
-//import com.mcbouncer.plugin.BouncerPlugin;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.config.MCBConfiguration;
 import java.net.UnknownHostException;
@@ -12,7 +11,6 @@ import java.net.InetAddress;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 

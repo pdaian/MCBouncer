@@ -79,8 +79,8 @@ public class BanRemovedEvent extends MCBEvent {
 
 
     @Override
-    public Type getType() {
-        return Type.BAN_REMOVED;
+    public MCBEventType getType() {
+        return MCBEventType.BAN_REMOVED;
     }
 
 }

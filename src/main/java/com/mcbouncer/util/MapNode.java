@@ -1,4 +1,4 @@
-package com.mcbouncer.util.config;
+package com.mcbouncer.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,12 +10,15 @@ import java.util.Map;
  *
  * @author sk89q
  */
-public class ConfigurationNode {
+public class MapNode {
 
     protected Map<String, Object> root;
 
-    protected ConfigurationNode(Map<String, Object> root) {
+    public MapNode(Map<String, Object> root) {
         this.root = root;
+    }
+
+    public MapNode() {
     }
 
     /**
@@ -378,18 +381,18 @@ public class ConfigurationNode {
      * @return list of integers
      */
     @SuppressWarnings("unchecked")
-    public List<ConfigurationNode> getNodeList(String path, List<ConfigurationNode> def) {
+    public List<MapNode> getNodeList(String path, List<MapNode> def) {
         List<Object> raw = getList(path);
 
         if (raw == null) {
-            return def != null ? def : new ArrayList<ConfigurationNode>();
+            return def != null ? def : new ArrayList<MapNode>();
         }
 
-        List<ConfigurationNode> list = new ArrayList<ConfigurationNode>();
+        List<MapNode> list = new ArrayList<MapNode>();
 
         for (Object o : raw) {
             if (o instanceof Map) {
-                list.add(new ConfigurationNode((Map<String, Object>) o));
+                list.add(new MapNode((Map<String, Object>) o));
             }
         }
 
@@ -405,11 +408,11 @@ public class ConfigurationNode {
      * @return node or null
      */
     @SuppressWarnings("unchecked")
-    public ConfigurationNode getNode(String path) {
+    public MapNode getNode(String path) {
         Object raw = getProperty(path);
 
         if (raw instanceof Map) {
-            return new ConfigurationNode((Map<String, Object>) raw);
+            return new MapNode((Map<String, Object>) raw);
         }
 
         return null;
@@ -423,17 +426,17 @@ public class ConfigurationNode {
      * @return map of nodes
      */
     @SuppressWarnings("unchecked")
-    public Map<String, ConfigurationNode> getNodes(String path) {
+    public Map<String, MapNode> getNodes(String path) {
         Object o = getProperty(path);
 
         if (o == null) {
             return null;
         } else if (o instanceof Map) {
-            Map<String, ConfigurationNode> nodes = new HashMap<String, ConfigurationNode>();
+            Map<String, MapNode> nodes = new HashMap<String, MapNode>();
 
             for (Map.Entry<String, Object> entry : ((Map<String, Object>) o).entrySet()) {
                 if (entry.getValue() instanceof Map) {
-                    nodes.put(entry.getKey(), new ConfigurationNode((Map<String, Object>) entry.getValue()));
+                    nodes.put(entry.getKey(), new MapNode((Map<String, Object>) entry.getValue()));
                 }
             }
 
@@ -535,4 +538,13 @@ public class ConfigurationNode {
             node = (Map<String, Object>) o;
         }
     }
+
+    public Map<String, Object> getRoot() {
+        return root;
+    }
+
+    public void setRoot(Map<String, Object> root) {
+        this.root = root;
+    }
+    
 }

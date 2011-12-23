@@ -27,8 +27,8 @@ public class RemoveNoteEvent extends MCBEvent {
     }
     
     @Override
-    public Type getType() {
-        return Type.REMOVE_NOTE;
+    public MCBEventType getType() {
+        return MCBEventType.REMOVE_NOTE;
     }
 
 }

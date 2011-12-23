@@ -16,12 +16,12 @@ public class MCBConfiguration {
     private static String defaultReason = "Banned for rule violation.";
     private static String defaultKickMessage = "Kicked by an admin.";
     private static ArrayList<String> plugins = new ArrayList<String>();
-    private static Configuration config = null;
+    private static YAMLConfiguration config = null;
 
     public void load(File folder) {
         folder.mkdirs();
         File file = new File(folder, "config.yml");
-        config = new Configuration(file);
+        config = new YAMLConfiguration(file);
         config.load();
 
         if (!file.exists()) {
@@ -77,7 +77,7 @@ public class MCBConfiguration {
         return apiKey;
     }
 
-    public static Configuration getConfig() {
+    public static YAMLConfiguration getConfig() {
         return config;
     }
 

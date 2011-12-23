@@ -1,5 +1,7 @@
 package com.mcbouncer.util.config;
 
+import com.mcbouncer.util.MapNode;
+import com.mcbouncer.exception.ConfigurationException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -53,13 +55,13 @@ import org.yaml.snakeyaml.representer.Representer;
  * </p>
  *
  */
-public class Configuration extends ConfigurationNode {
+public class YAMLConfiguration extends MapNode {
 
     private Yaml yaml;
     private File file;
     private String header = null;
 
-    public Configuration(File file) {
+    public YAMLConfiguration(File file) {
         super(new HashMap<String, Object>());
 
         DumperOptions options = new DumperOptions();
@@ -190,8 +192,8 @@ public class Configuration extends ConfigurationNode {
      * default in methods that select a node from a node list.
      * @return
      */
-    public static ConfigurationNode getEmptyNode() {
-        return new ConfigurationNode(new HashMap<String, Object>());
+    public static MapNode getEmptyNode() {
+        return new MapNode(new HashMap<String, Object>());
     }
 }
 

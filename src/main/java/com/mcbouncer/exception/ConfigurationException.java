@@ -1,4 +1,4 @@
-package com.mcbouncer.util.config;
+package com.mcbouncer.exception;
 
 public class ConfigurationException extends Exception {
 

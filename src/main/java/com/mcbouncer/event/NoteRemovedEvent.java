@@ -55,8 +55,8 @@ public class NoteRemovedEvent extends MCBEvent {
 
 
     @Override
-    public Type getType() {
-        return null;
+    public MCBEventType getType() {
+        return MCBEventType.NOTE_REMOVED;
     }
 
 }

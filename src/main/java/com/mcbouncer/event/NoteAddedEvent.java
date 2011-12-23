@@ -57,8 +57,8 @@ public class NoteAddedEvent extends MCBEvent {
     }
 
     @Override
-    public Type getType() {
-        return Type.NOTE_ADDED;
+    public MCBEventType getType() {
+        return MCBEventType.NOTE_ADDED;
     }
 
 }
