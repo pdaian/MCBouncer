@@ -1,14 +1,14 @@
 package com.mcbouncer.exception;
 
-public class ConfigurationException extends BouncerException {
+public class ParserException extends BouncerRuntimeException {
 
     private static final long serialVersionUID = -2442886939908724203L;
 
-    public ConfigurationException() {
+    public ParserException() {
         super();
     }
 
-    public ConfigurationException(String msg) {
+    public ParserException(String msg) {
         super(msg);
     }
 }

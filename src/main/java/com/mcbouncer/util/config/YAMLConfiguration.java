@@ -1,6 +1,6 @@
 package com.mcbouncer.util.config;
 
-import com.mcbouncer.util.MapNode;
+import com.mcbouncer.util.node.MapNode;
 import com.mcbouncer.exception.ConfigurationException;
 import java.io.File;
 import java.io.FileInputStream;

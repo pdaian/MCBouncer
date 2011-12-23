@@ -1,4 +1,4 @@
-package com.mcbouncer.util;
+package com.mcbouncer.util.node;
 
 import java.util.ArrayList;
 import java.util.HashMap;
