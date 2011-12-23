@@ -10,13 +10,13 @@ import org.bukkit.entity.Player;
 
 public class MCBCommandThread extends Thread {
 
-    public MCBouncer parent;
+    public MCBouncerPlugin parent;
     public CommandSender sender;
     public Command command;
     public String commandLabel;
     public String[] args;
 
-    public MCBCommandThread(MCBouncer parent, CommandSender sender, Command command, String commandLabel, String[] args) {
+    public MCBCommandThread(MCBouncerPlugin parent, CommandSender sender, Command command, String commandLabel, String[] args) {
         this.parent = parent;
         this.sender = sender;
         this.command = command;
@@ -59,7 +59,7 @@ public class MCBCommandThread extends Thread {
             commandClass.setParent(parent);
             commandClass.setSender(sender);
             
-            MCBouncer.log.debug("Received command from " + commandClass.getSenderName() + " - /" + commandName + " " + MCBouncerUtil.implode(args, " ") );
+            MCBouncerPlugin.log.debug("Received command from " + commandClass.getSenderName() + " - /" + commandName + " " + MCBouncerUtil.implode(args, " ") );
             
             return commandClass.runCommand();
             

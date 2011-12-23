@@ -1,7 +1,7 @@
 package com.mcbouncer.http.response;
 
 import com.mcbouncer.exception.ParserException;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.node.JSONNode;
 import java.util.List;
 import org.apache.http.Header;
@@ -11,7 +11,7 @@ import org.json.simple.parser.ParseException;
 
 public class Response {
 
-    protected MCBouncer plugin;
+    protected MCBouncerPlugin plugin;
     protected List<Header> headers;
     protected HTTPCode code;
     protected String contentType;
@@ -20,7 +20,7 @@ public class Response {
     protected JSONNode jsonObject;
     protected List<Cookie> cookies;
 
-    public Response(MCBouncer plugin) {
+    public Response(MCBouncerPlugin plugin) {
         this.plugin = plugin;
     }
 

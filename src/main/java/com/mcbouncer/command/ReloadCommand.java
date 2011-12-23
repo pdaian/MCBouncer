@@ -1,12 +1,12 @@
 package com.mcbouncer.command;
 
 import com.mcbouncer.plugin.BaseCommand;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.ChatColor;
 
 public class ReloadCommand extends BaseCommand {
 
-    public ReloadCommand(MCBouncer parent) {
+    public ReloadCommand(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 

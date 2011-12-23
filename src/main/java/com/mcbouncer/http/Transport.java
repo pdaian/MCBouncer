@@ -7,7 +7,7 @@ import com.mcbouncer.http.request.Request;
 import com.mcbouncer.http.request.RequestType;
 import com.mcbouncer.http.response.HTTPCode;
 import com.mcbouncer.http.response.Response;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.HTTPUtils;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -28,10 +28,10 @@ import org.apache.http.params.HttpProtocolParams;
 public abstract class Transport {
 
     protected Request request;
-    protected MCBouncer plugin;
+    protected MCBouncerPlugin plugin;
     protected Cookie cookie;
 
-    public Transport(MCBouncer plugin) {
+    public Transport(MCBouncerPlugin plugin) {
         this.plugin = plugin;
     }
 

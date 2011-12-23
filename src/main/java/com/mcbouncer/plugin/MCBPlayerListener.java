@@ -15,11 +15,11 @@ import org.bukkit.event.player.PlayerPreLoginEvent.Result;
 
 public class MCBPlayerListener extends PlayerListener {
 
-    private MCBouncer parent;
+    private MCBouncerPlugin parent;
     private String lastKick;
     private List<String> currUsers = new ArrayList<String>();
 
-    public MCBPlayerListener(MCBouncer parent) {
+    public MCBPlayerListener(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 
@@ -72,13 +72,13 @@ public class MCBPlayerListener extends PlayerListener {
         if (MCBouncerUtil.isBanned(playerName)) {
             this.lastKick = playerName;
             player.kickPlayer("Banned: " + MCBouncerUtil.getBanReason(playerName));
-            MCBouncer.log.info(playerName + " attempted to join with IP " + IP);
+            MCBouncerPlugin.log.info(playerName + " attempted to join with IP " + IP);
             return;
         }
         if (MCBouncerUtil.isIPBanned(IP)) {
             this.lastKick = playerName;
             player.kickPlayer("Banned: " + MCBouncerUtil.getIPBanReason(IP));
-            MCBouncer.log.info(playerName + " attempted to join with IP " + IP);
+            MCBouncerPlugin.log.info(playerName + " attempted to join with IP " + IP);
             return;
         }
         int numBans = MCBouncerUtil.getBanCount(playerName, IP);

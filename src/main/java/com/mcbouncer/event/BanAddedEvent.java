@@ -1,15 +1,18 @@
 package com.mcbouncer.event;
 
 import com.mcbouncer.util.BanType;
+import net.lahwran.fevents.MCBEvent;
+import net.lahwran.fevents.MCBHandlerList;
 
-public class BanAddedEvent extends MCBEvent {
+public class BanAddedEvent extends MCBEvent<BanAddedEvent> {
 
     private String user;
     private String issuer;
     private String reason;
     private String error;
     private boolean success;
-    
+    public static final MCBHandlerList<BanAddedEvent> handlers = new MCBHandlerList<BanAddedEvent>();
+
     public BanAddedEvent(BanType banType, String user, String issuer, String reason, boolean success, String error) {
         this.banType = banType;
         this.user = user;
@@ -18,7 +21,7 @@ public class BanAddedEvent extends MCBEvent {
         this.success = success;
         this.error = error;
     }
-    
+
     public String getError() {
         return error;
     }
@@ -62,17 +65,19 @@ public class BanAddedEvent extends MCBEvent {
     public void setBanType(BanType banType) {
         this.banType = banType;
     }
-
     private BanType banType;
-    
-    public BanType getBanType()
-    {
+
+    public BanType getBanType() {
         return banType;
     }
-    
+
     @Override
-    public MCBEventType getType() {
-        return MCBEventType.BAN_ADDED;
+    protected MCBHandlerList<BanAddedEvent> getHandlers() {
+        return handlers;
     }
 
+    @Override
+    protected String getEventName() {
+        return "BanAdded";
+    }
 }

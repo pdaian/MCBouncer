@@ -1,6 +1,6 @@
 package com.mcbouncer.util;
 
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -225,7 +225,7 @@ public class MCBouncerAPI {
     }
 
     private static String getUrl(String site) {
-        MCBouncer.log.debug("Getting URL - " + site);
+        MCBouncerPlugin.log.debug("Getting URL - " + site);
         try {
             URL url = new URL(site.toString());
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));

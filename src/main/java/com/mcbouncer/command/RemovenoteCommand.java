@@ -1,17 +1,17 @@
 package com.mcbouncer.command;
 
-import com.mcbouncer.event.MCBEventHandler;
 import com.mcbouncer.event.NoteRemovedEvent;
 import com.mcbouncer.event.RemoveNoteEvent;
 import com.mcbouncer.plugin.BaseCommand;
 import com.mcbouncer.util.ChatColor;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerUtil;
+import net.lahwran.fevents.MCBEventHandler;
 
 public class RemovenoteCommand extends BaseCommand {
 
-    public RemovenoteCommand(MCBouncer parent) {
+    public RemovenoteCommand(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 
@@ -22,21 +22,22 @@ public class RemovenoteCommand extends BaseCommand {
         
         try {
             
-            String sender = this.getSenderName();
+            String theSender = this.getSenderName();
             Integer noteId = Integer.valueOf(args[0]);
-            RemoveNoteEvent removeNoteEvent = new RemoveNoteEvent(sender, noteId);
+            RemoveNoteEvent removeNoteEvent = new RemoveNoteEvent(theSender, noteId);
+            MCBEventHandler.callEvent(removeNoteEvent);
             
             if (removeNoteEvent.isCancelled()) return true;
             
-            sender = removeNoteEvent.getIssuer();
+            theSender = removeNoteEvent.getIssuer();
             
-            boolean result = MCBouncerUtil.removeNote(noteId, sender);
+            boolean result = MCBouncerUtil.removeNote(noteId, theSender);
             
             if (result)
-                MCBouncer.log.info(sender + " removed note ID " + args[0]);
+                MCBouncerPlugin.log.info(theSender + " removed note ID " + args[0]);
             
-            NoteRemovedEvent noteRemovedEvent = new NoteRemovedEvent(sender, noteId, result, ((result==false)?"":MCBouncerAPI.getError()));
-            MCBEventHandler.getInstance().dispatch(noteRemovedEvent);
+            NoteRemovedEvent noteRemovedEvent = new NoteRemovedEvent(theSender, noteId, result, ((result==false)?"":MCBouncerAPI.getError()));
+            MCBEventHandler.callEvent(noteRemovedEvent);
             
             if (result) {
                 this.sendMessageToSender(ChatColor.GREEN + "Note removed successfully.");

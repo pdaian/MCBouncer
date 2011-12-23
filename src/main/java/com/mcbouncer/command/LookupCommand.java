@@ -2,14 +2,14 @@ package com.mcbouncer.command;
 
 import com.mcbouncer.plugin.BaseCommand;
 import com.mcbouncer.util.ChatColor;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.MCBouncerUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LookupCommand extends BaseCommand {
 
-    public LookupCommand(MCBouncer parent) {
+    public LookupCommand(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 

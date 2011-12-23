@@ -1,6 +1,6 @@
 package com.mcbouncer.util.config;
 
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class MCBConfiguration {
         config.load();
 
         if (!file.exists()) {
-            InputStream input = MCBouncer.class.getResourceAsStream("/defaults/config.yml");
+            InputStream input = MCBouncerPlugin.class.getResourceAsStream("/defaults/config.yml");
             if (input != null) {
                 FileOutputStream output = null;
 

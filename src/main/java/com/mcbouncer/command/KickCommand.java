@@ -2,13 +2,13 @@ package com.mcbouncer.command;
 
 import com.mcbouncer.plugin.BaseCommand;
 import com.mcbouncer.util.ChatColor;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.config.MCBConfiguration;
 import com.mcbouncer.util.MCBouncerUtil;
 
 public class KickCommand extends BaseCommand {
 
-    public KickCommand(MCBouncer parent) {
+    public KickCommand(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 
@@ -23,7 +23,7 @@ public class KickCommand extends BaseCommand {
             String reason = MCBouncerUtil.getReasonOrDefault(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultKickMessage());
 
             this.sendMessageToMods(ChatColor.RED + name + " was kicked for " + reason);
-            MCBouncer.log.info(this.getSenderName() + " kicked " + name + " - " + reason);
+            MCBouncerPlugin.log.info(this.getSenderName() + " kicked " + name + " - " + reason);
 
             this.kickPlayer(name, "Kicked: " + reason);
             return true;

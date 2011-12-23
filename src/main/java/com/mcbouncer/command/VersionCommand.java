@@ -1,13 +1,13 @@
 package com.mcbouncer.command;
 
 import com.mcbouncer.plugin.BaseCommand;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 public class VersionCommand extends BaseCommand {
 
-    public VersionCommand(MCBouncer parent) {
+    public VersionCommand(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 

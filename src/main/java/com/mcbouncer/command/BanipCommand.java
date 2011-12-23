@@ -2,18 +2,18 @@ package com.mcbouncer.command;
 
 import com.mcbouncer.event.AddBanEvent;
 import com.mcbouncer.event.BanAddedEvent;
-import com.mcbouncer.event.MCBEventHandler;
 import com.mcbouncer.plugin.BaseCommand;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.config.MCBConfiguration;
 import com.mcbouncer.util.BanType;
 import com.mcbouncer.util.MCBouncerUtil;
 import com.mcbouncer.util.ChatColor;
+import net.lahwran.fevents.MCBEventHandler;
 
 public class BanipCommand extends BaseCommand {
 
-    public BanipCommand(MCBouncer parent) {
+    public BanipCommand(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 
@@ -23,14 +23,14 @@ public class BanipCommand extends BaseCommand {
         }
         String reason = MCBouncerUtil.getReasonOrDefault(args, MCBouncerUtil.implodeWithoutFirstElement(args, " "), MCBConfiguration.getDefaultReason());
         String player = this.getIPFromArgs(args[0], reason);
-        String sender = this.getSenderName();
+        String theSender = this.getSenderName();
         
-        AddBanEvent addBanEvent = new AddBanEvent(BanType.IP, player, sender, reason);
-        MCBEventHandler.getInstance().dispatch(addBanEvent);
+        AddBanEvent addBanEvent = new AddBanEvent(BanType.IP, player, theSender, reason);
+        MCBEventHandler.callEvent(addBanEvent);
         
         if (addBanEvent.isCancelled()) return true;
         
-        sender = addBanEvent.getIssuer();
+        theSender = addBanEvent.getIssuer();
         player = addBanEvent.getUser();
         reason = addBanEvent.getReason();
         
@@ -45,13 +45,13 @@ public class BanipCommand extends BaseCommand {
             this.sendMessageToSender(ChatColor.GREEN + "Not a valid player or IP.");
             return true;
         }
-        boolean result = MCBouncerUtil.addIPBan(player, sender, reason);
+        boolean result = MCBouncerUtil.addIPBan(player, theSender, reason);
         
         if (result)
-            MCBouncer.log.info(sender + " banning " + player + " - " + reason);
+            MCBouncerPlugin.log.info(theSender + " banning " + player + " - " + reason);
         
-        BanAddedEvent banAddedEvent = new BanAddedEvent(BanType.USER, player, sender, reason, result, ((result==false)?"":MCBouncerAPI.getError()));
-        MCBEventHandler.getInstance().dispatch(banAddedEvent);
+        BanAddedEvent banAddedEvent = new BanAddedEvent(BanType.USER, player, theSender, reason, result, ((result==false)?"":MCBouncerAPI.getError()));
+        MCBEventHandler.callEvent(banAddedEvent);
         
         if (banAddedEvent.isCancelled()) return true;
         

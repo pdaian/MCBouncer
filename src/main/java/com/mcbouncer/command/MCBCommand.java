@@ -1,11 +1,11 @@
 package com.mcbouncer.command;
 
 import com.mcbouncer.plugin.BaseCommand;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 
 public class MCBCommand extends BaseCommand {
 
-    public MCBCommand(MCBouncer parent) {
+    public MCBCommand(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 

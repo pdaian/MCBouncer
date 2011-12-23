@@ -1,10 +1,20 @@
 package com.mcbouncer.event;
 
-public class PlayerUpdatedEvent extends MCBEvent {
+import net.lahwran.fevents.MCBEvent;
+import net.lahwran.fevents.MCBHandlerList;
+
+public class PlayerUpdatedEvent extends MCBEvent<PlayerUpdatedEvent> {
+
+    public static final MCBHandlerList<PlayerUpdatedEvent> handlers = new MCBHandlerList<PlayerUpdatedEvent>();
 
     @Override
-    public MCBEventType getType() {
-        return MCBEventType.PLAYER_UPDATED;
+    protected MCBHandlerList<PlayerUpdatedEvent> getHandlers() {
+        return handlers;
+    }
+
+    @Override
+    protected String getEventName() {
+        return "PlayerUpdated";
     }
 
 }

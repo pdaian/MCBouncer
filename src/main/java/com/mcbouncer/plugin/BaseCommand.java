@@ -9,7 +9,7 @@ import org.bukkit.ChatColor;
 
 public abstract class BaseCommand implements ICommand {
 
-    protected MCBouncer parent;
+    protected MCBouncerPlugin parent;
     protected String[] args;
     protected CommandSender sender;
 
@@ -95,7 +95,7 @@ public abstract class BaseCommand implements ICommand {
         this.args = args;
     }
 
-    public void setParent(MCBouncer parent) {
+    public void setParent(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 

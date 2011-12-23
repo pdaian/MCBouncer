@@ -1,14 +1,14 @@
 package com.mcbouncer.command;
 
 import com.mcbouncer.plugin.BaseCommand;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.ChatColor;
 import java.util.LinkedHashMap;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 public class HelpCommand extends BaseCommand {
 
-    public HelpCommand(MCBouncer parent) {
+    public HelpCommand(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 

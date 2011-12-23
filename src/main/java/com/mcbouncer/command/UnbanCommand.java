@@ -1,18 +1,18 @@
 package com.mcbouncer.command;
 
 import com.mcbouncer.event.BanRemovedEvent;
-import com.mcbouncer.event.MCBEventHandler;
 import com.mcbouncer.event.RemoveBanEvent;
 import com.mcbouncer.plugin.BaseCommand;
 import com.mcbouncer.util.ChatColor;
-import com.mcbouncer.plugin.MCBouncer;
+import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.BanType;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerUtil;
+import net.lahwran.fevents.MCBEventHandler;
 
 public class UnbanCommand extends BaseCommand {
 
-    public UnbanCommand(MCBouncer parent) {
+    public UnbanCommand(MCBouncerPlugin parent) {
         this.parent = parent;
     }
 
@@ -21,24 +21,24 @@ public class UnbanCommand extends BaseCommand {
             return false;
         }
         
-        String sender = this.getSenderName();
+        String theSender = this.getSenderName();
         String user = args[0];
         
-        RemoveBanEvent removeBanEvent = new RemoveBanEvent(BanType.USER, sender, user);
-        MCBEventHandler.getInstance().dispatch(removeBanEvent);
+        RemoveBanEvent removeBanEvent = new RemoveBanEvent(BanType.USER, theSender, user);
+        MCBEventHandler.callEvent(removeBanEvent);
         
         if (removeBanEvent.isCancelled()) return true;
         
-        sender = removeBanEvent.getIssuer();
+        theSender = removeBanEvent.getIssuer();
         user = removeBanEvent.getUser();
         
         boolean result = MCBouncerUtil.removeBan(user); 
         
         if (result)
-            MCBouncer.log.info(this.getSenderName() + " unbanned " + args[0]);
+            MCBouncerPlugin.log.info(this.getSenderName() + " unbanned " + args[0]);
         
-        BanRemovedEvent banRemovedEvent = new BanRemovedEvent(BanType.USER, sender, user, result, ((result==false)?"":MCBouncerAPI.getError()));
-        MCBEventHandler.getInstance().dispatch(banRemovedEvent);
+        BanRemovedEvent banRemovedEvent = new BanRemovedEvent(BanType.USER, theSender, user, result, ((result==false)?"":MCBouncerAPI.getError()));
+        MCBEventHandler.callEvent(banRemovedEvent);
         
         if (banRemovedEvent.isCancelled()) return true;
         

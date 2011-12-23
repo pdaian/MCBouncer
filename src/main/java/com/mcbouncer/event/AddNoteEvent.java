@@ -1,17 +1,21 @@
 package com.mcbouncer.event;
 
-public class AddNoteEvent extends MCBEvent {
+import net.lahwran.fevents.MCBEvent;
+import net.lahwran.fevents.MCBHandlerList;
+
+public class AddNoteEvent extends MCBEvent<AddNoteEvent> {
 
     private String user;
     private String issuer;
     private String note;
-    
+    public static final MCBHandlerList<AddNoteEvent> handlers = new MCBHandlerList<AddNoteEvent>();
+
     public AddNoteEvent(String user, String issuer, String note) {
         this.user = user;
         this.issuer = issuer;
         this.note = note;
     }
-    
+
     public String getUser() {
         return user;
     }
@@ -37,8 +41,12 @@ public class AddNoteEvent extends MCBEvent {
     }
 
     @Override
-    public MCBEventType getType() {
-        return MCBEventType.ADD_NOTE;
+    protected MCBHandlerList<AddNoteEvent> getHandlers() {
+        return handlers;
     }
 
+    @Override
+    protected String getEventName() {
+        return "AddNote";
+    }
 }

@@ -14,7 +14,7 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class MCBouncer extends JavaPlugin {
+public class MCBouncerPlugin extends JavaPlugin {
     
     public final static String version = "1.0";
 
@@ -23,7 +23,7 @@ public class MCBouncer extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        log.info("Plugin disabled. (version " + MCBouncer.version + ")");
+        log.info("Plugin disabled. (version " + MCBouncerPlugin.version + ")");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class MCBouncer extends JavaPlugin {
         }
         log.debug("Website for MCBouncer: " + MCBouncerAPI.website );
 
-        log.info("Plugin enabled. (version " + MCBouncer.version + ")");
+        log.info("Plugin enabled. (version " + MCBouncerPlugin.version + ")");
         log.debug("Debug mode enabled!");
         
         if( MCBConfiguration.isDebugMode() ) {
