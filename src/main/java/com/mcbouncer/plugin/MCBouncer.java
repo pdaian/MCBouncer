@@ -8,8 +8,6 @@ import com.mcbouncer.util.config.MCBConfiguration;
 import java.net.UnknownHostException;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import com.nijiko.permissions.PermissionHandler;
-import com.nijikokun.bukkit.Permissions.Permissions;
 import java.net.InetAddress;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
@@ -22,7 +20,6 @@ public class MCBouncer extends JavaPlugin {
     
     public final static String version = "1.0";
 
-    public PermissionHandler permissionHandler;
     public static final MCBLogger log = new MCBLogger();
     public HashMap<String, BaseCommand> commands = new HashMap<String, BaseCommand>();
 
@@ -35,7 +32,6 @@ public class MCBouncer extends JavaPlugin {
     public void onEnable() {
         
         setupConfiguration();
-        setupPermissions();
         setupListeners();
         setupCommands();
         
@@ -51,19 +47,6 @@ public class MCBouncer extends JavaPlugin {
         
         if( MCBConfiguration.isDebugMode() ) {
             MCBouncerAPI.website = "http://mcb.thezomg.com";
-        }
-    }
-
-    protected void setupPermissions() {
-        Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
-
-        if (this.permissionHandler == null) {
-            if (permissionsPlugin != null) {
-                log.debug("Permissions found, using that for Permissions.");
-                this.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
-            } else {
-                log.info("Permissions plugin not detected, defaulting to ops.txt.");
-            }
         }
     }
     
@@ -101,11 +84,7 @@ public class MCBouncer extends JavaPlugin {
     }
 
     public boolean hasPermission(Player player, String permission) {
-        if (this.permissionHandler == null) {
-            return player.isOp();
-        } else {
-            return this.permissionHandler.has(player, permission);
-        }
+        return player.hasPermission(permission);
     }
 
     public void messageMods(String message) {
