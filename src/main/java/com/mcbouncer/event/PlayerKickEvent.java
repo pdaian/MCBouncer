@@ -1,21 +1,22 @@
 package com.mcbouncer.event;
 
 import com.mcbouncer.LocalPlayer;
+import com.mcbouncer.util.BanType;
 import net.lahwran.fevents.Cancellable;
-import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
+import net.lahwran.fevents.MCBEvent;
 
-public class AddNoteEvent extends MCBEvent<AddNoteEvent> implements Cancellable {
+public class PlayerKickEvent extends MCBEvent<PlayerKickEvent> implements Cancellable {
 
     private String user;
     private LocalPlayer issuer;
-    private String note;
-    public static final MCBHandlerList<AddNoteEvent> handlers = new MCBHandlerList<AddNoteEvent>();
+    private String reason;
+    public static final MCBHandlerList<PlayerKickEvent> handlers = new MCBHandlerList<PlayerKickEvent>();
 
-    public AddNoteEvent(String user, LocalPlayer issuer, String note) {
+    public PlayerKickEvent(String user, LocalPlayer issuer, String reason) {
         this.user = user;
         this.issuer = issuer;
-        this.note = note;
+        this.reason = reason;
     }
 
     public String getUser() {
@@ -34,22 +35,22 @@ public class AddNoteEvent extends MCBEvent<AddNoteEvent> implements Cancellable 
         this.issuer = issuer;
     }
 
-    public String getNote() {
-        return note;
+    public String getReason() {
+        return reason;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
     @Override
-    protected MCBHandlerList<AddNoteEvent> getHandlers() {
+    protected MCBHandlerList<PlayerKickEvent> getHandlers() {
         return handlers;
     }
 
     @Override
     protected String getEventName() {
-        return "AddNote";
+        return "PlayerKick";
     }
     
     @Override

@@ -25,4 +25,22 @@ public class MCBLogger {
     public void warning(String s) {
         logger.log(Level.WARNING, "[MCBouncer] " + s);
     }
+
+    public void info(String s, Throwable e) {
+        logger.log(Level.INFO, "[MCBouncer] " + s, e);
+    }
+
+    public void debug(String s, Throwable e) {
+        if (MCBConfiguration.isDebugMode()) {
+            logger.log(Level.INFO, "[MCBouncer DEBUG] " + s, e);
+        }
+    }
+
+    public void severe(String s, Throwable e) {
+        logger.log(Level.SEVERE, "[MCBouncer] " + s, e);
+    }
+
+    public void warning(String s, Throwable e) {
+        logger.log(Level.WARNING, "[MCBouncer] " + s, e);
+    }
 }

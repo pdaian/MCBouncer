@@ -1,5 +1,6 @@
 package com.mcbouncer.event;
 
+import com.mcbouncer.LocalPlayer;
 import com.mcbouncer.util.BanType;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
@@ -7,13 +8,13 @@ import net.lahwran.fevents.MCBHandlerList;
 public class BanRemovedEvent extends MCBEvent<BanRemovedEvent> {
 
     private BanType banType;
-    private String issuer;
+    private LocalPlayer issuer;
     private String user;
     private boolean success;
     private String error;
     public static final MCBHandlerList<BanRemovedEvent> handlers = new MCBHandlerList<BanRemovedEvent>();
 
-    public BanRemovedEvent(BanType banType, String issuer, String user, boolean success, String error) {
+    public BanRemovedEvent(BanType banType, LocalPlayer issuer, String user, boolean success, String error) {
         this.banType = banType;
         this.issuer = issuer;
         this.user = user;
@@ -29,11 +30,11 @@ public class BanRemovedEvent extends MCBEvent<BanRemovedEvent> {
         this.banType = banType;
     }
 
-    public String getIssuer() {
+    public LocalPlayer getIssuer() {
         return issuer;
     }
 
-    public void setIssuer(String issuer) {
+    public void setIssuer(LocalPlayer issuer) {
         this.issuer = issuer;
     }
 

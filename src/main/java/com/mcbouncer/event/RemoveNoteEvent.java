@@ -1,24 +1,26 @@
 package com.mcbouncer.event;
 
+import com.mcbouncer.LocalPlayer;
+import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
-public class RemoveNoteEvent extends MCBEvent<RemoveNoteEvent> {
+public class RemoveNoteEvent extends MCBEvent<RemoveNoteEvent> implements Cancellable {
 
-    private String issuer;
+    private LocalPlayer issuer;
     private Integer noteId;
     public static final MCBHandlerList<RemoveNoteEvent> handlers = new MCBHandlerList<RemoveNoteEvent>();
 
-    public RemoveNoteEvent(String issuer, Integer noteId) {
+    public RemoveNoteEvent(LocalPlayer issuer, Integer noteId) {
         this.issuer = issuer;
         this.noteId = noteId;
     }
 
-    public String getIssuer() {
+    public LocalPlayer getIssuer() {
         return issuer;
     }
 
-    public void setIssuer(String issuer) {
+    public void setIssuer(LocalPlayer issuer) {
         this.issuer = issuer;
     }
 
@@ -38,5 +40,10 @@ public class RemoveNoteEvent extends MCBEvent<RemoveNoteEvent> {
     @Override
     protected String getEventName() {
         return "RemoveNote";
+    }
+    
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

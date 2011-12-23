@@ -1,18 +1,19 @@
 package com.mcbouncer.event;
 
+import com.mcbouncer.LocalPlayer;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
 public class NoteAddedEvent extends MCBEvent<NoteAddedEvent> {
 
-    String user;
-    String issuer;
-    String note;
-    boolean success;
-    String error;
+    protected String user;
+    protected LocalPlayer issuer;
+    protected String note;
+    protected boolean success;
+    protected String error;
     public static final MCBHandlerList<NoteAddedEvent> handlers = new MCBHandlerList<NoteAddedEvent>();
 
-    public NoteAddedEvent(String user, String issuer, String note, boolean success, String error) {
+    public NoteAddedEvent(String user, LocalPlayer issuer, String note, boolean success, String error) {
         this.user = user;
         this.issuer = issuer;
         this.note = note;
@@ -28,11 +29,11 @@ public class NoteAddedEvent extends MCBEvent<NoteAddedEvent> {
         this.user = user;
     }
 
-    public String getIssuer() {
+    public LocalPlayer getIssuer() {
         return issuer;
     }
 
-    public void setIssuer(String issuer) {
+    public void setIssuer(LocalPlayer issuer) {
         this.issuer = issuer;
     }
 

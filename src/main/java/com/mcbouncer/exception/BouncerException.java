@@ -10,4 +10,8 @@ public class BouncerException extends Exception {
 
     public BouncerException() {
     }
+
+    public BouncerException(Throwable thrwbl) {
+        super(thrwbl);
+    }
 }

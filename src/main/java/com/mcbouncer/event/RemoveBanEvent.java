@@ -1,27 +1,29 @@
 package com.mcbouncer.event;
 
+import com.mcbouncer.LocalPlayer;
 import com.mcbouncer.util.BanType;
+import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
-public class RemoveBanEvent extends MCBEvent<RemoveBanEvent> {
+public class RemoveBanEvent extends MCBEvent<RemoveBanEvent> implements Cancellable {
 
-    private String issuer;
+    private LocalPlayer issuer;
     private String user;
     private BanType banType;
     public static final MCBHandlerList<RemoveBanEvent> handlers = new MCBHandlerList<RemoveBanEvent>();
 
-    public RemoveBanEvent(BanType banType, String issuer, String user) {
+    public RemoveBanEvent(BanType banType, LocalPlayer issuer, String user) {
         this.banType = banType;
         this.issuer = issuer;
         this.user = user;
     }
 
-    public String getIssuer() {
+    public LocalPlayer getIssuer() {
         return issuer;
     }
 
-    public void setIssuer(String issuer) {
+    public void setIssuer(LocalPlayer issuer) {
         this.issuer = issuer;
     }
 
@@ -49,5 +51,10 @@ public class RemoveBanEvent extends MCBEvent<RemoveBanEvent> {
     @Override
     protected String getEventName() {
         return "RemoveBan";
+    }
+    
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

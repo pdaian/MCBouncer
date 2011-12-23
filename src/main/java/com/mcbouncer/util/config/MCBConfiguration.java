@@ -101,7 +101,7 @@ public class MCBConfiguration {
         return showBanMessages;
     }
 
-    public static String getDefaultKickMessage() {
+    public static String getDefaultKickReason() {
         return defaultKickMessage;
     }
 }

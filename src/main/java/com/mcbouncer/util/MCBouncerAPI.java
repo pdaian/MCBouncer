@@ -216,7 +216,7 @@ public class MCBouncerAPI {
     }
 
     private static Object setError(String e) {
-        MCBouncerAPI.lastFailure = (String) e;
+        MCBouncerAPI.lastFailure = e;
         return null;
     }
 
