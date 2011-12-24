@@ -18,6 +18,11 @@
             <version>1.0.1-R1</version>
         </dependency>
         <dependency>
+            <groupId>org.getspout</groupId>
+            <artifactId>spoutpluginapi</artifactId>
+            <version>dev-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1</version>
@@ -106,7 +111,8 @@
                         <configuration>
                             <artifactSet>
                                 <excludes>
-                                    <exclude>org.bukkit:bukkit</exclude>
+                                    <exclude>org.bukkit:*</exclude>
+                                    <exclude>org.getspout:*</exclude>
                                 </excludes>
                             </artifactSet>
                         </configuration>
@@ -143,6 +149,16 @@
                 <enabled>true</enabled>
             </releases>
             <url>http://repo.bukkit.org/artifactory/repo</url>
+        </repository>
+        <repository>
+            <id>spout-repo</id>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <url>http://nexus.getspout.org/content/groups/public/</url>
         </repository>
     </repositories>
 </project>

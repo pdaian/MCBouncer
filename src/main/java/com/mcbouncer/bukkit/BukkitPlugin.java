@@ -10,7 +10,7 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class MCBouncerPlugin extends JavaPlugin implements LocalPlugin {
+public class BukkitPlugin extends JavaPlugin implements LocalPlugin {
 
     protected MCBouncer controller;
     
