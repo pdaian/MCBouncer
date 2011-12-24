@@ -25,7 +25,6 @@ import java.util.List;
  * 
  * TODO: Document everything!
  * TODO: Implement the remaining unused configuration nodes
- * TODO: Find some way to reduce the amount of shading.
  * 
  */
 public class MCBouncer {
