@@ -2,7 +2,9 @@ package com.mcbouncer.commands;
 
 import com.mcbouncer.LocalPlayer;
 import com.mcbouncer.MCBouncer;
+import com.mcbouncer.commands.events.AddGlobalNoteEvent;
 import com.mcbouncer.commands.events.AddNoteEvent;
+import com.mcbouncer.commands.events.GlobalNoteAddedEvent;
 import com.mcbouncer.commands.events.NoteAddedEvent;
 import com.mcbouncer.commands.events.NoteRemovedEvent;
 import com.mcbouncer.commands.events.RemoveNoteEvent;
@@ -26,10 +28,8 @@ public class NoteCommands extends CommandContainer {
     desc = "Add a note to a username",
     min = 1,
     max = -1)
-    @CommandPermissions("mcbouncer.mod")
+    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.addnote"})
     public void addnote(CommandContext args, LocalPlayer sender) throws CommandException {
-
-        //TODO: Global notes
 
         String toNote = controller.getPlugin().getPlayerName(args.getString(0));
         String note = args.getJoinedStrings(1);
@@ -73,13 +73,64 @@ public class NoteCommands extends CommandContainer {
         }
 
     }
+    
+    @Command(aliases = {"addgnote", "addglobalnote"},
+    usage = "<username> <text>",
+    desc = "Add a global note to a username",
+    min = 1,
+    max = -1)
+    @CommandPermissions(value={"mcbouncer.admin", "mcbouncer.command.addnote.global"})
+    public void addgnote(CommandContext args, LocalPlayer sender) throws CommandException {
+
+        String toNote = controller.getPlugin().getPlayerName(args.getString(0));
+        String note = args.getJoinedStrings(1);
+
+        AddGlobalNoteEvent addNoteEvent = new AddGlobalNoteEvent(toNote, sender, note);
+        MCBEventHandler.callEvent(addNoteEvent);
+
+        if (addNoteEvent.isCancelled()) {
+            return;
+        }
+
+        toNote = addNoteEvent.getUser();
+        sender = addNoteEvent.getIssuer();
+        note = addNoteEvent.getNote();
+
+        boolean success = false;
+        String error = "";
+        try {
+            if (controller.getAPI().addGlobalNote(sender.getName(), toNote, note)) {
+                controller.getLogger().info(sender.getName() + " added global note to " + toNote + " - " + note);
+                success = true;
+            }
+            else {
+                error = "Unknown error";
+            }
+        } catch (NetworkException ex) {
+            controller.getLogger().severe("Network error!", ex);
+            error = ex.getMessage();
+        } catch (APIException ex) {
+            controller.getLogger().severe("API error!", ex);
+            error = ex.getMessage();
+        }
+
+        GlobalNoteAddedEvent noteAddedEvent = new GlobalNoteAddedEvent(toNote, sender, note, success, error);
+        MCBEventHandler.callEvent(noteAddedEvent);
+
+        if (success) {
+            sender.sendMessage(ChatColor.GREEN + "Global note added to " + toNote + " successfully.");
+        } else {
+            sender.sendMessage(ChatColor.RED + error);
+        }
+
+    }
 
     @Command(aliases = {"removenote", "delnote"},
     usage = "<note id>",
     desc = "Remove a note ID",
     min = 1,
     max = 1)
-    @CommandPermissions("mcbouncer.mod")
+    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.removenote"})
     public void removenote(CommandContext args, LocalPlayer sender) throws CommandException {
 
         Integer toRemove = args.getInteger(0);

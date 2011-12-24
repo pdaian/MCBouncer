@@ -273,4 +273,8 @@ public class MCBouncerAPI {
     public boolean addNote(String issuer, String user, String note) throws NetworkException, APIException {
         return addSomething("Note", issuer, user, note);
     }
+    
+    public boolean addGlobalNote(String issuer, String user, String note) throws NetworkException, APIException {
+        return addSomething("GlobalNote", issuer, user, note);
+    }
 }

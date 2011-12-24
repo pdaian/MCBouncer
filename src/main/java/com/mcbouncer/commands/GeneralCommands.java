@@ -29,7 +29,7 @@ public class GeneralCommands extends CommandContainer {
     desc = "Gets info about a username.",
     min = 1,
     max = 1)
-    @CommandPermissions("mcbouncer.mod")
+    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.lookup"})
     public void lookup(CommandContext args, LocalPlayer sender) throws CommandException {
 
         try {
@@ -79,7 +79,7 @@ public class GeneralCommands extends CommandContainer {
     desc = "Kicks a username",
     min = 1,
     max = 2)
-    @CommandPermissions("mcbouncer.mod")
+    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.kick"})
     public void kick(CommandContext args, LocalPlayer sender) throws CommandException {
 
         String toKick = controller.getPlugin().getPlayerName(args.getString(0));

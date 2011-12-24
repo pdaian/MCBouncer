@@ -69,7 +69,7 @@ public class MCBouncerCommands extends CommandContainer {
     
     @Command(aliases = {"reload"},
     desc = "Reloads MCBouncer configuration")
-    @CommandPermissions("mcbouncer.admin")
+    @CommandPermissions(value={"mcbouncer.admin", "mcbouncer.command.reload"})
     public void reload(CommandContext args, LocalPlayer sender) throws CommandException {
 
         controller.getConfiguration().load();

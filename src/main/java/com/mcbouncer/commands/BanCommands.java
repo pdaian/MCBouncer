@@ -2,7 +2,6 @@ package com.mcbouncer.commands;
 
 import com.mcbouncer.LocalPlayer;
 import com.mcbouncer.MCBouncer;
-import com.mcbouncer.api.MCBouncerAPI;
 import com.mcbouncer.commands.events.AddBanEvent;
 import com.mcbouncer.commands.events.BanAddedEvent;
 import com.mcbouncer.commands.events.BanRemovedEvent;
@@ -29,7 +28,7 @@ public class BanCommands extends CommandContainer {
     desc = "Ban a username",
     min = 1,
     max = -1)
-    @CommandPermissions("mcbouncer.mod")
+    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.ban"})
     public void ban(CommandContext args, LocalPlayer sender) throws CommandException {
 
         String toBan = controller.getPlugin().getPlayerName(args.getString(0));
@@ -86,7 +85,7 @@ public class BanCommands extends CommandContainer {
     desc = "Unban a username",
     min = 1,
     max = 1)
-    @CommandPermissions("mcbouncer.mod")
+    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.unban"})
     public void unban(CommandContext args, LocalPlayer sender) throws CommandException {
 
         String toUnban = args.getString(0);
@@ -135,7 +134,7 @@ public class BanCommands extends CommandContainer {
     desc = "Ban an IP.",
     min = 1,
     max = -1)
-    @CommandPermissions("mcbouncer.mod")
+    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.banip"})
     public void banIP(CommandContext args, LocalPlayer sender) throws CommandException {
 
         String toBanIP = controller.getPlugin().getIPAddress(args.getString(0));
@@ -201,7 +200,7 @@ public class BanCommands extends CommandContainer {
     desc = "Unban an IP",
     min = 1,
     max = 1)
-    @CommandPermissions("mcbouncer.mod")
+    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.unbanip"})
     public void unbanip(CommandContext args, LocalPlayer sender) throws CommandException {
 
         String toUnban = args.getString(0);
