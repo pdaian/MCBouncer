@@ -73,7 +73,7 @@ public class BukkitPlayerListener extends PlayerListener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         String name = event.getPlayer().getName();
         String ip = event.getPlayer().getAddress().getAddress().getHostAddress();
-        
+
         Thread r = new PlayerJoinThread(name, ip, event.getJoinMessage());
         r.start();
         event.setJoinMessage(null);
