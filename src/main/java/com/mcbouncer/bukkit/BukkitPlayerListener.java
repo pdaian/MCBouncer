@@ -1,4 +1,4 @@
-package com.mcbouncer.bukkit.listeners;
+package com.mcbouncer.bukkit;
 
 import com.mcbouncer.MCBouncer;
 import com.mcbouncer.event.ChatEvent;
@@ -16,6 +16,12 @@ import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerPreLoginEvent.Result;
 
+/**
+ * Main listener class for Bukkit. Very little logic is handled
+ * here. The purpose of this class is to connect Bukkit events
+ * to generic internal kick, login, etc. events. 
+ * 
+ */
 public class BukkitPlayerListener extends PlayerListener {
 
     protected MCBouncer controller;
@@ -24,6 +30,15 @@ public class BukkitPlayerListener extends PlayerListener {
         this.controller = controller;
     }
 
+    /**
+     * Bukkit PreLogin event, calls the internal LoginEvent.
+     * 
+     * If the event is cancelled, it means that the user
+     * is already trying to log in, and this event should
+     * be disallowed.
+     * 
+     * @param event 
+     */
     @Override
     public void onPlayerPreLogin(PlayerPreLoginEvent event) {
         LoginEvent newEvent = new LoginEvent(controller, event.getName());
@@ -35,6 +50,15 @@ public class BukkitPlayerListener extends PlayerListener {
 
     }
 
+    /**
+     * Bukkit Command event, calls the internal CommandEvent.
+     * 
+     * This basically checks if a user is still trying to log in,
+     * and if so, to disallow the event. This is to prevent users
+     * from spamming chat in the time that it takes to do a lookup.
+     * 
+     * @param event 
+     */
     @Override
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
         if (event.getPlayer() instanceof Player) {
@@ -47,6 +71,15 @@ public class BukkitPlayerListener extends PlayerListener {
         }
     }
 
+    /**
+     * Bukkit Chat event, calls the internal ChatEvent.
+     * 
+     * This basically checks if a user is still trying to log in,
+     * and if so, to disallow the event. This is to prevent users
+     * from spamming chat in the time that it takes to do a lookup.
+     * 
+     * @param event 
+     */
     @Override
     public void onPlayerChat(PlayerChatEvent event) {
         if (event.getPlayer() instanceof Player) {
@@ -59,6 +92,16 @@ public class BukkitPlayerListener extends PlayerListener {
         }
     }
 
+    /**
+     * Bukkit Kick event, calls the internal KickEvent.
+     * 
+     * This is part of the threading logic. If the event
+     * is cancelled, this means that the leave message
+     * should be cancelled. This will kick the user
+     * without showing it to other players.
+     * 
+     * @param event 
+     */
     @Override
     public void onPlayerKick(PlayerKickEvent event) {
         KickEvent newEvent = new KickEvent(controller, event.getPlayer().getName());
@@ -69,6 +112,18 @@ public class BukkitPlayerListener extends PlayerListener {
         }
     }
 
+    /**
+     * Bukkit Join event, calls the internal JoinEvent.
+     * 
+     * This is part of the threading logic. The join
+     * message is always cancelled, to prevent a join
+     * message for banned users while a lookup is in
+     * progress. If they are not banned, it should do
+     * a global broadcast of a join message to make up
+     * for the missing join message earlier.
+     * 
+     * @param event 
+     */
     @Override
     public void onPlayerJoin(PlayerJoinEvent event) {
         String name = event.getPlayer().getName();
@@ -79,6 +134,11 @@ public class BukkitPlayerListener extends PlayerListener {
         event.setJoinMessage(null);
     }
 
+    /**
+     * Thread class to connect to the MCBouncer server
+     * in a thread. This lets users into the server quicker,
+     * and prevents banned users from spamming the server.
+     */
     public class PlayerJoinThread extends Thread {
 
         protected String player;

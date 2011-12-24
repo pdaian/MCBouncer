@@ -16,9 +16,7 @@ import org.apache.commons.collections.CollectionUtils;
  * to call these methods using node syntax (key/key/key) instead
  * of Map.get(Map.get()) and whatnot. 
  * 
- * TODO: Debug method
- * 
- * @author bukkit
+ * @author yetanotherx
  */
 public class MapNode {
 

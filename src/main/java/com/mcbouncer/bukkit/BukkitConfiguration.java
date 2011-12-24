@@ -9,9 +9,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * TODO: Implement the remaining config nodes
+ * Implementation of the LocalConfiguration interface. 
+ * It uses YAML to load in a config.yml file, but it
+ * extends MapNode as well, so standard node accessors
+ * can be used on it.
  * 
- * @author yetanotherx
+ * @author sk89q
  */
 public class BukkitConfiguration extends LocalConfiguration {
 
@@ -21,6 +24,12 @@ public class BukkitConfiguration extends LocalConfiguration {
         this.dataFolder = dataFolder;
     }
     
+    /**
+     * Loads the config.yml file. If it doesn't
+     * exist, it copies the file in the defaults/
+     * folder in the jar to the right location
+     * 
+     */
     @Override
     public void load() {
         
@@ -64,12 +73,7 @@ public class BukkitConfiguration extends LocalConfiguration {
         YAMLFileNode node = new YAMLFileNode(file);
         node.load();
         this.conf = node;
-//TODO: Broken
-        setSettings();
         
-    }
-
-    protected void setSettings() {
         debugMode = conf.getBoolean("debug", debugMode);
         apiKey = conf.getString("apiKey", apiKey);
         numBansDisallow = conf.getInteger("numBansDisallow", numBansDisallow);

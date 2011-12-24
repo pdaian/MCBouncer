@@ -5,6 +5,16 @@ import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBHandlerList;
 import net.lahwran.fevents.MCBEvent;
 
+/**
+ * Called before a player is kicked. 
+ * 
+ * Cancelling this event cancels the kick, and
+ * the user will be allowed to roam free. 
+ * 
+ * Any fields modified here will be the variables
+ * that get acted upon. 
+ * 
+ */
 public class PlayerKickEvent extends MCBEvent<PlayerKickEvent> implements Cancellable {
 
     private String user;

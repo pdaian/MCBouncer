@@ -5,6 +5,12 @@ import com.mcbouncer.util.BanType;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Called after a ban is added. 
+ * 
+ * This event cannot be cancelled.
+ * 
+ */
 public class BanAddedEvent extends MCBEvent<BanAddedEvent> {
 
     private String user;

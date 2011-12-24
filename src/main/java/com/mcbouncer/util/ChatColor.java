@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * From Bukkit, used so non-bukkit versions can use ChatColor
+ * Stores color codes in an easy to use format.
+ * 
+ * From Bukkit.
+ * 
  */
 public enum ChatColor {
 

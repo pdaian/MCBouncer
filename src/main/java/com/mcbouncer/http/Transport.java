@@ -25,6 +25,15 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpProtocolParams;
 
+/**
+ * Core HTTP transport class. Handles connecting to a server,
+ * filling in a Response object, cookies (which we don't use), 
+ * timeouts, post requests (which we don't use either), and error
+ * handling.
+ * 
+ * It uses HTTPComponents to handle the actual networking.
+ * 
+ */
 public class Transport {
 
     protected Request request;

@@ -7,6 +7,12 @@ import com.mcbouncer.exception.NetworkException;
 import com.mcbouncer.util.ChatColor;
 import net.lahwran.fevents.MCBListener;
 
+/**
+ * Listener for internal join event.
+ * 
+ * See JoinEvent for description of event.
+ * 
+ */
 public class JoinListener implements MCBListener<JoinEvent> {
 
     public void onEvent(JoinEvent event) {
@@ -19,13 +25,13 @@ public class JoinListener implements MCBListener<JoinEvent> {
 
             if (controller.getAPI().isBanned(username)) {
                 controller.setLastKickedUser(username);
-                controller.getPlugin().kickPlayer(username, "Banned: " + controller.getAPI().getBanReason(username));
+                controller.getServer().kickPlayer(username, "Banned: " + controller.getAPI().getBanReason(username));
                 controller.getLogger().info(username + " attempted to join with IP " + ip);
                 return;
             }
             if (controller.getAPI().isIPBanned(ip)) {
                 controller.setLastKickedUser(username);
-                controller.getPlugin().kickPlayer(username, "Banned: " + controller.getAPI().getIPBanReason(ip));
+                controller.getServer().kickPlayer(username, "Banned: " + controller.getAPI().getIPBanReason(ip));
                 controller.getLogger().info(username + " attempted to join with IP " + ip);
                 return;
             }
@@ -40,7 +46,7 @@ public class JoinListener implements MCBListener<JoinEvent> {
                 } else {
                     response += numBans + " ban" + (numBans == 1 ? "" : "s") + " and " + numNotes + " note" + (numNotes == 1 ? "." : "s.");
                 }
-                controller.getPlugin().messageMods(ChatColor.GREEN + response);
+                controller.getServer().messageMods(ChatColor.GREEN + response);
             }
         } catch (NetworkException ne) {
             controller.getLogger().severe("Uh oh! Network error occurred!", ne);
@@ -49,7 +55,7 @@ public class JoinListener implements MCBListener<JoinEvent> {
         }
 
         controller.getCurrentlyLoggingIn().remove(username);
-        controller.getPlugin().broadcastMessage(event.getMessage());
+        controller.getServer().broadcastMessage(event.getMessage());
 
     }
 }

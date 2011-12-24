@@ -5,7 +5,6 @@ import java.util.HashMap;
 /**
  * Static list of all error codes and their meanings
  * 
- * @author yetanotherx
  */
 public class WebResponseCodes {
 

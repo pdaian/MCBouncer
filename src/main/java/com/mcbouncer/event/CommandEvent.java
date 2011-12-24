@@ -5,6 +5,13 @@ import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Internal generic incoming command event.
+ * 
+ * Cancelling this event will prevent the command
+ * from being executed.
+ * 
+ */
 public class CommandEvent extends MCBEvent<CommandEvent> implements Cancellable {
 
     protected MCBouncer controller;

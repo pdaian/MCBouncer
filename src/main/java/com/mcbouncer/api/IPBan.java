@@ -2,6 +2,11 @@ package com.mcbouncer.api;
 
 import com.mcbouncer.util.node.MapNode;
 
+/**
+ * Stores data about an IP Ban that was
+ * retrieved from the MCBouncer website.
+ * 
+ */
 public class IPBan {
 
     protected String ip;

@@ -9,6 +9,12 @@ import org.apache.http.cookie.Cookie;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * Response container class. Contains any headers that were
+ * sent, cookies, content type, length, and a JSON object if
+ * one requests it.
+ * 
+ */
 public class Response {
 
     protected MCBouncer controller;
@@ -24,6 +30,14 @@ public class Response {
         this.controller = controller;
     }
 
+    /**
+     * Parses the result as a JSON string. 
+     * 
+     * If it's not JSON-formatted, it will throw a ParserException.
+     * Otherwise, it will return a JSONNode with the data.
+     * 
+     * @return 
+     */
     @SuppressWarnings("unchecked")
     public JSONNode getJSONResult() {
         if (jsonObject == null) {

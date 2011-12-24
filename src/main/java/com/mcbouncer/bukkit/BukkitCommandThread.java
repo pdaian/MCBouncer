@@ -6,6 +6,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+/**
+ * Thread which runs Bukkit commands in
+ * the background. This prevents a website
+ * error from bringing down the entire game,
+ * as well as preventing long-running commands
+ * from interfering with play.
+ * 
+ */
 public class BukkitCommandThread extends Thread {
 
     public MCBouncer controller;
@@ -22,6 +30,11 @@ public class BukkitCommandThread extends Thread {
         this.args = args;
     }
 
+    /**
+     * Runs the command. If the onCommand method returns false,
+     * it will show an error message in the form of a usage line.
+     * 
+     */
     @Override
     public void run() {
         if (!this.onCommand()) {
@@ -32,7 +45,14 @@ public class BukkitCommandThread extends Thread {
             }
         }
     }
-
+    
+    /**
+     * Handles the incoming Bukkit command data,
+     * transforms it into generic data that MCBouncer
+     * can read, and sends it to the controller.
+     * 
+     * @return 
+     */
     public boolean onCommand() {
         
         String[] split = new String[args.length + 1];

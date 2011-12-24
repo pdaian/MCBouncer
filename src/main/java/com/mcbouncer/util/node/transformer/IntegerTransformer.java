@@ -6,7 +6,6 @@ import org.apache.commons.collections.Transformer;
  * Apache Commons collection transformer
  * Transforms objects to integers.
  * 
- * @author yetanotherx
  */
 public class IntegerTransformer implements Transformer {
 

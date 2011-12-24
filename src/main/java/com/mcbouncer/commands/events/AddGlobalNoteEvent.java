@@ -5,6 +5,17 @@ import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Called before a global is added. 
+ * 
+ * Cancelling this event cancels the addition
+ * of the note, and the user will not have a
+ * note attached.
+ * 
+ * Any fields modified here will be the variables
+ * that get acted upon. 
+ * 
+ */
 public class AddGlobalNoteEvent extends MCBEvent<AddGlobalNoteEvent> implements Cancellable {
 
     private String user;

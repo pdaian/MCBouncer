@@ -5,6 +5,17 @@ import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Called before a note is added. 
+ * 
+ * Cancelling this event cancels the removal
+ * of the note, and the user will still have
+ * an attached note.
+ * 
+ * Any fields modified here will be the variables
+ * that get acted upon. 
+ * 
+ */
 public class RemoveNoteEvent extends MCBEvent<RemoveNoteEvent> implements Cancellable {
 
     private LocalPlayer issuer;

@@ -2,6 +2,11 @@ package com.mcbouncer.api;
 
 import com.mcbouncer.util.node.MapNode;
 
+/**
+ * Stores data about a note that was
+ * retrieved from the MCBouncer website.
+ * 
+ */
 public class UserNote {
 
     protected Integer noteId;

@@ -11,6 +11,22 @@ import com.mcbouncer.util.node.MapNode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used to interact with the MCBouncer website
+ * itself. Each method throws NetworkException and
+ * APIException. 
+ * 
+ * APIException is thrown when there is a problem 
+ * parsing the API result. NetworkException is thrown 
+ * when there is a problem contacting the website.
+ * 
+ * All URLs that contain an API key are obfuscated with
+ * /apiUNIQKey/ until they get sent to getURL(). This is 
+ * to prevent debug messages unintentionally revealing
+ * a server's API key. This also prevents stack traces
+ * revealing the key.
+ * 
+ */
 public class MCBouncerAPI {
 
     protected MCBouncer controller;
@@ -19,11 +35,13 @@ public class MCBouncerAPI {
         this.controller = controller;
     }
 
-    protected Response getURL(String url) throws NetworkException {
+    protected Response getAPIURL(String url) throws NetworkException {
         controller.getLogger().debug("Getting URL - " + url);
-        url = url.replaceAll("apiKey", getKey());
-
-        Transport transport = controller.getTransport();
+        
+        url = url.replaceAll("apiUNIQKey", controller.getConfiguration().getAPIKey()); //Replaces apiUNIQKey with the real key
+        url = controller.getConfiguration().getWebsite() + "/api" + url; //Appends the website
+        
+        Transport transport = new Transport(controller);
         Request request = new Request(controller);
         request.setURL(url);
         transport.setRequest(request);
@@ -31,17 +49,9 @@ public class MCBouncerAPI {
         return transport.sendURL();
     }
 
-    protected String getKey() {
-        return controller.getConfiguration().getAPIKey();
-    }
-
-    protected String getWebsite() {
-        return controller.getConfiguration().getWebsite();
-    }
-
     protected Integer getTypeCount(String type, String user) throws NetworkException, APIException {
-        String url = getWebsite() + "/api/get" + type + "Count/apiKey/" + user;
-        Response response = this.getURL(url);
+        String url = "/get" + type + "Count/apiUNIQKey/" + user;
+        Response response = this.getAPIURL(url);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();
@@ -75,8 +85,8 @@ public class MCBouncerAPI {
     }
 
     public List<UserBan> getBans(String user) throws NetworkException, APIException {
-        String url = getWebsite() + "/api/getBans/apiKey/" + user;
-        Response response = this.getURL(url);
+        String url = "/getBans/apiUNIQKey/" + user;
+        Response response = this.getAPIURL(url);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();
@@ -99,8 +109,8 @@ public class MCBouncerAPI {
     }
 
     public List<IPBan> getIPBans(String ip) throws NetworkException, APIException {
-        String url = getWebsite() + "/api/getIPBans/apiKey/" + ip;
-        Response response = this.getURL(url);
+        String url = "/getIPBans/apiUNIQKey/" + ip;
+        Response response = this.getAPIURL(url);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();
@@ -123,8 +133,8 @@ public class MCBouncerAPI {
     }
 
     public List<UserNote> getNotes(String user) throws NetworkException, APIException {
-        String url = getWebsite() + "/api/getNotes/apiKey/" + user;
-        Response response = this.getURL(url);
+        String url = "/getNotes/apiUNIQKey/" + user;
+        Response response = this.getAPIURL(url);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();
@@ -147,8 +157,8 @@ public class MCBouncerAPI {
     }
 
     public boolean updateUser(String user, String ip) throws NetworkException, APIException {
-        String url = getWebsite() + "/api/getBans/apiKey/" + user + "/" + ip;
-        Response response = this.getURL(url);
+        String url = "/getBans/apiUNIQKey/" + user + "/" + ip;
+        Response response = this.getAPIURL(url);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();
@@ -162,8 +172,8 @@ public class MCBouncerAPI {
     }
 
     protected String getReason(String type, String user) throws NetworkException, APIException {
-        String url = getWebsite() + "/api/get" + type + "Reason/apiKey/" + user;
-        Response response = this.getURL(url);
+        String url = "/get" + type + "Reason/apiUNIQKey/" + user;
+        Response response = this.getAPIURL(url);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();
@@ -189,8 +199,8 @@ public class MCBouncerAPI {
     }
 
     protected boolean isBanned(String type, String user) throws NetworkException, APIException {
-        String url = getWebsite() + "/api/get" + type + "Reason/apiKey/" + user;
-        Response response = this.getURL(url);
+        String url = "/get" + type + "Reason/apiUNIQKey/" + user;
+        Response response = this.getAPIURL(url);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();
@@ -216,12 +226,12 @@ public class MCBouncerAPI {
     }
 
     protected boolean removeSomething(String type, String first, String second) throws NetworkException, APIException {
-        String url = getWebsite() + "/api/remove" + type + "/apiKey/" + first;
+        String url = "/remove" + type + "/apiUNIQKey/" + first;
         if (second != null) {
             url += "/" + second;
         }
 
-        Response response = this.getURL(url);
+        Response response = this.getAPIURL(url);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();
@@ -247,9 +257,9 @@ public class MCBouncerAPI {
     }
 
     protected boolean addSomething(String type, String issuer, String user, String reason) throws NetworkException, APIException {
-        String url = getWebsite() + "/api/add" + type + "/apiKey/" + issuer + "/" + user + "/" + reason;
+        String url = "/add" + type + "/apiUNIQKey/" + issuer + "/" + user + "/" + reason;
 
-        Response response = this.getURL(url);
+        Response response = this.getAPIURL(url);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();

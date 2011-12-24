@@ -5,6 +5,15 @@ import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Internal generic login event.
+ * 
+ * Cancelling this event will prevent the user
+ * from logging in. The only time it should be
+ * cancelled is if a lookup is still being done
+ * on a user.
+ * 
+ */
 public class LoginEvent extends MCBEvent<LoginEvent> implements Cancellable {
     
     protected MCBouncer controller;

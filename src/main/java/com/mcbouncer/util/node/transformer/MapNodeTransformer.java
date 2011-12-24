@@ -8,7 +8,6 @@ import org.apache.commons.collections.Transformer;
  * Apache Commons collection transformer
  * Transforms objects to MapNodes.
  * 
- * @author yetanotherx
  */
 public class MapNodeTransformer implements Transformer {
 

@@ -7,6 +7,12 @@ import java.util.List;
 import java.util.Map;
 import org.apache.http.Header;
 
+/**
+ * Request container class. Contains a URL, method, parameters,
+ * HTTP headers to send, etc. We don't use too much of this now,
+ * but in the future, it may be useful.
+ * 
+ */
 public class Request {
 
     protected MCBouncer controller;

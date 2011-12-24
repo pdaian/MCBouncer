@@ -2,6 +2,12 @@ package com.mcbouncer.util;
 
 import java.util.Map;
 
+/**
+ * Contains various utilities that make code prettier.
+ * 
+ * The join methods are from Apache Commons.
+ * 
+ */
 public class MiscUtils {
 
     // Joining

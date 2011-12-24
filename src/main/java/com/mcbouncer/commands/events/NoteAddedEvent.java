@@ -4,6 +4,12 @@ import com.mcbouncer.LocalPlayer;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Called after a note is added. 
+ * 
+ * This event cannot be cancelled.
+ * 
+ */
 public class NoteAddedEvent extends MCBEvent<NoteAddedEvent> {
 
     protected String user;

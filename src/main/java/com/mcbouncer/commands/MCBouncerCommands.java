@@ -11,6 +11,10 @@ import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * Contains subcommands of the /mcbouncer command. 
+ * 
+ */
 public class MCBouncerCommands extends CommandContainer {
 
     public MCBouncerCommands(MCBouncer controller) {

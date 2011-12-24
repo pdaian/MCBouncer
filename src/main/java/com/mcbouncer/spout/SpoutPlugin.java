@@ -1,8 +1,8 @@
 package com.mcbouncer.spout;
 
-import com.mcbouncer.LocalPlugin;
+import com.mcbouncer.LocalServer;
 
-public class SpoutPlugin implements LocalPlugin {
+public class SpoutPlugin implements LocalServer {
 
     public boolean isPlayerOnline(String name) {
         throw new UnsupportedOperationException("Not supported yet.");

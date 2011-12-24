@@ -1,13 +1,9 @@
 package com.mcbouncer.bukkit;
 
 import com.mcbouncer.LocalConfiguration;
-import com.mcbouncer.LocalPlugin;
+import com.mcbouncer.LocalServer;
 import com.mcbouncer.MCBouncer;
-import com.mcbouncer.bukkit.listeners.BukkitPlayerListener;
-import com.mcbouncer.commands.events.PlayerKickEvent;
 import com.mcbouncer.util.NetUtils;
-import net.lahwran.fevents.MCBListener;
-import net.lahwran.fevents.Order;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -15,24 +11,19 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class BukkitPlugin extends JavaPlugin implements LocalPlugin {
-
-    private static class ThisListener implements MCBListener<PlayerKickEvent> {
-
-        private static boolean run = false;
-        public ThisListener() {
-        }
-
-        public void onEvent(PlayerKickEvent event) {
-            System.out.println(event.getPlayer());
-            if( run ) {
-                event.setCancelled(true);
-            }
-            else {
-                run = true;
-            }
-        }
-    }
+/**
+ * Implementation of the LocalServer interface. It
+ * is the main plugin class for Bukkit. It extends
+ * JavaPlugin, and is set as the main class in plugin.yml.
+ * 
+ * It registers the configuration, sets the main controller,
+ * registers the pseudo-listeners, interprets commands,
+ * as well as implementing many of the server-specific 
+ * methods that need to be called during the execution of
+ * this plugin.
+ * 
+ */
+public class BukkitPlugin extends JavaPlugin implements LocalServer {
 
     protected MCBouncer controller;
     
@@ -52,7 +43,6 @@ public class BukkitPlugin extends JavaPlugin implements LocalPlugin {
         
         setupListeners();
         
-        PlayerKickEvent.handlers.register(new ThisListener(), Order.Late);
     }
     
     protected void setupListeners() {

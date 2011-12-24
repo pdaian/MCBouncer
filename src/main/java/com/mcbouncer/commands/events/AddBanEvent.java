@@ -6,6 +6,17 @@ import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBHandlerList;
 import net.lahwran.fevents.MCBEvent;
 
+/**
+ * Called before a ban is added. 
+ * 
+ * Cancelling this event cancels the addition
+ * of the ban, and the user will be allowed to
+ * roam free. 
+ * 
+ * Any fields modified here will be the variables
+ * that get acted upon. 
+ * 
+ */
 public class AddBanEvent extends MCBEvent<AddBanEvent> implements Cancellable {
 
     private String user;

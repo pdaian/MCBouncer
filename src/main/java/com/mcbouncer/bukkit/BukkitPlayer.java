@@ -4,6 +4,12 @@ import com.mcbouncer.LocalPlayer;
 import com.mcbouncer.MCBouncer;
 import org.bukkit.entity.Player;
 
+/**
+ * Implementation of the LocalPlayer interface. This is
+ * used when a command is called from in game. It is then
+ * sent to the command controllers.
+ * 
+ */
 public class BukkitPlayer implements LocalPlayer {
 
     protected MCBouncer controller;

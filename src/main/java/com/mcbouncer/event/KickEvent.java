@@ -5,6 +5,14 @@ import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Internal generic kick event.
+ * 
+ * WARNING: Cancelling this event will prevent 
+ * the quit message from being shown, not prevent
+ * the user from being kicked!
+ * 
+ */
 public class KickEvent extends MCBEvent<KickEvent> implements Cancellable {
 
     protected MCBouncer controller;

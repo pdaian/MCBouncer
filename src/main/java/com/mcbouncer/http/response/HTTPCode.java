@@ -4,7 +4,6 @@ package com.mcbouncer.http.response;
  * HTTP error code container class. Setting the code or message
  * will automatically set the other variable as well.
  * 
- * @author yetanotherx
  */
 public class HTTPCode {
     

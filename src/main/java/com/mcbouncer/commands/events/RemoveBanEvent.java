@@ -6,6 +6,16 @@ import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Called before a ban is removed. 
+ * 
+ * Cancelling this event cancels the removal
+ * of the ban, and the user will still be banned.
+ * 
+ * Any fields modified here will be the variables
+ * that get acted upon. 
+ * 
+ */
 public class RemoveBanEvent extends MCBEvent<RemoveBanEvent> implements Cancellable {
 
     private LocalPlayer issuer;

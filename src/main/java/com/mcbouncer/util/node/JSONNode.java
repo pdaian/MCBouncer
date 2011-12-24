@@ -6,6 +6,14 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+/**
+ * Extension of MapNode that accepts, in addition 
+ * to the standard Map<String, Object>, a JSONObject
+ * or JSONArray that will be cast to a map. If an
+ * JSONArray is passed, the key each array element will
+ * be the numerical ID of the value.
+ * 
+ */
 public class JSONNode extends MapNode {
 
     @SuppressWarnings("unchecked")

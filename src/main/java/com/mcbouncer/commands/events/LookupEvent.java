@@ -5,6 +5,15 @@ import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Called before a lookup is performed. 
+ * 
+ * Cancelling this event cancels the lookup.
+ * 
+ * Any fields modified here will be the variables
+ * that get acted upon. 
+ * 
+ */
 public class LookupEvent extends MCBEvent<LookupEvent> implements Cancellable {
 
     private LocalPlayer issuer;

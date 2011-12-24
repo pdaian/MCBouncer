@@ -16,6 +16,10 @@ import com.mcbouncer.util.commands.CommandContext;
 import com.mcbouncer.util.commands.CommandPermissions;
 import net.lahwran.fevents.MCBEventHandler;
 
+/**
+ * Contains note-related commands.
+ * 
+ */
 public class NoteCommands extends CommandContainer {
 
     public NoteCommands(MCBouncer controller) {
@@ -30,7 +34,7 @@ public class NoteCommands extends CommandContainer {
     @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.addnote"})
     public void addnote(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
-        String toNote = controller.getPlugin().getPlayerName(args.getString(0));
+        String toNote = controller.getServer().getPlayerName(args.getString(0));
         String note = args.getJoinedStrings(1);
 
         AddNoteEvent addNoteEvent = new AddNoteEvent(toNote, sender, note);
@@ -73,7 +77,7 @@ public class NoteCommands extends CommandContainer {
     @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.command.addnote.global"})
     public void addgnote(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
-        String toNote = controller.getPlugin().getPlayerName(args.getString(0));
+        String toNote = controller.getServer().getPlayerName(args.getString(0));
         String note = args.getJoinedStrings(1);
 
         AddGlobalNoteEvent addNoteEvent = new AddGlobalNoteEvent(toNote, sender, note);

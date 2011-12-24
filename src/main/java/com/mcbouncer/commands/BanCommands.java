@@ -16,6 +16,10 @@ import com.mcbouncer.util.commands.CommandContext;
 import com.mcbouncer.util.commands.CommandPermissions;
 import net.lahwran.fevents.MCBEventHandler;
 
+/**
+ * Container for ban-related commands.
+ * 
+ */
 public class BanCommands extends CommandContainer {
 
     public BanCommands(MCBouncer controller) {
@@ -30,7 +34,7 @@ public class BanCommands extends CommandContainer {
     @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.ban"})
     public void ban(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
-        String toBan = controller.getPlugin().getPlayerName(args.getString(0));
+        String toBan = controller.getServer().getPlayerName(args.getString(0));
         String reason = controller.getConfiguration().getDefaultReason();
 
         if (args.argsLength() > 1) {
@@ -48,7 +52,7 @@ public class BanCommands extends CommandContainer {
         sender = addBanEvent.getIssuer();
         reason = addBanEvent.getReason();
 
-        controller.getPlugin().kickPlayer(toBan, "Banned: " + reason);
+        controller.getServer().kickPlayer(toBan, "Banned: " + reason);
 
         boolean success = false;
         String error = "";
@@ -120,8 +124,8 @@ public class BanCommands extends CommandContainer {
     @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.banip"})
     public void banIP(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
-        String toBanIP = controller.getPlugin().getIPAddress(args.getString(0));
-        String toBanUser = controller.getPlugin().getPlayerName(args.getString(0));
+        String toBanIP = controller.getServer().getIPAddress(args.getString(0));
+        String toBanUser = controller.getServer().getPlayerName(args.getString(0));
         String reason = controller.getConfiguration().getDefaultReason();
 
         if (toBanIP.length() == 0) {
@@ -144,9 +148,9 @@ public class BanCommands extends CommandContainer {
         reason = addBanEvent.getReason();
 
         if (toBanUser.length() != 0) {
-            controller.getPlugin().kickPlayer(toBanUser, "Banned: " + reason);
+            controller.getServer().kickPlayer(toBanUser, "Banned: " + reason);
         } else {
-            controller.getPlugin().kickPlayerWithIP(toBanIP, "Banned: " + reason);
+            controller.getServer().kickPlayerWithIP(toBanIP, "Banned: " + reason);
         }
 
         boolean success = false;

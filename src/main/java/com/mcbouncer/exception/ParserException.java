@@ -1,8 +1,10 @@
 package com.mcbouncer.exception;
 
+/**
+ * Exception for when the JSON parser receives an invalid input
+ * 
+ */
 public class ParserException extends BouncerRuntimeException {
-
-    private static final long serialVersionUID = -2442886939908724203L;
 
     public ParserException() {
         super();

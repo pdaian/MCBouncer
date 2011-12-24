@@ -4,6 +4,15 @@ import com.mcbouncer.MCBouncer;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Internal generic game join event.
+ * 
+ * This is called after the user has logged
+ * in, but before it has joined that game.
+ * 
+ * This event cannot be cancelled.
+ * 
+ */
 public class JoinEvent extends MCBEvent<JoinEvent> {
     
     protected MCBouncer controller;

@@ -18,6 +18,11 @@ import com.mcbouncer.util.commands.NestedCommand;
 import java.util.List;
 import net.lahwran.fevents.MCBEventHandler;
 
+/**
+ * Contains general commands that don't
+ * really fit into any other category.
+ * 
+ */
 public class GeneralCommands extends CommandContainer {
 
     public GeneralCommands(MCBouncer controller) {
@@ -33,8 +38,8 @@ public class GeneralCommands extends CommandContainer {
     public void lookup(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         if (!NetUtils.isIPAddress(args.getString(0))) {
-            String username = controller.getPlugin().getPlayerName(args.getString(0));
-            String ip = controller.getPlugin().getIPAddress(username);
+            String username = controller.getServer().getPlayerName(args.getString(0));
+            String ip = controller.getServer().getIPAddress(username);
 
             LookupEvent lookupEvent = new LookupEvent(sender, username);
             MCBEventHandler.callEvent(lookupEvent);
@@ -92,7 +97,7 @@ public class GeneralCommands extends CommandContainer {
     @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.kick"})
     public void kick(CommandContext args, LocalPlayer sender) throws CommandException {
 
-        String toKick = controller.getPlugin().getPlayerName(args.getString(0));
+        String toKick = controller.getServer().getPlayerName(args.getString(0));
         String reason = controller.getConfiguration().getDefaultKickReason();
 
         if (args.argsLength() > 1) {
@@ -110,11 +115,11 @@ public class GeneralCommands extends CommandContainer {
         sender = playerKickEvent.getIssuer();
         reason = playerKickEvent.getReason();
 
-        if (!controller.getPlugin().isPlayerOnline(toKick)) {
+        if (!controller.getServer().isPlayerOnline(toKick)) {
             throw new CommandException(ChatColor.RED + toKick + " is not online");
         }
 
-        controller.getPlugin().kickPlayer(toKick, "Kicked: " + reason);
+        controller.getServer().kickPlayer(toKick, "Kicked: " + reason);
         controller.getLogger().info(sender.getName() + " kicked " + toKick + " - " + reason);
         sender.sendMessage(ChatColor.GREEN + "User " + toKick + " kicked successfully.");
 

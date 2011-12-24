@@ -14,7 +14,6 @@ import org.apache.http.message.BasicNameValuePair;
  * Useful HTTP utilities. URL encoding/decoding, also makes a query
  * string out of a Request object
  * 
- * @author yetanotherx
  */
 public class HTTPUtils {
 

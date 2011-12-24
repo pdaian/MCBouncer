@@ -5,6 +5,13 @@ import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Internal generic incoming chat event.
+ * 
+ * Cancelling this event will prevent the message
+ * from being shown.
+ * 
+ */
 public class ChatEvent extends MCBEvent<ChatEvent> implements Cancellable {
 
     protected MCBouncer controller;

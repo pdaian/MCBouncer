@@ -2,6 +2,11 @@ package com.mcbouncer;
 
 import com.mcbouncer.util.node.MapNode;
 
+/**
+ * Base configuration class. Implementations of this class
+ * should use the load() method to fill in all the fields.
+ * 
+ */
 public abstract class LocalConfiguration {
 
     protected boolean debugMode = false;

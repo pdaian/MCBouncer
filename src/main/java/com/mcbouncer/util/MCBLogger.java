@@ -4,6 +4,12 @@ import com.mcbouncer.MCBouncer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Main logger controller, adds debug logging. If
+ * the configuration file says debug: true, then debug
+ * messages will be shown.
+ * 
+ */
 public class MCBLogger {
 
     protected MCBouncer controller;

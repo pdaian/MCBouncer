@@ -5,6 +5,12 @@ import com.mcbouncer.MCBouncer;
 import com.mcbouncer.util.ChatColor;
 import org.bukkit.command.CommandSender;
 
+/**
+ * Implementation of the LocalPlayer interface. Used
+ * when a console user runs a command. This instance
+ * is what is sent to the command methods.
+ * 
+ */
 public class BukkitCommandSender implements LocalPlayer {
 
     protected MCBouncer controller;

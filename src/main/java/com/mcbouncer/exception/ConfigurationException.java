@@ -1,9 +1,11 @@
 package com.mcbouncer.exception;
 
+/**
+ * Exception for when there is an error during MCBouncer config.
+ * 
+ */
 public class ConfigurationException extends BouncerException {
-
-    private static final long serialVersionUID = -2442886939908724203L;
-
+    
     public ConfigurationException() {
         super();
     }

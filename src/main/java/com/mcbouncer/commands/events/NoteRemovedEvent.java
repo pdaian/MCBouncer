@@ -4,6 +4,12 @@ import com.mcbouncer.LocalPlayer;
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
+/**
+ * Called after a note is removed. 
+ * 
+ * This event cannot be cancelled.
+ * 
+ */
 public class NoteRemovedEvent extends MCBEvent<NoteRemovedEvent> {
 
     private LocalPlayer issuer;

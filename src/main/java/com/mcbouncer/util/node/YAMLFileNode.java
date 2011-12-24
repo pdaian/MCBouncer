@@ -23,36 +23,11 @@ import org.yaml.snakeyaml.representer.Represent;
 import org.yaml.snakeyaml.representer.Representer;
 
 /**
- * YAML configuration loader. To use this class, construct it with path to
- * a file and call its load() method. For specifying node paths in the
- * various get*() methods, they support SK's path notation, allowing you to
- * select child nodes by delimiting node names with periods.
- *
- * <p>
- * For example, given the following configuration file:</p>
- *
- * <pre>members:
- *     - Hollie
- *     - Jason
- *     - Bobo
- *     - Aya
- *     - Tetsu
- * worldguard:
- *     fire:
- *         spread: false
- *         blocks: [cloth, rock, glass]
- * sturmeh:
- *     cool: false
- *     eats:
- *         babies: true</pre>
- *
- * <p>Calling code could access sturmeh's baby eating state by using
- * <code>getBoolean("sturmeh.eats.babies", false)</code>. For lists, there are
- * methods such as <code>getStringList</code> that will return a type safe list.
- *
- * <p>This class is currently incomplete. It is not yet possible to get a node.
- * </p>
- *
+ * YAML file loader, as an extension of MapNode.
+ * After passing a YAML file and load()ing it, the
+ * file can be accessed with standard MapNode methods.
+ * 
+ * @author sk89q 
  */
 public class YAMLFileNode extends MapNode {
 
