@@ -6,6 +6,7 @@ import com.mcbouncer.exception.NetworkException;
 import com.mcbouncer.http.Transport;
 import com.mcbouncer.http.request.Request;
 import com.mcbouncer.http.response.Response;
+import com.mcbouncer.util.MiscUtils;
 import com.mcbouncer.util.node.JSONNode;
 import com.mcbouncer.util.node.MapNode;
 import java.util.ArrayList;

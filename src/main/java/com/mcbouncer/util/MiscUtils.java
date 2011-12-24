@@ -1,6 +1,11 @@
 package com.mcbouncer.util;
 
+import com.mcbouncer.util.node.EmptyNullRepresenter;
+import com.mcbouncer.util.node.MapNode;
 import java.util.Map;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 /**
  * Contains various utilities that make code prettier.
@@ -131,5 +136,15 @@ public class MiscUtils {
         }
 
         return build.toString();
+    }
+
+    public static String debugMapNode(MapNode node) {
+        DumperOptions options = new DumperOptions();
+
+        options.setIndent(4);
+        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        
+        Yaml yaml = new Yaml(new SafeConstructor(), new EmptyNullRepresenter(), options);
+        return yaml.dump(node.getBase());
     }
 }
