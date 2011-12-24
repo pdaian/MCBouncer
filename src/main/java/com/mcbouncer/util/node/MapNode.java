@@ -38,6 +38,19 @@ public class MapNode {
         this.base = base;
     }
 
+    /**
+     * Gets the item located at the given location, separated
+     * by slashes. For example, if there is a YAML file that
+     * is formatted as such:
+     *   yaml:
+     *     foo:
+     *       bar: baz
+     * 
+     * Calling getObjectFromPath("yaml/foo/bar") will return "baz"
+     * 
+     * @param prop
+     * @return 
+     */
     @SuppressWarnings("unchecked")
     public Object getObjectFromPath(String prop) {
         if (prop.contains("/")) {

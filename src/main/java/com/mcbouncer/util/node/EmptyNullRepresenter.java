@@ -10,6 +10,12 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Represent;
 import org.yaml.snakeyaml.representer.Representer;
 
+/**
+ * Null representer for SnakeYAML parsing and generating.
+ * The only reason this has its own class is so 
+ * MiscUtils.debugMapNode() can use it.
+ * 
+ */
 public class EmptyNullRepresenter extends Representer {
 
     public EmptyNullRepresenter() {

@@ -20,6 +20,18 @@ public class NetUtils {
         return (aIpAddress >> 24 & 255) + "." + (aIpAddress >> 16 & 255) + "." + (aIpAddress >> 8 & 255) + "." + (aIpAddress & 255);
     }
 
+    /**
+     * Returns whether or not the given string is a valid IP address.
+     * 
+     * Not only will this return false for IP addresses
+     * that are formatted like "foobagoo", but will also
+     * detect invalid IPs like "0.0.0.257" (cannot have 257
+     * as a number), "1.22.333.4444" (cannot have 4 digits),
+     * and anything that does not resolve to a valid address.
+     * 
+     * @param string
+     * @return 
+     */
     public static boolean isIPAddress(String string) {
         try {
             return (NetUtils.long2ip(NetUtils.ip2long(string)).equals(string));

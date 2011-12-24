@@ -128,6 +128,12 @@ public class MiscUtils {
         return buf.toString();
     }
 
+    /**
+     * Prints out a Map in an easy-to-read format
+     * 
+     * @param map
+     * @return 
+     */
     public static String debugMap(Map<?, ?> map) {
         StringBuilder build = new StringBuilder();
 
@@ -138,6 +144,13 @@ public class MiscUtils {
         return build.toString();
     }
 
+    /**
+     * Prints out a MapNode in an easy-to-read format (really,
+     * it's just dumped YAML)
+     * 
+     * @param node
+     * @return 
+     */
     public static String debugMapNode(MapNode node) {
         DumperOptions options = new DumperOptions();
 

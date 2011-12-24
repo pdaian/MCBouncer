@@ -23,8 +23,10 @@ import java.util.List;
  * to be server-independent, so all the data in here is not tied
  * to any specific implementation.
  * 
- * TODO: Document everything!
+ * TODO: Tests
+ * TODO: Stress test the code base
  * TODO: Implement the remaining unused configuration nodes
+ * TODO: Implement PlayerUpdate events
  * 
  */
 public class MCBouncer {

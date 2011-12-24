@@ -5,7 +5,13 @@ import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
 /**
- * TODO: Implement this.
+ * Called before a user's login is sent to the website. 
+ * 
+ * Cancelling this event cancels the connection to
+ * the website, so the login will not be registered.
+ * 
+ * Any fields modified here will be the variables
+ * that get acted upon. 
  * 
  */
 public class PlayerUpdateEvent extends MCBEvent<PlayerUpdateEvent> implements Cancellable {

@@ -4,7 +4,9 @@ import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;
 
 /**
- * TODO: Implement this.
+ * Called after a player is update on the website. 
+ * 
+ * This event cannot be cancelled.
  * 
  */
 public class PlayerUpdatedEvent extends MCBEvent<PlayerUpdatedEvent> {
