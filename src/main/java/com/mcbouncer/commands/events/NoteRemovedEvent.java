@@ -1,4 +1,4 @@
-package com.mcbouncer.event;
+package com.mcbouncer.commands.events;
 
 import com.mcbouncer.LocalPlayer;
 import net.lahwran.fevents.MCBEvent;

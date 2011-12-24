@@ -50,7 +50,7 @@ public class HTTPUtils {
         try {
             return URLEncoder.encode(string, "UTF-8");
         } catch (UnsupportedEncodingException ex) {
-            throw new RuntimeException("UTF8 not found! What is wrong with your system?");
+            throw new RuntimeException("UTF8 not found! What is wrong with your system?", ex);
         }
     }
 
@@ -64,7 +64,7 @@ public class HTTPUtils {
         try {
             return URLDecoder.decode(string, "UTF-8");
         } catch (UnsupportedEncodingException ex) {
-            throw new RuntimeException("UTF8 not found! What is wrong with your system?");
+            throw new RuntimeException("UTF8 not found! What is wrong with your system?", ex);
         }
     }
 }

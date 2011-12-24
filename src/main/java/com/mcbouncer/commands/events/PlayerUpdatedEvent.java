@@ -1,4 +1,4 @@
-package com.mcbouncer.event;
+package com.mcbouncer.commands.events;
 
 import net.lahwran.fevents.MCBEvent;
 import net.lahwran.fevents.MCBHandlerList;

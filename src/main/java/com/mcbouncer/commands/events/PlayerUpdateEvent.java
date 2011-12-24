@@ -1,4 +1,4 @@
-package com.mcbouncer.event;
+package com.mcbouncer.commands.events;
 
 import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;

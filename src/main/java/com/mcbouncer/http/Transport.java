@@ -1,13 +1,13 @@
 package com.mcbouncer.http;
 
 import com.google.common.io.CharStreams;
+import com.mcbouncer.MCBouncer;
 import com.mcbouncer.exception.NetworkException;
 import org.apache.http.cookie.Cookie;
 import com.mcbouncer.http.request.Request;
 import com.mcbouncer.http.request.RequestType;
 import com.mcbouncer.http.response.HTTPCode;
 import com.mcbouncer.http.response.Response;
-import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.HTTPUtils;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -25,14 +25,14 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpProtocolParams;
 
-public abstract class Transport {
+public class Transport {
 
     protected Request request;
-    protected MCBouncerPlugin plugin;
+    protected MCBouncer controller;
     protected Cookie cookie;
 
-    public Transport(MCBouncerPlugin plugin) {
-        this.plugin = plugin;
+    public Transport(MCBouncer controller) {
+        this.controller = controller;
     }
 
     public Response sendURL() throws NetworkException {
@@ -76,7 +76,7 @@ public abstract class Transport {
                 response = client.execute(method);
             }
 
-            Response resp = new Response(request.getPlugin());
+            Response resp = new Response(controller);
             resp.setContent(CharStreams.toString(new InputStreamReader(response.getEntity().getContent())));
             resp.setHTTPCode(new HTTPCode(response.getStatusLine().getStatusCode()));
             resp.setContentType(response.getEntity().getContentType().getValue());

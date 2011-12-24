@@ -1,19 +1,24 @@
 package com.mcbouncer.util;
 
-import com.mcbouncer.util.config.MCBConfiguration;
+import com.mcbouncer.MCBouncer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MCBLogger {
 
-    public static final Logger logger = Logger.getLogger("Minecraft");
+    protected MCBouncer controller;
+    protected static final Logger logger = Logger.getLogger("Minecraft");
+
+    public MCBLogger(MCBouncer controller) {
+        this.controller = controller;
+    }
 
     public void info(String s) {
         logger.log(Level.INFO, "[MCBouncer] " + s);
     }
 
     public void debug(String s) {
-        if (MCBConfiguration.isDebugMode()) {
+        if (controller.getConfiguration() != null && controller.getConfiguration().isDebugMode()) {
             logger.log(Level.INFO, "[MCBouncer DEBUG] " + s);
         }
     }
@@ -31,7 +36,7 @@ public class MCBLogger {
     }
 
     public void debug(String s, Throwable e) {
-        if (MCBConfiguration.isDebugMode()) {
+        if (controller.getConfiguration() != null && controller.getConfiguration().isDebugMode()) {
             logger.log(Level.INFO, "[MCBouncer DEBUG] " + s, e);
         }
     }

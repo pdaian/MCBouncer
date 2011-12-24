@@ -47,7 +47,7 @@ import java.util.Set;
  * @author sk89q
  * @author yetanotherx
  */
-public abstract class CommandManager {
+public class CommandManager {
 
     /**
      * Main MCBouncer controller instance
@@ -312,7 +312,7 @@ public abstract class CommandManager {
         }
 
         if (allowedCommands.size() > 0) {
-            command.append(MCBouncerUtil.implode(allowedCommands.toArray(new String[0]), "|"));
+            command.append(MCBouncerUtil.join(allowedCommands.toArray(new String[0]), "|"));
         } else {
             if (!found) {
                 command.append("?");

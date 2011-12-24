@@ -7,5 +7,7 @@ public interface LocalPlugin {
     public String getIPAddress(String ipOrName);
     public void kickPlayer(String name, String reason);
     public void kickPlayerWithIP(String name, String reason);
+    public void messageMods(String string);
+    public void broadcastMessage(String message);
     
 }

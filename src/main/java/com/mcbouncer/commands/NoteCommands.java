@@ -2,12 +2,11 @@ package com.mcbouncer.commands;
 
 import com.mcbouncer.LocalPlayer;
 import com.mcbouncer.MCBouncer;
-import com.mcbouncer.event.AddNoteEvent;
-import com.mcbouncer.event.NoteAddedEvent;
-import com.mcbouncer.event.NoteRemovedEvent;
-import com.mcbouncer.event.RemoveNoteEvent;
+import com.mcbouncer.commands.events.AddNoteEvent;
+import com.mcbouncer.commands.events.NoteAddedEvent;
+import com.mcbouncer.commands.events.NoteRemovedEvent;
+import com.mcbouncer.commands.events.RemoveNoteEvent;
 import com.mcbouncer.exception.CommandException;
-import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.ChatColor;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerUtil;
@@ -49,7 +48,7 @@ public class NoteCommands extends CommandContainer {
         boolean result = MCBouncerUtil.addNote(toNote, sender.getName(), note);
 
         if (result) {
-            MCBouncerPlugin.log.info(sender.getName() + " added note to " + toNote + " - " + note);
+            controller.getLogger().info(sender.getName() + " added note to " + toNote + " - " + note);
         }
 
         NoteAddedEvent noteAddedEvent = new NoteAddedEvent(toNote, sender, note, result, ((result == false) ? "" : MCBouncerAPI.getError()));
@@ -85,7 +84,7 @@ public class NoteCommands extends CommandContainer {
         boolean result = MCBouncerUtil.removeNote(toRemove, "admin");
 
         if (result) {
-            MCBouncerPlugin.log.info(sender.getName() + " removed note ID " + toRemove);
+            controller.getLogger().info(sender.getName() + " removed note ID " + toRemove);
         }
 
         NoteRemovedEvent noteRemovedEvent = new NoteRemovedEvent(sender, toRemove, result, ((result == false) ? "" : MCBouncerAPI.getError()));

@@ -1,6 +1,6 @@
 package com.mcbouncer.http.request;
 
-import com.mcbouncer.plugin.MCBouncerPlugin;
+import com.mcbouncer.MCBouncer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,26 +9,26 @@ import org.apache.http.Header;
 
 public class Request {
 
-    protected MCBouncerPlugin plugin;
+    protected MCBouncer controller;
     protected String url = "";
     protected RequestType method = RequestType.GET;
     protected Map<String, String> parameters;
     protected List<Header> headers;
 
-    public Request(MCBouncerPlugin plugin, Map<String, String> parameters, List<Header> headers) {
-        this.plugin = plugin;
+    public Request(MCBouncer controller, Map<String, String> parameters, List<Header> headers) {
+        this.controller = controller;
         this.parameters = parameters;
         this.headers = headers;
     }
 
-    public Request(MCBouncerPlugin plugin, Map<String, String> parameters) {
-        this.plugin = plugin;
+    public Request(MCBouncer controller, Map<String, String> parameters) {
+        this.controller = controller;
         this.parameters = parameters;
         this.headers = new ArrayList<Header>();
     }
 
-    public Request(MCBouncerPlugin plugin) {
-        this.plugin = plugin;
+    public Request(MCBouncer controller) {
+        this.controller = controller;
         this.parameters = new HashMap<String, String>();
         this.headers = new ArrayList<Header>();
     }
@@ -59,10 +59,6 @@ public class Request {
 
     public void setURL(String url) {
         this.url = url;
-    }
-
-    public MCBouncerPlugin getPlugin() {
-        return plugin;
     }
     
 }

@@ -2,20 +2,19 @@ package com.mcbouncer.commands;
 
 import com.mcbouncer.LocalPlayer;
 import com.mcbouncer.MCBouncer;
-import com.mcbouncer.event.AddBanEvent;
-import com.mcbouncer.event.BanAddedEvent;
-import com.mcbouncer.event.BanRemovedEvent;
-import com.mcbouncer.event.RemoveBanEvent;
+import com.mcbouncer.commands.events.AddBanEvent;
+import com.mcbouncer.commands.events.BanAddedEvent;
+import com.mcbouncer.commands.events.BanRemovedEvent;
+import com.mcbouncer.commands.events.RemoveBanEvent;
 import com.mcbouncer.exception.CommandException;
-import com.mcbouncer.plugin.MCBouncerPlugin;
 import com.mcbouncer.util.BanType;
 import com.mcbouncer.util.ChatColor;
 import com.mcbouncer.util.MCBouncerAPI;
 import com.mcbouncer.util.MCBouncerUtil;
+import com.mcbouncer.util.NetUtil;
 import com.mcbouncer.util.commands.Command;
 import com.mcbouncer.util.commands.CommandContext;
 import com.mcbouncer.util.commands.CommandPermissions;
-import com.mcbouncer.util.config.MCBConfiguration;
 import net.lahwran.fevents.MCBEventHandler;
 
 public class BanCommands extends CommandContainer {
@@ -33,7 +32,7 @@ public class BanCommands extends CommandContainer {
     public void ban(CommandContext args, LocalPlayer sender) throws CommandException {
 
         String toBan = controller.getPlugin().getPlayerName(args.getString(0));
-        String reason = MCBConfiguration.getDefaultReason();
+        String reason = controller.getConfiguration().getDefaultReason();
 
         if (args.argsLength() > 1) {
             reason = args.getJoinedStrings(1);
@@ -55,7 +54,7 @@ public class BanCommands extends CommandContainer {
         boolean result = MCBouncerUtil.addBan(toBan, sender.getName(), reason);
 
         if (result) {
-            MCBouncerPlugin.log.info(sender.getName() + " banning " + toBan + " - " + reason);
+            controller.getLogger().info(sender.getName() + " banning " + toBan + " - " + reason);
         }
 
         BanAddedEvent banAddedEvent = new BanAddedEvent(BanType.USER, toBan, sender, reason, result, ((result == false) ? "" : MCBouncerAPI.getError()));
@@ -92,7 +91,7 @@ public class BanCommands extends CommandContainer {
         boolean result = MCBouncerUtil.removeBan(toUnban);
 
         if (result) {
-            MCBouncerPlugin.log.info(sender.getName() + " unbanned " + toUnban);
+            controller.getLogger().info(sender.getName() + " unbanned " + toUnban);
         }
 
         BanRemovedEvent banRemovedEvent = new BanRemovedEvent(BanType.USER, sender, toUnban, result, ((result==false)?"":MCBouncerAPI.getError()));
@@ -116,7 +115,7 @@ public class BanCommands extends CommandContainer {
 
         String toBanIP = controller.getPlugin().getIPAddress(args.getString(0));
         String toBanUser = controller.getPlugin().getPlayerName(args.getString(0));
-        String reason = MCBConfiguration.getDefaultReason();
+        String reason = controller.getConfiguration().getDefaultReason();
         
         if( toBanIP.length() == 0 ) {
             throw new CommandException("No IP address found for that user.");
@@ -146,7 +145,7 @@ public class BanCommands extends CommandContainer {
         boolean result = MCBouncerUtil.addIPBan(toBanIP, sender.getName(), reason);
 
         if (result) {
-            MCBouncerPlugin.log.info(sender.getName() + " banning " + toBanIP + " - " + reason);
+            controller.getLogger().info(sender.getName() + " banning " + toBanIP + " - " + reason);
         }
 
         
@@ -171,7 +170,7 @@ public class BanCommands extends CommandContainer {
 
         String toUnban = args.getString(0);
         
-        if( !MCBouncerUtil.isIPAddress(toUnban) ) {
+        if( !NetUtil.isIPAddress(toUnban) ) {
             throw new CommandException("Invalid IP address given.");
         }
 
@@ -188,7 +187,7 @@ public class BanCommands extends CommandContainer {
         boolean result = MCBouncerUtil.removeIPBan(toUnban);
 
         if (result) {
-            MCBouncerPlugin.log.info(sender.getName() + " unbanned " + toUnban);
+            controller.getLogger().info(sender.getName() + " unbanned " + toUnban);
         }
 
         BanRemovedEvent banRemovedEvent = new BanRemovedEvent(BanType.IP, sender, toUnban, result, ((result==false)?"":MCBouncerAPI.getError()));
