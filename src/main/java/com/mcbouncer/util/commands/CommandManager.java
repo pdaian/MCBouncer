@@ -27,7 +27,7 @@ import com.mcbouncer.exception.CommandPermissionsException;
 import com.mcbouncer.exception.MissingNestedCommandException;
 import com.mcbouncer.exception.UnhandledCommandException;
 import com.mcbouncer.exception.WrappedCommandException;
-import com.mcbouncer.util.MCBouncerUtil;
+import com.mcbouncer.util.MiscUtils;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -312,7 +312,7 @@ public class CommandManager {
         }
 
         if (allowedCommands.size() > 0) {
-            command.append(MCBouncerUtil.join(allowedCommands.toArray(new String[0]), "|"));
+            command.append(MiscUtils.join(allowedCommands.toArray(new String[0]), "|"));
         } else {
             if (!found) {
                 command.append("?");

@@ -8,6 +8,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * TODO: Implement the remaining config nodes
+ * 
+ * @author yetanotherx
+ */
 public class BukkitConfiguration extends LocalConfiguration {
 
     protected File dataFolder;
@@ -71,7 +76,43 @@ public class BukkitConfiguration extends LocalConfiguration {
         showBanMessages = conf.getBoolean("config.showBansMessages", showBanMessages);
         defaultReason = conf.getString("config.defaultBanMessage", defaultReason);
         defaultKickMessage = conf.getString("config.defaultKickMessage", defaultKickMessage);
+        website = conf.getString("config.website", website); 
         //plugins = (ArrayList<String>) config.getStringList("plugins", plugins);
+    }
+
+    @Override
+    public String getAPIKey() {
+        return apiKey;
+    }
+
+    @Override
+    public boolean isDebugMode() {
+        return debugMode;
+    }
+
+    @Override
+    public String getDefaultKickReason() {
+        return defaultKickMessage;
+    }
+
+    @Override
+    public String getDefaultReason() {
+        return defaultReason;
+    }
+
+    @Override
+    public int getNumBansDisallow() {
+        return numBansDisallow;
+    }
+
+    @Override
+    public boolean isShowBanMessages() {
+        return showBanMessages;
+    }
+
+    @Override
+    public String getWebsite() {
+        return website;
     }
     
 }

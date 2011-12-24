@@ -6,10 +6,10 @@ import com.mcbouncer.commands.events.AddNoteEvent;
 import com.mcbouncer.commands.events.NoteAddedEvent;
 import com.mcbouncer.commands.events.NoteRemovedEvent;
 import com.mcbouncer.commands.events.RemoveNoteEvent;
+import com.mcbouncer.exception.APIException;
 import com.mcbouncer.exception.CommandException;
+import com.mcbouncer.exception.NetworkException;
 import com.mcbouncer.util.ChatColor;
-import com.mcbouncer.util.MCBouncerAPI;
-import com.mcbouncer.util.MCBouncerUtil;
 import com.mcbouncer.util.commands.Command;
 import com.mcbouncer.util.commands.CommandContext;
 import com.mcbouncer.util.commands.CommandPermissions;
@@ -45,19 +45,31 @@ public class NoteCommands extends CommandContainer {
         sender = addNoteEvent.getIssuer();
         note = addNoteEvent.getNote();
 
-        boolean result = MCBouncerUtil.addNote(toNote, sender.getName(), note);
-
-        if (result) {
-            controller.getLogger().info(sender.getName() + " added note to " + toNote + " - " + note);
+        boolean success = false;
+        String error = "";
+        try {
+            if (controller.getAPI().addNote(sender.getName(), toNote, note)) {
+                controller.getLogger().info(sender.getName() + " added note to " + toNote + " - " + note);
+                success = true;
+            }
+            else {
+                error = "Unknown error";
+            }
+        } catch (NetworkException ex) {
+            controller.getLogger().severe("Network error!", ex);
+            error = ex.getMessage();
+        } catch (APIException ex) {
+            controller.getLogger().severe("API error!", ex);
+            error = ex.getMessage();
         }
 
-        NoteAddedEvent noteAddedEvent = new NoteAddedEvent(toNote, sender, note, result, ((result == false) ? "" : MCBouncerAPI.getError()));
+        NoteAddedEvent noteAddedEvent = new NoteAddedEvent(toNote, sender, note, success, error);
         MCBEventHandler.callEvent(noteAddedEvent);
 
-        if (result) {
+        if (success) {
             sender.sendMessage(ChatColor.GREEN + "Note added to " + toNote + " successfully.");
         } else {
-            sender.sendMessage(ChatColor.RED + MCBouncerAPI.getError());
+            sender.sendMessage(ChatColor.RED + error);
         }
 
     }
@@ -81,19 +93,31 @@ public class NoteCommands extends CommandContainer {
 
         toRemove = removeNoteEvent.getNoteId();
 
-        boolean result = MCBouncerUtil.removeNote(toRemove, "admin");
-
-        if (result) {
-            controller.getLogger().info(sender.getName() + " removed note ID " + toRemove);
+        boolean success = false;
+        String error = "";
+        try {
+            if (controller.getAPI().removeNote(toRemove, sender.getName())) {
+                controller.getLogger().info(sender.getName() + " removed note ID " + toRemove);
+                success = true;
+            }
+            else {
+                error = "Unknown error";
+            }
+        } catch (NetworkException ex) {
+            controller.getLogger().severe("Network error!", ex);
+            error = ex.getMessage();
+        } catch (APIException ex) {
+            controller.getLogger().severe("API error!", ex);
+            error = ex.getMessage();
         }
 
-        NoteRemovedEvent noteRemovedEvent = new NoteRemovedEvent(sender, toRemove, result, ((result == false) ? "" : MCBouncerAPI.getError()));
+        NoteRemovedEvent noteRemovedEvent = new NoteRemovedEvent(sender, toRemove, success, error);
         MCBEventHandler.callEvent(noteRemovedEvent);
 
-        if (result) {
+        if (success) {
             sender.sendMessage(ChatColor.GREEN + "Note removed successfully.");
         } else {
-            sender.sendMessage(ChatColor.RED + MCBouncerAPI.getError());
+            sender.sendMessage(ChatColor.RED + error);
         }
 
     }

@@ -4,7 +4,7 @@ package com.mcbouncer.util;
  * Provides useful methods dealing with the network
  * From javawork.org
  */
-public class NetUtil {
+public class NetUtils {
 
     public static long ip2long(String aIpAddress) {
         long ip = 0;
@@ -22,7 +22,7 @@ public class NetUtil {
 
     public static boolean isIPAddress(String string) {
         try {
-            return (NetUtil.long2ip(NetUtil.ip2long(string)).equals(string));
+            return (NetUtils.long2ip(NetUtils.ip2long(string)).equals(string));
         } catch (Exception e) {
             return false;
         }

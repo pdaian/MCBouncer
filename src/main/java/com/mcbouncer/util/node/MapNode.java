@@ -398,7 +398,7 @@ public class MapNode {
 
         return list;
     }
-
+    
     /**
      * Get a configuration node at a path. If the node doesn't exist or the
      * path does not lead to a node, null will be returned. A node has
