@@ -12,9 +12,9 @@ public class JSONNode extends MapNode {
     public JSONNode(Object jsonObject) {
         try {
             if (jsonObject == null) {
-                this.setRoot(new HashMap<String, Object>());
+                this.setBase(new HashMap<String, Object>());
             } else if (jsonObject instanceof Map) {
-                this.setRoot((Map<String, Object>) jsonObject);
+                this.setBase((Map<String, Object>) jsonObject);
             } else if (jsonObject instanceof JSONArray) {
                 JSONArray arr = (JSONArray) jsonObject;
                 HashMap<String, Object> newMap = new HashMap<String, Object>();
@@ -24,9 +24,9 @@ public class JSONNode extends MapNode {
                     newMap.put(i.toString(), obj);
                     i++;
                 }
-                this.setRoot(newMap);
+                this.setBase(newMap);
             } else if (jsonObject instanceof JSONObject) {
-                this.setRoot((Map<String, Object>) jsonObject);
+                this.setBase((Map<String, Object>) jsonObject);
             }
         } catch (ClassCastException e) {
             throw new InvalidArgumentException("Object must be a JSON object or a Map<String, Object>");

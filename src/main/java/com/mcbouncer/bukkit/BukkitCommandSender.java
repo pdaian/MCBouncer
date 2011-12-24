@@ -2,6 +2,7 @@ package com.mcbouncer.bukkit;
 
 import com.mcbouncer.LocalPlayer;
 import com.mcbouncer.MCBouncer;
+import com.mcbouncer.util.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public class BukkitCommandSender implements LocalPlayer {
@@ -23,6 +24,6 @@ public class BukkitCommandSender implements LocalPlayer {
     }
 
     public void sendMessage(String message) {
-        controller.getLogger().info(message);
+        controller.getLogger().info(ChatColor.stripColor(message));
     }
 }

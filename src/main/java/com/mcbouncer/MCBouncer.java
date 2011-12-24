@@ -18,6 +18,11 @@ import com.mcbouncer.util.commands.CommandManager;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * TODO:Doc
+ * @author yetanotherx
+ */
 public class MCBouncer {
 
     protected final MCBLogger logger;

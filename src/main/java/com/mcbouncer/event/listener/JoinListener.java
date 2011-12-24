@@ -5,7 +5,6 @@ import com.mcbouncer.event.JoinEvent;
 import com.mcbouncer.exception.APIException;
 import com.mcbouncer.exception.NetworkException;
 import com.mcbouncer.util.ChatColor;
-import com.mcbouncer.util.MiscUtils;
 import net.lahwran.fevents.MCBListener;
 
 public class JoinListener implements MCBListener<JoinEvent> {

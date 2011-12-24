@@ -13,7 +13,7 @@ public class UserNote {
     protected Boolean global;
 
     public UserNote(MapNode node) {
-        noteId = node.getInt("noteid", 0);
+        noteId = node.getInteger("noteid");
         username = node.getString("username");
         issuer = node.getString("issuer");
         server = node.getString("server");

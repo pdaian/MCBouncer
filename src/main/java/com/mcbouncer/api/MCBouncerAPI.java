@@ -50,7 +50,7 @@ public class MCBouncerAPI {
             }
 
             if (json.getBoolean("success", false)) {
-                return json.getInt("totalcount", 0);
+                return json.getInteger("totalcount", 0);
             } else {
                 throw new APIException(json.getString("error"));
             }
@@ -65,7 +65,7 @@ public class MCBouncerAPI {
     public Integer getIPBanCount(String user) throws NetworkException, APIException {
         return getTypeCount("IPBan", user);
     }
-    
+
     public Integer getTotalBanCount(String user, String ip) throws NetworkException, APIException {
         return getTypeCount("Ban", user) + getTypeCount("IPBan", ip);
     }
@@ -87,7 +87,7 @@ public class MCBouncerAPI {
             if (json.getBoolean("success", false)) {
                 List<UserBan> bans = new ArrayList<UserBan>();
 
-                for (MapNode node : json.getNodeList("data", new ArrayList<MapNode>())) {
+                for (MapNode node : json.getMapNodeList("data")) {
                     bans.add(new UserBan(node));
                 }
                 return bans;
@@ -111,7 +111,7 @@ public class MCBouncerAPI {
             if (json.getBoolean("success", false)) {
                 List<IPBan> bans = new ArrayList<IPBan>();
 
-                for (MapNode node : json.getNodeList("data", new ArrayList<MapNode>())) {
+                for (MapNode node : json.getMapNodeList("data")) {
                     bans.add(new IPBan(node));
                 }
                 return bans;
@@ -135,7 +135,7 @@ public class MCBouncerAPI {
             if (json.getBoolean("success", false)) {
                 List<UserNote> bans = new ArrayList<UserNote>();
 
-                for (MapNode node : json.getNodeList("data", new ArrayList<MapNode>())) {
+                for (MapNode node : json.getMapNodeList("data")) {
                     bans.add(new UserNote(node));
                 }
                 return bans;
@@ -273,7 +273,7 @@ public class MCBouncerAPI {
     public boolean addNote(String issuer, String user, String note) throws NetworkException, APIException {
         return addSomething("Note", issuer, user, note);
     }
-    
+
     public boolean addGlobalNote(String issuer, String user, String note) throws NetworkException, APIException {
         return addSomething("GlobalNote", issuer, user, note);
     }

@@ -1,7 +1,6 @@
 package com.mcbouncer.commands.events;
 
 import com.mcbouncer.LocalPlayer;
-import com.mcbouncer.util.BanType;
 import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBHandlerList;
 import net.lahwran.fevents.MCBEvent;
@@ -19,7 +18,7 @@ public class PlayerKickEvent extends MCBEvent<PlayerKickEvent> implements Cancel
         this.reason = reason;
     }
 
-    public String getUser() {
+    public String getPlayer() {
         return user;
     }
 

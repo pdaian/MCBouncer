@@ -23,6 +23,7 @@ commands:
   kick:
     description: 'Kick a user from the server'
     usage: '/<command> playername [reason]'
+    aliases: ['boot']
   mcbouncer:
     description: 'MCBouncer commands'
     usage: '/<command> [help|version|reload]'

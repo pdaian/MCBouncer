@@ -83,9 +83,9 @@ public class YAMLFileNode extends MapNode {
             stream = new FileInputStream(file);
             read(yaml.load(new UnicodeReader(stream)));
         } catch (IOException e) {
-            root = new HashMap<String, Object>();
+            base = new HashMap<String, Object>();
         } catch (ConfigurationException e) {
-            root = new HashMap<String, Object>();
+            base = new HashMap<String, Object>();
         } finally {
             try {
                 if (stream != null) {
@@ -158,7 +158,7 @@ public class YAMLFileNode extends MapNode {
                 writer.append(header);
                 writer.append("\r\n");
             }
-            yaml.dump(root, writer);
+            yaml.dump(base, writer);
             return true;
         } catch (IOException e) {
         } finally {
@@ -177,9 +177,9 @@ public class YAMLFileNode extends MapNode {
     private void read(Object input) throws ConfigurationException {
         try {
             if (null == input) {
-                root = new HashMap<String, Object>();
+                base = new HashMap<String, Object>();
             } else {
-                root = (Map<String, Object>) input;
+                base = (Map<String, Object>) input;
             }
         } catch (ClassCastException e) {
             throw new ConfigurationException("Root document must be an key-value structure");

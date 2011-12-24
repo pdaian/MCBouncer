@@ -20,7 +20,7 @@ public class KickEvent extends MCBEvent<KickEvent> implements Cancellable {
         return controller;
     }
 
-    public String getUser() {
+    public String getPlayer() {
         return user;
     }
 

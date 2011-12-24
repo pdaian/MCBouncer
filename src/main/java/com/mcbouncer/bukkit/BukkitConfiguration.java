@@ -64,19 +64,19 @@ public class BukkitConfiguration extends LocalConfiguration {
         YAMLFileNode node = new YAMLFileNode(file);
         node.load();
         this.conf = node;
-
+//TODO: Broken
         setSettings();
         
     }
 
     protected void setSettings() {
-        debugMode = conf.getBoolean("config.debug", debugMode);
-        apiKey = conf.getString("config.apiKey", apiKey);
-        numBansDisallow = conf.getInt("config.numBansDisallow", numBansDisallow);
-        showBanMessages = conf.getBoolean("config.showBansMessages", showBanMessages);
-        defaultReason = conf.getString("config.defaultBanMessage", defaultReason);
-        defaultKickMessage = conf.getString("config.defaultKickMessage", defaultKickMessage);
-        website = conf.getString("config.website", website); 
+        debugMode = conf.getBoolean("debug", debugMode);
+        apiKey = conf.getString("apiKey", apiKey);
+        numBansDisallow = conf.getInteger("numBansDisallow", numBansDisallow);
+        showBanMessages = conf.getBoolean("showBansMessages", showBanMessages);
+        defaultReason = conf.getString("defaultBanMessage", defaultReason);
+        defaultKickMessage = conf.getString("defaultKickMessage", defaultKickMessage);
+        website = conf.getString("website", website); 
         //plugins = (ArrayList<String>) config.getStringList("plugins", plugins);
     }
 

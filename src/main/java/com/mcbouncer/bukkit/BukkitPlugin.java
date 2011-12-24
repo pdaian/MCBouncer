@@ -4,7 +4,10 @@ import com.mcbouncer.LocalConfiguration;
 import com.mcbouncer.LocalPlugin;
 import com.mcbouncer.MCBouncer;
 import com.mcbouncer.bukkit.listeners.BukkitPlayerListener;
+import com.mcbouncer.commands.events.PlayerKickEvent;
 import com.mcbouncer.util.NetUtils;
+import net.lahwran.fevents.MCBListener;
+import net.lahwran.fevents.Order;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,6 +16,23 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BukkitPlugin extends JavaPlugin implements LocalPlugin {
+
+    private static class ThisListener implements MCBListener<PlayerKickEvent> {
+
+        private static boolean run = false;
+        public ThisListener() {
+        }
+
+        public void onEvent(PlayerKickEvent event) {
+            System.out.println(event.getPlayer());
+            if( run ) {
+                event.setCancelled(true);
+            }
+            else {
+                run = true;
+            }
+        }
+    }
 
     protected MCBouncer controller;
     
@@ -23,12 +43,16 @@ public class BukkitPlugin extends JavaPlugin implements LocalPlugin {
     public void onEnable() {
         
         LocalConfiguration config = new BukkitConfiguration(this.getDataFolder());
+        config.load();
+        
         controller = new MCBouncer(this, config);
         
         controller.getLogger().info("Plugin enabled. (version " + MCBouncer.getVersion() + ")");
         controller.getLogger().debug("Debug mode enabled!");
         
         setupListeners();
+        
+        PlayerKickEvent.handlers.register(new ThisListener(), Order.Late);
     }
     
     protected void setupListeners() {

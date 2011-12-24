@@ -6,9 +6,8 @@ import com.mcbouncer.commands.events.AddBanEvent;
 import com.mcbouncer.commands.events.BanAddedEvent;
 import com.mcbouncer.commands.events.BanRemovedEvent;
 import com.mcbouncer.commands.events.RemoveBanEvent;
-import com.mcbouncer.exception.APIException;
+import com.mcbouncer.exception.BouncerException;
 import com.mcbouncer.exception.CommandException;
-import com.mcbouncer.exception.NetworkException;
 import com.mcbouncer.util.BanType;
 import com.mcbouncer.util.ChatColor;
 import com.mcbouncer.util.NetUtils;
@@ -28,8 +27,8 @@ public class BanCommands extends CommandContainer {
     desc = "Ban a username",
     min = 1,
     max = -1)
-    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.ban"})
-    public void ban(CommandContext args, LocalPlayer sender) throws CommandException {
+    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.ban"})
+    public void ban(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toBan = controller.getPlugin().getPlayerName(args.getString(0));
         String reason = controller.getConfiguration().getDefaultReason();
@@ -53,20 +52,12 @@ public class BanCommands extends CommandContainer {
 
         boolean success = false;
         String error = "";
-        try {
-            if (controller.getAPI().addBan(sender.getName(), toBan, reason)) {
-                controller.getLogger().info(sender.getName() + " banning " + toBan + " - " + reason);
-                success = true;
-            }
-            else {
-                error = "Unknown error";
-            }
-        } catch (NetworkException ex) {
-            controller.getLogger().severe("Network error!", ex);
-            error = ex.getMessage();
-        } catch (APIException ex) {
-            controller.getLogger().severe("API error!", ex);
-            error = ex.getMessage();
+
+        if (controller.getAPI().addBan(sender.getName(), toBan, reason)) {
+            controller.getLogger().info(sender.getName() + " banning " + toBan + " - " + reason);
+            success = true;
+        } else {
+            error = "Unknown error";
         }
 
         BanAddedEvent banAddedEvent = new BanAddedEvent(BanType.USER, toBan, sender, reason, success, error);
@@ -85,8 +76,8 @@ public class BanCommands extends CommandContainer {
     desc = "Unban a username",
     min = 1,
     max = 1)
-    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.unban"})
-    public void unban(CommandContext args, LocalPlayer sender) throws CommandException {
+    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.unban"})
+    public void unban(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toUnban = args.getString(0);
 
@@ -102,20 +93,12 @@ public class BanCommands extends CommandContainer {
 
         boolean success = false;
         String error = "";
-        try {
-            if (controller.getAPI().removeBan(toUnban)) {
-                controller.getLogger().info(sender.getName() + " unbanned " + toUnban);
-                success = true;
-            }
-            else {
-                error = "Unknown error";
-            }
-        } catch (NetworkException ex) {
-            controller.getLogger().severe("Network error!", ex);
-            error = ex.getMessage();
-        } catch (APIException ex) {
-            controller.getLogger().severe("API error!", ex);
-            error = ex.getMessage();
+
+        if (controller.getAPI().removeBan(toUnban)) {
+            controller.getLogger().info(sender.getName() + " unbanned " + toUnban);
+            success = true;
+        } else {
+            error = "Unknown error";
         }
 
         BanRemovedEvent banRemovedEvent = new BanRemovedEvent(BanType.USER, sender, toUnban, success, error);
@@ -134,8 +117,8 @@ public class BanCommands extends CommandContainer {
     desc = "Ban an IP.",
     min = 1,
     max = -1)
-    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.banip"})
-    public void banIP(CommandContext args, LocalPlayer sender) throws CommandException {
+    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.banip"})
+    public void banIP(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toBanIP = controller.getPlugin().getIPAddress(args.getString(0));
         String toBanUser = controller.getPlugin().getPlayerName(args.getString(0));
@@ -168,20 +151,12 @@ public class BanCommands extends CommandContainer {
 
         boolean success = false;
         String error = "";
-        try {
-            if (controller.getAPI().addIPBan(sender.getName(), toBanIP, reason)) {
-                controller.getLogger().info(sender.getName() + " banning " + toBanIP + " - " + reason);
-                success = true;
-            }
-            else {
-                error = "Unknown error";
-            }
-        } catch (NetworkException ex) {
-            controller.getLogger().severe("Network error!", ex);
-            error = ex.getMessage();
-        } catch (APIException ex) {
-            controller.getLogger().severe("API error!", ex);
-            error = ex.getMessage();
+
+        if (controller.getAPI().addIPBan(sender.getName(), toBanIP, reason)) {
+            controller.getLogger().info(sender.getName() + " banning " + toBanIP + " - " + reason);
+            success = true;
+        } else {
+            error = "Unknown error";
         }
 
         BanAddedEvent banAddedEvent = new BanAddedEvent(BanType.IP, toBanIP, sender, reason, success, error);
@@ -190,7 +165,7 @@ public class BanCommands extends CommandContainer {
         if (success) {
             sender.sendMessage(ChatColor.GREEN + "IP " + toBanIP + " banned successfully.");
         } else {
-            sender.sendMessage(ChatColor.RED + error    );
+            sender.sendMessage(ChatColor.RED + error);
         }
 
     }
@@ -200,8 +175,8 @@ public class BanCommands extends CommandContainer {
     desc = "Unban an IP",
     min = 1,
     max = 1)
-    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.unbanip"})
-    public void unbanip(CommandContext args, LocalPlayer sender) throws CommandException {
+    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.unbanip"})
+    public void unbanip(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toUnban = args.getString(0);
 
@@ -221,20 +196,12 @@ public class BanCommands extends CommandContainer {
 
         boolean success = false;
         String error = "";
-        try {
-            if (controller.getAPI().removeIPBan(toUnban)) {
-                controller.getLogger().info(sender.getName() + " unbanned " + toUnban);
-                success = true;
-            }
-            else {
-                error = "Unknown error";
-            }
-        } catch (NetworkException ex) {
-            controller.getLogger().severe("Network error!", ex);
-            error = ex.getMessage();
-        } catch (APIException ex) {
-            controller.getLogger().severe("API error!", ex);
-            error = ex.getMessage();
+
+        if (controller.getAPI().removeIPBan(toUnban)) {
+            controller.getLogger().info(sender.getName() + " unbanned " + toUnban);
+            success = true;
+        } else {
+            error = "Unknown error";
         }
 
         BanRemovedEvent banRemovedEvent = new BanRemovedEvent(BanType.IP, sender, toUnban, success, error);

@@ -8,9 +8,8 @@ import com.mcbouncer.commands.events.GlobalNoteAddedEvent;
 import com.mcbouncer.commands.events.NoteAddedEvent;
 import com.mcbouncer.commands.events.NoteRemovedEvent;
 import com.mcbouncer.commands.events.RemoveNoteEvent;
-import com.mcbouncer.exception.APIException;
+import com.mcbouncer.exception.BouncerException;
 import com.mcbouncer.exception.CommandException;
-import com.mcbouncer.exception.NetworkException;
 import com.mcbouncer.util.ChatColor;
 import com.mcbouncer.util.commands.Command;
 import com.mcbouncer.util.commands.CommandContext;
@@ -28,8 +27,8 @@ public class NoteCommands extends CommandContainer {
     desc = "Add a note to a username",
     min = 1,
     max = -1)
-    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.addnote"})
-    public void addnote(CommandContext args, LocalPlayer sender) throws CommandException {
+    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.addnote"})
+    public void addnote(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toNote = controller.getPlugin().getPlayerName(args.getString(0));
         String note = args.getJoinedStrings(1);
@@ -47,20 +46,12 @@ public class NoteCommands extends CommandContainer {
 
         boolean success = false;
         String error = "";
-        try {
-            if (controller.getAPI().addNote(sender.getName(), toNote, note)) {
-                controller.getLogger().info(sender.getName() + " added note to " + toNote + " - " + note);
-                success = true;
-            }
-            else {
-                error = "Unknown error";
-            }
-        } catch (NetworkException ex) {
-            controller.getLogger().severe("Network error!", ex);
-            error = ex.getMessage();
-        } catch (APIException ex) {
-            controller.getLogger().severe("API error!", ex);
-            error = ex.getMessage();
+
+        if (controller.getAPI().addNote(sender.getName(), toNote, note)) {
+            controller.getLogger().info(sender.getName() + " added note to " + toNote + " - " + note);
+            success = true;
+        } else {
+            error = "Unknown error";
         }
 
         NoteAddedEvent noteAddedEvent = new NoteAddedEvent(toNote, sender, note, success, error);
@@ -73,14 +64,14 @@ public class NoteCommands extends CommandContainer {
         }
 
     }
-    
+
     @Command(aliases = {"addgnote", "addglobalnote"},
     usage = "<username> <text>",
     desc = "Add a global note to a username",
     min = 1,
     max = -1)
-    @CommandPermissions(value={"mcbouncer.admin", "mcbouncer.command.addnote.global"})
-    public void addgnote(CommandContext args, LocalPlayer sender) throws CommandException {
+    @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.command.addnote.global"})
+    public void addgnote(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toNote = controller.getPlugin().getPlayerName(args.getString(0));
         String note = args.getJoinedStrings(1);
@@ -98,20 +89,12 @@ public class NoteCommands extends CommandContainer {
 
         boolean success = false;
         String error = "";
-        try {
-            if (controller.getAPI().addGlobalNote(sender.getName(), toNote, note)) {
-                controller.getLogger().info(sender.getName() + " added global note to " + toNote + " - " + note);
-                success = true;
-            }
-            else {
-                error = "Unknown error";
-            }
-        } catch (NetworkException ex) {
-            controller.getLogger().severe("Network error!", ex);
-            error = ex.getMessage();
-        } catch (APIException ex) {
-            controller.getLogger().severe("API error!", ex);
-            error = ex.getMessage();
+
+        if (controller.getAPI().addGlobalNote(sender.getName(), toNote, note)) {
+            controller.getLogger().info(sender.getName() + " added global note to " + toNote + " - " + note);
+            success = true;
+        } else {
+            error = "Unknown error";
         }
 
         GlobalNoteAddedEvent noteAddedEvent = new GlobalNoteAddedEvent(toNote, sender, note, success, error);
@@ -130,8 +113,8 @@ public class NoteCommands extends CommandContainer {
     desc = "Remove a note ID",
     min = 1,
     max = 1)
-    @CommandPermissions(value={"mcbouncer.mod", "mcbouncer.command.removenote"})
-    public void removenote(CommandContext args, LocalPlayer sender) throws CommandException {
+    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.removenote"})
+    public void removenote(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         Integer toRemove = args.getInteger(0);
 
@@ -146,20 +129,12 @@ public class NoteCommands extends CommandContainer {
 
         boolean success = false;
         String error = "";
-        try {
-            if (controller.getAPI().removeNote(toRemove, sender.getName())) {
-                controller.getLogger().info(sender.getName() + " removed note ID " + toRemove);
-                success = true;
-            }
-            else {
-                error = "Unknown error";
-            }
-        } catch (NetworkException ex) {
-            controller.getLogger().severe("Network error!", ex);
-            error = ex.getMessage();
-        } catch (APIException ex) {
-            controller.getLogger().severe("API error!", ex);
-            error = ex.getMessage();
+
+        if (controller.getAPI().removeNote(toRemove, sender.getName())) {
+            controller.getLogger().info(sender.getName() + " removed note ID " + toRemove);
+            success = true;
+        } else {
+            error = "Unknown error";
         }
 
         NoteRemovedEvent noteRemovedEvent = new NoteRemovedEvent(sender, toRemove, success, error);
