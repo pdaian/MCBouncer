@@ -110,10 +110,12 @@
                         </goals>
                         <configuration>
                             <artifactSet>
-                                <excludes>
-                                    <exclude>org.bukkit:*</exclude>
-                                    <exclude>org.getspout:*</exclude>
-                                </excludes>
+                                <includes>
+                                    <include>com.googlecode.json-simple:*</include>
+                                    <include>org.apache.httpcomponents:*</include>
+                                    <include>org.yaml:*</include>
+                                    <include>com.google.guava:*</include>
+                                </includes>
                             </artifactSet>
                         </configuration>
                     </execution>

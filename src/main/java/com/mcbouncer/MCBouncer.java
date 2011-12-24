@@ -17,7 +17,6 @@ import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.util.commands.CommandManager;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 
 public class MCBouncer {
 
@@ -45,6 +44,8 @@ public class MCBouncer {
         commandManager.register(GeneralCommands.class);
         commandManager.register(MCBouncerCommands.class);
         commandManager.register(NoteCommands.class);
+        
+        this.api = new MCBouncerAPI(this);
 
     }
 
