@@ -111,7 +111,8 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptors>
-                        <descriptor>src/main/assembly/package.xml</descriptor>
+                        <descriptor>src/main/assembly/bukkit.xml</descriptor>
+                        <descriptor>src/main/assembly/spout.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
