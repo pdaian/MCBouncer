@@ -42,6 +42,7 @@ public class JoinListener implements MCBListener<JoinEvent> {
                 controller.getLogger().info(username + " attempted to join with IP " + ip);
                 return;
             }
+            
             if (controller.getAPI().isIPBanned(ip)) {
                 controller.setLastKickedUser(username);
                 controller.getCurrentlyLoggingIn().remove(username);
@@ -49,8 +50,18 @@ public class JoinListener implements MCBListener<JoinEvent> {
                 controller.getLogger().info(username + " attempted to join with IP " + ip);
                 return;
             }
+            
             int numBans = controller.getAPI().getTotalBanCount(username, ip);
             int numNotes = controller.getAPI().getNoteCount(username);
+            
+            if( controller.getConfiguration().getNumBansDisallow() > 0 && numBans > controller.getConfiguration().getNumBansDisallow() ) {
+                controller.setLastKickedUser(username);
+                controller.getCurrentlyLoggingIn().remove(username);
+                controller.getServer().kickPlayer(username, "You are banned on too many servers to log in here.");
+                controller.getLogger().info(username + " is banned on " + numBans + " servers, and has been disallowed");
+                return;
+            }
+            
             if (numBans > 0 || numNotes > 0) {
                 String response = username + " has ";
                 if (numNotes == 0) {

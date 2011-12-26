@@ -62,7 +62,7 @@ public class BanCommands extends CommandContainer {
             controller.getAPI().addBan(sender.getName(), toBan, reason);
             controller.getLogger().info(sender.getName() + " banning " + toBan + " - " + reason);
             success = true;
-        } catch(APIException e) {
+        } catch (APIException e) {
             error = e.getMessage();
         }
 
@@ -70,7 +70,12 @@ public class BanCommands extends CommandContainer {
         MCBEventHandler.callEvent(banAddedEvent);
 
         if (success) {
-            controller.getServer().messageMods(ChatColor.GREEN + "User " + toBan + " has been banned by " + sender.getName() + ". (" + reason + ")" );
+            String message = ChatColor.GREEN + "User " + toBan + " has been banned by " + sender.getName() + ". (" + reason + ")";
+            if (controller.getConfiguration().isShowBanMessages()) {
+                controller.getServer().broadcastMessage(message);
+            } else {
+                controller.getServer().messageMods(message);
+            }
         } else {
             sender.sendMessage(ChatColor.RED + error);
         }
@@ -104,7 +109,7 @@ public class BanCommands extends CommandContainer {
             controller.getAPI().removeBan(toUnban);
             controller.getLogger().info(sender.getName() + " unbanned " + toUnban);
             success = true;
-        } catch(APIException e) {
+        } catch (APIException e) {
             error = e.getMessage();
         }
 
@@ -163,7 +168,7 @@ public class BanCommands extends CommandContainer {
             controller.getAPI().addIPBan(sender.getName(), toBanIP, reason);
             controller.getLogger().info(sender.getName() + " banning " + toBanIP + " - " + reason);
             success = true;
-        } catch(APIException e) {
+        } catch (APIException e) {
             error = e.getMessage();
         }
 
@@ -209,7 +214,7 @@ public class BanCommands extends CommandContainer {
             controller.getAPI().removeIPBan(toUnban);
             controller.getLogger().info(sender.getName() + " unbanned " + toUnban);
             success = true;
-        } catch(APIException e) {
+        } catch (APIException e) {
             error = e.getMessage();
         }
 

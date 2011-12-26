@@ -35,7 +35,6 @@ import net.lahwran.fevents.Order;
  * to any specific implementation.
  * 
  * TODO: Unit tests
- * TODO: Implement the remaining unused configuration nodes
  * TODO: Some sort of offline mode
  * 
  */
