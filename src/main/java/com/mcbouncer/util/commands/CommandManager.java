@@ -144,7 +144,7 @@ public class CommandManager {
 
                 final CharSequence arguments = getArguments(command);
                 for (String alias : command.aliases()) {
-                    final String helpMessage = "/" + alias + " " + arguments + "\n\n" + help;
+                    final String helpMessage = "/" + alias + " " + arguments + " - " + help;
                     final String key = alias.replaceAll("/", "");
                     String previous = helpMessages.put(key, helpMessage);
 
