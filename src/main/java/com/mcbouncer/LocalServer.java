@@ -29,7 +29,7 @@ public interface LocalServer {
     /**
      * Gets the IP address of the given username. 
      * If the user is not online or the given username
-     * is an IP, it just returns the given argument.
+     * is an IP, it just returns a blank string.
      * 
      * @param ipOrName
      * @return 

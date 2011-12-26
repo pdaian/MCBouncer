@@ -121,8 +121,8 @@ public class GeneralCommands extends CommandContainer {
 
         controller.getServer().kickPlayer(toKick, "Kicked: " + reason);
         controller.getLogger().info(sender.getName() + " kicked " + toKick + " - " + reason);
-        sender.sendMessage(ChatColor.GREEN + "User " + toKick + " kicked successfully.");
-
+        controller.getServer().messageMods(ChatColor.GREEN + toKick + " has been kicked by " + sender.getName() + ". (" + reason + ")");
+        
     }
 
     @Command(aliases = {"mcbouncer", "mcb"},

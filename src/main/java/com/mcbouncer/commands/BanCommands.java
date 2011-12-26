@@ -6,6 +6,7 @@ import com.mcbouncer.commands.events.AddBanEvent;
 import com.mcbouncer.commands.events.BanAddedEvent;
 import com.mcbouncer.commands.events.BanRemovedEvent;
 import com.mcbouncer.commands.events.RemoveBanEvent;
+import com.mcbouncer.exception.APIException;
 import com.mcbouncer.exception.BouncerException;
 import com.mcbouncer.exception.CommandException;
 import com.mcbouncer.util.BanType;
@@ -57,18 +58,19 @@ public class BanCommands extends CommandContainer {
         boolean success = false;
         String error = "";
 
-        if (controller.getAPI().addBan(sender.getName(), toBan, reason)) {
+        try {
+            controller.getAPI().addBan(sender.getName(), toBan, reason);
             controller.getLogger().info(sender.getName() + " banning " + toBan + " - " + reason);
             success = true;
-        } else {
-            error = "Unknown error";
+        } catch(APIException e) {
+            error = e.getMessage();
         }
 
         BanAddedEvent banAddedEvent = new BanAddedEvent(BanType.USER, toBan, sender, reason, success, error);
         MCBEventHandler.callEvent(banAddedEvent);
 
         if (success) {
-            sender.sendMessage(ChatColor.GREEN + "User " + toBan + " banned successfully.");
+            controller.getServer().messageMods(ChatColor.GREEN + "User " + toBan + " has been banned by " + sender.getName() + ". (" + reason + ")" );
         } else {
             sender.sendMessage(ChatColor.RED + error);
         }
@@ -98,18 +100,19 @@ public class BanCommands extends CommandContainer {
         boolean success = false;
         String error = "";
 
-        if (controller.getAPI().removeBan(toUnban)) {
+        try {
+            controller.getAPI().removeBan(toUnban);
             controller.getLogger().info(sender.getName() + " unbanned " + toUnban);
             success = true;
-        } else {
-            error = "Unknown error";
+        } catch(APIException e) {
+            error = e.getMessage();
         }
 
         BanRemovedEvent banRemovedEvent = new BanRemovedEvent(BanType.USER, sender, toUnban, success, error);
         MCBEventHandler.callEvent(banRemovedEvent);
 
         if (success) {
-            sender.sendMessage(ChatColor.GREEN + "User unbanned successfully.");
+            controller.getServer().messageMods(ChatColor.GREEN + toUnban + " has been unbanned by " + sender.getName() + ".");
         } else {
             sender.sendMessage(ChatColor.RED + error);
         }
@@ -147,7 +150,7 @@ public class BanCommands extends CommandContainer {
         sender = addBanEvent.getIssuer();
         reason = addBanEvent.getReason();
 
-        if (toBanUser.length() != 0) {
+        if (!toBanUser.equals(toBanIP)) {
             controller.getServer().kickPlayer(toBanUser, "Banned: " + reason);
         } else {
             controller.getServer().kickPlayerWithIP(toBanIP, "Banned: " + reason);
@@ -156,18 +159,19 @@ public class BanCommands extends CommandContainer {
         boolean success = false;
         String error = "";
 
-        if (controller.getAPI().addIPBan(sender.getName(), toBanIP, reason)) {
+        try {
+            controller.getAPI().addIPBan(sender.getName(), toBanIP, reason);
             controller.getLogger().info(sender.getName() + " banning " + toBanIP + " - " + reason);
             success = true;
-        } else {
-            error = "Unknown error";
+        } catch(APIException e) {
+            error = e.getMessage();
         }
 
         BanAddedEvent banAddedEvent = new BanAddedEvent(BanType.IP, toBanIP, sender, reason, success, error);
         MCBEventHandler.callEvent(banAddedEvent);
 
         if (success) {
-            sender.sendMessage(ChatColor.GREEN + "IP " + toBanIP + " banned successfully.");
+            controller.getServer().messageMods(ChatColor.GREEN + toBanIP + " has been banned by " + sender.getName() + ". (" + reason + ")");
         } else {
             sender.sendMessage(ChatColor.RED + error);
         }
@@ -201,18 +205,19 @@ public class BanCommands extends CommandContainer {
         boolean success = false;
         String error = "";
 
-        if (controller.getAPI().removeIPBan(toUnban)) {
+        try {
+            controller.getAPI().removeIPBan(toUnban);
             controller.getLogger().info(sender.getName() + " unbanned " + toUnban);
             success = true;
-        } else {
-            error = "Unknown error";
+        } catch(APIException e) {
+            error = e.getMessage();
         }
 
         BanRemovedEvent banRemovedEvent = new BanRemovedEvent(BanType.IP, sender, toUnban, success, error);
         MCBEventHandler.callEvent(banRemovedEvent);
 
         if (success) {
-            sender.sendMessage(ChatColor.GREEN + "IP unbanned successfully.");
+            controller.getServer().messageMods(ChatColor.GREEN + toUnban + " has been unbanned by " + sender.getName() + ".");
         } else {
             sender.sendMessage(ChatColor.RED + error);
         }

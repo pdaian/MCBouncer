@@ -6,6 +6,7 @@ import com.mcbouncer.exception.NetworkException;
 import com.mcbouncer.http.Transport;
 import com.mcbouncer.http.request.Request;
 import com.mcbouncer.http.response.Response;
+import com.mcbouncer.util.HTTPUtils;
 import com.mcbouncer.util.MiscUtils;
 import com.mcbouncer.util.node.JSONNode;
 import com.mcbouncer.util.node.MapNode;
@@ -31,6 +32,7 @@ import java.util.List;
 public class MCBouncerAPI {
 
     protected MCBouncer controller;
+    protected String lastError = "";
 
     public MCBouncerAPI(MCBouncer controller) {
         this.controller = controller;
@@ -48,7 +50,14 @@ public class MCBouncerAPI {
      * @throws NetworkException 
      */
     protected Response getAPIURL(String... params) throws NetworkException {
-        String url = controller.getConfiguration().getWebsite() + "/api" + MiscUtils.join(params, "/"); //Appends the website
+        String[] newParams = new String[params.length];
+        int i = 0;
+        for (String param : params) {
+            newParams[i] = HTTPUtils.urlEncode(param);
+            i++;
+        }
+
+        String url = controller.getConfiguration().getWebsite() + "/api/" + MiscUtils.join(newParams, "/"); //Appends the website
         controller.getLogger().debug("Getting URL - " + url);
 
         url = url.replaceAll("apiUNIQKey", controller.getConfiguration().getAPIKey()); //Replaces apiUNIQKey with the real key
@@ -250,7 +259,11 @@ public class MCBouncerAPI {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
-            return json.getBoolean("success", false);
+            if (json.getBoolean("success", false)) {
+                return true;
+            } else {
+                throw new APIException(json.getString("error"));
+            }
         }
         throw new APIException("No content received! Is MCBouncer down?");
     }
@@ -383,7 +396,11 @@ public class MCBouncerAPI {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
-            return json.getBoolean("success", false);
+            if (json.getBoolean("success", false)) {
+                return true;
+            } else {
+                throw new APIException(json.getString("error"));
+            }
         }
         throw new APIException("No content received! Is MCBouncer down?");
     }
@@ -448,11 +465,15 @@ public class MCBouncerAPI {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
-            return json.getBoolean("success", false);
+            if (json.getBoolean("success", false)) {
+                return true;
+            } else {
+                throw new APIException(json.getString("error"));
+            }
         }
         throw new APIException("No content received! Is MCBouncer down?");
     }
-    
+
     /**
      * Adds a ban for a username
      * 
@@ -507,5 +528,14 @@ public class MCBouncerAPI {
      */
     public boolean addGlobalNote(String issuer, String user, String note) throws NetworkException, APIException {
         return addSomething("GlobalNote", issuer, user, note);
+    }
+
+    /**
+     * Returns the last error that was received
+     * from the API.
+     * 
+     */
+    public String getLastError() {
+        return lastError;
     }
 }

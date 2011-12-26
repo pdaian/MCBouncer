@@ -81,7 +81,7 @@ public class BukkitPlugin extends JavaPlugin implements LocalServer {
         
         Player player = this.getServer().getPlayer(ipOrName);
         if( player == null ) {
-            return "0.0.0.0";
+            return "";
         }
         return player.getAddress().getAddress().getHostAddress();
     }

@@ -98,7 +98,7 @@ public class Transport {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            throw new NetworkException("Failed to get URL " + request.getURL() + " (" + ex.getMessage() + ")");
+            throw new NetworkException(ex);
         } finally {
             client.getConnectionManager().shutdown();
         }

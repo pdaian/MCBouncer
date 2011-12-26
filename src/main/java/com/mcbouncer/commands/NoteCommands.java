@@ -8,6 +8,7 @@ import com.mcbouncer.commands.events.GlobalNoteAddedEvent;
 import com.mcbouncer.commands.events.NoteAddedEvent;
 import com.mcbouncer.commands.events.NoteRemovedEvent;
 import com.mcbouncer.commands.events.RemoveNoteEvent;
+import com.mcbouncer.exception.APIException;
 import com.mcbouncer.exception.BouncerException;
 import com.mcbouncer.exception.CommandException;
 import com.mcbouncer.util.ChatColor;
@@ -51,11 +52,12 @@ public class NoteCommands extends CommandContainer {
         boolean success = false;
         String error = "";
 
-        if (controller.getAPI().addNote(sender.getName(), toNote, note)) {
+        try {
+            controller.getAPI().addNote(sender.getName(), toNote, note);
             controller.getLogger().info(sender.getName() + " added note to " + toNote + " - " + note);
             success = true;
-        } else {
-            error = "Unknown error";
+        } catch(APIException e) {
+            error = e.getMessage();
         }
 
         NoteAddedEvent noteAddedEvent = new NoteAddedEvent(toNote, sender, note, success, error);
@@ -94,11 +96,12 @@ public class NoteCommands extends CommandContainer {
         boolean success = false;
         String error = "";
 
-        if (controller.getAPI().addGlobalNote(sender.getName(), toNote, note)) {
+        try {
+            controller.getAPI().addGlobalNote(sender.getName(), toNote, note);
             controller.getLogger().info(sender.getName() + " added global note to " + toNote + " - " + note);
             success = true;
-        } else {
-            error = "Unknown error";
+        } catch(APIException e) {
+            error = e.getMessage();
         }
 
         GlobalNoteAddedEvent noteAddedEvent = new GlobalNoteAddedEvent(toNote, sender, note, success, error);
@@ -134,11 +137,12 @@ public class NoteCommands extends CommandContainer {
         boolean success = false;
         String error = "";
 
-        if (controller.getAPI().removeNote(toRemove, sender.getName())) {
+        try {
+            controller.getAPI().removeNote(toRemove, sender.getName());
             controller.getLogger().info(sender.getName() + " removed note ID " + toRemove);
             success = true;
-        } else {
-            error = "Unknown error";
+        } catch(APIException e) {
+            error = e.getMessage();
         }
 
         NoteRemovedEvent noteRemovedEvent = new NoteRemovedEvent(sender, toRemove, success, error);

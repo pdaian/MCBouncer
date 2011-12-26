@@ -13,4 +13,8 @@ public class NetworkException extends BouncerException {
     public NetworkException(String msg) {
         super(msg);
     }
+
+    public NetworkException(Throwable thrwbl) {
+        super(thrwbl);
+    }
 }
