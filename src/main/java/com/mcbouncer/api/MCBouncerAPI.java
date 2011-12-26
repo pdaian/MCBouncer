@@ -3,6 +3,7 @@ package com.mcbouncer.api;
 import com.mcbouncer.MCBouncer;
 import com.mcbouncer.exception.APIException;
 import com.mcbouncer.exception.NetworkException;
+import com.mcbouncer.exception.ParserException;
 import com.mcbouncer.http.Transport;
 import com.mcbouncer.http.request.Request;
 import com.mcbouncer.http.response.Response;
@@ -83,8 +84,11 @@ public class MCBouncerAPI {
         Response response = this.getAPIURL("get" + type + "Count", "apiUNIQKey", user);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
-            JSONNode json = response.getJSONResult();
-            if (json == null) {
+            JSONNode json = null;
+            try {
+                json = response.getJSONResult();
+            }
+            catch( ParserException e ) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -160,8 +164,11 @@ public class MCBouncerAPI {
         Response response = this.getAPIURL("getBans", "apiUNIQKey", user);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
-            JSONNode json = response.getJSONResult();
-            if (json == null) {
+            JSONNode json = null;
+            try {
+                json = response.getJSONResult();
+            }
+            catch( ParserException e ) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -191,8 +198,11 @@ public class MCBouncerAPI {
         Response response = this.getAPIURL("getIPBans", "apiUNIQKey", ip);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
-            JSONNode json = response.getJSONResult();
-            if (json == null) {
+            JSONNode json = null;
+            try {
+                json = response.getJSONResult();
+            }
+            catch( ParserException e ) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -222,8 +232,11 @@ public class MCBouncerAPI {
         Response response = this.getAPIURL("getNotes", "apiUNIQKey", user);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
-            JSONNode json = response.getJSONResult();
-            if (json == null) {
+            JSONNode json = null;
+            try {
+                json = response.getJSONResult();
+            }
+            catch( ParserException e ) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -254,8 +267,11 @@ public class MCBouncerAPI {
         Response response = this.getAPIURL("updateUser", "apiUNIQKey", user, ip);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
-            JSONNode json = response.getJSONResult();
-            if (json == null) {
+            JSONNode json = null;
+            try {
+                json = response.getJSONResult();
+            }
+            catch( ParserException e ) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -281,8 +297,11 @@ public class MCBouncerAPI {
         Response response = this.getAPIURL("get" + type + "Reason", "apiUNIQKey", user);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
-            JSONNode json = response.getJSONResult();
-            if (json == null) {
+            JSONNode json = null;
+            try {
+                json = response.getJSONResult();
+            }
+            catch( ParserException e ) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -334,8 +353,11 @@ public class MCBouncerAPI {
         Response response = this.getAPIURL("get" + type + "Reason", "apiUNIQKey", user);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
-            JSONNode json = response.getJSONResult();
-            if (json == null) {
+            JSONNode json = null;
+            try {
+                json = response.getJSONResult();
+            }
+            catch( ParserException e ) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -391,8 +413,11 @@ public class MCBouncerAPI {
         }
 
         if (response.getContent() != null && response.getContent().length() != 0) {
-            JSONNode json = response.getJSONResult();
-            if (json == null) {
+            JSONNode json = null;
+            try {
+                json = response.getJSONResult();
+            }
+            catch( ParserException e ) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -460,8 +485,11 @@ public class MCBouncerAPI {
         Response response = this.getAPIURL("add" + type, "apiUNIQKey", issuer, user, reason);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
-            JSONNode json = response.getJSONResult();
-            if (json == null) {
+            JSONNode json = null;
+            try {
+                json = response.getJSONResult();
+            }
+            catch( ParserException e ) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
