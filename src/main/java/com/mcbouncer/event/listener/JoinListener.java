@@ -25,12 +25,14 @@ public class JoinListener implements MCBListener<JoinEvent> {
 
             if (controller.getAPI().isBanned(username)) {
                 controller.setLastKickedUser(username);
+                controller.getCurrentlyLoggingIn().remove(username);
                 controller.getServer().kickPlayer(username, "Banned: " + controller.getAPI().getBanReason(username));
                 controller.getLogger().info(username + " attempted to join with IP " + ip);
                 return;
             }
             if (controller.getAPI().isIPBanned(ip)) {
                 controller.setLastKickedUser(username);
+                controller.getCurrentlyLoggingIn().remove(username);
                 controller.getServer().kickPlayer(username, "Banned: " + controller.getAPI().getIPBanReason(ip));
                 controller.getLogger().info(username + " attempted to join with IP " + ip);
                 return;

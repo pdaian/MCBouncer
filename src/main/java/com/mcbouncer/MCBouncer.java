@@ -5,6 +5,16 @@ import com.mcbouncer.commands.BanCommands;
 import com.mcbouncer.commands.GeneralCommands;
 import com.mcbouncer.commands.MCBouncerCommands;
 import com.mcbouncer.commands.NoteCommands;
+import com.mcbouncer.event.ChatEvent;
+import com.mcbouncer.event.CommandEvent;
+import com.mcbouncer.event.JoinEvent;
+import com.mcbouncer.event.KickEvent;
+import com.mcbouncer.event.LoginEvent;
+import com.mcbouncer.event.listener.ChatListener;
+import com.mcbouncer.event.listener.CommandListener;
+import com.mcbouncer.event.listener.JoinListener;
+import com.mcbouncer.event.listener.KickListener;
+import com.mcbouncer.event.listener.LoginListener;
 import com.mcbouncer.exception.CommandException;
 import com.mcbouncer.exception.CommandPermissionsException;
 import com.mcbouncer.exception.CommandUsageException;
@@ -16,6 +26,7 @@ import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.util.commands.CommandManager;
 import java.util.ArrayList;
 import java.util.List;
+import net.lahwran.fevents.Order;
 
 /**
  * Core controller class. Stores many of the important data
@@ -24,7 +35,6 @@ import java.util.List;
  * to any specific implementation.
  * 
  * TODO: Tests
- * TODO: Stress test the code base
  * TODO: Implement the remaining unused configuration nodes
  * TODO: Implement PlayerUpdate events
  * TODO: Some sort of offline mode
@@ -56,6 +66,12 @@ public class MCBouncer {
         commandManager.register(GeneralCommands.class);
         commandManager.register(MCBouncerCommands.class);
         commandManager.register(NoteCommands.class);
+        
+        JoinEvent.handlers.register(new JoinListener(), Order.Earliest);
+        ChatEvent.handlers.register(new ChatListener(), Order.Earliest);
+        CommandEvent.handlers.register(new CommandListener(), Order.Earliest);
+        KickEvent.handlers.register(new KickListener(), Order.Earliest);
+        LoginEvent.handlers.register(new LoginListener(), Order.Earliest);
 
         this.api = new MCBouncerAPI(this);
     }

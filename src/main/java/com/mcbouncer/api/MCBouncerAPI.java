@@ -80,7 +80,7 @@ public class MCBouncerAPI {
      * @throws APIException 
      */
     protected Integer getTypeCount(String type, String user) throws NetworkException, APIException {
-        Response response = this.getAPIURL("/get" + type + "Count", "apiUNIQKey", user);
+        Response response = this.getAPIURL("get" + type + "Count", "apiUNIQKey", user);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();
@@ -278,7 +278,7 @@ public class MCBouncerAPI {
      * @throws APIException 
      */
     protected String getReason(String type, String user) throws NetworkException, APIException {
-        Response response = this.getAPIURL("/get" + type + "Reason", "apiUNIQKey", user);
+        Response response = this.getAPIURL("get" + type + "Reason", "apiUNIQKey", user);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();
@@ -331,7 +331,7 @@ public class MCBouncerAPI {
      * @throws APIException 
      */
     protected boolean isBanned(String type, String user) throws NetworkException, APIException {
-        Response response = this.getAPIURL("/get" + type + "Reason", "apiUNIQKey", user);
+        Response response = this.getAPIURL("get" + type + "Reason", "apiUNIQKey", user);
 
         if (response.getContent() != null && response.getContent().length() != 0) {
             JSONNode json = response.getJSONResult();

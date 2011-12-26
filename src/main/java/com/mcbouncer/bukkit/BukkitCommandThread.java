@@ -51,6 +51,8 @@ public class BukkitCommandThread extends Thread {
      * transforms it into generic data that MCBouncer
      * can read, and sends it to the controller.
      * 
+     * @author sk89q
+     * 
      * @return 
      */
     public boolean onCommand() {
