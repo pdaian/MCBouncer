@@ -4,10 +4,8 @@ import com.mcbouncer.MCBouncer;
 
 /**
  * Simply stores the controller in a protected
- * field. There's no real reason this needs to
- * exist, and should probably be decommissioned.
- * 
- * TODO
+ * field. It also provides an interface to ensure
+ * that only command classes get registered.
  * 
  */
 public abstract class CommandContainer {
