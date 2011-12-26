@@ -1,6 +1,6 @@
-package com.mcbouncer;
+package com.mcbouncer.util;
 
-public enum ConfigurationDefaults {
+public enum ConfigDefaults {
 
     DEBUG(false),
     BANSDISALLOW(-1),
@@ -13,15 +13,15 @@ public enum ConfigurationDefaults {
     protected String strVal;
     protected boolean boolVal;
 
-    private ConfigurationDefaults(boolean boolVal) {
+    private ConfigDefaults(boolean boolVal) {
         this.boolVal = boolVal;
     }
 
-    private ConfigurationDefaults(String strVal) {
+    private ConfigDefaults(String strVal) {
         this.strVal = strVal;
     }
 
-    private ConfigurationDefaults(int intVal) {
+    private ConfigDefaults(int intVal) {
         this.intVal = intVal;
     }
 

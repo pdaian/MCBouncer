@@ -1,6 +1,6 @@
 package com.mcbouncer.bukkit;
 
-import com.mcbouncer.ConfigurationDefaults;
+import com.mcbouncer.util.ConfigDefaults;
 import com.mcbouncer.LocalConfiguration;
 import com.mcbouncer.MCBouncer;
 import com.mcbouncer.util.node.YAMLFileNode;
@@ -75,13 +75,13 @@ public class BukkitConfiguration extends LocalConfiguration {
         node.load();
         this.conf = node;
         
-        debugMode = conf.getBoolean("debug", ConfigurationDefaults.DEBUG.getBoolVal());
-        apiKey = conf.getString("apiKey", ConfigurationDefaults.APIKEY.getStrVal());
-        numBansDisallow = conf.getInteger("numBansDisallow", ConfigurationDefaults.BANSDISALLOW.getIntVal());
-        showBanMessages = conf.getBoolean("showBanMessages", ConfigurationDefaults.SHOWMESSAGES.getBoolVal());
-        defaultReason = conf.getString("defaultBanMessage", ConfigurationDefaults.DEFAULTBAN.getStrVal());
-        defaultKickMessage = conf.getString("defaultKickMessage", ConfigurationDefaults.DEFAULTKICK.getStrVal());
-        website = conf.getString("website", ConfigurationDefaults.WEBSITE.getStrVal());
+        debugMode = conf.getBoolean("debug", ConfigDefaults.DEBUG.getBoolVal());
+        apiKey = conf.getString("apiKey", ConfigDefaults.APIKEY.getStrVal());
+        numBansDisallow = conf.getInteger("numBansDisallow", ConfigDefaults.BANSDISALLOW.getIntVal());
+        showBanMessages = conf.getBoolean("showBanMessages", ConfigDefaults.SHOWMESSAGES.getBoolVal());
+        defaultReason = conf.getString("defaultBanMessage", ConfigDefaults.DEFAULTBAN.getStrVal());
+        defaultKickMessage = conf.getString("defaultKickMessage", ConfigDefaults.DEFAULTKICK.getStrVal());
+        website = conf.getString("website", ConfigDefaults.WEBSITE.getStrVal());
         
     }
 

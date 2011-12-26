@@ -1,5 +1,6 @@
 package com.mcbouncer;
 
+import com.mcbouncer.util.ConfigDefaults;
 import com.mcbouncer.util.node.MapNode;
 
 /**
@@ -9,13 +10,13 @@ import com.mcbouncer.util.node.MapNode;
  */
 public abstract class LocalConfiguration {
 
-    protected boolean debugMode = ConfigurationDefaults.DEBUG.boolVal;
-    protected int numBansDisallow = ConfigurationDefaults.BANSDISALLOW.intVal;
-    protected String apiKey = ConfigurationDefaults.APIKEY.strVal;
-    protected boolean showBanMessages = ConfigurationDefaults.SHOWMESSAGES.boolVal;
-    protected String defaultReason = ConfigurationDefaults.DEFAULTBAN.strVal;
-    protected String defaultKickMessage = ConfigurationDefaults.DEFAULTKICK.strVal;
-    protected String website = ConfigurationDefaults.WEBSITE.strVal;
+    protected boolean debugMode = ConfigDefaults.DEBUG.getBoolVal();
+    protected int numBansDisallow = ConfigDefaults.BANSDISALLOW.getIntVal();
+    protected String apiKey = ConfigDefaults.APIKEY.getStrVal();
+    protected boolean showBanMessages = ConfigDefaults.SHOWMESSAGES.getBoolVal();
+    protected String defaultReason = ConfigDefaults.DEFAULTBAN.getStrVal();
+    protected String defaultKickMessage = ConfigDefaults.DEFAULTKICK.getStrVal();
+    protected String website = ConfigDefaults.WEBSITE.getStrVal();
     protected MapNode conf;
 
     public abstract void load();
