@@ -31,6 +31,10 @@ commands:
   addnote:
     description: 'Adds a note'
     usage: '/<command> playername note'
+  addglobalnote:
+    description: 'Adds a global note'
+    usage: '/<command> playername note'
+    aliases: ['addgnote']
   removenote:
     description: 'Removes a note'
     usage: '/<command> noteid'

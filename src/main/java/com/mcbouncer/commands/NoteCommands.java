@@ -30,7 +30,7 @@ public class NoteCommands extends CommandContainer {
     @Command(aliases = {"addnote"},
     usage = "<username> <text>",
     desc = "Add a note to a username",
-    min = 1,
+    min = 2,
     max = -1)
     @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.addnote"})
     public void addnote(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
@@ -56,7 +56,7 @@ public class NoteCommands extends CommandContainer {
             controller.getAPI().addNote(sender.getName(), toNote, note);
             controller.getLogger().info(sender.getName() + " added note to " + toNote + " - " + note);
             success = true;
-        } catch(APIException e) {
+        } catch (APIException e) {
             error = e.getMessage();
         }
 
@@ -74,7 +74,7 @@ public class NoteCommands extends CommandContainer {
     @Command(aliases = {"addgnote", "addglobalnote"},
     usage = "<username> <text>",
     desc = "Add a global note to a username",
-    min = 1,
+    min = 2,
     max = -1)
     @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.command.addnote.global"})
     public void addgnote(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
@@ -100,7 +100,7 @@ public class NoteCommands extends CommandContainer {
             controller.getAPI().addGlobalNote(sender.getName(), toNote, note);
             controller.getLogger().info(sender.getName() + " added global note to " + toNote + " - " + note);
             success = true;
-        } catch(APIException e) {
+        } catch (APIException e) {
             error = e.getMessage();
         }
 
@@ -141,7 +141,7 @@ public class NoteCommands extends CommandContainer {
             controller.getAPI().removeNote(toRemove, sender.getName());
             controller.getLogger().info(sender.getName() + " removed note ID " + toRemove);
             success = true;
-        } catch(APIException e) {
+        } catch (APIException e) {
             error = e.getMessage();
         }
 

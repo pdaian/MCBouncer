@@ -5,8 +5,6 @@ import com.mcbouncer.commands.BanCommands;
 import com.mcbouncer.commands.GeneralCommands;
 import com.mcbouncer.commands.MCBouncerCommands;
 import com.mcbouncer.commands.NoteCommands;
-import com.mcbouncer.commands.events.AddBanEvent;
-import com.mcbouncer.commands.events.BanAddedEvent;
 import com.mcbouncer.exception.CommandException;
 import com.mcbouncer.exception.CommandPermissionsException;
 import com.mcbouncer.exception.CommandUsageException;
@@ -18,8 +16,6 @@ import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.util.commands.CommandManager;
 import java.util.ArrayList;
 import java.util.List;
-import net.lahwran.fevents.MCBListener;
-import net.lahwran.fevents.Order;
 
 /**
  * Core controller class. Stores many of the important data
@@ -35,35 +31,6 @@ import net.lahwran.fevents.Order;
  * 
  */
 public class MCBouncer {
-
-    private static class ABListener implements MCBListener<AddBanEvent> {
-
-        protected static boolean done = false;
-        
-        public ABListener() {
-        }
-
-        public void onEvent(AddBanEvent event) {
-            if( done ) {
-                event.setCancelled(true);
-                done = false;
-            }
-            else {
-                System.out.println(event.getIssuer().getName());
-                done = true;
-            }
-        }
-    }
-
-    private static class BAListener implements MCBListener<BanAddedEvent> {
-
-        public BAListener() {
-        }
-
-        public void onEvent(BanAddedEvent event) {
-            System.out.println(event.isSuccess());
-        }
-    }
 
     protected final MCBLogger logger;
     protected LocalServer server;
@@ -91,9 +58,6 @@ public class MCBouncer {
         commandManager.register(NoteCommands.class);
 
         this.api = new MCBouncerAPI(this);
-
-        AddBanEvent.handlers.register(new ABListener(), Order.Late);
-        BanAddedEvent.handlers.register(new BAListener(), Order.Late);
     }
 
     /**
