@@ -34,9 +34,8 @@ import net.lahwran.fevents.Order;
  * to be server-independent, so all the data in here is not tied
  * to any specific implementation.
  * 
- * TODO: Tests
+ * TODO: Unit tests
  * TODO: Implement the remaining unused configuration nodes
- * TODO: Implement PlayerUpdate events
  * TODO: Some sort of offline mode
  * 
  */

@@ -2,7 +2,7 @@ name: MCBouncer
 version: 1.1beta
 author: MCBouncer Staff
 website: http://www.mcbouncer.com/
-main: com.mcbouncer.bukkit.BukkitPlugin
+main: com.mcbouncer.bukkit.BukkitServer
 description: MCBouncer is a cloud-based ban suite and protection program that is modular, unbiased, and fair to its users.
 commands:
   ban:

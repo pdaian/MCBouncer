@@ -2,9 +2,11 @@ package com.mcbouncer.event.listener;
 
 import com.mcbouncer.MCBouncer;
 import com.mcbouncer.event.JoinEvent;
+import com.mcbouncer.event.PlayerUpdateEvent;
 import com.mcbouncer.exception.APIException;
 import com.mcbouncer.exception.NetworkException;
 import com.mcbouncer.util.ChatColor;
+import net.lahwran.fevents.MCBEventHandler;
 import net.lahwran.fevents.MCBListener;
 
 /**
@@ -21,6 +23,16 @@ public class JoinListener implements MCBListener<JoinEvent> {
         MCBouncer controller = event.getController();
 
         try {
+            PlayerUpdateEvent updateEvent = new PlayerUpdateEvent(username, ip);
+            MCBEventHandler.callEvent(updateEvent);
+
+            if (updateEvent.isCancelled()) {
+                return;
+            }
+            
+            username = updateEvent.getUsername();
+            ip = updateEvent.getIP();
+
             controller.getAPI().updateUser(username, ip);
 
             if (controller.getAPI().isBanned(username)) {

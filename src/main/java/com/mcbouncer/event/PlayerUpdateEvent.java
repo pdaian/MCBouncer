@@ -1,4 +1,4 @@
-package com.mcbouncer.commands.events;
+package com.mcbouncer.event;
 
 import net.lahwran.fevents.Cancellable;
 import net.lahwran.fevents.MCBEvent;
@@ -16,7 +16,30 @@ import net.lahwran.fevents.MCBHandlerList;
  */
 public class PlayerUpdateEvent extends MCBEvent<PlayerUpdateEvent> implements Cancellable {
 
+    protected String username;
+    protected String ip;
     public static final MCBHandlerList<PlayerUpdateEvent> handlers = new MCBHandlerList<PlayerUpdateEvent>();
+
+    public PlayerUpdateEvent(String username, String ip) {
+        this.username = username;
+        this.ip = ip;
+    }
+
+    public String getIP() {
+        return ip;
+    }
+
+    public void setIP(String ip) {
+        this.ip = ip;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     @Override
     protected MCBHandlerList<PlayerUpdateEvent> getHandlers() {

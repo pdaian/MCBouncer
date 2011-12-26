@@ -23,7 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * this plugin.
  * 
  */
-public class BukkitPlugin extends JavaPlugin implements LocalServer {
+public class BukkitServer extends JavaPlugin implements LocalServer {
 
     protected MCBouncer controller;
     
