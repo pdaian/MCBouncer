@@ -1,4 +1,4 @@
-package com.mcbouncer.http.response;
+package com.mcbouncer.http;
 
 /**
  * HTTP error code container class. Setting the code or message

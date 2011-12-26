@@ -1,6 +1,6 @@
 package com.mcbouncer.util;
 
-import com.mcbouncer.http.request.Request;
+import com.mcbouncer.http.Request;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;

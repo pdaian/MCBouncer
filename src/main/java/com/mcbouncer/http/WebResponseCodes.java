@@ -1,4 +1,4 @@
-package com.mcbouncer.http.response;
+package com.mcbouncer.http;
 
 import java.util.HashMap;
 

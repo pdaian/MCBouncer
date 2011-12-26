@@ -1,4 +1,4 @@
-package com.mcbouncer.http.response;
+package com.mcbouncer.http;
 
 import com.mcbouncer.MCBouncer;
 import com.mcbouncer.exception.ParserException;

@@ -1,4 +1,4 @@
-package com.mcbouncer.http.request;
+package com.mcbouncer.http;
 
 import com.mcbouncer.MCBouncer;
 import java.util.ArrayList;

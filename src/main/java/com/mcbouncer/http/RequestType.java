@@ -1,4 +1,4 @@
-package com.mcbouncer.http.request;
+package com.mcbouncer.http;
 
 /**
  * Different types of HTTP request types. Only
