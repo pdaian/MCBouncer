@@ -24,7 +24,7 @@ public class BukkitConfiguration extends LocalConfiguration {
     public BukkitConfiguration(File dataFolder) {
         this.dataFolder = dataFolder;
     }
-    
+
     /**
      * Loads the config.yml file. If it doesn't
      * exist, it copies the file in the defaults/
@@ -33,10 +33,10 @@ public class BukkitConfiguration extends LocalConfiguration {
      */
     @Override
     public void load() {
-        
+
         dataFolder.getParentFile().mkdirs();
         File file = new File(dataFolder, "config.yml");
-        
+
         if (!file.exists()) {
             InputStream input = MCBouncer.class.getResourceAsStream("/defaults/config.yml");
             if (input != null) {
@@ -70,11 +70,11 @@ public class BukkitConfiguration extends LocalConfiguration {
             }
 
         }
-        
+
         YAMLFileNode node = new YAMLFileNode(file);
         node.load();
         this.conf = node;
-        
+
         debugMode = conf.getBoolean("debug", ConfigDefaults.DEBUG.getBoolVal());
         apiKey = conf.getString("apiKey", ConfigDefaults.APIKEY.getStrVal());
         numBansDisallow = conf.getInteger("numBansDisallow", ConfigDefaults.BANSDISALLOW.getIntVal());
@@ -82,7 +82,7 @@ public class BukkitConfiguration extends LocalConfiguration {
         defaultReason = conf.getString("defaultBanMessage", ConfigDefaults.DEFAULTBAN.getStrVal());
         defaultKickMessage = conf.getString("defaultKickMessage", ConfigDefaults.DEFAULTKICK.getStrVal());
         website = conf.getString("website", ConfigDefaults.WEBSITE.getStrVal());
-        
+
     }
 
     @Override
@@ -119,5 +119,4 @@ public class BukkitConfiguration extends LocalConfiguration {
     public String getWebsite() {
         return website;
     }
-    
 }

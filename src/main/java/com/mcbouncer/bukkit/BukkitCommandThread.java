@@ -45,7 +45,7 @@ public class BukkitCommandThread extends Thread {
             }
         }
     }
-    
+
     /**
      * Handles the incoming Bukkit command data,
      * transforms it into generic data that MCBouncer
@@ -56,16 +56,16 @@ public class BukkitCommandThread extends Thread {
      * @return 
      */
     public boolean onCommand() {
-        
+
         String[] split = new String[args.length + 1];
         System.arraycopy(args, 0, split, 1, args.length);
         split[0] = "/" + command.getName();
 
         LocalPlayer newSender = new BukkitCommandSender(controller, sender);
-        if( sender instanceof Player ) {
+        if (sender instanceof Player) {
             newSender = new BukkitPlayer(controller, (Player) sender);
         }
-        
+
         controller.handleCommand(newSender, split);
 
         return true;

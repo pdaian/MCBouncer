@@ -62,7 +62,7 @@ public class AddNoteEvent extends MCBEvent<AddNoteEvent> implements Cancellable 
     protected String getEventName() {
         return "AddNote";
     }
-    
+
     @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;

@@ -156,7 +156,7 @@ public class MiscUtils {
 
         options.setIndent(4);
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-        
+
         Yaml yaml = new Yaml(new SafeConstructor(), new EmptyNullRepresenter(), options);
         return yaml.dump(node.getBase());
     }

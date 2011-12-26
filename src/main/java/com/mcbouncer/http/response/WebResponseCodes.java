@@ -10,7 +10,7 @@ public class WebResponseCodes {
 
     private final static HashMap<Integer, String> codes = new HashMap<Integer, String>();
     private final static HashMap<String, Integer> reverseCodes = new HashMap<String, Integer>();
-    
+
     static {
         addCode(100, "Continue");
         addCode(101, "Switching Protocols");
@@ -54,16 +54,16 @@ public class WebResponseCodes {
         addCode(504, "Gateway Timeout");
         addCode(505, "HTTP Version Not Supported");
     }
-    
+
     private static void addCode(Integer code, String message) {
         codes.put(code, message);
         reverseCodes.put(message, code);
     }
-    
+
     public static String getError(Integer code) {
         return codes.get(code);
     }
-    
+
     public static Integer getError(String message) {
         return reverseCodes.get(message);
     }

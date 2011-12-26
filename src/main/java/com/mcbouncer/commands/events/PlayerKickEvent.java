@@ -61,7 +61,7 @@ public class PlayerKickEvent extends MCBEvent<PlayerKickEvent> implements Cancel
     protected String getEventName() {
         return "PlayerKick";
     }
-    
+
     @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;

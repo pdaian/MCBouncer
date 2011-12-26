@@ -13,16 +13,14 @@ public class MapNodeTransformer implements Transformer {
 
     @SuppressWarnings("unchecked")
     public Object transform(Object o) {
-        if( o == null ) {
+        if (o == null) {
             return null;
         }
-        
-        if( o instanceof Map ) {
+
+        if (o instanceof Map) {
             return new MapNode((Map<String, Object>) o);
-        }
-        else {
+        } else {
             return null;
         }
     }
-    
 }

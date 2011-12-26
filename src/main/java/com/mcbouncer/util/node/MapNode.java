@@ -133,7 +133,7 @@ public class MapNode {
             return Boolean.parseBoolean(out.toString());
         }
     }
-    
+
     public MapNode getMapNode(String prop) {
         return getMapNode(prop, null);
     }
@@ -144,10 +144,9 @@ public class MapNode {
         if (out == null) {
             return defaultResult;
         } else {
-            if( out instanceof Map ) {
-                return new MapNode((Map<String, Object>)out);
-            }
-            else {
+            if (out instanceof Map) {
+                return new MapNode((Map<String, Object>) out);
+            } else {
                 return null;
             }
         }
@@ -160,19 +159,18 @@ public class MapNode {
     @SuppressWarnings("unchecked")
     public List<Object> getList(String prop, List<Object> defaultResult) {
         Object out = this.getObjectFromPath(prop);
-        
+
         if (out == null) {
             return defaultResult;
         } else {
-            if( out instanceof List ) {
+            if (out instanceof List) {
                 return (List<Object>) out;
-            }
-            else {
+            } else {
                 return defaultResult;
             }
         }
     }
-    
+
     public List<Integer> getIntegerList(String prop) {
         return getIntegerList(prop, new ArrayList<Integer>());
     }
@@ -180,17 +178,16 @@ public class MapNode {
     @SuppressWarnings("unchecked")
     public List<Integer> getIntegerList(String prop, List<Integer> defaultResult) {
         List<Object> out = this.getList(prop, null);
-        
-        if( out == null ) {
+
+        if (out == null) {
             return defaultResult;
-        }
-        else {
+        } else {
             List<Integer> newList = new ArrayList<Integer>();
             CollectionUtils.collect(out, new IntegerTransformer(), newList);
             return newList;
         }
     }
-    
+
     public List<Double> getDoubleList(String prop) {
         return getDoubleList(prop, new ArrayList<Double>());
     }
@@ -198,17 +195,16 @@ public class MapNode {
     @SuppressWarnings("unchecked")
     public List<Double> getDoubleList(String prop, List<Double> defaultResult) {
         List<Object> out = this.getList(prop, null);
-        
-        if( out == null ) {
+
+        if (out == null) {
             return defaultResult;
-        }
-        else {
+        } else {
             List<Double> newList = new ArrayList<Double>();
             CollectionUtils.collect(out, new DoubleTransformer(), newList);
             return newList;
         }
     }
-    
+
     public List<String> getStringList(String prop) {
         return getStringList(prop, new ArrayList<String>());
     }
@@ -216,17 +212,16 @@ public class MapNode {
     @SuppressWarnings("unchecked")
     public List<String> getStringList(String prop, List<String> defaultResult) {
         List<Object> out = this.getList(prop, null);
-        
-        if( out == null ) {
+
+        if (out == null) {
             return defaultResult;
-        }
-        else {
+        } else {
             List<String> newList = new ArrayList<String>();
             CollectionUtils.collect(out, new StringTransformer(), newList);
             return newList;
         }
     }
-    
+
     public List<Boolean> getBooleanList(String prop) {
         return getBooleanList(prop, new ArrayList<Boolean>());
     }
@@ -234,17 +229,16 @@ public class MapNode {
     @SuppressWarnings("unchecked")
     public List<Boolean> getBooleanList(String prop, List<Boolean> defaultResult) {
         List<Object> out = this.getList(prop, null);
-        
-        if( out == null ) {
+
+        if (out == null) {
             return defaultResult;
-        }
-        else {
+        } else {
             List<Boolean> newList = new ArrayList<Boolean>();
             CollectionUtils.collect(out, new BooleanTransformer(), newList);
             return newList;
         }
     }
-    
+
     public List<MapNode> getMapNodeList(String prop) {
         return getMapNodeList(prop, new ArrayList<MapNode>());
     }
@@ -252,15 +246,13 @@ public class MapNode {
     @SuppressWarnings("unchecked")
     public List<MapNode> getMapNodeList(String prop, List<MapNode> defaultResult) {
         List<Object> out = this.getList(prop, null);
-        
-        if( out == null ) {
+
+        if (out == null) {
             return defaultResult;
-        }
-        else {
+        } else {
             List<MapNode> newList = new ArrayList<MapNode>();
             CollectionUtils.collect(out, new MapNodeTransformer(), newList);
             return newList;
         }
     }
-    
 }

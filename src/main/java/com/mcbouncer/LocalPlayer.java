@@ -6,14 +6,14 @@ package com.mcbouncer;
  * 
  */
 public interface LocalPlayer {
-    
+
     /**
      * Gets the name of the player
      * 
      * @return 
      */
     public String getName();
-    
+
     /**
      * Returns whether or not the given user has
      * a certain permission node.
@@ -22,12 +22,11 @@ public interface LocalPlayer {
      * @return 
      */
     public boolean hasPermission(String permission);
-    
+
     /**
      * Sends a message to this user
      * 
      * @param message 
      */
     public void sendMessage(String message);
-    
 }

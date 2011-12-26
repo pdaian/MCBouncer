@@ -87,8 +87,7 @@ public class MCBouncerAPI {
             JSONNode json = null;
             try {
                 json = response.getJSONResult();
-            }
-            catch( ParserException e ) {
+            } catch (ParserException e) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -167,8 +166,7 @@ public class MCBouncerAPI {
             JSONNode json = null;
             try {
                 json = response.getJSONResult();
-            }
-            catch( ParserException e ) {
+            } catch (ParserException e) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -201,8 +199,7 @@ public class MCBouncerAPI {
             JSONNode json = null;
             try {
                 json = response.getJSONResult();
-            }
-            catch( ParserException e ) {
+            } catch (ParserException e) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -235,8 +232,7 @@ public class MCBouncerAPI {
             JSONNode json = null;
             try {
                 json = response.getJSONResult();
-            }
-            catch( ParserException e ) {
+            } catch (ParserException e) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -270,8 +266,7 @@ public class MCBouncerAPI {
             JSONNode json = null;
             try {
                 json = response.getJSONResult();
-            }
-            catch( ParserException e ) {
+            } catch (ParserException e) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -300,8 +295,7 @@ public class MCBouncerAPI {
             JSONNode json = null;
             try {
                 json = response.getJSONResult();
-            }
-            catch( ParserException e ) {
+            } catch (ParserException e) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -356,8 +350,7 @@ public class MCBouncerAPI {
             JSONNode json = null;
             try {
                 json = response.getJSONResult();
-            }
-            catch( ParserException e ) {
+            } catch (ParserException e) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -416,8 +409,7 @@ public class MCBouncerAPI {
             JSONNode json = null;
             try {
                 json = response.getJSONResult();
-            }
-            catch( ParserException e ) {
+            } catch (ParserException e) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 
@@ -488,8 +480,7 @@ public class MCBouncerAPI {
             JSONNode json = null;
             try {
                 json = response.getJSONResult();
-            }
-            catch( ParserException e ) {
+            } catch (ParserException e) {
                 throw new APIException("No JSON received! Is MCBouncer down?");
             }
 

@@ -17,5 +17,4 @@ public class CommandException extends BouncerException {
     public CommandException(Throwable t) {
         super(t);
     }
-
 }

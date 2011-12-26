@@ -43,17 +43,17 @@ public class MCBouncerCommands extends CommandContainer {
 
         player.sendMessage(ChatColor.GRAY + helpMessage);
     }
-    
+
     @Command(aliases = {"reload"},
     desc = "Reloads MCBouncer configuration")
-    @CommandPermissions(value={"mcbouncer.admin", "mcbouncer.command.reload"})
+    @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.command.reload"})
     public void reload(CommandContext args, LocalPlayer sender) throws CommandException {
 
         controller.getConfiguration().load();
         sender.sendMessage(ChatColor.GREEN + "Configuration loaded successfully.");
 
     }
-    
+
     @Command(aliases = {"version", "ver"},
     desc = "Gets the current MCBouncer version")
     public void version(CommandContext args, LocalPlayer sender) throws CommandException {

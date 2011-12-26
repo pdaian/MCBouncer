@@ -9,5 +9,4 @@ public class MissingNestedCommandException extends CommandUsageException {
     public MissingNestedCommandException(String message, String usage) {
         super(message, usage);
     }
-
 }

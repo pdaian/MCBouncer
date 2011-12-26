@@ -16,6 +16,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NestedCommand {
+
     /**
      * A list of classes with the child commands.
      */

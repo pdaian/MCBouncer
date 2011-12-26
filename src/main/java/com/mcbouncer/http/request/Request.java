@@ -66,5 +66,4 @@ public class Request {
     public void setURL(String url) {
         this.url = url;
     }
-    
 }

@@ -8,7 +8,7 @@ package com.mcbouncer;
  * 
  */
 public interface LocalServer {
-    
+
     /**
      * Whether or not the player with the given name is online.
      * 
@@ -16,7 +16,7 @@ public interface LocalServer {
      * @return 
      */
     public boolean isPlayerOnline(String name);
-    
+
     /**
      * Returns the full player name if the player is online.
      * If not, just returns the given argument
@@ -25,7 +25,7 @@ public interface LocalServer {
      * @return 
      */
     public String getPlayerName(String name);
-    
+
     /**
      * Gets the IP address of the given username. 
      * If the user is not online or the given username
@@ -35,7 +35,7 @@ public interface LocalServer {
      * @return 
      */
     public String getIPAddress(String ipOrName);
-    
+
     /**
      * Kicks the player with the given name from the
      * server with the given reason.
@@ -46,7 +46,7 @@ public interface LocalServer {
      * @param reason 
      */
     public void kickPlayer(String name, String reason);
-    
+
     /**
      * Kicks all players that are connected to the given
      * IP address from the server with the given reason.
@@ -55,7 +55,7 @@ public interface LocalServer {
      * @param reason 
      */
     public void kickPlayerWithIP(String ip, String reason);
-    
+
     /**
      * Sends a message to all the currently online players
      * that have the "mcbouncer.mod" permission.
@@ -63,12 +63,11 @@ public interface LocalServer {
      * @param string 
      */
     public void messageMods(String string);
-    
+
     /**
      * Sends a message to all the players on the server.
      * 
      * @param message 
      */
     public void broadcastMessage(String message);
-    
 }

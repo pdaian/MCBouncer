@@ -14,10 +14,9 @@ public class ChatListener implements MCBListener<ChatEvent> {
 
     public void onEvent(ChatEvent event) {
         List<String> loggedIn = event.getController().getCurrentlyLoggingIn();
-        
-        if( loggedIn.contains(event.getUser()) ) {
+
+        if (loggedIn.contains(event.getUser())) {
             event.setCancelled(true);
         }
     }
-    
 }

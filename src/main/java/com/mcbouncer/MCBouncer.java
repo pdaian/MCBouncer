@@ -64,7 +64,7 @@ public class MCBouncer {
         commandManager.register(GeneralCommands.class);
         commandManager.register(MCBouncerCommands.class);
         commandManager.register(NoteCommands.class);
-        
+
         JoinEvent.handlers.register(new JoinListener(), Order.Earliest);
         ChatEvent.handlers.register(new ChatListener(), Order.Earliest);
         CommandEvent.handlers.register(new CommandListener(), Order.Earliest);

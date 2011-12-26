@@ -5,7 +5,7 @@ package com.mcbouncer.exception;
  * 
  */
 public class ConfigurationException extends BouncerException {
-    
+
     public ConfigurationException() {
         super();
     }

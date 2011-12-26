@@ -15,5 +15,4 @@ public class SpoutPlayer implements LocalPlayer {
     public void sendMessage(String message) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }

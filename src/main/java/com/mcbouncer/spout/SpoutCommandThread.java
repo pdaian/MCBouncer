@@ -5,5 +5,4 @@ public class SpoutCommandThread extends Thread {
     @Override
     public void run() {
     }
-    
 }

@@ -62,7 +62,7 @@ public class RemoveBanEvent extends MCBEvent<RemoveBanEvent> implements Cancella
     protected String getEventName() {
         return "RemoveBan";
     }
-    
+
     @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;

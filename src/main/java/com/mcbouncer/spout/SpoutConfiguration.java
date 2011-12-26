@@ -43,5 +43,4 @@ public class SpoutConfiguration extends LocalConfiguration {
     public String getWebsite() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }

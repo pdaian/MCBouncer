@@ -12,6 +12,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Command {
+
     /**
      * A list of aliases for the command. The first alias is the most
      * important -- it is the main name of the command. (The method name

@@ -7,7 +7,7 @@ package net.lahwran.fevents;
  * @author lahwran
  */
 public class MCBEventHandler {
-    
+
     /**
      * Call an event.
      * 
@@ -37,5 +37,4 @@ public class MCBEventHandler {
             }
         }
     }
-
 }

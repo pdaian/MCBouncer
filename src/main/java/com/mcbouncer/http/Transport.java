@@ -86,7 +86,7 @@ public class Transport {
             }
 
             Response resp = new Response(controller);
-            
+
             resp.setContent(CharStreams.toString(new InputStreamReader(response.getEntity().getContent())));
             resp.setHTTPCode(new HTTPCode(response.getStatusLine().getStatusCode()));
             resp.setContentType(response.getEntity().getContentType().getValue());

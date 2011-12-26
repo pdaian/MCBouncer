@@ -62,7 +62,7 @@ public class AddGlobalNoteEvent extends MCBEvent<AddGlobalNoteEvent> implements 
     protected String getEventName() {
         return "AddGlobalNote";
     }
-    
+
     @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;

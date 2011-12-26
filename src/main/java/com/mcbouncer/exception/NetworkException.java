@@ -5,7 +5,7 @@ package com.mcbouncer.exception;
  * 
  */
 public class NetworkException extends BouncerException {
-    
+
     public NetworkException() {
         super();
     }

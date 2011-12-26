@@ -16,6 +16,7 @@ import java.util.Set;
  * @author Someone from WorldEdit
  */
 public class CommandContext {
+
     protected final String command;
     protected final List<String> parsedArgs;
     protected final List<Integer> originalArgIndices;
@@ -60,29 +61,31 @@ public class CommandContext {
             argIndexList.add(i);
 
             switch (arg.charAt(0)) {
-            case '\'':
-            case '"':
-                final StringBuilder build = new StringBuilder();
-                final char quotedChar = arg.charAt(0);
+                case '\'':
+                case '"':
+                    final StringBuilder build = new StringBuilder();
+                    final char quotedChar = arg.charAt(0);
 
-                int endIndex;
-                for (endIndex = i; endIndex < args.length; ++endIndex) {
-                    final String arg2 = args[endIndex];
-                    if (arg2.charAt(arg2.length() - 1) == quotedChar) {
-                        if (endIndex != i) build.append(' ');
-                        build.append(arg2.substring(endIndex == i ? 1 : 0, arg2.length() - 1));
-                        break;
-                    } else if (endIndex == i) {
-                        build.append(arg2.substring(1));
-                    } else {
-                        build.append(' ').append(arg2);
+                    int endIndex;
+                    for (endIndex = i; endIndex < args.length; ++endIndex) {
+                        final String arg2 = args[endIndex];
+                        if (arg2.charAt(arg2.length() - 1) == quotedChar) {
+                            if (endIndex != i) {
+                                build.append(' ');
+                            }
+                            build.append(arg2.substring(endIndex == i ? 1 : 0, arg2.length() - 1));
+                            break;
+                        } else if (endIndex == i) {
+                            build.append(arg2.substring(1));
+                        } else {
+                            build.append(' ').append(arg2);
+                        }
                     }
-                }
 
-                if (endIndex < args.length) {
-                    arg = build.toString();
-                    i = endIndex;
-                }
+                    if (endIndex < args.length) {
+                        arg = build.toString();
+                        i = endIndex;
+                    }
                 // else raise exception about hanging quotes?
             }
             argList.add(arg);
@@ -93,7 +96,7 @@ public class CommandContext {
         this.originalArgIndices = new ArrayList<Integer>(argIndexList.size());
         this.parsedArgs = new ArrayList<String>(argList.size());
 
-        for (int nextArg = 0; nextArg < argList.size(); ) {
+        for (int nextArg = 0; nextArg < argList.size();) {
             // Fetch argument
             String arg = argList.get(nextArg++);
 

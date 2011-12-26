@@ -50,7 +50,7 @@ public class LookupEvent extends MCBEvent<LookupEvent> implements Cancellable {
     protected String getEventName() {
         return "Lookup";
     }
-    
+
     @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;

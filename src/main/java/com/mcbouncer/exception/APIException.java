@@ -17,5 +17,4 @@ public class APIException extends BouncerException {
     public APIException(Throwable t) {
         super(t);
     }
-
 }

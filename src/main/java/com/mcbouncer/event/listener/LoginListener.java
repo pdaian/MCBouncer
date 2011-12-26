@@ -14,13 +14,11 @@ public class LoginListener implements MCBListener<LoginEvent> {
 
     public void onEvent(LoginEvent event) {
         List<String> loggedIn = event.getController().getCurrentlyLoggingIn();
-        
-        if( loggedIn.contains(event.getUser()) ) {
+
+        if (loggedIn.contains(event.getUser())) {
             event.setCancelled(true);
-        }
-        else {
+        } else {
             loggedIn.add(event.getUser());
         }
     }
-    
 }

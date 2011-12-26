@@ -52,7 +52,7 @@ public class RemoveNoteEvent extends MCBEvent<RemoveNoteEvent> implements Cancel
     protected String getEventName() {
         return "RemoveNote";
     }
-    
+
     @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;

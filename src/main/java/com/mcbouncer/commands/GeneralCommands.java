@@ -26,11 +26,11 @@ import net.lahwran.fevents.MCBEventHandler;
  * 
  */
 public class GeneralCommands extends CommandContainer {
-    
+
     public GeneralCommands(MCBouncer controller) {
         super(controller);
     }
-    
+
     @Command(aliases = {"lookup"},
     usage = "<username/ip>",
     desc = "Gets info about a username.",
@@ -38,30 +38,30 @@ public class GeneralCommands extends CommandContainer {
     max = 1)
     @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.lookup"})
     public void lookup(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
-        
+
         try {
             if (!NetUtils.isIPAddress(args.getString(0))) {
                 String username = controller.getServer().getPlayerName(args.getString(0));
                 String ip = controller.getServer().getIPAddress(username);
-                
+
                 LookupEvent lookupEvent = new LookupEvent(sender, username);
                 MCBEventHandler.callEvent(lookupEvent);
-                
+
                 if (lookupEvent.isCancelled()) {
                     return;
                 }
                 username = lookupEvent.getPlayer();
-                
+
                 List<UserBan> bans = controller.getAPI().getBans(username);
                 List<UserNote> notes = controller.getAPI().getNotes(username);
-                
+
                 List<IPBan> ipbans = new ArrayList<IPBan>();
                 if (ip.length() != 0) {
                     ipbans = controller.getAPI().getIPBans(ip);
                 }
-                
+
                 sender.sendMessage(ChatColor.AQUA + username + " has " + bans.size() + " ban" + (bans.size() == 1 ? "" : "s") + " and " + notes.size() + " note" + (notes.size() == 1 ? "" : "s"));
-                
+
                 for (int i = 0; i < bans.size(); i++) {
                     sender.sendMessage(ChatColor.GREEN + "Ban #" + (i + 1) + ": " + bans.get(i).getServer() + " (" + bans.get(i).getIssuer() + ") [" + bans.get(i).getReason() + "]");
                 }
@@ -76,15 +76,15 @@ public class GeneralCommands extends CommandContainer {
                     }
                 }
             } else {
-                
+
                 LookupEvent lookupEvent = new LookupEvent(sender, args.getString(0));
                 MCBEventHandler.callEvent(lookupEvent);
-                
+
                 if (lookupEvent.isCancelled()) {
                     return;
                 }
                 String ip = lookupEvent.getPlayer();
-                
+
                 List<IPBan> bans = controller.getAPI().getIPBans(ip);
                 sender.sendMessage(ChatColor.AQUA + args.getString(0) + " has " + bans.size() + " ban" + (bans.size() == 1 ? "" : "s"));
                 for (int i = 0; i < bans.size(); i++) {
@@ -94,9 +94,9 @@ public class GeneralCommands extends CommandContainer {
         } catch (APIException e) {
             sender.sendMessage(ChatColor.RED + e.getMessage());
         }
-        
+
     }
-    
+
     @Command(aliases = {"kick", "boot"},
     usage = "<username> [reason]",
     desc = "Kicks a username",
@@ -104,35 +104,35 @@ public class GeneralCommands extends CommandContainer {
     max = -1)
     @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.kick"})
     public void kick(CommandContext args, LocalPlayer sender) throws CommandException {
-        
+
         String toKick = controller.getServer().getPlayerName(args.getString(0));
         String reason = controller.getConfiguration().getDefaultKickReason();
-        
+
         if (args.argsLength() > 1) {
             reason = args.getJoinedStrings(1);
         }
-        
+
         PlayerKickEvent playerKickEvent = new PlayerKickEvent(toKick, sender, reason);
         MCBEventHandler.callEvent(playerKickEvent);
-        
+
         if (playerKickEvent.isCancelled()) {
             return;
         }
-        
+
         toKick = playerKickEvent.getPlayer();
         sender = playerKickEvent.getIssuer();
         reason = playerKickEvent.getReason();
-        
+
         if (!controller.getServer().isPlayerOnline(toKick)) {
             throw new CommandException(ChatColor.RED + toKick + " is not online");
         }
-        
+
         controller.getServer().kickPlayer(toKick, "Kicked: " + reason);
         controller.getLogger().info(sender.getName() + " kicked " + toKick + " - " + reason);
         controller.getServer().messageMods(ChatColor.GREEN + toKick + " has been kicked by " + sender.getName() + ". (" + reason + ")");
-        
+
     }
-    
+
     @Command(aliases = {"mcbouncer", "mcb"},
     desc = "MCBouncer commands")
     @NestedCommand(MCBouncerCommands.class)

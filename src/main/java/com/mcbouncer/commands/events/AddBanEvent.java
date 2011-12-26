@@ -59,7 +59,7 @@ public class AddBanEvent extends MCBEvent<AddBanEvent> implements Cancellable {
     public void setBanType(BanType banType) {
         this.banType = banType;
     }
-    
+
     public BanType getBanType() {
         return banType;
     }
@@ -73,7 +73,7 @@ public class AddBanEvent extends MCBEvent<AddBanEvent> implements Cancellable {
     protected String getEventName() {
         return "AddBan";
     }
-    
+
     @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;

@@ -14,7 +14,7 @@ import net.lahwran.fevents.MCBHandlerList;
  * 
  */
 public class JoinEvent extends MCBEvent<JoinEvent> {
-    
+
     protected MCBouncer controller;
     protected String user;
     protected String ip;
@@ -53,5 +53,4 @@ public class JoinEvent extends MCBEvent<JoinEvent> {
     protected String getEventName() {
         return "JoinEvent";
     }
-    
 }

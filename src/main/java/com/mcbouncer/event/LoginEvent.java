@@ -15,7 +15,7 @@ import net.lahwran.fevents.MCBHandlerList;
  * 
  */
 public class LoginEvent extends MCBEvent<LoginEvent> implements Cancellable {
-    
+
     protected MCBouncer controller;
     protected String user;
     public static final MCBHandlerList<LoginEvent> handlers = new MCBHandlerList<LoginEvent>();
@@ -42,7 +42,7 @@ public class LoginEvent extends MCBEvent<LoginEvent> implements Cancellable {
     protected String getEventName() {
         return "LoginEvent";
     }
-    
+
     @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;

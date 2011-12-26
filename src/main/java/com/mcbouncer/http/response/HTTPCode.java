@@ -6,7 +6,7 @@ package com.mcbouncer.http.response;
  * 
  */
 public class HTTPCode {
-    
+
     protected Integer code;
     protected String message;
 
@@ -37,5 +37,4 @@ public class HTTPCode {
         this.message = message;
         this.code = WebResponseCodes.getError(message);
     }
-    
 }
