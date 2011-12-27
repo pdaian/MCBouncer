@@ -27,10 +27,12 @@ public class BukkitServer extends JavaPlugin implements LocalServer {
 
     protected MCBouncer controller;
 
+    @Override
     public void onDisable() {
         controller.getLogger().info("Plugin disabled (version " + MCBouncer.getVersion() + ")");
     }
 
+    @Override
     public void onEnable() {
 
         LocalConfiguration config = new BukkitConfiguration(this.getDataFolder());

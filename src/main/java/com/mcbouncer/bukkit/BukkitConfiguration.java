@@ -85,38 +85,4 @@ public class BukkitConfiguration extends LocalConfiguration {
 
     }
 
-    @Override
-    public String getAPIKey() {
-        return apiKey;
-    }
-
-    @Override
-    public boolean isDebugMode() {
-        return debugMode;
-    }
-
-    @Override
-    public String getDefaultKickReason() {
-        return defaultKickMessage;
-    }
-
-    @Override
-    public String getDefaultReason() {
-        return defaultReason;
-    }
-
-    @Override
-    public int getNumBansDisallow() {
-        return numBansDisallow;
-    }
-
-    @Override
-    public boolean isShowBanMessages() {
-        return showBanMessages;
-    }
-
-    @Override
-    public String getWebsite() {
-        return website;
-    }
 }

@@ -23,6 +23,11 @@
             <version>dev-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>net.canarymod</groupId>
+            <artifactId>crow</artifactId>
+            <version>4.3.10</version> <!-- TODO, use deobf'd version -->
+        </dependency>
+        <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1</version>
@@ -47,6 +52,11 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>10.0.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -101,6 +111,7 @@
                                     <include>org.apache.httpcomponents:*</include>
                                     <include>org.yaml:*</include>
                                     <include>commons*:*</include>
+                                    <include>com.google.guava:*</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
@@ -113,6 +124,7 @@
                     <descriptors>
                         <descriptor>src/main/assembly/bukkit.xml</descriptor>
                         <descriptor>src/main/assembly/spout.xml</descriptor>
+                        <descriptor>src/main/assembly/canary.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
@@ -173,6 +185,16 @@
                 <enabled>true</enabled>
             </releases>
             <url>http://nexus.getspout.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>mcb-repo</id>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <url>http://maven.mcbouncer.com/archiva/repository/internal/</url>
         </repository>
     </repositories>
 </project>

@@ -25,17 +25,31 @@ public abstract class LocalConfiguration {
         return conf;
     }
 
-    public abstract String getAPIKey();
+    public String getAPIKey() {
+        return apiKey;
+    }
 
-    public abstract boolean isDebugMode();
+    public boolean isDebugMode() {
+        return debugMode;
+    }
 
-    public abstract String getDefaultKickReason();
+    public String getDefaultKickReason() {
+        return defaultKickMessage;
+    }
 
-    public abstract String getDefaultReason();
+    public String getDefaultReason() {
+        return defaultReason;
+    }
 
-    public abstract int getNumBansDisallow();
+    public int getNumBansDisallow() {
+        return numBansDisallow;
+    }
 
-    public abstract boolean isShowBanMessages();
+    public boolean isShowBanMessages() {
+        return showBanMessages;
+    }
 
-    public abstract String getWebsite();
+    public String getWebsite() {
+        return website;
+    }
 }

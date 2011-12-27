@@ -138,7 +138,23 @@ public class MiscUtils {
         StringBuilder build = new StringBuilder();
 
         for (Object key : map.keySet()) {
-            build.append(key).append(" - ").append(map.get(key)).append("\n");
+            build.append(key).append(" -- ").append(map.get(key)).append("\n");
+        }
+
+        return build.toString();
+    }
+    
+    /**
+     * Prints out an array in an easy-to-read format
+     * 
+     * @param arr
+     * @return 
+     */
+    public static String debugArray(Object[] arr) {
+        StringBuilder build = new StringBuilder();
+
+        for (Object object : arr) {
+            build.append(object).append("\n");
         }
 
         return build.toString();
