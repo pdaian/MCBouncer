@@ -32,7 +32,7 @@ public class BanCommands extends CommandContainer {
     desc = "Ban a username",
     min = 1,
     max = -1)
-    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.ban"})
+    @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.mod", "mcbouncer.command.ban"})
     public void ban(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toBan = controller.getServer().getPlayerName(args.getString(0));
@@ -87,7 +87,7 @@ public class BanCommands extends CommandContainer {
     desc = "Unban a username",
     min = 1,
     max = 1)
-    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.unban"})
+    @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.mod", "mcbouncer.command.unban"})
     public void unban(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toUnban = args.getString(0);
@@ -129,7 +129,7 @@ public class BanCommands extends CommandContainer {
     desc = "Ban an IP.",
     min = 1,
     max = -1)
-    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.banip"})
+    @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.mod", "mcbouncer.command.banip"})
     public void banIP(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toBanIP = controller.getServer().getIPAddress(args.getString(0));
@@ -188,7 +188,7 @@ public class BanCommands extends CommandContainer {
     desc = "Unban an IP",
     min = 1,
     max = 1)
-    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.unbanip"})
+    @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.mod", "mcbouncer.command.unbanip"})
     public void unbanip(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toUnban = args.getString(0);

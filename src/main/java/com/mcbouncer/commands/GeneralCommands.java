@@ -36,7 +36,7 @@ public class GeneralCommands extends CommandContainer {
     desc = "Gets info about a username.",
     min = 1,
     max = 1)
-    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.lookup"})
+    @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.mod", "mcbouncer.command.lookup"})
     public void lookup(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         try {
@@ -102,7 +102,7 @@ public class GeneralCommands extends CommandContainer {
     desc = "Kicks a username",
     min = 1,
     max = -1)
-    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.kick"})
+    @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.mod", "mcbouncer.command.kick"})
     public void kick(CommandContext args, LocalPlayer sender) throws CommandException {
 
         String toKick = controller.getServer().getPlayerName(args.getString(0));

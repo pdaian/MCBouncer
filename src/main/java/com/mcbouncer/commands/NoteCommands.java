@@ -32,7 +32,7 @@ public class NoteCommands extends CommandContainer {
     desc = "Add a note to a username",
     min = 2,
     max = -1)
-    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.addnote"})
+    @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.mod", "mcbouncer.command.addnote"})
     public void addnote(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         String toNote = controller.getServer().getPlayerName(args.getString(0));
@@ -120,7 +120,7 @@ public class NoteCommands extends CommandContainer {
     desc = "Remove a note ID",
     min = 1,
     max = 1)
-    @CommandPermissions(value = {"mcbouncer.mod", "mcbouncer.command.removenote"})
+    @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.mod", "mcbouncer.command.removenote"})
     public void removenote(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
         Integer toRemove = args.getInteger(0);
