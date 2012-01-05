@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>org.getspout</groupId>
-            <artifactId>spoutpluginapi</artifactId>
+            <artifactId>spoutapi</artifactId>
             <version>dev-SNAPSHOT</version>
         </dependency>
         <dependency>

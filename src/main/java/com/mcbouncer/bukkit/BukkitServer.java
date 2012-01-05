@@ -34,7 +34,13 @@ public class BukkitServer extends JavaPlugin implements LocalServer {
 
     @Override
     public void onEnable() {
-
+        
+        if( !this.getServer().getOnlineMode() ) {
+            controller.getLogger().severe("MCBouncer requires that the server must be in online mode.");
+            this.getPluginLoader().disablePlugin(this);
+            return;
+        }
+        
         LocalConfiguration config = new BukkitConfiguration(this.getDataFolder());
         config.load();
 

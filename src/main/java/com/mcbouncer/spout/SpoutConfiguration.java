@@ -1,46 +1,17 @@
 package com.mcbouncer.spout;
 
-import com.mcbouncer.LocalConfiguration;
+import com.mcbouncer.bukkit.BukkitConfiguration;
+import java.io.File;
 
-public class SpoutConfiguration extends LocalConfiguration {
+/**
+ * Everything Bukkit config does is not-Bukkit specific. Cool.
+ * 
+ */
+public class SpoutConfiguration extends BukkitConfiguration {
 
-    @Override
-    public void load() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public SpoutConfiguration(File dataFolder) {
+        super(dataFolder);
     }
 
-    @Override
-    public String getAPIKey() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isDebugMode() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String getDefaultKickReason() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String getDefaultReason() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public int getNumBansDisallow() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isShowBanMessages() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String getWebsite() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    
 }
