@@ -17,6 +17,7 @@ public abstract class LocalConfiguration {
     protected String defaultReason = ConfigDefaults.DEFAULTBAN.getStrVal();
     protected String defaultKickMessage = ConfigDefaults.DEFAULTKICK.getStrVal();
     protected String website = ConfigDefaults.WEBSITE.getStrVal();
+    protected boolean disableIPFunctions = ConfigDefaults.DISABLEIPFUNCTIONS.getBoolVal();
     protected MapNode conf;
 
     public abstract void load();
@@ -51,5 +52,9 @@ public abstract class LocalConfiguration {
 
     public String getWebsite() {
         return website;
+    }
+    
+    public boolean isIPFunctionsDisabled() {
+        return disableIPFunctions;
     }
 }

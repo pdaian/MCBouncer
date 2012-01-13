@@ -132,6 +132,11 @@ public class BanCommands extends CommandContainer {
     @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.mod", "mcbouncer.command.banip"})
     public void banIP(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
+        if (controller.getConfiguration().isIPFunctionsDisabled()) {
+            sender.sendMessage(ChatColor.RED + "IP Functions Disabled.");
+            return;
+        }
+        
         String toBanIP = controller.getServer().getIPAddress(args.getString(0));
         String toBanUser = controller.getServer().getPlayerName(args.getString(0));
         String reason = controller.getConfiguration().getDefaultReason();
@@ -191,6 +196,11 @@ public class BanCommands extends CommandContainer {
     @CommandPermissions(value = {"mcbouncer.admin", "mcbouncer.mod", "mcbouncer.command.unbanip"})
     public void unbanip(CommandContext args, LocalPlayer sender) throws CommandException, BouncerException {
 
+        if (controller.getConfiguration().isIPFunctionsDisabled()) {
+            sender.sendMessage(ChatColor.RED + "IP Functions Disabled.");
+            return;
+        }
+        
         String toUnban = args.getString(0);
 
         if (!NetUtils.isIPAddress(toUnban)) {

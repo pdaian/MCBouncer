@@ -1,14 +1,14 @@
 package com.mcbouncer.spout;
 
 import com.mcbouncer.MCBouncer;
-import org.getspout.api.event.EventHandler;
-import org.getspout.api.event.Listener;
-import org.getspout.api.event.Order;
-import org.getspout.api.event.player.PlayerChatEvent;
-import org.getspout.api.event.player.PlayerJoinEvent;
-import org.getspout.api.event.player.PlayerKickEvent;
-import org.getspout.api.event.player.PlayerPreLoginEvent;
-import org.getspout.api.event.server.PreCommandEvent;
+import org.spout.api.event.EventHandler;
+import org.spout.api.event.Listener;
+import org.spout.api.event.Order;
+import org.spout.api.event.player.PlayerChatEvent;
+import org.spout.api.event.player.PlayerJoinEvent;
+import org.spout.api.event.player.PlayerKickEvent;
+import org.spout.api.event.player.PlayerPreLoginEvent;
+import org.spout.api.event.server.PreCommandEvent;
 
 public class SpoutListener implements Listener {
     

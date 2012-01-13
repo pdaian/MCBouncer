@@ -3,8 +3,8 @@ package com.mcbouncer.spout;
 import com.mcbouncer.LocalServer;
 import com.mcbouncer.MCBouncer;
 import com.mcbouncer.util.NetUtils;
-import org.getspout.api.player.Player;
-import org.getspout.api.plugin.CommonPlugin;
+import org.spout.api.player.Player;
+import org.spout.api.plugin.CommonPlugin;
 
 /**
  * Implementation of the LocalServer interface. It

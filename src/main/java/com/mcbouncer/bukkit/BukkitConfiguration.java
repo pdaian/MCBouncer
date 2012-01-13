@@ -82,6 +82,7 @@ public class BukkitConfiguration extends LocalConfiguration {
         defaultReason = conf.getString("defaultBanMessage", ConfigDefaults.DEFAULTBAN.getStrVal());
         defaultKickMessage = conf.getString("defaultKickMessage", ConfigDefaults.DEFAULTKICK.getStrVal());
         website = conf.getString("website", ConfigDefaults.WEBSITE.getStrVal());
+        disableIPFunctions = conf.getBoolean("disableIPFunctions", ConfigDefaults.DISABLEIPFUNCTIONS.getBoolVal());
 
     }
 

@@ -2,7 +2,7 @@ package com.mcbouncer.spout;
 
 import com.mcbouncer.LocalPlayer;
 import com.mcbouncer.MCBouncer;
-import org.getspout.api.player.Player;
+import org.spout.api.player.Player;
 
 public class SpoutPlayer implements LocalPlayer {
     

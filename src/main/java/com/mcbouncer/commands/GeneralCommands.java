@@ -56,7 +56,7 @@ public class GeneralCommands extends CommandContainer {
                 List<UserNote> notes = controller.getAPI().getNotes(username);
 
                 List<IPBan> ipbans = new ArrayList<IPBan>();
-                if (ip.length() != 0) {
+                if (ip.length() != 0 && !controller.getConfiguration().isIPFunctionsDisabled()) {
                     ipbans = controller.getAPI().getIPBans(ip);
                 }
 
@@ -65,8 +65,9 @@ public class GeneralCommands extends CommandContainer {
                 for (int i = 0; i < bans.size(); i++) {
                     sender.sendMessage(ChatColor.GREEN + "Ban #" + (i + 1) + ": " + bans.get(i).getServer() + " (" + bans.get(i).getIssuer() + ") [" + bans.get(i).getReason() + "]");
                 }
+                
                 for (int i = 0; i < ipbans.size(); i++) {
-                    sender.sendMessage(ChatColor.GREEN + "IP Ban #" + (i + 1) + ": " + ip + " - " + bans.get(i).getServer() + " (" + bans.get(i).getIssuer() + ") [" + bans.get(i).getReason() + "]");
+                    sender.sendMessage(ChatColor.GREEN + "IP Ban #" + (i + 1) + ": " + ip + " - " + ipbans.get(i).getServer() + " (" + ipbans.get(i).getIssuer() + ") [" + ipbans.get(i).getReason() + "]");
                 }
                 for (int i = 0; i < notes.size(); i++) {
                     if (notes.get(i).isGlobal()) {
@@ -76,7 +77,10 @@ public class GeneralCommands extends CommandContainer {
                     }
                 }
             } else {
-
+                if (controller.getConfiguration().isIPFunctionsDisabled()) {
+                    sender.sendMessage(ChatColor.RED + "IP Functions Disabled.");
+                    return;
+                }
                 LookupEvent lookupEvent = new LookupEvent(sender, args.getString(0));
                 MCBEventHandler.callEvent(lookupEvent);
 

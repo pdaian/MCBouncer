@@ -33,7 +33,9 @@ public class JoinListener implements MCBListener<JoinEvent> {
             username = updateEvent.getUsername();
             ip = updateEvent.getIP();
 
-            controller.getAPI().updateUser(username, ip);
+            if (!controller.getConfiguration().isIPFunctionsDisabled()) {
+                controller.getAPI().updateUser(username, ip);
+            }
 
             if (controller.getAPI().isBanned(username)) {
                 controller.setLastKickedUser(username);
@@ -43,7 +45,7 @@ public class JoinListener implements MCBListener<JoinEvent> {
                 return;
             }
 
-            if (controller.getAPI().isIPBanned(ip)) {
+            if (!controller.getConfiguration().isIPFunctionsDisabled() && controller.getAPI().isIPBanned(ip)) {
                 controller.setLastKickedUser(username);
                 controller.getCurrentlyLoggingIn().remove(username);
                 controller.getServer().kickPlayer(username, "Banned: " + controller.getAPI().getIPBanReason(ip));
