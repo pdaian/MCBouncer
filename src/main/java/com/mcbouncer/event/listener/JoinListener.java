@@ -82,7 +82,10 @@ public class JoinListener implements MCBListener<JoinEvent> {
         }
 
         controller.getCurrentlyLoggingIn().remove(username);
-        controller.getServer().broadcastMessage(event.getMessage());
+        
+        if (event.getMessage() != null && !event.getMessage().equals("")) {
+            controller.getServer().broadcastMessage(event.getMessage());
+        }
 
     }
 }

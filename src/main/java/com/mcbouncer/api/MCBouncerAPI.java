@@ -54,6 +54,7 @@ public class MCBouncerAPI {
         String[] newParams = new String[params.length];
         int i = 0;
         for (String param : params) {
+            param = stripColor(param);
             newParams[i] = HTTPUtils.urlEncode(param);
             i++;
         }
@@ -556,5 +557,19 @@ public class MCBouncerAPI {
      */
     public String getLastError() {
         return lastError;
+    }
+    
+    /**
+     * Returns the input string with Minecraft color codes removed.
+     * This code is taken from CraftBukkit ChatColor.stripColor.
+     * @param input The input string to remove color codes from.
+     * @return The input string void of color codes.
+     */
+    public String stripColor(final String input) {
+        if (input == null) {
+            return null;
+        }
+
+        return input.replaceAll("(?i)\u00A7[0-F]", "");
     }
 }

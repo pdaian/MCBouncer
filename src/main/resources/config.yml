@@ -12,3 +12,7 @@ numBansDisallow: -1
 #Whether or not to show messgaes to all the users on the server when a user is banned
 #true will send a message to everyone, false will message the mods only
 showBanMessages: false
+
+#Whether or not to disable IP functions including banip, unban ip, update user
+#IP Ban lookups
+disableIPFunctions: false
