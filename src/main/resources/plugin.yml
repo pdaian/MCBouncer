@@ -39,3 +39,45 @@ commands:
     description: 'Removes a note'
     usage: '/<command> noteid'
     aliases: ['delnote']
+    
+permissions:
+  mcbouncer.admin:
+    description: Allow a player all mcbouncer permissions
+    children:
+      mcbouncer.mod
+      mcbouncer.reload
+  mcbouncer.mod:
+    description: Allow a player all mcbouncer permissions except mcbouncer.reload
+    children:
+      mcbouncer.command.ban
+      mcbouncer.commnad.unban
+      mcbouncer.command.banip
+      mcbouncer.command.unbanip
+      mcbouncer.command.lookup
+      mcbouncer.command.kick
+      mcbouncer.command.addnote
+      mcbouncer.command.addnote.global
+      mcbouncer.command.removenote
+  mcbouncer.command.ban:
+    description: Allow a player to ban using mcbouncer
+  mcbouncer.commnad.unban:
+    description: Allow a player to unban using mcbouncer
+  mcbouncer.command.banip:
+    description: Allow a player to ban ip using mcbouncer
+  mcbouncer.command.unbanip:
+    description: Allow a player to unban an ip using mcbouncer
+  mcbouncer.command.lookup:
+    description: Allow a player to do ban lookups using mcbouncer
+  mcbouncer.command.kick:
+    description: Allow a player to kick using mcbouncer
+  mcbouncer.command.addnote:
+    description: Allow a player to add notes using mcbouncer
+  mcbouncer.command.addnote.global:
+    description: Allow a player to add global notes using mcbouncer
+  mcbouncer.command.removenote:
+    description: Allow a player to remove notes using mcbouncer
+  mcbouncer.command.reload:
+    description: Allow a playing to reload the mcbouncer configuration
+      
+  
+    
