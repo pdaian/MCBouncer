@@ -56,11 +56,7 @@ public class BukkitServer extends JavaPlugin implements LocalServer {
     protected void setupListeners() {
         BukkitPlayerListener pl = new BukkitPlayerListener(controller);
         PluginManager pm = this.getServer().getPluginManager();
-        pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.Highest, this);
-        pm.registerEvent(Event.Type.PLAYER_PRELOGIN, pl, Event.Priority.Lowest, this);
-        pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pl, Event.Priority.Lowest, this);
-        pm.registerEvent(Event.Type.PLAYER_CHAT, pl, Event.Priority.Lowest, this);
-        pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Highest, this);
+        pm.registerEvents(pl, this);
     }
 
     @Override

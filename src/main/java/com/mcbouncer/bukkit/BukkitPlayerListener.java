@@ -8,11 +8,13 @@ import com.mcbouncer.event.KickEvent;
 import com.mcbouncer.event.LoginEvent;
 import net.lahwran.fevents.MCBEventHandler;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerPreLoginEvent.Result;
 
@@ -22,7 +24,7 @@ import org.bukkit.event.player.PlayerPreLoginEvent.Result;
  * to generic internal kick, login, etc. events. 
  * 
  */
-public class BukkitPlayerListener extends PlayerListener {
+public class BukkitPlayerListener implements Listener {
 
     protected MCBouncer controller;
 
@@ -39,7 +41,7 @@ public class BukkitPlayerListener extends PlayerListener {
      * 
      * @param event 
      */
-    @Override
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerPreLogin(PlayerPreLoginEvent event) {
         LoginEvent newEvent = new LoginEvent(controller, event.getName());
         MCBEventHandler.callEvent(newEvent);
@@ -59,7 +61,7 @@ public class BukkitPlayerListener extends PlayerListener {
      * 
      * @param event 
      */
-    @Override
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
         if (event.getPlayer() instanceof Player) {
             CommandEvent newEvent = new CommandEvent(controller, event.getPlayer().getName());
@@ -80,7 +82,7 @@ public class BukkitPlayerListener extends PlayerListener {
      * 
      * @param event 
      */
-    @Override
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(PlayerChatEvent event) {
         if (event.getPlayer() instanceof Player) {
             ChatEvent newEvent = new ChatEvent(controller, event.getPlayer().getName());
@@ -102,7 +104,7 @@ public class BukkitPlayerListener extends PlayerListener {
      * 
      * @param event 
      */
-    @Override
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerKick(PlayerKickEvent event) {
         KickEvent newEvent = new KickEvent(controller, event.getPlayer().getName());
         MCBEventHandler.callEvent(newEvent);
@@ -124,7 +126,7 @@ public class BukkitPlayerListener extends PlayerListener {
      * 
      * @param event 
      */
-    @Override
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         String name = event.getPlayer().getName();
         String ip = event.getPlayer().getAddress().getAddress().getHostAddress();

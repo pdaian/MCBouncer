@@ -44,20 +44,20 @@ permissions:
   mcbouncer.admin:
     description: Allow a player all mcbouncer permissions
     children:
-      mcbouncer.mod
-      mcbouncer.reload
+      mcbouncer.mod: true
+      mcbouncer.reload: true
   mcbouncer.mod:
     description: Allow a player all mcbouncer permissions except mcbouncer.reload
     children:
-      mcbouncer.command.ban
-      mcbouncer.commnad.unban
-      mcbouncer.command.banip
-      mcbouncer.command.unbanip
-      mcbouncer.command.lookup
-      mcbouncer.command.kick
-      mcbouncer.command.addnote
-      mcbouncer.command.addnote.global
-      mcbouncer.command.removenote
+      mcbouncer.command.ban: true
+      mcbouncer.commnad.unban: true
+      mcbouncer.command.banip: true
+      mcbouncer.command.unbanip: true
+      mcbouncer.command.lookup: true
+      mcbouncer.command.kick: true
+      mcbouncer.command.addnote: true
+      mcbouncer.command.addnote.global: true
+      mcbouncer.command.removenote: true
   mcbouncer.command.ban:
     description: Allow a player to ban using mcbouncer
   mcbouncer.commnad.unban:
