@@ -1,7 +1,7 @@
 package com.mcbouncer.event.listener;
 
 import com.mcbouncer.event.LoginEvent;
-import java.util.List;
+import java.util.HashMap;
 import net.lahwran.fevents.MCBListener;
 
 /**
@@ -13,12 +13,17 @@ import net.lahwran.fevents.MCBListener;
 public class LoginListener implements MCBListener<LoginEvent> {
 
     public void onEvent(LoginEvent event) {
-        List<String> loggedIn = event.getController().getCurrentlyLoggingIn();
+        HashMap<String, Long> loggedIn = event.getController().getCurrentlyLoggingIn();
 
-        if (loggedIn.contains(event.getUser())) {
-            event.setCancelled(true);
+        if (loggedIn.keySet().contains(event.getUser())) {
+            if (System.currentTimeMillis() - loggedIn.get(event.getUser()) > 5000) {
+                loggedIn.put(event.getUser(), System.currentTimeMillis());
+            } else
+            {
+                event.setCancelled(true);
+            }
         } else {
-            loggedIn.add(event.getUser());
+            loggedIn.put(event.getUser(), System.currentTimeMillis());
         }
     }
 }

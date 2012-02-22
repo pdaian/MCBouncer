@@ -16,7 +16,7 @@ public class KickListener implements MCBListener<KickEvent> {
             event.setCancelled(true);
         }
 
-        if (event.getController().getCurrentlyLoggingIn().contains(event.getPlayer())) {
+        if (event.getController().getCurrentlyLoggingIn().keySet().contains(event.getPlayer())) {
             event.setCancelled(true);
         }
     }

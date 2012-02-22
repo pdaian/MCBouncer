@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -88,6 +90,48 @@ public class BukkitPlayerListener implements Listener {
             ChatEvent newEvent = new ChatEvent(controller, event.getPlayer().getName());
             MCBEventHandler.callEvent(newEvent);
 
+            if (newEvent.isCancelled()) {
+                event.setCancelled(true);
+            }
+        }
+    }
+    
+    /**
+     * Bukkit Block Break event, calls the internal BlockBreakEvent.
+     * 
+     * This basically checks if a user is still trying to log in,
+     * and if so, to disallow the event. This is to prevent users
+     * from removing blocks in the time that it takes to do a lookup.
+     * 
+     * @param event 
+     */
+    @EventHandler(priority= EventPriority.LOWEST)
+    public void onBlockBreak(BlockBreakEvent event) {
+        if (event.getPlayer() instanceof Player) {
+            com.mcbouncer.event.BlockBreakEvent newEvent = new com.mcbouncer.event.BlockBreakEvent(controller, event.getPlayer().getName());
+            MCBEventHandler.callEvent(newEvent);
+            
+            if (newEvent.isCancelled()) {
+                event.setCancelled(true);
+            }
+        }
+    }
+    
+    /**
+     * Bukkit Block Place event, calls the internal BlockPlaceEvent.
+     * 
+     * This basically checks if a user is still trying to log in,
+     * and if so, to disallow the event. This is to prevent users
+     * from placing blocks in the time that it takes to do a lookup.
+     * 
+     * @param event 
+     */
+    @EventHandler(priority= EventPriority.LOWEST)
+    public void onBlockPlace(BlockPlaceEvent event) {
+        if (event.getPlayer() instanceof Player) {
+            com.mcbouncer.event.BlockPlaceEvent newEvent = new com.mcbouncer.event.BlockPlaceEvent(controller, event.getPlayer().getName());
+            MCBEventHandler.callEvent(newEvent);
+            
             if (newEvent.isCancelled()) {
                 event.setCancelled(true);
             }

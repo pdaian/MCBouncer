@@ -5,16 +5,8 @@ import com.mcbouncer.commands.BanCommands;
 import com.mcbouncer.commands.GeneralCommands;
 import com.mcbouncer.commands.MCBouncerCommands;
 import com.mcbouncer.commands.NoteCommands;
-import com.mcbouncer.event.ChatEvent;
-import com.mcbouncer.event.CommandEvent;
-import com.mcbouncer.event.JoinEvent;
-import com.mcbouncer.event.KickEvent;
-import com.mcbouncer.event.LoginEvent;
-import com.mcbouncer.event.listener.ChatListener;
-import com.mcbouncer.event.listener.CommandListener;
-import com.mcbouncer.event.listener.JoinListener;
-import com.mcbouncer.event.listener.KickListener;
-import com.mcbouncer.event.listener.LoginListener;
+import com.mcbouncer.event.*;
+import com.mcbouncer.event.listener.*;
 import com.mcbouncer.exception.CommandException;
 import com.mcbouncer.exception.CommandPermissionsException;
 import com.mcbouncer.exception.CommandUsageException;
@@ -26,6 +18,7 @@ import com.mcbouncer.util.MCBLogger;
 import com.mcbouncer.util.commands.CommandManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 import net.lahwran.fevents.Order;
 
 /**
@@ -46,7 +39,7 @@ public class MCBouncer {
     protected LocalConfiguration configuration;
     protected MCBouncerAPI api;
     protected static String version;
-    protected List<String> currentlyLoggingIn = new ArrayList<String>();
+    protected HashMap<String, Long> currentlyLoggingIn = new HashMap<String, Long>();
     protected String lastKickedUser = "";
 
     static {
@@ -67,6 +60,8 @@ public class MCBouncer {
 
         JoinEvent.handlers.register(new JoinListener(), Order.Earliest);
         ChatEvent.handlers.register(new ChatListener(), Order.Earliest);
+        BlockBreakEvent.handlers.register(new BlockBreakListener(), Order.Earliest);
+        BlockPlaceEvent.handlers.register(new BlockPlaceListener(), Order.Earliest);
         CommandEvent.handlers.register(new CommandListener(), Order.Earliest);
         KickEvent.handlers.register(new KickListener(), Order.Earliest);
         LoginEvent.handlers.register(new LoginListener(), Order.Earliest);
@@ -161,7 +156,7 @@ public class MCBouncer {
      * 
      * @return 
      */
-    public List<String> getCurrentlyLoggingIn() {
+    public HashMap<String, Long> getCurrentlyLoggingIn() {
         return currentlyLoggingIn;
     }
 

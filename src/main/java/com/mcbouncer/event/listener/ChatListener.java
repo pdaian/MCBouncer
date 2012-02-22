@@ -1,7 +1,7 @@
 package com.mcbouncer.event.listener;
 
 import com.mcbouncer.event.ChatEvent;
-import java.util.List;
+import java.util.HashMap;
 import net.lahwran.fevents.MCBListener;
 
 /**
@@ -13,9 +13,9 @@ import net.lahwran.fevents.MCBListener;
 public class ChatListener implements MCBListener<ChatEvent> {
 
     public void onEvent(ChatEvent event) {
-        List<String> loggedIn = event.getController().getCurrentlyLoggingIn();
-
-        if (loggedIn.contains(event.getUser())) {
+        HashMap<String, Long> loggedIn = event.getController().getCurrentlyLoggingIn();
+        
+        if (loggedIn.keySet().contains(event.getUser())) {
             event.setCancelled(true);
         }
     }
