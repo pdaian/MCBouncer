@@ -75,13 +75,14 @@ public class JoinListener implements MCBListener<JoinEvent> {
                 }
                 controller.getServer().messageMods(ChatColor.GREEN + response);
             }
+            
+            controller.getCurrentlyLoggingIn().remove(username);
+            
         } catch (NetworkException ne) {
             controller.getLogger().severe("Uh oh! Network error occurred!", ne);
         } catch (APIException ae) {
             controller.getLogger().severe("Uh oh! API error occurred!", ae);
         }
-
-        controller.getCurrentlyLoggingIn().remove(username);
         
         if (event.getMessage() != null && !event.getMessage().equals("")) {
             controller.getServer().broadcastMessage(event.getMessage());
