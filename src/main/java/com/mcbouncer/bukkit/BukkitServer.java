@@ -105,17 +105,11 @@ public class BukkitServer extends JavaPlugin implements LocalServer {
         }
     }
 
-    public void messageMods(String string) {
-        for (Player player : this.getServer().getOnlinePlayers()) {
-            if (player.hasPermission("mcbouncer.mod")) {
-                player.sendMessage(string);
-            }
-        }
+    public void messageMods(String message) {
+        this.getServer().broadcast(message, "mcbouncer.mod");
     }
 
     public void broadcastMessage(String message) {
-        for (Player player : this.getServer().getOnlinePlayers()) {
-            player.sendMessage(message);
-        }
+        this.getServer().broadcastMessage(message);
     }
 }
