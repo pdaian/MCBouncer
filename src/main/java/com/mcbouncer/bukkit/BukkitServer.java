@@ -4,10 +4,12 @@ import com.mcbouncer.LocalConfiguration;
 import com.mcbouncer.LocalServer;
 import com.mcbouncer.MCBouncer;
 import com.mcbouncer.util.NetUtils;
+import java.util.Set;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.permissions.Permissible;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -106,7 +108,15 @@ public class BukkitServer extends JavaPlugin implements LocalServer {
     }
 
     public void messageMods(String message) {
-        this.getServer().broadcast(message, "mcbouncer.mod");
+        String permission = "mcbouncer.mod";
+        this.getServer().broadcast(message, permission);
+
+        Set<Permissible> subs = getServer().getPluginManager().getPermissionSubscriptions(permission);
+        for (Player player : getServer().getOnlinePlayers()) {
+            if (player.hasPermission(permission) && !subs.contains(player)) {
+                player.sendMessage(message);
+            }
+        }
     }
 
     public void broadcastMessage(String message) {
