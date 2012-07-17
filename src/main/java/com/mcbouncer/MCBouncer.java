@@ -39,8 +39,6 @@ public class MCBouncer {
     protected LocalConfiguration configuration;
     protected MCBouncerAPI api;
     protected static String version;
-    protected HashMap<String, Long> currentlyLoggingIn = new HashMap<String, Long>();
-    protected String lastKickedUser = "";
 
     static {
         getVersion();
@@ -59,12 +57,6 @@ public class MCBouncer {
         commandManager.register(NoteCommands.class);
 
         JoinEvent.handlers.register(new JoinListener(), Order.Earliest);
-        ChatEvent.handlers.register(new ChatListener(), Order.Earliest);
-        BlockBreakEvent.handlers.register(new BlockBreakListener(), Order.Earliest);
-        BlockPlaceEvent.handlers.register(new BlockPlaceListener(), Order.Earliest);
-        CommandEvent.handlers.register(new CommandListener(), Order.Earliest);
-        KickEvent.handlers.register(new KickListener(), Order.Earliest);
-        LoginEvent.handlers.register(new LoginListener(), Order.Earliest);
 
         this.api = new MCBouncerAPI(this);
     }
@@ -147,37 +139,6 @@ public class MCBouncer {
      */
     public LocalConfiguration getConfiguration() {
         return configuration;
-    }
-
-    /**
-     * Returns a list of users who are currently logging in.
-     * This is used to prevent people spamming login packets
-     * in order to DDoS the server.
-     * 
-     * @return 
-     */
-    public HashMap<String, Long> getCurrentlyLoggingIn() {
-        return currentlyLoggingIn;
-    }
-
-    /**
-     * Returns the name of the user that was last kicked. This
-     * is used to thread the login without showing lots of dual
-     * login/out spam messages;
-     * 
-     * @return 
-     */
-    public String getLastKickedUser() {
-        return lastKickedUser;
-    }
-
-    /**
-     * Sets the name of the last kicked user
-     * 
-     * @param lastKickedUser 
-     */
-    public void setLastKickedUser(String lastKickedUser) {
-        this.lastKickedUser = lastKickedUser;
     }
 
     /**

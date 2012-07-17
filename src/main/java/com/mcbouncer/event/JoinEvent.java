@@ -18,22 +18,16 @@ public class JoinEvent extends MCBEvent<JoinEvent> {
     protected MCBouncer controller;
     protected String user;
     protected String ip;
-    protected String message;
     public static final MCBHandlerList<JoinEvent> handlers = new MCBHandlerList<JoinEvent>();
 
-    public JoinEvent(MCBouncer controller, String user, String ip, String message) {
+    public JoinEvent(MCBouncer controller, String user, String ip) {
         this.controller = controller;
         this.user = user;
         this.ip = ip;
-        this.message = message;
     }
 
     public MCBouncer getController() {
         return controller;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     public String getUser() {
