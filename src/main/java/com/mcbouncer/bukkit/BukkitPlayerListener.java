@@ -31,6 +31,10 @@ public class BukkitPlayerListener implements Listener {
         JoinEvent joinEvent = new JoinEvent(controller, name, ip);
         MCBEventHandler.callEvent(joinEvent);
         
+        if (joinEvent.isDisallow()) {
+            event.disallow(Result.KICK_OTHER, joinEvent.getDisallowMessage());
+        }
+        
         if (joinEvent.isCancelled()) {
             event.disallow(Result.KICK_OTHER, "Unexpected error, try again in a few minutes.");
         }

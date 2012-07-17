@@ -18,6 +18,7 @@ public class JoinEvent extends MCBEvent<JoinEvent> {
     protected MCBouncer controller;
     protected String user;
     protected String ip;
+    protected String disallowMessage = null;
     public static final MCBHandlerList<JoinEvent> handlers = new MCBHandlerList<JoinEvent>();
 
     public JoinEvent(MCBouncer controller, String user, String ip) {
@@ -36,6 +37,18 @@ public class JoinEvent extends MCBEvent<JoinEvent> {
 
     public String getIP() {
         return ip;
+    }
+    
+    public boolean isDisallow() {
+        return !(disallowMessage == null || disallowMessage.isEmpty());
+    }
+    
+    public void setDisallowMessage(String disallowMessage) {
+        this.disallowMessage = disallowMessage;
+    }
+    
+    public String getDisallowMessage() {
+        return this.disallowMessage;
     }
 
     @Override

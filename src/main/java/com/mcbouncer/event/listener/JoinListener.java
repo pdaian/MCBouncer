@@ -38,13 +38,13 @@ public class JoinListener implements MCBListener<JoinEvent> {
             }
 
             if (controller.getAPI().isBanned(username)) {
-                controller.getServer().kickPlayer(username, "Banned: " + controller.getAPI().getBanReason(username));
+                event.setDisallowMessage("Banned: " + controller.getAPI().getBanReason(username));
                 controller.getLogger().info(username + " attempted to join with IP " + ip);
                 return;
             }
 
             if (!controller.getConfiguration().isIPFunctionsDisabled() && controller.getAPI().isIPBanned(ip)) {
-                controller.getServer().kickPlayer(username, "Banned: " + controller.getAPI().getIPBanReason(ip));
+                event.setDisallowMessage("Banned: " + controller.getAPI().getIPBanReason(ip));
                 controller.getLogger().info(username + " attempted to join with IP " + ip);
                 return;
             }
@@ -53,7 +53,7 @@ public class JoinListener implements MCBListener<JoinEvent> {
             int numNotes = controller.getAPI().getNoteCount(username);
 
             if (controller.getConfiguration().getNumBansDisallow() > 0 && numBans > controller.getConfiguration().getNumBansDisallow()) {
-                controller.getServer().kickPlayer(username, "You are banned on too many servers to log in here.");
+                event.setDisallowMessage("You are banned on too many servers to log in here.");
                 controller.getLogger().info(username + " is banned on " + numBans + " servers, and has been disallowed");
                 return;
             }
@@ -72,10 +72,10 @@ public class JoinListener implements MCBListener<JoinEvent> {
             
         } catch (NetworkException ne) {
             controller.getLogger().severe("Uh oh! Network error occurred!", ne);
-            controller.getServer().kickPlayer(username, "MCBouncer timeout.");
+            event.setDisallowMessage("MCBouncer timeout.");
         } catch (APIException ae) {
             controller.getLogger().severe("Uh oh! API error occurred!", ae);
-            controller.getServer().kickPlayer(username, "API Error");
+            event.setDisallowMessage("API Error");
         }
 
     }
