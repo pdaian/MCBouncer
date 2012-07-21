@@ -71,10 +71,11 @@ public class JoinListener implements MCBListener<JoinEvent> {
             }
             
         } catch (NetworkException ne) {
-            controller.getLogger().severe("Uh oh! Network error occurred!", ne);
+            //controller.getLogger().severe("Uh oh! Network error occurred!", ne);
+            controller.getLogger().severe("MCBouncer timed out while looking up: " + username);
             event.setDisallowMessage("MCBouncer timeout.");
         } catch (APIException ae) {
-            controller.getLogger().severe("Uh oh! API error occurred!", ae);
+            controller.getLogger().severe("Uh oh! API error occurred while looking up for: " + username, ae);
             event.setDisallowMessage("API Error");
         }
 
