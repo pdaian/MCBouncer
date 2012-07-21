@@ -14,49 +14,87 @@ You can download the latest MCBouncer [[http://mcbouncer.com/info/download|here]
 * A sense of discovery and adventure.
 
 ==Rules==
-No racial remarks in bans or notes
-No homophobic remarks in bans or notes
-Online mode servers only
-You must provide a means for users to appeal
+* No racial remarks in bans or notes
+
+* No homophobic remarks in bans or notes
+
+* Online mode servers only
+
+* You must provide a means for users to appeal
+
 
 Abuse of MCBouncer may result in your server being disabled, and your inability to use the MCBouncer service in the future. If your server is disabled, none of your bans will be visible in the system, you will not be able to make any bans or notes, or do lookups. Bans issued by a disabled server will be archived in the database.
 
 ==Plugin Permissions==
 mcbouncer.command.ban
+
 - allow a user to ban
+
 mcbouncer.command.unban
+
 - allow a user to unban
+
 mcbouncer.command.banip
+
 - allow a user to ban an ip
+
 mcbouncer.command.unbanip
+
 - allow a user to unban an ip
+
 mcbouncer.command.lookup
+
 - allow a user to lookup bans/notes
+
 mcbouncer.command.kick
+
 - allow a user to kick
+
 mcbouncer.command.addnote
+
 - allow a user to add a note
+
 mcbouncer.command.removenote
+
 - allow a user to remove a note
+
 mcbouncer.command.reload
+
 - allow a user to reload the mcbouncer config
+
 mcbouncer.mod
+
 - contains all permissions except mcbouncer.command.reload
+
 mcbouncer.admin
+
 - contains all permissions
 
 ==Commands==
 /ban <user> <reason>
+
 - Ban <user> with the reason of <reason>
+
 /unban <user> - Unban <user>
+
 - Ban <ip> with the reason of <reason>
+
 /banip <ip> <reason>
+
 - Ban <ip> with the reason of <reason>
+
 /unbanip <user>
+
 - Unban <ip>
+
 /addnote <user> <note>
+
 - Add note <note> to <user>
+
 /delnote <noteid> - Delete note <noteid>
+
 - Delete note <noteid>
+
 /lookup <user>
+
 Lookup notes and bans for <user>
