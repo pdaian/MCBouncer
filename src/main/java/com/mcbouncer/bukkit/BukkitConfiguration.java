@@ -34,7 +34,7 @@ public class BukkitConfiguration extends LocalConfiguration {
     @Override
     public void load() {
 
-        dataFolder.getParentFile().mkdirs();
+        dataFolder.mkdirs();
         File file = new File(dataFolder, "config.yml");
 
         if (!file.exists()) {
