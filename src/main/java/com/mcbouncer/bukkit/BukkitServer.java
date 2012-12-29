@@ -93,16 +93,26 @@ public class BukkitServer extends JavaPlugin implements LocalServer {
     }
 
     public void kickPlayer(String name, String reason) {
-        Player player = this.getServer().getPlayer(name);
+        final Player player = this.getServer().getPlayer(name);
+        kickPlayer(player, reason);
+    }
+    
+    public void kickPlayer(final Player player, final String reason) {
         if (player != null) {
-            player.kickPlayer(reason);
+            this.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+
+                public void run() {
+                    player.kickPlayer(reason);
+                }
+            }, 1);
+            
         }
     }
 
-    public void kickPlayerWithIP(String ip, String reason) {
+    public void kickPlayerWithIP(String ip, final String reason) {
         for (Player player : this.getServer().getOnlinePlayers()) {
             if (player.getAddress().getAddress().getHostAddress().equals(ip)) {
-                player.kickPlayer(reason);
+                kickPlayer(player, reason);
             }
         }
     }
