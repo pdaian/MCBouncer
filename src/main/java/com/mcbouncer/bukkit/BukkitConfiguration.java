@@ -83,6 +83,7 @@ public class BukkitConfiguration extends LocalConfiguration {
         defaultKickMessage = conf.getString("defaultKickMessage", ConfigDefaults.DEFAULTKICK.getStrVal());
         website = conf.getString("website", ConfigDefaults.WEBSITE.getStrVal());
         disableIPFunctions = conf.getBoolean("disableIPFunctions", ConfigDefaults.DISABLEIPFUNCTIONS.getBoolVal());
+        allowOnFail = conf.getBoolean("allowedOnFail", ConfigDefaults.ALLOWONFAIL.getBoolVal());
 
     }
 

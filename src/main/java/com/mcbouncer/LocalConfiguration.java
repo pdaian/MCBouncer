@@ -18,6 +18,7 @@ public abstract class LocalConfiguration {
     protected String defaultKickMessage = ConfigDefaults.DEFAULTKICK.getStrVal();
     protected String website = ConfigDefaults.WEBSITE.getStrVal();
     protected boolean disableIPFunctions = ConfigDefaults.DISABLEIPFUNCTIONS.getBoolVal();
+    protected boolean allowOnFail = ConfigDefaults.ALLOWONFAIL.getBoolVal();
     protected MapNode conf;
 
     public abstract void load();
@@ -56,5 +57,9 @@ public abstract class LocalConfiguration {
     
     public boolean isIPFunctionsDisabled() {
         return disableIPFunctions;
+    }
+    
+    public boolean isAllowedOnFail() {
+        return allowOnFail;
     }
 }

@@ -9,7 +9,8 @@ public enum ConfigDefaults {
     DEFAULTBAN("Banned for rule violation."),
     DEFAULTKICK("Kicked by an admin."),
     WEBSITE("http://www.mcbouncer.com"),
-    DISABLEIPFUNCTIONS(false);
+    DISABLEIPFUNCTIONS(false),
+    ALLOWONFAIL(false);
     protected int intVal;
     protected String strVal;
     protected boolean boolVal;
